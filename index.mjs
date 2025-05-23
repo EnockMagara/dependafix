@@ -1,6 +1,7 @@
 import express from 'express';
 import { Webhooks, createNodeMiddleware } from '@octokit/webhooks';
 import { Octokit } from '@octokit/core';
+import { createAppAuth } from '@octokit/auth-app';
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
