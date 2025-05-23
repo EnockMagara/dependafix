@@ -24,9 +24,22 @@ const octokit = new Octokit({
   },
 });
 
+// Add debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log('Headers:', JSON.stringify(req.headers, null, 2));
+  next();
+});
+
 // Middleware to handle JSON payloads
 app.use(express.json());
 app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
+
+// Add webhook debugging
+webhooks.onAny(async ({ name, payload }) => {
+  console.log(`Received webhook event: ${name}`);
+  console.log(`Repository: ${payload.repository?.full_name || 'unknown'}`);
+});
 
 // Webhook event handler for push events
 webhooks.on('push', async ({ payload }) => {
