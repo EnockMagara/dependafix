@@ -31,6 +31,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add a simple test route
+app.get('/', (req, res) => {
+  res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
+});
+
 // Middleware to handle JSON payloads
 app.use(express.json());
 app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
