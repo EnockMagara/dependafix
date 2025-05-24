@@ -45,9 +45,7 @@ app.post('/test-webhook', (req, res) => {
   res.json({ status: 'Test webhook received successfully' });
 });
 
-// Webhook middleware
-app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
-
+// WEBHOOK HANDLERS MUST BE DEFINED BEFORE MIDDLEWARE
 // Add webhook debugging
 webhooks.onAny(async ({ name, payload }) => {
   console.log(`Received webhook event: ${name}`);
@@ -135,6 +133,9 @@ webhooks.on('push', async ({ payload }) => {
     console.error('Error processing webhook:', error);
   }
 });
+
+// Webhook middleware - MUST BE AFTER HANDLERS
+app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
 
 // Start the server
 app.listen(port, () => {
