@@ -56,75 +56,84 @@ webhooks.onAny(async ({ name, payload }) => {
 
 // Webhook event handler for push events
 webhooks.on('push', async ({ payload }) => {
-  const { repository, commits } = payload;
-  const repoOwner = repository.owner.login;
-  const repoName = repository.name;
+  try {
+    const { repository, commits } = payload;
+    const repoOwner = repository.owner.login;
+    const repoName = repository.name;
+    const defaultBranch = repository.default_branch; // Use actual default branch
 
-  // Check if package.json was modified
-  const packageJsonChanged = commits.some(commit =>
-    commit.modified.includes('package.json') || commit.added.includes('package.json')
-  );
+    // Check if package.json was modified
+    const packageJsonChanged = commits.some(commit =>
+      commit.modified.includes('package.json') || commit.added.includes('package.json')
+    );
 
-  if (!packageJsonChanged) return;
+    if (!packageJsonChanged) {
+      console.log(`No package.json changes detected in ${repoOwner}/${repoName}`);
+      return;
+    }
 
-  console.log(`Detected package.json change in ${repoOwner}/${repoName}`);
+    console.log(`Detected package.json change in ${repoOwner}/${repoName}`);
 
-  // Get installation ID for the repository
-  const installation = await octokit.request('GET /repos/{owner}/{repo}/installation', {
-    owner: repoOwner,
-    repo: repoName,
-  });
-  const installationId = installation.data.id;
+    // Get installation ID for the repository
+    const installation = await octokit.request('GET /repos/{owner}/{repo}/installation', {
+      owner: repoOwner,
+      repo: repoName,
+    });
+    const installationId = installation.data.id;
 
-  // Authenticate as the GitHub App installation
-  const installationOctokit = new Octokit({
-    authStrategy: createAppAuth,
-    auth: {
-      appId: process.env.GITHUB_APP_ID,
-      privateKey: await fs.readFile(process.env.GITHUB_PRIVATE_KEY_PATH, 'utf8'),
-      installationId,
-    },
-  });
+    // Authenticate as the GitHub App installation
+    const installationOctokit = new Octokit({
+      authStrategy: createAppAuth,
+      auth: {
+        appId: process.env.GITHUB_APP_ID,
+        privateKey: await fs.readFile(process.env.GITHUB_PRIVATE_KEY_PATH, 'utf8'),
+        installationId,
+      },
+    });
 
-  // Placeholder: Simulate detecting a breaking change and generating a fix
-  const fixContent = '// Placeholder fix for dependency update\nconsole.log("Fixed dependency issue");';
-  const branchName = `fix-dependency-${Date.now()}`;
+    // Placeholder: Simulate detecting a breaking change and generating a fix
+    const fixContent = '// Placeholder fix for dependency update\nconsole.log("Fixed dependency issue");';
+    const branchName = `fix-dependency-${Date.now()}`;
 
-  // Create a new branch
-  const refResponse = await installationOctokit.request('GET /repos/{owner}/{repo}/git/ref/heads/main', {
-    owner: repoOwner,
-    repo: repoName,
-  });
-  const mainSha = refResponse.data.object.sha;
+    // Create a new branch - use the actual default branch
+    const refResponse = await installationOctokit.request('GET /repos/{owner}/{repo}/git/ref/heads/{branch}', {
+      owner: repoOwner,
+      repo: repoName,
+      branch: defaultBranch, // Use the repository's default branch
+    });
+    const mainSha = refResponse.data.object.sha;
 
-  await installationOctokit.request('POST /repos/{owner}/{repo}/git/refs', {
-    owner: repoOwner,
-    repo: repoName,
-    ref: `refs/heads/${branchName}`,
-    sha: mainSha,
-  });
+    await installationOctokit.request('POST /repos/{owner}/{repo}/git/refs', {
+      owner: repoOwner,
+      repo: repoName,
+      ref: `refs/heads/${branchName}`,
+      sha: mainSha,
+    });
 
-  // Commit the fix
-  await installationOctokit.request('PUT /repos/{owner}/{repo}/contents/fix.js', {
-    owner: repoOwner,
-    repo: repoName,
-    path: 'fix.js',
-    message: 'Apply fix for dependency update',
-    content: Buffer.from(fixContent).toString('base64'),
-    branch: branchName,
-  });
+    // Commit the fix
+    await installationOctokit.request('PUT /repos/{owner}/{repo}/contents/fix.js', {
+      owner: repoOwner,
+      repo: repoName,
+      path: 'fix.js',
+      message: 'Apply fix for dependency update',
+      content: Buffer.from(fixContent).toString('base64'),
+      branch: branchName,
+    });
 
-  // Create a PR
-  await installationOctokit.request('POST /repos/{owner}/{repo}/pulls', {
-    owner: repoOwner,
-    repo: repoName,
-    title: 'Automated fix for dependency update',
-    head: branchName,
-    base: 'main',
-    body: 'This PR contains an automated fix for a breaking change detected in a dependency update.',
-  });
+    // Create a PR
+    await installationOctokit.request('POST /repos/{owner}/{repo}/pulls', {
+      owner: repoOwner,
+      repo: repoName,
+      title: 'Automated fix for dependency update',
+      head: branchName,
+      base: defaultBranch, // Use the repository's default branch
+      body: 'This PR contains an automated fix for a breaking change detected in a dependency update.',
+    });
 
-  console.log(`Created PR for ${repoOwner}/${repoName}`);
+    console.log(`Created PR for ${repoOwner}/${repoName}`);
+  } catch (error) {
+    console.error('Error processing webhook:', error);
+  }
 });
 
 // Start the server
