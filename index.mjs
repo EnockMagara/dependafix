@@ -24,6 +24,9 @@ const octokit = new Octokit({
   },
 });
 
+// Middleware to handle JSON payloads - MUST BE FIRST
+app.use(express.json());
+
 // Add debug middleware to log all requests
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
@@ -36,8 +39,13 @@ app.get('/', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
 });
 
-// Middleware to handle JSON payloads
-app.use(express.json());
+// Add a test webhook endpoint without signature verification
+app.post('/test-webhook', (req, res) => {
+  console.log('Test webhook received:', req.body);
+  res.json({ status: 'Test webhook received successfully' });
+});
+
+// Webhook middleware
 app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
 
 // Add webhook debugging
