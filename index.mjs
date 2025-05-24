@@ -145,6 +145,16 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add webhook signature debugging middleware
+app.use('/webhook', (req, res, next) => {
+  console.log('🔐 Webhook signature debugging:');
+  console.log('🔑 Expected secret:', process.env.GITHUB_WEBHOOK_SECRET);
+  console.log('📝 Received signature:', req.headers['x-hub-signature-256']);
+  console.log('📦 Content-Length:', req.headers['content-length']);
+  console.log('🎯 Event type:', req.headers['x-github-event']);
+  next();
+});
+
 // Add a simple test route
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
@@ -156,8 +166,31 @@ app.post('/test-webhook', (req, res) => {
   res.json({ status: 'Test webhook received successfully' });
 });
 
-// Webhook middleware - MUST BE AFTER HANDLERS ARE REGISTERED
-app.use(createNodeMiddleware(webhooks, { path: '/webhook' }));
+// Add error handling for webhook middleware
+const webhookMiddleware = createNodeMiddleware(webhooks, { 
+  path: '/webhook',
+  onUnhandledRequest: (req, res) => {
+    console.log('❌ Unhandled webhook request');
+    res.status(404).send('Not found');
+  }
+});
+
+// Add error handling wrapper
+app.use((req, res, next) => {
+  if (req.path === '/webhook') {
+    console.log('🎯 Processing webhook request...');
+    webhookMiddleware(req, res, (err) => {
+      if (err) {
+        console.error('❌ Webhook middleware error:', err);
+        res.status(400).send('Webhook error');
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
 
 // Start the server
 app.listen(port, () => {
