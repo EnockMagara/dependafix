@@ -2,8 +2,10 @@
   "name": "sample_bot",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "start": "probot run ./src/index.js",
+    "dev": "probot run ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,10 +16,10 @@
     "@octokit/auth-app": "^8.0.1",
     "@octokit/core": "^7.0.2",
     "@octokit/webhooks": "^14.0.0",
-    "lodash": "^4.17.21",
     "dotenv": "^16.5.0",
-    "express": "^5.1.1"
-
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "probot": "^13.4.7"
+    
   }
 }
-
