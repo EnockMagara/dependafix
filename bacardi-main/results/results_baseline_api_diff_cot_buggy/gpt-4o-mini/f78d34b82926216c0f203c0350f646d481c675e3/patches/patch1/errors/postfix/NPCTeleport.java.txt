@@ -1,0 +1,2 @@
+121:incompatible types: possible lossy conversion from float to byte
+108:incompatible types: possible lossy conversion from float to byte

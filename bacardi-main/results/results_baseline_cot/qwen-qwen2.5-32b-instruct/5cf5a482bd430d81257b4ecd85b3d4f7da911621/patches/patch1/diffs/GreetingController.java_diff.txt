@@ -1,0 +1,57 @@
+6,8c6
+< import javax.mvc.Controller;
+< import javax.mvc.Models;
+< import javax.mvc.UriRef;
+---
+> import javax.mvc.annotation.Controller;
+10,12c8,9
+< import javax.mvc.binding.MvcBinding;
+< import javax.mvc.binding.ParamError;
+< import javax.mvc.security.CsrfProtected;
+---
+> import javax.mvc.binding.BindingResult.Status;
+> import javax.mvc.result.Redirect;
+19,23d15
+< /**
+<  *
+<  * @author hantsy
+<  */
+< @Path("greeting")
+25a18
+> @Path("greeting")
+32c25
+<     Models models;
+---
+>     Logger log;
+37,39d29
+<     @Inject
+<     Logger log;
+< 
+46,47c36
+<     @UriRef("greeting-post")
+<     public String post(
+---
+>     public Redirect post(
+49d37
+<             @MvcBinding
+51c39
+<         if (bindingResult.isFailed()) {
+---
+>         if (bindingResult.getStatus() == Status.FAILED) {
+54,55c42
+<                     .stream()
+<                     .forEach((ParamError t) -> {
+---
+>                     .forEach((t) -> {
+58c45
+<             models.put("errors", alert);
+---
+>             flashMessage.notify(alert);
+60c47
+<             return "greeting.xhtml";
+---
+>             return new Redirect("greeting.xhtml");
+65c52
+<         return "redirect:greeting";
+---
+>         return new Redirect("greeting");

@@ -1,0 +1,10 @@
+73:incompatible types: com.github.games647.changeskin.sponge.ChangeSkinSponge cannot be converted to org.spongepowered.plugin.PluginContainer
+56:cannot find symbol  symbol:   class Pre   location: interface org.spongepowered.api.event.lifecycle.ConstructPluginEvent 
+74:incompatible types: com.github.games647.changeskin.sponge.ChangeSkinSponge cannot be converted to org.spongepowered.plugin.PluginContainer
+23:cannot find symbol  symbol:   class Cause   location: package org.spongepowered.api.event.cause 
+94:cannot find symbol  symbol:   variable Cause   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+35:cannot find symbol  symbol: class Plugin 
+71:incompatible types: com.github.games647.changeskin.sponge.ChangeSkinSponge cannot be converted to org.spongepowered.plugin.PluginContainer
+70:incompatible types: com.github.games647.changeskin.sponge.ChangeSkinSponge cannot be converted to org.spongepowered.plugin.PluginContainer
+72:incompatible types: com.github.games647.changeskin.sponge.ChangeSkinSponge cannot be converted to org.spongepowered.plugin.PluginContainer
+30:cannot find symbol  symbol:   class Plugin   location: package org.spongepowered.plugin 

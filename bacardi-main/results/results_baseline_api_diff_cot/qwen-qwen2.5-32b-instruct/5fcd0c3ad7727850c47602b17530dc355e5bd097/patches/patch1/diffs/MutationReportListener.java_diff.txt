@@ -1,0 +1,21 @@
+2a3,5
+> import org.pitest.classinfo.ClassInfoVisitor;
+> import org.pitest.classinfo.ClassName;
+> import org.pitest.classinfo.ClassInfo;
+103a107,118
+>     // Assuming the new API requires a different approach to get class info
+>     // This is a placeholder for the actual implementation that should be provided based on the new API
+>     // For demonstration, we assume a method that can provide the necessary information
+>     ClassInfoVisitor visitor = new ClassInfoVisitor() {
+>       @Override
+>       public void visit(ClassInfo classInfo) {
+>         // Implementation to get class info
+>       }
+>     };
+>     // Assuming the new method signature is as follows:
+>     // coverage.getClassInfo(visitor, className, byteCode, timestamp);
+>     // Placeholder for the actual implementation
+105c120
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), coverage.getClassInfo(visitor, ClassName.fromString(data.getMutatedClass()), new byte[]{}, 0L));

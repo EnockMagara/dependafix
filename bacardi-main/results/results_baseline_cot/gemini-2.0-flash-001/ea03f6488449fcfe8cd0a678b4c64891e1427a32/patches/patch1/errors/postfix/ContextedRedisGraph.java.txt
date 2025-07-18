@@ -1,0 +1,3 @@
+158:cannot find symbol  symbol:   class RedisCommand   location: class com.redislabs.redisgraph.impl.api.ContextedRedisGraph 
+14:cannot find symbol  symbol:   class RedisCommand   location: package redis.clients.jedis.commands 
+143:cannot find symbol  symbol:   class RedisCommand   location: class com.redislabs.redisgraph.impl.api.ContextedRedisGraph 

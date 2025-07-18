@@ -1,0 +1,59 @@
+22c22
+< import ch.qos.logback.core.encoder.EncoderBase;
+---
+> import ch.qos.logback.core.encoder.Encoder;
+51c51
+<   public static class LogMessageEncoder extends EncoderBase<LogMessage> {
+---
+>   public static class LogMessageEncoder implements Encoder<LogMessage> {
+55a56
+>     private Context context;
+58c59
+<     public void init(OutputStream os) {
+---
+>     public void init(OutputStream os) throws IOException {
+60,61d60
+<       // Use the TFlushingFastFramedTransport to be compatible with singer_thrift
+<       // log.
+63,64c62
+<       framedTransport = new TFastFramedTransport(new TIOStreamTransport(os),
+<           bufferCapacity);
+---
+>       framedTransport = new TFastFramedTransport(new TIOStreamTransport(os), bufferCapacity);
+78a77,86
+>     public byte[] headerBytes() {
+>       return null;
+>     }
+> 
+>     @Override
+>     public byte[] footerBytes() {
+>       return null;
+>     }
+> 
+>     @Override
+80a89,113
+>     }
+> 
+>     @Override
+>     public void setContext(Context context) {
+>       this.context = context;
+>     }
+> 
+>     @Override
+>     public Context getContext() {
+>       return this.context;
+>     }
+> 
+>     @Override
+>     public boolean isStarted() {
+>       return true;
+>     }
+> 
+>     @Override
+>     public void start() {
+>       // no-op
+>     }
+> 
+>     @Override
+>     public void stop() {
+>       // no-op

@@ -1,0 +1,34 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+4a4,5
+> import de.gwdg.metadataqa.api.model.pathcache.PathCacheBranch;
+> import de.gwdg.metadataqa.api.model.pathcache.PathCacheBranchImpl;
+67c68
+<     for (JsonBranch branch : schema.getPaths()) {
+---
+>     for (PathCacheBranch branch : schema.getPaths()) {
+89c90
+<             new Control007(extractFirst(cache, branch), marcRecord));
+---
+>             new Control007(extractFirst(cache, branch), marcRecord);
+93c94
+<             new Control008(extractFirst(cache, branch), marcRecord));
+---
+>             new Control008(extractFirst(cache, branch), marcRecord);
+259c260
+<               definition,
+---
+>               (definition,
+313c314
+<   private static List<String> extractList(JsonPathCache cache, JsonBranch branch) {
+---
+>   private static List<String> extractList(JsonPathCache cache, PathCacheBranch branch) {
+322c323
+<   private static String extractFirst(JsonPathCache cache, JsonBranch branch) {
+---
+>   private static String extractFirst(JsonPathCache cache, PathCacheBranch branch) {
+384,385c385
+<             line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+<           );
+---
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0));

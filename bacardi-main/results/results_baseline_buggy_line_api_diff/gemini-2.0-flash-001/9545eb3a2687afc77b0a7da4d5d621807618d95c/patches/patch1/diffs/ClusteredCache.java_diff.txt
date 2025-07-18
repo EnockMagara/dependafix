@@ -1,0 +1,9 @@
+20,21d19
+< import com.hazelcast.core.IMap;
+< import com.hazelcast.core.MapEvent;
+23c21,23
+< import com.hazelcast.monitor.LocalMapStats;
+---
+> import com.hazelcast.map.IMap;
+> import com.hazelcast.map.LocalMapStats;
+> import com.hazelcast.map.MapEvent;

@@ -1,0 +1,51 @@
+0a1,8
+> package com.jcabi.http.mock;
+> 
+> import java.net.URI;
+> import java.lang.reflect.Method;
+> import org.hamcrest.Matcher;
+> import org.hamcrest.Description;
+> import org.hamcrest.TypeSafeDiagnosingMatcher;
+> 
+30,34d37
+< package com.jcabi.http.mock;
+< 
+< import java.net.URI;
+< import org.hamcrest.Matcher;
+< import org.hamcrest.Matchers;
+100a104,138
+>     private static final class Matchers {
+>         public static <T> Matcher<T> hasProperty(final String propertyName, final Matcher<?> valueMatcher) {
+>             return new TypeSafeDiagnosingMatcher<T>() {
+>                 @Override
+>                 public void describeTo(Description description) {
+>                     description.appendText("an object with property ")
+>                                .appendValue(propertyName)
+>                                .appendText(" matching ")
+>                                .appendDescriptionOf(valueMatcher);
+>                 }
+>                 
+>                 @Override
+>                 protected boolean matchesSafely(T item, Description mismatchDescription) {
+>                     Object value;
+>                     try {
+>                         String getter = "get" + Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
+>                         Method method = item.getClass().getMethod(getter);
+>                         value = method.invoke(item);
+>                     } catch (Exception e) {
+>                         mismatchDescription.appendText("no accessible getter called ")
+>                                            .appendValue(propertyName);
+>                         return false;
+>                     }
+>                     if (!valueMatcher.matches(value)) {
+>                         mismatchDescription.appendText("property ")
+>                                            .appendValue(propertyName)
+>                                            .appendText(" ");
+>                         valueMatcher.describeMismatch(value, mismatchDescription);
+>                         return false;
+>                     }
+>                     return true;
+>                 }
+>             };
+>         }
+>     }

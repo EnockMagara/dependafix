@@ -1,0 +1,78 @@
+15d14
+< import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
+17d15
+< import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
+20d17
+< 
+244d240
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+246c242
+<         append(null, buffer, strategy);
+---
+>         append(null, buffer);
+251,263c247,249
+<     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+<         strategy.appendStart(locator, this, buffer);
+<         appendFields(locator, buffer, strategy);
+<         strategy.appendEnd(locator, this, buffer);
+<         return buffer;
+<     }
+< 
+<     @Override
+<     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+<         {
+<             String theBuildingNumber;
+<             theBuildingNumber = this.getBuildingNumber();
+<             strategy.appendField(locator, this, "buildingNumber", buffer, theBuildingNumber, (this.buildingNumber!= null));
+---
+>     public StringBuilder append(ObjectLocator locator, StringBuilder buffer) {
+>         if (buildingNumber != null) {
+>             buffer.append("buildingNumber=").append(buildingNumber);
+265,268c251,252
+<         {
+<             String theStreetName;
+<             theStreetName = this.getStreetName();
+<             strategy.appendField(locator, this, "streetName", buffer, theStreetName, (this.streetName!= null));
+---
+>         if (streetName != null) {
+>             buffer.append(", streetName=").append(streetName);
+270,273c254,255
+<         {
+<             String theAddressDetail;
+<             theAddressDetail = this.getAddressDetail();
+<             strategy.appendField(locator, this, "addressDetail", buffer, theAddressDetail, (this.addressDetail!= null));
+---
+>         if (addressDetail != null) {
+>             buffer.append(", addressDetail=").append(addressDetail);
+275,278c257,258
+<         {
+<             String theCity;
+<             theCity = this.getCity();
+<             strategy.appendField(locator, this, "city", buffer, theCity, (this.city!= null));
+---
+>         if (city != null) {
+>             buffer.append(", city=").append(city);
+280,283c260,261
+<         {
+<             String thePostalCode;
+<             thePostalCode = this.getPostalCode();
+<             strategy.appendField(locator, this, "postalCode", buffer, thePostalCode, (this.postalCode!= null));
+---
+>         if (postalCode != null) {
+>             buffer.append(", postalCode=").append(postalCode);
+285,288c263,264
+<         {
+<             String theRegion;
+<             theRegion = this.getRegion();
+<             strategy.appendField(locator, this, "region", buffer, theRegion, (this.region!= null));
+---
+>         if (region != null) {
+>             buffer.append(", region=").append(region);
+290,293c266,267
+<         {
+<             String theCountry;
+<             theCountry = this.getCountry();
+<             strategy.appendField(locator, this, "country", buffer, theCountry, (this.country!= null));
+---
+>         if (country != null) {
+>             buffer.append(", country=").append(country);

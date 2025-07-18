@@ -1,0 +1,85 @@
+30,31c30
+< import org.cactoos.collection.Filtered;
+< import org.cactoos.iterable.IterableOf;
+---
+> import org.cactoos.iterable.Filtered;
+34a34
+> import org.cactoos.iterable.IterableOf;
+36d35
+< import org.cactoos.scalar.CheckedScalar;
+38d36
+< import org.cactoos.scalar.UncheckedScalar;
+40d37
+< import org.cactoos.text.SplitText;
+201,213c198,204
+<             return new CheckedScalar<>(
+<                 () -> Long.parseUnsignedLong(
+<                     new ListOf<>(
+<                         new SplitText(
+<                             new TextOf(this.path),
+<                             "\n"
+<                         )
+<                     ).get(2).asString(),
+<                     // @checkstyle MagicNumber (1 line)
+<                     16
+<                 ),
+<                 e -> new IOException(e)
+<             ).value();
+---
+>             try {
+>                 String content = new TextOf(this.path).asString();
+>                 String[] lines = content.split("\n");
+>                 return Long.parseUnsignedLong(lines[2].trim(), 16);
+>             } catch (Exception e) {
+>                 throw new IOException(e);
+>             }
+248,250c239,245
+<                 incoming -> new Filtered<>(
+<                     origin -> new UncheckedScalar<>(
+<                         new Or(
+---
+>                 other.ledger(),
+>                 incoming -> new ListOf<>(
+>                     new Filtered<>(
+>                         ledger,
+>                         origin -> {
+>                             try {
+>                                 return new Or(
+252,255c247,248
+<                             () -> incoming.id() == origin.id()
+<                                 && incoming.bnf().equals(origin.bnf()),
+<                             () -> incoming.id() == origin.id()
+<                                 && incoming.amount() < 0L,
+---
+>                                     () -> incoming.id() == origin.id() && incoming.bnf().equals(origin.bnf()),
+>                                     () -> incoming.id() == origin.id() && incoming.amount() < 0L,
+256a250,254
+>                                 ).value();
+>                             } catch (Exception ex) {
+>                                 throw new RuntimeException(ex);
+>                             }
+>                         }
+258,261c256
+<                     ).value(),
+<                     ledger
+<                 ).isEmpty(),
+<                 other.ledger()
+---
+>                 ).isEmpty()
+270a266,267
+>             String content = new TextOf(this.path).asString();
+>             String[] lines = content.split("\\n");
+272c269
+<                 txt -> new RtTransaction(txt.asString()),
+---
+>                 line -> new RtTransaction(line),
+274,280c271
+<                     new ListOf<>(
+<                         new SplitText(
+<                             new TextOf(this.path),
+<                             "\\n"
+<                         )
+<                     ),
+<                     // @checkstyle MagicNumberCheck (1 line)
+---
+>                     new ListOf<>(lines),

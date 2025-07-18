@@ -1,0 +1,4 @@
+21:package org.spongepowered.api.text does not exist
+24:cannot find symbol  symbol:   class Flag   location: package org.spongepowered.api.command.parameter 
+83:cannot find symbol  symbol:   class CommandSpec   location: class com.github.games647.changeskin.sponge.command.SetCommand 
+18:cannot find symbol  symbol:   class CommandSpec   location: package org.spongepowered.api.command 

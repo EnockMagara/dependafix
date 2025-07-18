@@ -1,0 +1,1 @@
+139:cannot find symbol  symbol:   class HazelcastInstance   location: class org.jivesoftware.openfire.plugin.util.cache.ClusteredCacheFactory 

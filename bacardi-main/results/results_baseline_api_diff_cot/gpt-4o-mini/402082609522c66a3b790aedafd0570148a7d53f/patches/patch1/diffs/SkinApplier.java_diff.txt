@@ -1,0 +1,28 @@
+3d2
+< import com.flowpowered.math.vector.Vector3d;
+12,13d10
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.data.key.Keys;
+23d19
+<     private final CommandSource invoker;
+26,27c22
+<     public SkinApplier(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, SkinModel targetSkin
+<             , boolean keepSkin) {
+---
+>     public SkinApplier(ChangeSkinSponge plugin, Player receiver, SkinModel targetSkin, boolean keepSkin) {
+31d25
+<         this.invoker = invoker;
+42,43c36,37
+<         if (invoker instanceof Player) {
+<             UUID uniqueId = ((Player) invoker).getUniqueId();
+---
+>         if (receiver.isOnline()) {
+>             UUID uniqueId = receiver.getUniqueId();
+65c59
+<         plugin.sendMessage(invoker, "skin-changed");
+---
+>         plugin.sendMessage(receiver, "skin-changed");
+70c64
+<         plugin.sendMessage(invoker, key);
+---
+>         plugin.sendMessage(receiver, key);

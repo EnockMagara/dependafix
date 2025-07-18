@@ -1,0 +1,30 @@
+498:')' expected
+704:')' expected
+655:')' expected
+779:')' expected
+330:';' expected
+572:')' expected
+357:';' expected
+380:')' expected
+431:';' expected
+551:illegal start of type
+284:')' expected
+402:';' expected
+781:')' expected
+746:')' expected
+421:';' expected
+192:')' expected
+580:';' expected
+457:';' expected
+592:illegal start of expression
+486:';' expected
+531:')' expected
+410:';' expected
+510:illegal start of type
+415:';' expected
+595:')' expected
+777:')' expected
+392:';' expected
+517:')' expected
+447:';' expected
+387:')' expected

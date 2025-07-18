@@ -1,0 +1,24 @@
+74:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+88:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+61:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+22:com.redislabs.redisgraph.impl.api.RedisGraphTransaction is not abstract and does not override abstract method execGetResponse() in com.redislabs.redisgraph.RedisGraphTransaction
+167:cannot find symbol  symbol:   method getResponse(redis.clients.jedis.Builder<java.lang.String>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+48:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+177:sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in com.redislabs.redisgraph.impl.api.RedisGraphTransaction cannot override sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in redis.clients.jedis.TransactionBase  attempting to assign weaker access privileges; was public 
+142:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+36:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+14:cannot find symbol  symbol:   class CommandArguments   location: package redis.clients.jedis.util 
+101:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+178:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+128:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+114:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+7:cannot find symbol  symbol:   class MultiKeyCommandsPipeline   location: package redis.clients.jedis.commands 
+22:cannot find symbol  symbol: class BasicRedisPipeline 
+6:cannot find symbol  symbol:   class MultiKeyBinaryRedisPipeline   location: package redis.clients.jedis.commands 
+5:cannot find symbol  symbol:   class BinaryScriptingCommandsPipeline   location: package redis.clients.jedis.commands 
+19:cannot find symbol  symbol: class MultiKeyBinaryRedisPipeline 
+8:cannot find symbol  symbol:   class RedisPipeline   location: package redis.clients.jedis.commands 
+21:cannot find symbol  symbol: class BinaryScriptingCommandsPipeline 
+4:cannot find symbol  symbol:   class ClusterPipeline   location: package redis.clients.jedis.commands 
+20:cannot find symbol  symbol: class MultiKeyCommandsPipeline 
+9:cannot find symbol  symbol:   class ScriptingCommandsPipeline   location: package redis.clients.jedis.commands 

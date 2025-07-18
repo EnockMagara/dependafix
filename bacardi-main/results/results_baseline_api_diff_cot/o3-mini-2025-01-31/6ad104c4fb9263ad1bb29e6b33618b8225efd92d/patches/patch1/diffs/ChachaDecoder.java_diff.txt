@@ -1,0 +1,16 @@
+8,9d7
+< import org.bouncycastle.crypto.tls.AlertDescription;
+< import org.bouncycastle.crypto.tls.TlsFatalAlert;
+17d14
+< 
+19d15
+< 
+31c27
+<       throw new TlsFatalAlert(AlertDescription.bad_record_mac);
+---
+>       throw new IOException("bad_record_mac");
+36d31
+< 
+47,48d41
+< 
+<     // NOTE: The BC implementation puts 'r' after 'k'

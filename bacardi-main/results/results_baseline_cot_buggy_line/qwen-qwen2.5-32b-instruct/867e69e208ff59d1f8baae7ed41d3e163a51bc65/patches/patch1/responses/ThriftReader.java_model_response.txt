@@ -1,0 +1,79 @@
+```java
+package com.pinterest.singer.reader;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import org.apache.thrift.TBase;
+import org.apache.thrift.TException;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TFramedTransport;
+import org.apache.thrift.transport.TIOStreamTransport;
+import org.apache.thrift.transport.TTransport;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+@SuppressWarnings("rawtypes")
+public class ThriftReader<T extends TBase> implements Closeable {
+
+  public static interface TBaseFactory<T> {
+    T get();
+  }
+
+  public static interface TProtocolFactory {
+    TProtocol get(TTransport transport);
+  }
+
+  private final TBaseFactory<T> baseFactory;
+  private final ByteOffsetInputStream byteOffsetInputStream;
+  private final TFramedTransport framedTransport;
+  private final TProtocol protocol;
+
+  public ThriftReader(
+      String path,
+      TBaseFactory<T> baseFactory,
+      TProtocolFactory protocolFactory,
+      int readBufferSize,
+      int maxMessageSize) throws IOException {
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(path));
+    Preconditions.checkNotNull(protocolFactory);
+
+    this.byteOffsetInputStream = new ByteOffsetInputStream(
+        new RandomAccessFile(path, "r"), readBufferSize);
+    this.framedTransport = new TFramedTransport(new TIOStreamTransport(this.byteOffsetInputStream), maxMessageSize);
+    this.baseFactory = Preconditions.checkNotNull(baseFactory);
+    this.protocol = protocolFactory.get(this.framedTransport);
+  }
+
+  public T read() throws IOException, TException {
+    if (framedTransport.getBytesRemainingInBuffer() == 0 && byteOffsetInputStream.isEOF()) {
+      return null;
+    }
+
+    T t = baseFactory.get();
+    t.read(protocol);
+    return t;
+  }
+
+  public long getByteOffset() throws IOException {
+    Preconditions.checkState(
+        byteOffsetInputStream.getByteOffset() >= framedTransport.bytesRemainingInFrame());
+    return byteOffsetInputStream.getByteOffset() - framedTransport.bytesRemainingInFrame();
+  }
+
+  public void setByteOffset(long byteOffset) throws IOException {
+    if (getByteOffset() == byteOffset) {
+      return;
+    }
+
+    framedTransport.consumeBuffer(framedTransport.bytesRemainingInFrame());
+    byteOffsetInputStream.setByteOffset(byteOffset);
+  }
+
+  public void close() throws IOException {
+    framedTransport.close();
+  }
+}
+```
+```

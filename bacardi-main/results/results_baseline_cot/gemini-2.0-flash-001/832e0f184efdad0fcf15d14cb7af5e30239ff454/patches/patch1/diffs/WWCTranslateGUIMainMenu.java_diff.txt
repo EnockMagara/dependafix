@@ -1,0 +1,49 @@
+86c86,89
+<                                 translationMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                 XEnchantment enchantment = XEnchantment.matchXEnchantment("power").get();
+>                                 if (enchantment != null) {
+>                                         translationMeta.addEnchant(enchantment.getEnchant(), 1, false);
+>                                 }
+127c130,133
+<                                                 rateMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment2 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment2 != null) {
+>                                                         rateMeta.addEnchant(enchantment2.getEnchant(), 1, false);
+>                                                 }
+149c155,158
+<                                                 bookMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment3 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment3 != null) {
+>                                                         bookMeta.addEnchant(enchantment3.getEnchant(), 1, false);
+>                                                 }
+173c182,185
+<                                                 signMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment4 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment4 != null) {
+>                                                         signMeta.addEnchant(enchantment4.getEnchant(), 1, false);
+>                                                 }
+196c208,211
+<                                                 itemMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment5 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment5 != null) {
+>                                                         itemMeta.addEnchant(enchantment5.getEnchant(), 1, false);
+>                                                 }
+217c232,235
+<                                                 entityMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment6 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment6 != null) {
+>                                                         entityMeta.addEnchant(enchantment6.getEnchant(), 1, false);
+>                                                 }
+241c259,262
+<                                                 chatMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                                 XEnchantment enchantment7 = XEnchantment.matchXEnchantment("power").get();
+>                                                 if (enchantment7 != null) {
+>                                                         chatMeta.addEnchant(enchantment7.getEnchant(), 1, false);
+>                                                 }

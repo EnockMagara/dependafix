@@ -1,0 +1,14 @@
+101:cannot find symbol  symbol:   method getServer()   location: class org.spongepowered.api.Sponge 
+43:cannot find symbol  symbol:   method getCause()   location: variable invoker of type org.spongepowered.api.command.CommandCause 
+42:cannot find symbol  symbol:   method getCause()   location: variable invoker of type org.spongepowered.api.command.CommandCause 
+90:cannot find symbol  symbol:   method getTabList()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+92:cannot find symbol  symbol:   method connection()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+75:cannot find symbol  symbol:   method async()   location: interface org.spongepowered.api.scheduler.Task.Builder 
+98:cannot find symbol  symbol:   method getLocation()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+57:cannot find symbol  symbol:   method isOnline()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+89:cannot find symbol  symbol:   method getTabList()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+100:cannot find symbol  symbol:   method getWorld()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+99:cannot find symbol  symbol:   method getRotation()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+48:cannot find symbol  symbol:   method getUniqueId()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+93:cannot find symbol  symbol:   method getTabList()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 
+94:cannot find symbol  symbol:   method gameMode()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 

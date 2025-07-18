@@ -1,0 +1,28 @@
+20c20
+< import com.google.cloud.pubsublite.PublishMetadata;
+---
+> // Removed obsolete dependency: import com.google.cloud.pubsublite.PublishMetadata;
+34a35,37
+>   // Added a local stub for PublishMetadata since it was removed from the dependency.
+>   public static class PublishMetadata {}
+> 
+40,41c43
+<         TopicPath.newBuilder()
+<             .setProject(
+---
+>         TopicPath.of(
+43,46c45,47
+<                     .project())
+<             .setLocation(CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()))
+<             .setName(TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()))
+<             .build();
+---
+>                 .project(),
+>             CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()),
+>             TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()));
+48c49
+<     builder.setPublisherFactory(
+---
+>     builder.setPublisherSupplier(
+53d53
+<                 .setContext(PubsubContext.of(FRAMEWORK))

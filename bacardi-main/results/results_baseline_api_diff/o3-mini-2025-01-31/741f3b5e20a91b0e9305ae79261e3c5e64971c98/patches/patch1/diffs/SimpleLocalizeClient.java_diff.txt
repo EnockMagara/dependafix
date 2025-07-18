@@ -1,0 +1,8 @@
+18a19
+> import java.nio.charset.StandardCharsets;
+88c89
+<     ExportResponse exportResponse = objectMapper.readValue(body, ExportResponse.class);
+---
+>     ExportResponse exportResponse = objectMapper.readValue(body.getBytes(StandardCharsets.UTF_8), ExportResponse.class);
+166d166
+< 

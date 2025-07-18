@@ -1,0 +1,6 @@
+8a9
+> import com.artipie.asto.factory.StorageConfig;
+44c45
+<                         sub.string("type"), Yaml.createYamlInput(sub.toString()).readYamlMapping()
+---
+>                         sub.config("type"), Yaml.createYamlInput(sub.toString()).readYamlMapping()

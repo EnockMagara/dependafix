@@ -1,0 +1,2 @@
+149:cannot find symbol  symbol:   method getEntityProvider(java.lang.String)   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+151:cannot find symbol  symbol:   method getEntityProvider(java.lang.String)   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 

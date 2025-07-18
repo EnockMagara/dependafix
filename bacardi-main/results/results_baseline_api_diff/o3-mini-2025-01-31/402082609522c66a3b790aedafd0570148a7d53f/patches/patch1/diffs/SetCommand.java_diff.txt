@@ -1,0 +1,114 @@
+9c9,11
+< 
+---
+> import java.util.ArrayList;
+> import java.util.List;
+> import java.util.Optional;
+11d12
+< 
+13,17c14,16
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.args.GenericArguments;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.CommandExecutor;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+21,24d19
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+< 
+36,39c31,34
+<     @Override
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+<         if (!(src instanceof Player)) {
+<             plugin.sendMessage(src, "no-console");
+---
+>     public CommandResult execute(CommandContext args) {
+>         Optional<Player> optionalPlayer = args.cause().first(Player.class);
+>         if (!optionalPlayer.isPresent()) {
+>             plugin.sendMessage(args.cause().root(), "no-console");
+43c38,39
+<         UUID uniqueId = ((Player) src).getUniqueId();
+---
+>         Player receiver = optionalPlayer.get();
+>         UUID uniqueId = receiver.getUniqueId();
+45c41
+<             plugin.sendMessage(src, "cooldown");
+---
+>             plugin.sendMessage(receiver, "cooldown");
+49d44
+<         Player receiver = (Player) src;
+51c46
+<         boolean keepSkin = args.hasAny("keep");
+---
+>         boolean keepSkin = args.<Boolean>getOne("keep").orElse(false);
+60c55
+<             if (core.getConfig().getBoolean("skinPermission") && !plugin.hasSkinPermission(src, targetUUID, true)) {
+---
+>             if (core.getConfig().getBoolean("skinPermission") && !plugin.hasSkinPermission(receiver, targetUUID, true)) {
+64,65c59,60
+<             plugin.sendMessage(src, "skin-change-queue");
+<             Runnable skinDownloader = new SkinDownloader(plugin, src, receiver, targetUUID, keepSkin);
+---
+>             plugin.sendMessage(receiver, "skin-change-queue");
+>             Runnable skinDownloader = new SkinDownloader(plugin, receiver, receiver, targetUUID, keepSkin);
+70c65
+<         Runnable nameResolver = new NameResolver(plugin, src, targetSkin, receiver, keepSkin);
+---
+>         Runnable nameResolver = new NameResolver(plugin, receiver, targetSkin, receiver, keepSkin);
+75d69
+<     @Override
+79,81c73
+<                 .arguments(
+<                         string(of("skin")),
+<                         flags().flag("keep").buildWith(GenericArguments.none()))
+---
+>                 .arguments(Parameter.string().key("skin").build(), Parameter.bool().key("keep").build())
+84a77,119
+> 
+>     public static class CommandSpec {
+>         private final CommandExecutor executor;
+>         private final Object[] arguments;
+>         private final String permission;
+> 
+>         private CommandSpec(CommandExecutor executor, Object[] arguments, String permission) {
+>             this.executor = executor;
+>             this.arguments = arguments;
+>             this.permission = permission;
+>         }
+> 
+>         public static Builder builder() {
+>             return new Builder();
+>         }
+> 
+>         public static class Builder {
+>             private CommandExecutor executor;
+>             private List<Object> arguments = new ArrayList<>();
+>             private String permission;
+> 
+>             public Builder executor(CommandExecutor executor) {
+>                 this.executor = executor;
+>                 return this;
+>             }
+> 
+>             public Builder arguments(Object... args) {
+>                 for (Object arg : args) {
+>                     this.arguments.add(arg);
+>                 }
+>                 return this;
+>             }
+> 
+>             public Builder permission(String permission) {
+>                 this.permission = permission;
+>                 return this;
+>             }
+> 
+>             public CommandSpec build() {
+>                 return new CommandSpec(executor, arguments.toArray(), permission);
+>             }
+>         }
+>     }

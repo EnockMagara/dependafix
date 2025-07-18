@@ -1,0 +1,12 @@
+13c13
+< import javax.mvc.Models;
+---
+> import javax.mvc.ModelAndView; // Updated import
+29c29
+<     Models models;
+---
+>     ModelAndView modelAndView; // Updated variable type
+34c34
+<         models.put("error", exception.getMessage());
+---
+>         modelAndView.put("error", exception.getMessage()); // Updated usage

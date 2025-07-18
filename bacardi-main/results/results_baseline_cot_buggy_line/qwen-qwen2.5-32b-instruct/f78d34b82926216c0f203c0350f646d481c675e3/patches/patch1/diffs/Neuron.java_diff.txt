@@ -1,0 +1,4 @@
+5c5
+< import static develop.p2p.lib.LearnMath.sigmoid;
+---
+> import static ml.peya.lib.LearnMath.sigmoid; // Adjusted import based on the new dependency

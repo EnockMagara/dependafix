@@ -1,0 +1,4 @@
+41:cannot find symbol  symbol:   class Storages   location: class com.artipie.security.policy.YamlPolicyFactory 
+40:cannot find symbol  symbol:   method map()   location: variable sub of type com.artipie.security.policy.PolicyConfig 
+44:no suitable method found for newStorage(java.util.Map<java.lang.String,java.lang.Object>)    method com.artipie.asto.factory.StorageFactory.newStorage(com.artipie.asto.factory.Config) is not applicable       (argument mismatch; java.util.Map<java.lang.String,java.lang.Object> cannot be converted to com.artipie.asto.factory.Config)     method com.artipie.asto.factory.StorageFactory.newStorage(com.amihaiemil.eoyaml.YamlMapping) is not applicable       (argument mismatch; java.util.Map<java.lang.String,java.lang.Object> cannot be converted to com.amihaiemil.eoyaml.YamlMapping) 
+6:cannot find symbol  symbol:   class Storages   location: package com.artipie.asto.factory 

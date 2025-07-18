@@ -1,0 +1,66 @@
+12a13
+> import com.github.games647.changeskin.sponge.LoginListener;
+16d16
+< 
+19d18
+< 
+23,24c22,23
+< import org.spongepowered.api.command.CommandManager;
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.command.manager.CommandManager;
+> import org.spongepowered.api.command.source.CommandSource;
+27,34c26,32
+< import org.spongepowered.api.event.game.state.GameInitializationEvent;
+< import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+< import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelRegistrar;
+< import org.spongepowered.api.plugin.Plugin;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+< 
+---
+> import org.spongepowered.api.event.lifecycle.ConstructPluginEvent;
+> import org.spongepowered.api.event.lifecycle.RegisterCommandEvent;
+> import org.spongepowered.api.event.lifecycle.StoppingEngineEvent;
+> import org.spongepowered.api.network.channel.ChannelBinding.RawDataChannel;
+> import org.spongepowered.api.network.channel.ChannelRegistrar;
+> import org.spongepowered.api.plugin.meta.Plugin;
+> import org.spongepowered.api.text.serializer.legacy.LegacyComponentSerializer;
+40c38
+< @Plugin(id = ARTIFACT_ID, name = PomData.NAME, version = PomData.VERSION,
+---
+> @Plugin(id = PomData.ARTIFACT_ID, name = PomData.NAME, version = PomData.VERSION,
+62c60
+<     public void onPreInit(GamePreInitializationEvent preInitEvent) {
+---
+>     public void onPreInit(ConstructPluginEvent preInitEvent) {
+73c71
+<     public void onInit(GameInitializationEvent initEvent) {
+---
+>     public void onInit(RegisterCommandEvent initEvent) {
+77c75
+<         CommandManager cmdManager = Sponge.getCommandManager();
+---
+>         CommandManager cmdManager = Sponge.server().commandManager();
+84,85c82
+<         cmdManager.register(this, injector.getInstance(InvalidateCommand.class)
+<                 .buildSpec(), "skininvalidate", "skin-invalidate");
+---
+>         cmdManager.register(this, injector.getInstance(InvalidateCommand.class).buildSpec(), "skininvalidate", "skin-invalidate");
+87c84
+<         Sponge.getEventManager().registerListeners(this, injector.getInstance(LoginListener.class));
+---
+>         Sponge.eventManager().registerListeners(this, injector.getInstance(LoginListener.class));
+90c87
+<         ChannelRegistrar channelReg = Sponge.getChannelRegistrar();
+---
+>         ChannelRegistrar channelReg = Sponge.server().channelRegistrar();
+100c97
+<     public void onShutdown(GameStoppingServerEvent stoppingServerEvent) {
+---
+>     public void onShutdown(StoppingEngineEvent stoppingServerEvent) {
+145c142
+<             receiver.sendMessage(TextSerializers.LEGACY_FORMATTING_CODE.deserialize(message));
+---
+>             receiver.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));

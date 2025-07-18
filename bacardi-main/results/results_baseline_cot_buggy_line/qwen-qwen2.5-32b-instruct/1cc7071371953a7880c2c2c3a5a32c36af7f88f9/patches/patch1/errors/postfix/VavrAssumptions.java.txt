@@ -1,0 +1,9 @@
+42:cannot find symbol  symbol:   class WithInlineExpunction   location: class org.assertj.vavr.api.VavrAssumptions.TypeCache 
+207:variable CACHE is already defined in class org.assertj.vavr.api.VavrAssumptions
+25:cannot find symbol  symbol:   class ForClassLoader   location: interface net.bytebuddy.dynamic.loading.ClassLoadingStrategy 
+174:cannot find symbol  symbol:   variable ForClassLoader   location: interface net.bytebuddy.dynamic.loading.ClassLoadingStrategy 
+209:variable BYTE_BUDDY is already defined in class org.assertj.vavr.api.VavrAssumptions
+212:variable ASSUMPTION is already defined in class org.assertj.vavr.api.VavrAssumptions
+169:method <ASSERTION>generateAssumptionClass(java.lang.Class<ASSERTION>) is already defined in class org.assertj.vavr.api.VavrAssumptions
+113:cannot find symbol  symbol:   variable ForClassLoader   location: class org.assertj.vavr.api.VavrAssumptions 
+162:method <ASSERTION>createAssumptionClass(java.lang.Class<ASSERTION>) is already defined in class org.assertj.vavr.api.VavrAssumptions

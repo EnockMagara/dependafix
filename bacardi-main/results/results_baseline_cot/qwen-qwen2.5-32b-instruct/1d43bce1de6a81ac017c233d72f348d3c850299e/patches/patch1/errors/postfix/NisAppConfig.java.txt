@@ -1,0 +1,11 @@
+135:cannot find symbol  symbol: method nisConfiguration() 
+132:cannot find symbol  symbol: method weighedBalancesSupplier() 
+78:cannot find symbol  symbol:   variable MAX_AUDIT_HISTORY_SIZE   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+125:cannot find symbol  symbol: method nisConfiguration() 
+119:cannot find symbol  symbol: method namespaceCache() 
+116:cannot find symbol  symbol: method nisConfiguration() 
+127:cannot find symbol  symbol: method nisConfiguration() 
+134:cannot find symbol  symbol: method nisCache() 
+110:cannot find symbol  symbol: method sessionFactory() 
+131:cannot find symbol  symbol: method nisConfiguration() 
+120:cannot find symbol  symbol: method nisConfiguration() 

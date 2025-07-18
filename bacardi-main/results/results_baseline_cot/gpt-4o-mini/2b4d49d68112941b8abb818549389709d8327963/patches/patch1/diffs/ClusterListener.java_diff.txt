@@ -1,0 +1,12 @@
+18c18
+< import com.hazelcast.core.Cluster;
+---
+> import com.hazelcast.cluster.Cluster;
+154d153
+<     @Override
+227d225
+<     @Override
+261d258
+<     @Override
+270d266
+<     @Override

@@ -1,0 +1,33 @@
+8,11d7
+< import javax.mvc.UriRef;
+< import javax.mvc.binding.BindingResult;
+< import javax.mvc.binding.MvcBinding;
+< import javax.mvc.binding.ParamError;
+29,32c25
+<     BindingResult bindingResult;
+< 
+<     @Inject
+<     Models models;
+---
+>     Logger log;
+37,39d29
+<     @Inject
+<     Logger log;
+< 
+49d38
+<             @MvcBinding
+51,62c40
+<         if (bindingResult.isFailed()) {
+<             AlertMessage alert = AlertMessage.danger("Validation voilations!");
+<             bindingResult.getAllErrors()
+<                     .stream()
+<                     .forEach((ParamError t) -> {
+<                         alert.addError(t.getParamName(), "", t.getMessage());
+<                     });
+<             models.put("errors", alert);
+<             log.info("mvc binding failed.");
+<             return "csrf.xhtml";
+<         }
+< 
+---
+>         AlertMessage alert = AlertMessage.danger("Validation violations!");

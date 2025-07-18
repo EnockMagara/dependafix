@@ -1,0 +1,24 @@
+22,23d21
+< import com.hazelcast.config.MaxSizeConfig;
+< import com.hazelcast.config.MemberAttributeConfig;
+27d24
+< import com.hazelcast.core.Cluster;
+30a28,29
+> import com.hazelcast.cluster.Cluster;
+> import com.hazelcast.config.MaxSizeConfig;
+193c192
+<                 final MemberAttributeConfig memberAttributeConfig = config.getMemberAttributeConfig();
+---
+>                 final com.hazelcast.config.MemberAttributeConfig memberAttributeConfig = config.getMemberAttributeConfig();
+356c355
+<         return cluster == null ? System.currentTimeMillis() : cluster.getClusterTime();
+---
+>         return cluster == null ? System.currentTimeMillis() : hazelcast.getCluster().getClusterTime();
+496c495
+<             result = new HazelcastClusterNodeInfo(member, cluster.getClusterTime());
+---
+>             result = new HazelcastClusterNodeInfo(member, hazelcast.getCluster().getClusterTime());
+701,703d699
+< 
+< 
+< 

@@ -1,0 +1,16 @@
+13d12
+< import org.spongepowered.api.command.CommandSource;
+15,16c14,15
+< import org.spongepowered.api.command.args.GenericArguments;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+---
+> import org.spongepowered.api.command.parameter.CommandSource;
+> import org.spongepowered.api.command.parameter.GenericArguments;
+21,22c20,21
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+---
+> import static org.spongepowered.api.command.parameter.GenericArguments.flags;
+> import static org.spongepowered.api.command.parameter.GenericArguments.string;
+75d73
+<     @Override

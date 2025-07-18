@@ -1,0 +1,18 @@
+8c8,10
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.text.channel.MessageChannel;
+> import org.spongepowered.api.text.Text;
+> 
+14c16
+<     private final CommandSource invoker;
+---
+>     private final MessageChannel invoker;
+18c20
+<     public NameResolver(ChangeSkinSponge plugin, CommandSource invoker, String targetName, Player receiver
+---
+>     public NameResolver(ChangeSkinSponge plugin, MessageChannel invoker, String targetName, Player receiver
+30c32
+<         plugin.sendMessage(invoker, id);
+---
+>         plugin.sendMessage(invoker, Text.of(id));

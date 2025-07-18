@@ -1,0 +1,71 @@
+11a12
+> import java.util.concurrent.CompletableFuture;
+14c15,16
+< import org.spongepowered.api.command.CommandException;
+---
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.CommandExecutor;
+16,19c18,20
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.CommandCause;
+21,23c22,24
+< import org.spongepowered.api.scheduler.Task;
+< import org.spongepowered.api.text.Text;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+---
+> 
+> import net.kyori.adventure.text.Component;
+> import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+33d33
+< 
+35,38c35,38
+<     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+<         if (!(src instanceof Player)) {
+<             plugin.sendMessage(src, "no-console");
+<             return CommandResult.empty();
+---
+>     public CommandResult execute(CommandCause cause, CommandContext args) throws CommandException {
+>         if (!(cause.audience() instanceof Player)) {
+>             plugin.sendMessage(cause, "no-console");
+>             return CommandResult.builder().build();
+41,43c41,43
+<         UUID uniqueId = ((Player) src).getUniqueId();
+<         Task.builder().async()
+<                 .execute(() -> {
+---
+>         Player player = (Player) cause.audience();
+>         UUID uniqueId = player.getUniqueId();
+>         CompletableFuture.runAsync(() -> {
+45,47c45,46
+<                     Task.builder().execute(() -> sendSkinDetails(uniqueId, preferences)).submit(plugin);
+<                 })
+<                 .submit(plugin);
+---
+>             Sponge.server().scheduler().executor(plugin).submit(() -> sendSkinDetails(uniqueId, preferences));
+>         });
+49c48
+<         return CommandResult.success();
+---
+>         return CommandResult.builder().successCount(1).build();
+53,54c52,53
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command buildSpec() {
+>         return Command.builder()
+61c60
+<         Optional<Player> optPlayer = Sponge.getServer().getPlayer(uuid);
+---
+>         Optional<Player> optPlayer = Sponge.server().player(uuid);
+70,71c69,70
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+<                 player.sendMessage(text);
+---
+>                 Component component = LegacyComponentSerializer.legacyAmpersand().deserialize(formatted);
+>                 player.sendMessage(component);

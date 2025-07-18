@@ -1,0 +1,14 @@
+22a23
+> import org.yaml.snakeyaml.introspector.BeanAccess;
+218c219,227
+<   protected Set<Property> getProperties(Class<? extends Object> type)
+---
+>   protected Set<Property> getProperties(Class<? extends Object> type) {
+>     try {
+>       return getPropertiesInternal(type);
+>     } catch (IntrospectionException e) {
+>       throw new YAMLException(e);
+>     }
+>   }
+> 
+>   protected Set<Property> getPropertiesInternal(Class<? extends Object> type)

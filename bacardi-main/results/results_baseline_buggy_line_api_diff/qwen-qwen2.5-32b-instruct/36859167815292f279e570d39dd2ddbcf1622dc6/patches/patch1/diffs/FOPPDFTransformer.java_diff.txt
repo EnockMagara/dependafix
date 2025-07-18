@@ -1,0 +1,47 @@
+34d33
+< import java.io.IOException;
+54,55d52
+< import org.apache.fop.apps.FOPException;
+< import org.apache.fop.apps.FOUserAgent;
+58c55,57
+< import org.apache.xmlgraphics.util.MimeConstants;
+---
+> import org.apache.fop.apps.FopFactoryBuilder;
+> import org.apache.fop.apps.FopFactoryConfig;
+> import org.apache.fop.apps.MimeConstants;
+68a68
+>     private final FopFactory fopFactory;
+71a72
+>         this.fopFactory = createFopFactory();
+77a79,84
+>     private FopFactory createFopFactory() {
+>         FopFactoryBuilder builder = new FopFactoryBuilder(new File("."));
+>         FopFactoryConfig config = builder.build();
+>         return FopFactory.newInstance(config);
+>     }
+> 
+114,119d120
+<         // create an instance of fop factory
+<         FopFactory fopFactory = FopFactory.newInstance();
+<         // a user agent is needed for transformation
+<         FOUserAgent foUserAgent = fopFactory.newFOUserAgent();
+<         // to store output
+< 
+139c140
+<             Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, foUserAgent, outStream);
+---
+>             Fop fop = fopFactory.newFop(MimeConstants.MIME_PDF, outStream);
+141,142c142
+<             // Resulting SAX events (the generated FO)
+<             // must be piped through to FOP
+---
+>             // Resulting SAX events (the generated FO) must be piped through to FOP
+148,150c148
+<         } catch (FOPException e) {
+<             throw new ExportServiceException("Error using FOP to open the template", e);
+<         } catch (TransformerException e) {
+---
+>         } catch (Exception e) {
+152,153d149
+<         } catch (IOException | WriterException e) {
+<             throw new ExportServiceException("Error generating qrCode", e);

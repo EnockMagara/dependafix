@@ -1,0 +1,7 @@
+43,44c43
+<     super(Model.class);
+< 
+---
+>     super();
+64a64
+>     desc.putListPropertyType("roles", String.class);

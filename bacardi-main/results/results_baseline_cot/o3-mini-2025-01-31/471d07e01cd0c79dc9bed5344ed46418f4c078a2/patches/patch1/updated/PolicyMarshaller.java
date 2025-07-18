@@ -1,0 +1,77 @@
+package com.google.cloud.resourcemanager;
+
+import com.google.cloud.Identity;
+import com.google.cloud.Policy;
+import com.google.cloud.Policy.Marshaller;
+import com.google.cloud.Role;
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.iam.v1.Binding;
+import com.google.protobuf.ByteString;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/** @deprecated v3 GAPIC client of ResourceManager is now available */
+@Deprecated
+final class PolicyMarshaller extends Marshaller<com.google.iam.v1.Policy> {
+
+  static final PolicyMarshaller INSTANCE = new PolicyMarshaller();
+
+  private PolicyMarshaller() {}
+
+  private static class Builder extends Policy.Builder {
+
+    private Builder(Map<Role, Set<Identity>> bindings, String etag, Integer version) {
+      setBindings(bindings);
+      setEtag(etag);
+      if (version != null) {
+        setVersion(version);
+      }
+    }
+  }
+
+  @Override
+  protected Policy fromPb(com.google.iam.v1.Policy policyPb) {
+    Map<Role, Set<Identity>> bindings = new HashMap<>();
+    if (!policyPb.getBindingsList().isEmpty()) {
+      for (Binding bindingPb : policyPb.getBindingsList()) {
+        bindings.put(
+            Role.of(bindingPb.getRole()),
+            ImmutableSet.copyOf(
+                Lists.transform(
+                    bindingPb.getMembersList(),
+                    new Function<String, Identity>() {
+                      @Override
+                      public Identity apply(String s) {
+                        return IDENTITY_VALUE_OF_FUNCTION.apply(s);
+                      }
+                    })));
+      }
+    }
+    return new Builder(bindings, policyPb.getEtag().toStringUtf8(), policyPb.getVersion()).build();
+  }
+
+  @Override
+  protected com.google.iam.v1.Policy toPb(Policy policy) {
+    com.google.iam.v1.Policy.Builder policyPbBuilder = com.google.iam.v1.Policy.newBuilder();
+    for (Map.Entry<Role, Set<Identity>> binding : policy.getBindings().entrySet()) {
+      Binding.Builder bindingPbBuilder = Binding.newBuilder();
+      bindingPbBuilder.setRole(binding.getKey().getValue());
+      List<String> members = new ArrayList<>();
+      for (Identity identity : binding.getValue()) {
+        members.add(IDENTITY_STR_VALUE_FUNCTION.apply(identity));
+      }
+      bindingPbBuilder.addAllMembers(members);
+      policyPbBuilder.addBindings(bindingPbBuilder.build());
+    }
+    policyPbBuilder.setEtag(ByteString.copyFromUtf8(policy.getEtag()));
+    if (policy.getVersion() != null) {
+      policyPbBuilder.setVersion(policy.getVersion());
+    }
+    return policyPbBuilder.build();
+  }
+}

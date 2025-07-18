@@ -1,0 +1,29 @@
+111:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+22:com.redislabs.redisgraph.impl.api.RedisGraphTransaction is not abstract and does not override abstract method execGetResponse() in com.redislabs.redisgraph.RedisGraphTransaction
+114:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+124:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+142:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+167:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+88:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+98:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+178:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+159:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+71:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+48:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+151:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+74:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+177:sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in com.redislabs.redisgraph.impl.api.RedisGraphTransaction cannot override sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in redis.clients.jedis.TransactionBase  attempting to assign weaker access privileges; was public 
+165:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+46:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+58:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+34:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+138:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+36:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+101:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+128:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+14:cannot find symbol  symbol:   class CommandArguments   location: package redis.clients.jedis.util 
+85:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+61:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+155:cannot find symbol  symbol:   class Response   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+5:cannot find symbol  symbol:   class RedisPipeline   location: package redis.clients.jedis.commands 
+15:cannot find symbol  symbol: class RedisPipeline 

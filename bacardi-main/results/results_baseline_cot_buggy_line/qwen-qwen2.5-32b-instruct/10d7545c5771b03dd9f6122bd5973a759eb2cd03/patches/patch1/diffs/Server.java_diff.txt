@@ -1,0 +1,41 @@
+1,18d0
+< //
+< // Wire
+< // Copyright (C) 2016 Wire Swiss GmbH
+< //
+< // This program is free software: you can redistribute it and/or modify
+< // it under the terms of the GNU General Public License as published by
+< // the Free Software Foundation, either version 3 of the License, or
+< // (at your option) any later version.
+< //
+< // This program is distributed in the hope that it will be useful,
+< // but WITHOUT ANY WARRANTY; without even the implied warranty of
+< // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+< // GNU General Public License for more details.
+< //
+< // You should have received a copy of the GNU General Public License
+< // along with this program. If not, see http://www.gnu.org/licenses/.
+< //
+< 
+51d32
+< import io.dropwizard.servlets.tasks.Task;
+53a35
+> import io.dropwizard.setup.AdminEnvironment;
+153c135,143
+<             runHealthChecks();
+---
+>             Logger.info("Running health checks...");
+>             final SortedMap<String, HealthCheck.Result> results = env.healthChecks().runHealthChecks();
+>             for (String name : results.keySet()) {
+>                 final HealthCheck.Result result = results.get(name);
+>                 if (!result.isHealthy()) {
+>                     Logger.error("%s failed with: %s", name, result.getMessage());
+>                     throw new RuntimeException(result.getError());
+>                 }
+>             }
+169a160
+> 
+199c190
+<         return botId -> new JdbiState(botId, getJdbi());
+---
+>         return botId -> new JdbiState(botId, new JdbiStorage(getJdbi()));

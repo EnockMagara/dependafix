@@ -1,0 +1,60 @@
+10a11
+> import java.util.Optional;
+11a13
+> import org.spongepowered.api.command.Command;
+13,16c15,17
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+19,20c20
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import org.spongepowered.api.command.CommandCause;
+34,35c34,41
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+<         String url = args.<String>getOne("url").get();
+---
+>     public CommandResult execute(CommandCause cause, CommandContext args) throws CommandException {
+>         Optional<String> urlOptional = args.one(Parameter.string().key("url").build());
+>         if (!urlOptional.isPresent()) {
+>             plugin.sendMessage(cause, "no-valid-url");
+>             return CommandResult.empty();
+>         }
+> 
+>         String url = urlOptional.get();
+39c45
+<                 plugin.sendMessage(src, "no-accounts");
+---
+>                 plugin.sendMessage(cause, "no-accounts");
+42c48
+<                 Runnable skinUploader = new SkinUploader(plugin, src, uploadAccount, url);
+---
+>                 Runnable skinUploader = new SkinUploader(plugin, cause, uploadAccount, url);
+46c52
+<             plugin.sendMessage(src, "no-valid-url");
+---
+>             plugin.sendMessage(cause, "no-valid-url");
+53,54c59,60
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command.Builder buildSpec() {
+>         return Command.builder()
+56,58c62,68
+<                 .arguments(string(of("url")))
+<                 .permission(PomData.ARTIFACT_ID + ".command.skinupload.base")
+<                 .build();
+---
+>                 .addParameter(Parameter.string().key("url").build())
+>                 .permission(PomData.ARTIFACT_ID + ".command.skinupload.base");
+>     }
+> 
+>     @Override
+>     public CommandResult execute(org.spongepowered.api.command.CommandSource src, org.spongepowered.api.command.args.CommandContext args) {
+>         return null;

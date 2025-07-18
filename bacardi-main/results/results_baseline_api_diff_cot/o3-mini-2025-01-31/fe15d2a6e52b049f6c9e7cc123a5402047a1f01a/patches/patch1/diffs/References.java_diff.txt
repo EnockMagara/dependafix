@@ -1,0 +1,10 @@
+8d7
+< 
+15d13
+< import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
+17a16
+> import org.jvnet.jaxb2_commons.lang.DefaultToStringStrategy;
+104c103
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>         final ToStringStrategy2 strategy = new DefaultToStringStrategy();

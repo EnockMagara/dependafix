@@ -1,0 +1,39 @@
+11a12
+> import org.pitest.classinfo.ClassInfoVisitor;
+12a14
+> import java.io.ByteArrayOutputStream;
+14a17
+> import java.io.InputStream;
+105c108
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), getClassInfo(data));
+135a139,166
+>   }
+>   
+>   private Object getClassInfo(final ClassMutationResults data) {
+>     try {
+>       String resourcePath = data.getMutatedClass().asJavaName().replace('.', '/') + ".class";
+>       InputStream in = this.getClass().getClassLoader().getResourceAsStream(resourcePath);
+>       if (in == null) {
+>         return null;
+>       }
+>       byte[] bytes = readAllBytes(in);
+>       long timestamp = 0L;
+>       ClassInfoVisitor visitor = new ClassInfoVisitor();
+>       return visitor.getClassInfo(data.getMutatedClass(), bytes, timestamp);
+>     } catch (IOException e) {
+>       e.printStackTrace();
+>       return null;
+>     }
+>   }
+>   
+>   private byte[] readAllBytes(InputStream input) throws IOException {
+>     ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+>     int nRead;
+>     byte[] data = new byte[16384];
+>     while ((nRead = input.read(data, 0, data.length)) != -1) {
+>       buffer.write(data, 0, nRead);
+>     }
+>     buffer.flush();
+>     return buffer.toByteArray();

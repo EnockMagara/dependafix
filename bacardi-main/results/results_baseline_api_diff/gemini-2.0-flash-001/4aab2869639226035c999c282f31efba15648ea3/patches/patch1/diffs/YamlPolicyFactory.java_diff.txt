@@ -1,0 +1,27 @@
+9c9,11
+< import com.artipie.asto.factory.Storages;
+---
+> import com.artipie.asto.factory.Config;
+> import com.artipie.asto.factory.StorageFactory;
+> import com.artipie.asto.fs.FileStorageFactory;
+11a14,15
+> import java.util.HashMap;
+> import java.util.Map;
+40a45,55
+>             final String type = sub.string("type");
+>             final Map<String, Object> map = new HashMap<>();
+>             map.put("type", type);
+>             map.putAll(sub.map());
+>             final Config cfg = new Config.FromMap(map);
+>             final StorageFactory factory;
+>             if (type.equals("fs")) {
+>                 factory = new FileStorageFactory();
+>             } else {
+>                 throw new IllegalArgumentException("Unsupported storage type: " + type);
+>             }
+43,45c58
+<                     new Storages().newStorage(
+<                         sub.string("type"), Yaml.createYamlInput(sub.toString()).readYamlMapping()
+<                     )
+---
+>                     factory.newStorage(cfg)

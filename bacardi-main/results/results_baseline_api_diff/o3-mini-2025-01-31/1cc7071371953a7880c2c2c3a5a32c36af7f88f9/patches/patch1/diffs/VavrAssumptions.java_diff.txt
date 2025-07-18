@@ -1,0 +1,79 @@
+24,33c24,32
+< import org.assertj.core.internal.bytebuddy.ByteBuddy;
+< import org.assertj.core.internal.bytebuddy.TypeCache;
+< import org.assertj.core.internal.bytebuddy.TypeCache.SimpleKey;
+< import org.assertj.core.internal.bytebuddy.dynamic.scaffold.TypeValidation;
+< import org.assertj.core.internal.bytebuddy.implementation.Implementation;
+< import org.assertj.core.internal.bytebuddy.implementation.MethodDelegation;
+< import org.assertj.core.internal.bytebuddy.implementation.auxiliary.AuxiliaryType;
+< import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.RuntimeType;
+< import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.SuperCall;
+< import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.This;
+---
+> import net.bytebuddy.ByteBuddy;
+> import net.bytebuddy.dynamic.scaffold.TypeValidation;
+> import net.bytebuddy.implementation.Implementation;
+> import net.bytebuddy.implementation.MethodDelegation;
+> import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
+> import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+> import net.bytebuddy.implementation.bind.annotation.SuperCall;
+> import net.bytebuddy.implementation.bind.annotation.This;
+> import net.bytebuddy.matcher.ElementMatchers;
+38a38,39
+> import java.util.concurrent.ConcurrentHashMap;
+> import java.util.concurrent.ConcurrentMap;
+40,41c41
+< import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.any;
+< import static org.assertj.core.util.Arrays.array;
+---
+> import static net.bytebuddy.matcher.ElementMatchers.any;
+51c51
+<             .with(new AuxiliaryType.NamingStrategy.SuffixingRandom("Assertj$Assumptions"));
+---
+>             .with(new net.bytebuddy.NamingStrategy.SuffixingRandom("Assertj$Assumptions"));
+55c55
+<     private static final TypeCache<SimpleKey> CACHE = new TypeCache.WithInlineExpunction<>(TypeCache.Sort.SOFT);
+---
+>     private static final ConcurrentMap<SimpleKey, Class<?>> CACHE = new ConcurrentHashMap<>();
+171c171
+<      * @param <VALUE> type of the value contained in the {@link io.vavr.control.Try}.
+---
+>      * @param <VALUE> type of the value contained in the {@link Try}.
+198c198
+<         return asAssumption(assertionType, array(actualType), array(actual));
+---
+>         return asAssumption(assertionType, new Class<?>[]{actualType}, new Object[]{actual});
+216,218c216,217
+<         return (Class<ASSERTION>) CACHE.findOrInsert(VavrAssumptions.class.getClassLoader(),
+<                 cacheKey,
+<                 () -> generateAssumptionClass(assertClass));
+---
+>         return (Class<ASSERTION>) CACHE.computeIfAbsent(cacheKey,
+>                 key -> generateAssumptionClass(assertClass));
+259d257
+<         // @format:off
+268,269d265
+<         // @format:on
+<         // should not arrive here
+272a269,289
+>     private static final class SimpleKey {
+>         private final Class<?> clazz;
+> 
+>         private SimpleKey(Class<?> clazz) {
+>             this.clazz = clazz;
+>         }
+> 
+>         @Override
+>         public boolean equals(Object obj) {
+>             if (this == obj) return true;
+>             if (obj == null || getClass() != obj.getClass()) return false;
+>             SimpleKey that = (SimpleKey) obj;
+>             return clazz.equals(that.clazz);
+>         }
+> 
+>         @Override
+>         public int hashCode() {
+>             return clazz.hashCode();
+>         }
+>     }
+> 

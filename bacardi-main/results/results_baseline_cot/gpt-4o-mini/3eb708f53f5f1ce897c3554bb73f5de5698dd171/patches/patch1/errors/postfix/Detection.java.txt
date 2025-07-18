@@ -1,0 +1,1 @@
+62:cannot find symbol  symbol:   variable MoreObjects   location: class com.google.cloud.translate.Detection 

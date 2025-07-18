@@ -1,0 +1,8 @@
+18a19
+> import java.util.Set;
+103a105
+>     Set<String> classNames = Collections.singleton(data.getMutatedClass().getName());
+105c107
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), coverage.getClassInfo(classNames));

@@ -1,0 +1,51 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+24d22
+< 
+27d24
+< 
+67c64,70
+<     for (JsonBranch branch : schema.getPaths()) {
+---
+>     for (Object branchObj : schema.getPaths()) {
+>       JsonBranch branch;
+>       if (branchObj instanceof String) {
+>         branch = new JsonBranch((String) branchObj);
+>       } else {
+>         branch = (JsonBranch) branchObj;
+>       }
+267c270
+<       MarcSubfield marcSubfield = null;
+---
+>       MarcSubfield marcSubfield;
+283c286
+<     DataField field = null;
+---
+>     DataField field;
+300c303
+<       MarcSubfield marcSubfield = null;
+---
+>       MarcSubfield marcSubfield;
+484a488,509
+>   
+>   private static class JsonBranch {
+>     private final String label;
+>     
+>     public JsonBranch(String label) {
+>       this.label = label;
+>     }
+>     
+>     public Object getParent() {
+>       // New dependency no longer defines parent; assume always top-level.
+>       return null;
+>     }
+>     
+>     public String getLabel() {
+>       return label;
+>     }
+>     
+>     public String getJsonPath() {
+>       // In the new API, use the label as the JSON path.
+>       return label;
+>     }
+>   }

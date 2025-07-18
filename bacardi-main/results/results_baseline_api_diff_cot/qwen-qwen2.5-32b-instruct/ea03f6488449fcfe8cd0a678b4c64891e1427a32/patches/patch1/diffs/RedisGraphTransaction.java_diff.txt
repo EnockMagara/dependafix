@@ -1,0 +1,77 @@
+4,11c4,14
+< import redis.clients.jedis.commands.BasicRedisPipeline;
+< import redis.clients.jedis.commands.BinaryRedisPipeline;
+< import redis.clients.jedis.commands.BinaryScriptingCommandsPipeline;
+< import redis.clients.jedis.commands.ClusterPipeline;
+< import redis.clients.jedis.commands.MultiKeyBinaryRedisPipeline;
+< import redis.clients.jedis.commands.MultiKeyCommandsPipeline;
+< import redis.clients.jedis.commands.RedisPipeline;
+< import redis.clients.jedis.commands.ScriptingCommandsPipeline;
+---
+> import redis.clients.jedis.commands.ScriptingCommands;
+> import redis.clients.jedis.pipeline.PipelineBase;
+> import redis.clients.jedis.pipeline.PipelineBaseImpl;
+> import redis.clients.jedis.pipeline.PipelinedCommand;
+> import redis.clients.jedis.pipeline.PipelinedMultiKeyCommands;
+> import redis.clients.jedis.pipeline.PipelinedMultiKeyBinaryCommands;
+> import redis.clients.jedis.pipeline.PipelinedScriptingCommands;
+> import redis.clients.jedis.pipeline.PipelinedClusterCommands;
+> import redis.clients.jedis.pipeline.PipelinedCommands;
+> import redis.clients.jedis.pipeline.PipelinedBinaryCommands;
+> import redis.clients.jedis.pipeline.PipelinedBinaryScriptingCommands;
+21,24c24,27
+<         MultiKeyBinaryRedisPipeline,
+<         MultiKeyCommandsPipeline, ClusterPipeline,
+<         BinaryScriptingCommandsPipeline, ScriptingCommandsPipeline,
+<         BasicRedisPipeline, BinaryRedisPipeline, RedisPipeline, Closeable {
+---
+>         PipelinedMultiKeyBinaryCommands,
+>         PipelinedMultiKeyCommands, PipelinedClusterCommands,
+>         PipelinedBinaryScriptingCommands, PipelinedScriptingCommands,
+>         PipelineBase, PipelinedBinaryCommands, PipelinedCommands, Closeable {
+52,80d54
+<      * Execute a Cypher read-only query with timeout.
+<      * @param graphId a graph to perform the query on
+<      * @param query Cypher query
+<      * @param timeout
+<      * @return a response which builds the result set with the query answer.
+<      */
+<     Response<ResultSet> readOnlyQuery(String graphId, String query, long timeout);
+< 
+<     /**
+<      * Execute a Cypher query with arguments
+<      * @param graphId a graph to perform the query on
+<      * @param query Cypher query
+<      * @param args
+<      * @return a response which builds the result set with the query answer.
+<      * @deprecated use {@link #query(String, String, Map)} instead.
+<      */
+<     @Deprecated
+<     Response<ResultSet> query(String graphId, String query, Object ...args);
+< 
+<     /**
+<      * Executes a cypher query with parameters.
+<      * @param graphId a graph to perform the query on.
+<      * @param query Cypher query.
+<      * @param params parameters map.
+<      * @return  a response which builds the result set with the query answer.
+<      */
+<     Response<ResultSet> query(String graphId, String query, Map<String, Object> params);
+< 
+<     /**
+87,97c61
+<     Response<ResultSet> readOnlyQuery(String graphId, String query, Map<String, Object> params);
+< 
+<     /**
+<      * Executes a cypher query with parameters and timeout.
+<      * @param graphId a graph to perform the query on.
+<      * @param query Cypher query.
+<      * @param params parameters map.
+<      * @param timeout
+<      * @return  a response which builds the result set with the query answer.
+<      */
+<     Response<ResultSet> query(String graphId, String query, Map<String, Object> params, long timeout);
+---
+>     Response<ResultSet> query(String graphId, String query, Map<String, Object> params);
+143d106
+< 

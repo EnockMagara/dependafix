@@ -1,0 +1,5 @@
+14:cannot find symbol  symbol: class ContainerRequestFilter 
+7:package javax.ws.rs.container does not exist
+6:package javax.ws.rs.container does not exist
+16:cannot find symbol  symbol:   class ContainerRequestContext   location: class com.wire.lithium.server.monitoring.RequestMdcFactoryFilter 
+8:package javax.ws.rs.ext does not exist

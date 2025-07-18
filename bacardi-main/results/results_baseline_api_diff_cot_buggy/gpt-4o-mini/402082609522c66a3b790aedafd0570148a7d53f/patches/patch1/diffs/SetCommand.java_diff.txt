@@ -1,0 +1,14 @@
+14d13
+< import org.spongepowered.api.command.args.CommandContext;
+16c15
+< import org.spongepowered.api.command.spec.CommandExecutor;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+25c24
+< public class SetCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class SetCommand implements ChangeSkinCommand {
+36d34
+<     @Override
+75d72
+<     @Override

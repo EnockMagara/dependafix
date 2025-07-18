@@ -1,0 +1,38 @@
+16a17
+> import org.yaml.snakeyaml.LoaderOptions;
+37,39d37
+<   /**
+<    * It maps the runtime class to its Construct implementation.
+<    */
+43,44c41
+<     super(Model.class);
+< 
+---
+>     super(new LoaderOptions());
+126,130d122
+<     desc = new TypeDescription(MailingList.class);
+<     desc.putListPropertyType("otherArchives", String.class);
+<     addTypeDescription(desc);
+< 
+<     // Simple types
+168c160
+<           child = toDom(child, (Map) entryValue);
+---
+>           toDom(child, (Map) entryValue);
+188c180
+<           if (pair[1] != null && pair[1] instanceof Map)
+---
+>           if (pair[1] instanceof Map)
+247,258d238
+<       List<Class> configurationContainers = Arrays.<Class>asList(Plugin.class, PluginExecution.class,
+<           ReportPlugin.class, ReportSet.class);
+< 
+<       if (configurationContainers.contains(type)) {
+<         for (NodeTuple valueNode : node.getValue()) {
+<           Node keyNode = valueNode.getKeyNode();
+<           Node childValueNode = valueNode.getValueNode();
+<           if (keyNode instanceof ScalarNode && "configuration".equals(((ScalarNode) keyNode).getValue())) {
+<             childValueNode.setTag(XPP3DOM_TAG);
+<           }
+<         }
+<       }

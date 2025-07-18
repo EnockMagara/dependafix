@@ -1,0 +1,15 @@
+8d7
+< 
+20d18
+< 
+40d37
+<  * 
+48,49c45
+< public class SpecialRegimes implements ToString2
+< {
+---
+> public class SpecialRegimes implements ToString2 {
+108c104
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>         final ToStringStrategy2 strategy = new JAXBToStringStrategy();

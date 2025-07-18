@@ -1,0 +1,10 @@
+197a198
+>         String wildcardPattern = "**/*.class";
+199c200
+<             DirectoryScanner directoryScanner = new DirectoryScanner(new File(dir), TestListResolver.getWildcard());
+---
+>             DirectoryScanner directoryScanner = new DirectoryScanner(new File(dir), wildcardPattern);
+205c206
+<             DirectoryScanner directoryScanner = new DirectoryScanner(new File(dir), TestListResolver.getWildcard());
+---
+>             DirectoryScanner directoryScanner = new DirectoryScanner(new File(dir), wildcardPattern);

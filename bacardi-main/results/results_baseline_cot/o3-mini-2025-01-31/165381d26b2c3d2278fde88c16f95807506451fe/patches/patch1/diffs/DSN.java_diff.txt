@@ -1,0 +1,9 @@
+15d14
+< import com.github.javaparser.printer.PrettyPrinterConfiguration;
+335,336d333
+<       private final PrettyPrinterConfiguration noComments = new PrettyPrinterConfiguration().setPrintComments(false);
+< 
+344c341
+<             if (n.toString(noComments).contains("solve")) {
+---
+>             if (n.toString().contains("solve")) {

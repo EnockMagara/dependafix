@@ -1,0 +1,29 @@
+17,18c17,18
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelBuf;
+---
+> import org.spongepowered.api.network.channel.raw.RawDataChannel;
+> import org.spongepowered.api.network.channel.raw.RawDataReceiver;
+20d19
+< import org.spongepowered.api.network.RawDataListener;
+22a22,23
+> import io.netty.buffer.ByteBuf;
+> 
+26c27
+< public class CheckPermissionListener implements RawDataListener {
+---
+> public class CheckPermissionListener implements RawDataReceiver {
+40c41,43
+<     public void handlePayload(ChannelBuf data, RemoteConnection connection, Type side) {
+---
+>     public void handlePayload(RawDataChannel channel, RemoteConnection connection, ByteBuf buf) {
+>         byte[] content = new byte[buf.readableBytes()];
+>         buf.readBytes(content);
+42c45
+<         ByteArrayDataInput dataInput = ByteStreams.newDataInput(data.array());
+---
+>         ByteArrayDataInput dataInput = ByteStreams.newDataInput(content);
+83c86
+<         permissionsResultChannel.sendTo(receiver, buf -> buf.writeByteArray(dataOutput.toByteArray()));
+---
+>         permissionsResultChannel.sendTo(receiver, buf -> buf.writeBytes(dataOutput.toByteArray()));

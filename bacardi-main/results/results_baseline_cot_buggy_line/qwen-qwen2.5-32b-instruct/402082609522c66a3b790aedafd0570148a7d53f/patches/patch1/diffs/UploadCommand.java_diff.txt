@@ -1,0 +1,6 @@
+8d7
+< import com.google.inject.Inject;
+19d17
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+20a19
+> import static org.spongepowered.api.command.args.GenericArguments.string;

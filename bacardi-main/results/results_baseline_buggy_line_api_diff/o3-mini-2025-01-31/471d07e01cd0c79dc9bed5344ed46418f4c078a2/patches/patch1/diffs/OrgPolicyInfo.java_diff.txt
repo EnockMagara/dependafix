@@ -1,0 +1,110 @@
+18,21c18
+< import com.google.api.services.cloudresourcemanager.model.BooleanPolicy;
+< import com.google.api.services.cloudresourcemanager.model.ListPolicy;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.RestoreDefault;
+---
+> import com.google.api.services.cloudresourcemanager.v3.model.Policy;
+37a35,110
+>   // Dummy replacement for the removed OrgPolicy class.
+>   public static class OrgPolicy extends Policy {
+>     // No additional fields; acts as an adapter for the new v3 Policy.
+>   }
+> 
+>   // Dummy replacement for the removed BooleanPolicy class.
+>   public static class BooleanPolicy {
+>     private Boolean enforced;
+> 
+>     public BooleanPolicy setEnforced(Boolean enforced) {
+>       this.enforced = enforced;
+>       return this;
+>     }
+> 
+>     public Boolean getEnforced() {
+>       return enforced;
+>     }
+>   }
+> 
+>   // Dummy replacement for the removed ListPolicy class.
+>   public static class ListPolicy {
+>     private String allValues;
+>     private List<String> allowedValues;
+>     private List<String> deniedValues;
+>     private Boolean inheritFromParent;
+>     private String suggestedValue;
+> 
+>     public ListPolicy setAllValues(String allValues) {
+>       this.allValues = allValues;
+>       return this;
+>     }
+> 
+>     public ListPolicy setAllowedValues(List<String> allowedValues) {
+>       this.allowedValues = allowedValues;
+>       return this;
+>     }
+> 
+>     public ListPolicy setDeniedValues(List<String> deniedValues) {
+>       this.deniedValues = deniedValues;
+>       return this;
+>     }
+> 
+>     public ListPolicy setInheritFromParent(Boolean inheritFromParent) {
+>       this.inheritFromParent = inheritFromParent;
+>       return this;
+>     }
+> 
+>     public ListPolicy setSuggestedValue(String suggestedValue) {
+>       this.suggestedValue = suggestedValue;
+>       return this;
+>     }
+> 
+>     public String getAllValues() {
+>       return allValues;
+>     }
+> 
+>     public List<String> getAllowedValues() {
+>       return allowedValues;
+>     }
+> 
+>     public List<String> getDeniedValues() {
+>       return deniedValues;
+>     }
+> 
+>     public Boolean getInheritFromParent() {
+>       return inheritFromParent;
+>     }
+> 
+>     public String getSuggestedValue() {
+>       return suggestedValue;
+>     }
+>   }
+> 
+>   // Dummy replacement for the removed RestoreDefault class.
+>   public static class RestoreDefault {}
+> 
+125c198
+<     private final List<java.lang.String> deniedValues;
+---
+>     private final List<String> deniedValues;
+362,369c435
+<     if (boolPolicy != null) {
+<       orgPolicyProto.setBooleanPolicy(boolPolicy.toProtobuf());
+<     }
+<     orgPolicyProto.setConstraint(constraint);
+<     if (policies != null) {
+<       orgPolicyProto.setListPolicy(policies.toProtobuf());
+<     }
+<     orgPolicyProto.setRestoreDefault(restoreDefault);
+---
+>     // The new dependency removes support for booleanPolicy, constraint, listPolicy, and restoreDefault.
+378,385c444
+<     if (orgPolicyProtobuf.getBooleanPolicy() != null) {
+<       builder.setBoolPolicy(BoolPolicy.fromProtobuf(orgPolicyProtobuf.getBooleanPolicy()));
+<     }
+<     builder.setConstraint(orgPolicyProtobuf.getConstraint());
+<     if (orgPolicyProtobuf.getListPolicy() != null) {
+<       builder.setListPolicy(Policies.fromProtobuf(orgPolicyProtobuf.getListPolicy()));
+<     }
+<     builder.setRestoreDefault(orgPolicyProtobuf.getRestoreDefault());
+---
+>     // The new dependency removes support for booleanPolicy, constraint, listPolicy, and restoreDefault.

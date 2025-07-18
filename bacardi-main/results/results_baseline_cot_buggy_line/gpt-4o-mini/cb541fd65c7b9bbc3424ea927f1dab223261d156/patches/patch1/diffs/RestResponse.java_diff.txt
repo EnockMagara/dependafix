@@ -1,0 +1,12 @@
+45d44
+< import org.hamcrest.CustomMatcher;
+210c209
+<         return this.assertHeader(name, Matchers.hasItems(value));
+---
+>         return this.assertHeader(name, Matchers.hasItem(value));
+310c309
+<     private static final class StatusMatch extends CustomMatcher<Response> {
+---
+>     private static final class StatusMatch extends Matcher<Response> {
+327d325
+<         @Override

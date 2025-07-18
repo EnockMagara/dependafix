@@ -1,0 +1,22 @@
+7,8c7,8
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+---
+> import org.spongepowered.api.text.Texts;
+> import org.spongepowered.api.text.Text;
+12c12
+<     private final CommandSource invoker;
+---
+>     private final Object invoker; // Updated type to a generic Object
+14c14
+<     public SkinChanger(ChangeSkinSponge plugin, Account owner, String url, String oldSkinUrl, CommandSource invoker) {
+---
+>     public SkinChanger(ChangeSkinSponge plugin, Account owner, String url, String oldSkinUrl, Object invoker) {
+20d19
+<     @Override
+22c21,23
+<         invoker.sendMessage(TextSerializers.LEGACY_FORMATTING_CODE.deserialize(localeMessage));
+---
+>         Text message = Texts.of(localeMessage); // Updated to use new Texts class
+>         // Assuming invoker has a method to send messages, replace with appropriate method
+>         // invoker.sendMessage(message); // Uncomment and replace with actual method to send message

@@ -1,0 +1,16 @@
+34a35
+> import org.yaml.snakeyaml.LoaderOptions;
+83,91c84,86
+<       Constructor constructor = new Constructor(Config.class);
+< 
+<       TypeDescription nodeDesc = new TypeDescription(YamlNode.class);
+<       nodeDesc.putListPropertyType("tags", String.class);
+<       constructor.addTypeDescription(nodeDesc);
+< 
+<       TypeDescription configDesc = new TypeDescription(Config.class);
+<       configDesc.putListPropertyType("nodes", YamlNode.class);
+<       constructor.addTypeDescription(configDesc);
+---
+>       LoaderOptions options = new LoaderOptions();
+>       Constructor constructor = new Constructor(options);
+>       constructor.addTypeDescription(new TypeDescription(Config.class).withPropertyType("nodes", YamlNode.class));

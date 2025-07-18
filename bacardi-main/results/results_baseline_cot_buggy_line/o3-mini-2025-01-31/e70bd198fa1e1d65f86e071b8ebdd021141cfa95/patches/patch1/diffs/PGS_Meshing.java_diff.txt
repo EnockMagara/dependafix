@@ -1,0 +1,29 @@
+38d37
+< import org.tinspin.index.PointIndex;
+40c39,41
+< import it.unimi.dsi.util.XoRoShiRo128PlusRandomGenerator;
+---
+> import processing.core.PConstants;
+> import processing.core.PShape;
+> import processing.core.PVector;
+49,51d49
+< import processing.core.PConstants;
+< import processing.core.PShape;
+< import processing.core.PVector;
+164,168c162
+<                 final PointIndex<Vertex> tree = KDTree.create(2, (p1, p2) -> {
+<                         final double deltaX = p1[0] - p2[0];
+<                         final double deltaY = p1[1] - p2[1];
+<                         return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+<                 });
+---
+>                 final KDTree<Vertex> tree = new KDTree<>(2);
+174c168,169
+<                         final Vertex near = tree.query1NN(midpoint).value();
+---
+>                         List<KDTree.Entry<Vertex>> nearest = tree.queryKNN(midpoint, 1);
+>                         final Vertex near = nearest.get(0).getValue();
+868c863
+<                 final PShapeData data = new PShapeData(oldMesh.getChild(0)); // use first child; assume global.
+---
+>                 final PShapeData data = new PGS_Conversion.PShapeData(oldMesh.getChild(0)); // use first child; assume global.

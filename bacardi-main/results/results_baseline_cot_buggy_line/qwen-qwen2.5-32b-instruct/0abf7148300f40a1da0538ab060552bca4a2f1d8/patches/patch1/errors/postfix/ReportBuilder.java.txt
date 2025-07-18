@@ -1,0 +1,2 @@
+394:method calcMaxContentHeight() is already defined in class xdev.tableexport.export.ReportBuilder
+367:method calcMaxHeaderHeight() is already defined in class xdev.tableexport.export.ReportBuilder

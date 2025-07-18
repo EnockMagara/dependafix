@@ -1,0 +1,62 @@
+146,148c146,148
+<     com.google.api.services.cloudresourcemanager.model.ResourceId toPb() {
+<       com.google.api.services.cloudresourcemanager.model.ResourceId resourceIdPb =
+<           new com.google.api.services.cloudresourcemanager.model.ResourceId();
+---
+>     com.google.api.services.cloudresourcemanager.v3.model.ResourceId toPb() {
+>       com.google.api.services.cloudresourcemanager.v3.model.ResourceId resourceIdPb =
+>           new com.google.api.services.cloudresourcemanager.v3.model.ResourceId();
+155c155
+<         com.google.api.services.cloudresourcemanager.model.ResourceId resourceIdPb) {
+---
+>         com.google.api.services.cloudresourcemanager.v3.model.ResourceId resourceIdPb) {
+392,394c392,394
+<   com.google.api.services.cloudresourcemanager.model.Project toPb() {
+<     com.google.api.services.cloudresourcemanager.model.Project projectPb =
+<         new com.google.api.services.cloudresourcemanager.model.Project();
+---
+>   com.google.api.services.cloudresourcemanager.v3.model.Project toPb() {
+>     com.google.api.services.cloudresourcemanager.v3.model.Project projectPb =
+>         new com.google.api.services.cloudresourcemanager.v3.model.Project();
+398c398,400
+<     projectPb.setProjectNumber(projectNumber);
+---
+>     if (projectNumber != null) {
+>         projectPb.setDisplayName(projectNumber.toString());
+>     }
+400c402
+<       projectPb.setLifecycleState(state.toString());
+---
+>       projectPb.setState(state.toString());
+409c411
+<       projectPb.setParent(parent.toPb());
+---
+>       projectPb.setParent(String.format("%s/%s", parent.getType(), parent.getId()));
+414c416
+<   static ProjectInfo fromPb(com.google.api.services.cloudresourcemanager.model.Project projectPb) {
+---
+>   static ProjectInfo fromPb(com.google.api.services.cloudresourcemanager.v3.model.Project projectPb) {
+416c418,425
+<         newBuilder(projectPb.getProjectId()).setProjectNumber(projectPb.getProjectNumber());
+---
+>         newBuilder(projectPb.getProjectId());
+>     if (projectPb.getDisplayName() != null) {
+>         try {
+>             builder.setProjectNumber(Long.parseLong(projectPb.getDisplayName()));
+>         } catch (NumberFormatException e) {
+>             // ignore
+>         }
+>     }
+423,424c432,433
+<     if (projectPb.getLifecycleState() != null) {
+<       builder.setState(State.valueOf(projectPb.getLifecycleState()));
+---
+>     if (projectPb.getState() != null) {
+>       builder.setState(State.valueOf(projectPb.getState()));
+431c440,443
+<       builder.setParent(ResourceId.fromPb(projectPb.getParent()));
+---
+>       String[] parentParts = projectPb.getParent().split("/");
+>       if (parentParts.length == 2) {
+>         builder.setParent(ResourceId.of(parentParts[1], parentParts[0]));
+>       }

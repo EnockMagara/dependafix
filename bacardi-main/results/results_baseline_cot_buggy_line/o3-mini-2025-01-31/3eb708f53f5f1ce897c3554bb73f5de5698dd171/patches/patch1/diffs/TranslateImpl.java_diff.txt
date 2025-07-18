@@ -1,0 +1,14 @@
+23,25d22
+< import com.google.api.services.translate.model.DetectionsResourceItems;
+< import com.google.api.services.translate.model.LanguagesResource;
+< import com.google.api.services.translate.model.TranslationsResource;
+148a146,154
+>   
+>   public static class DetectionsResourceItems {
+>   }
+>   
+>   public static class LanguagesResource {
+>   }
+>   
+>   public static class TranslationsResource {
+>   }

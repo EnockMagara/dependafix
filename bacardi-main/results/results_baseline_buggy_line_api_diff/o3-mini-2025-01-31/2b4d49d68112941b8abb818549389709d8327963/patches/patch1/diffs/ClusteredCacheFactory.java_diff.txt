@@ -1,0 +1,54 @@
+22c22
+< import com.hazelcast.config.MaxSizeConfig;
+---
+> import com.hazelcast.config.EvictionConfig;
+27c27,28
+< import com.hazelcast.core.Cluster;
+---
+> import com.hazelcast.cluster.Cluster;
+> import com.hazelcast.cluster.Member;
+30d30
+< import com.hazelcast.core.Member;
+44,49c44,49
+< import org.jivesoftware.util.cache.CacheFactory;
+< import org.jivesoftware.util.cache.CacheFactoryStrategy;
+< import org.jivesoftware.util.cache.CacheWrapper;
+< import org.jivesoftware.util.cache.ClusterTask;
+< import org.jivesoftware.util.cache.ExternalizableUtil;
+< import org.jivesoftware.util.cache.ExternalizableUtilStrategy;
+---
+> import org.jivesoftware.openfire.plugin.util.cache.CacheFactory;
+> import org.jivesoftware.openfire.plugin.util.cache.CacheFactoryStrategy;
+> import org.jivesoftware.openfire.plugin.util.cache.CacheWrapper;
+> import org.jivesoftware.openfire.plugin.util.cache.ClusterTask;
+> import org.jivesoftware.openfire.plugin.util.cache.ExternalizableUtil;
+> import org.jivesoftware.openfire.plugin.util.cache.ExternalizableUtilStrategy;
+148d147
+<     private static HazelcastInstance hazelcast = null;
+149a149
+>     private static HazelcastInstance hazelcast = null;
+194,195c194,195
+<                 memberAttributeConfig.setStringAttribute(HazelcastClusterNodeInfo.HOST_NAME_ATTRIBUTE, XMPPServer.getInstance().getServerInfo().getHostname());
+<                 memberAttributeConfig.setStringAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE, XMPPServer.getInstance().getNodeID().toString());
+---
+>                 memberAttributeConfig.setAttribute(HazelcastClusterNodeInfo.HOST_NAME_ATTRIBUTE, XMPPServer.getInstance().getServerInfo().getHostname());
+>                 memberAttributeConfig.setAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE, XMPPServer.getInstance().getNodeID().toString());
+288c288,291
+<             dynamicConfig.setMaxSizeConfig(new MaxSizeConfig(hazelcastMaxCacheSizeInMegaBytes, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+---
+>             EvictionConfig evictionConfig = new EvictionConfig();
+>             evictionConfig.setSize(hazelcastMaxCacheSizeInMegaBytes);
+>             evictionConfig.setMaximumSizePolicy(EvictionConfig.MaxSizePolicy.USED_HEAP_SIZE);
+>             dynamicConfig.setEvictionConfig(evictionConfig);
+294d296
+<         // TODO: Better genericize this method in CacheFactoryStrategy so we can stop suppressing this warning
+656c658,660
+<         return NodeID.getInstance(member.getStringAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE).getBytes(StandardCharsets.UTF_8));
+---
+>         Object attribute = member.getAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE);
+>         String attrStr = attribute != null ? attribute.toString() : "";
+>         return NodeID.getInstance(attrStr.getBytes(StandardCharsets.UTF_8));
+701,703d704
+< 
+< 
+< 

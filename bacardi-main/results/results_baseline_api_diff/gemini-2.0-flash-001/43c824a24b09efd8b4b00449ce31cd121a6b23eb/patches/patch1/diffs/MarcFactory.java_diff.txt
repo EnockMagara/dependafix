@@ -1,0 +1,64 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+67,68c66,71
+<     for (JsonBranch branch : schema.getPaths()) {
+<       if (branch.getParent() != null)
+---
+>     for (var path : schema.getPaths()) {
+>       String pathString = path.getPath();
+>       String label = path.getLabel();
+>       String parentPath = path.getParentPath();
+> 
+>       if (parentPath != null && !parentPath.isEmpty())
+70c73
+<       switch (branch.getLabel()) {
+---
+>       switch (label) {
+72c75
+<           marcRecord.setLeader(new Leader(extractFirst(cache, branch)));
+---
+>           marcRecord.setLeader(new Leader(extractFirst(cache, pathString)));
+75c78
+<           marcRecord.setControl001(new Control001(extractFirst(cache, branch)));
+---
+>           marcRecord.setControl001(new Control001(extractFirst(cache, pathString)));
+78c81
+<           marcRecord.setControl003(new Control003(extractFirst(cache, branch)));
+---
+>           marcRecord.setControl003(new Control003(extractFirst(cache, pathString)));
+81c84
+<           marcRecord.setControl005(new Control005(extractFirst(cache, branch), marcRecord));
+---
+>           marcRecord.setControl005(new Control005(extractFirst(cache, pathString), marcRecord));
+85c88
+<             new Control006(extractFirst(cache, branch), marcRecord));
+---
+>             new Control006(extractFirst(cache, pathString), marcRecord));
+89c92
+<             new Control007(extractFirst(cache, branch), marcRecord));
+---
+>             new Control007(extractFirst(cache, pathString), marcRecord));
+93c96
+<             new Control008(extractFirst(cache, branch), marcRecord));
+---
+>             new Control008(extractFirst(cache, pathString), marcRecord));
+96c99
+<           JSONArray fieldInstances = (JSONArray) cache.getFragment(branch.getJsonPath());
+---
+>           JSONArray fieldInstances = (JSONArray) cache.getFragment(pathString);
+104c107
+<               marcRecord.addUnhandledTags(branch.getLabel());
+---
+>               marcRecord.addUnhandledTags(label);
+313,314c316,317
+<   private static List<String> extractList(JsonPathCache cache, JsonBranch branch) {
+<     List<XmlFieldInstance> instances = cache.get(branch.getJsonPath());
+---
+>   private static List<String> extractList(JsonPathCache cache, String jsonPath) {
+>     List<XmlFieldInstance> instances = cache.get(jsonPath);
+322,323c325,326
+<   private static String extractFirst(JsonPathCache cache, JsonBranch branch) {
+<     List<String> list = extractList(cache, branch);
+---
+>   private static String extractFirst(JsonPathCache cache, String jsonPath) {
+>     List<String> list = extractList(cache, jsonPath);

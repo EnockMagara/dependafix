@@ -1,0 +1,6 @@
+20:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 
+23:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 
+21:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 
+24:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 
+19:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 
+22:cannot find symbol  symbol:   class Matchers   location: package org.hamcrest 

@@ -1,0 +1,24 @@
+4d3
+< import java.io.FileWriter;
+6c5,7
+< import java.nio.file.*;
+---
+> import java.nio.file.Files;
+> import java.nio.file.Path;
+> import java.nio.file.StandardOpenOption;
+42d42
+< 
+221c221
+<                         skewparams.add(cmdArgsWork.remove(skewstepsIndex));
+---
+>                         skewparams.add(cmdArgsWork.remove(skewstepsIndex);
+283,284c283
+<         segmentListFile.deleteOnExit();
+< 
+---
+>         segmentListFile.deleteOnExit(); // Delete if OCR4all terminates
+291c290,291
+<         Files.write(segmentListFile.toPath(), content, StandardOpenOption.APPEND);
+---
+>         Files.write(segmentListFile.toPath(), content, StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+> 

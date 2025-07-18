@@ -1,0 +1,27 @@
+85:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+13:package com.google.api.services.translate.model does not exist
+73:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+48:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+63:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+82:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+56:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+59:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+58:cannot find symbol  symbol:   class DetectLanguageResponse   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+33:cannot find symbol  symbol: variable options 
+12:package com.google.api.services.translate.model does not exist
+75:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+102:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+27:cannot find symbol  symbol:   class Translate   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+11:package com.google.api.services.translate.model does not exist
+10:package com.google.api.services.translate.model does not exist
+92:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+97:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+35:package Translate does not exist
+111:cannot find symbol  symbol: class TranslationsResource 
+47:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+79:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+108:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+95:cannot find symbol  symbol:   variable options   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+54:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+109:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+9:package com.google.api.services.translate does not exist

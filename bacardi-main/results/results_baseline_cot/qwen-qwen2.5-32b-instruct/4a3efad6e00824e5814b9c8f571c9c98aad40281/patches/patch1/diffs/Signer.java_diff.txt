@@ -1,0 +1,10 @@
+7c7
+< import eu.europa.esig.dss.pades.CertificationPermission;
+---
+> import eu.europa.esig.dss.pades.CertificationLevel;
+71c71
+<         signatureParameters.setPermission(CertificationPermission.MINIMAL_CHANGES_PERMITTED);
+---
+>         signatureParameters.setCertificationLevel(CertificationLevel.PAdES_BASELINE_B); // Replace CertificationPermission with CertificationLevel
+123d122
+< 

@@ -1,0 +1,2 @@
+30:cannot find symbol  symbol:   class ModelsProxy   location: class com.example.config.PostNotFoundExceptionMapper 
+17:cannot find symbol  symbol:   class ModelsProxy   location: package org.eclipse.krazo.engine 

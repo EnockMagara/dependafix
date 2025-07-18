@@ -1,0 +1,4 @@
+10a11
+> import jakarta.ws.rs.client.Client;
+12d12
+< import javax.ws.rs.client.Client;

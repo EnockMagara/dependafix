@@ -1,0 +1,20 @@
+12d11
+< import redis.clients.jedis.Client;
+14a14
+> import redis.clients.jedis.params.MultiKeyParams;
+142,145c142,145
+<         Client client = jedis.getClient();
+<         client.multi();
+<         client.getOne();
+<         RedisGraphTransaction transaction = new RedisGraphTransaction(client, this);
+---
+>         MultiKeyParams multiKeyParams = new MultiKeyParams();
+>         multiKeyParams.multi();
+>         multiKeyParams.getOne();
+>         RedisGraphTransaction transaction = new RedisGraphTransaction(multiKeyParams, this);
+157,158c157,158
+<         Client client = jedis.getClient();
+<         RedisGraphPipeline pipeline = new RedisGraphPipeline(client, this);
+---
+>         MultiKeyParams multiKeyParams = new MultiKeyParams();
+>         RedisGraphPipeline pipeline = new RedisGraphPipeline(multiKeyParams, this);

@@ -1,0 +1,254 @@
+21c21
+<  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+---
+>  * OUT OF OR IN CONNECTION WITH THE USE OR OTHER DEALINGS IN THE
+29a30
+> import java.util.Arrays;
+31a33
+> import org.cactoos.Scalar;
+33c35,36
+< import org.cactoos.iterable.LengthOf;
+---
+> import org.cactoos.iterable.IterableOf;
+> import org.cactoos.scalar.LengthOf;
+35,38c38,39
+< import org.cactoos.scalar.IoCheckedScalar;
+< import org.cactoos.scalar.ItemAt;
+< import org.cactoos.scalar.StickyScalar;
+< import org.cactoos.scalar.UncheckedScalar;
+---
+> import org.cactoos.scalar.Sticky;
+> import org.cactoos.scalar.Unchecked;
+40d40
+< import org.cactoos.text.SplitText;
+42,44c42,44
+< import org.cactoos.text.TrimmedText;
+< import org.cactoos.text.UncheckedText;
+< import org.cactoos.time.ZonedDateTimeOf;
+---
+> import org.cactoos.text.Trimmed;
+> 
+> import java.util.stream.Collectors;
+88c88
+<     private final IoCheckedScalar<String> transaction;
+---
+>     private final Scalar<String> transaction;
+95,96c95
+<         this.transaction = new IoCheckedScalar<>(
+<             new StickyScalar<>(
+---
+>         this.transaction = new Sticky<>(
+99c98
+<                         new TrimmedText(
+---
+>                     new Trimmed(
+108,110c107,109
+<                         new ListOf<>(
+<                             new SplitText(trnsct, ";")
+<                         );
+---
+>                     Arrays.stream(trnsct.split(";"))
+>                         .map(TextOf::new)
+>                         .collect(Collectors.toList());
+112c111
+<                     if (new LengthOf(pieces).intValue() != 7) {
+---
+>                 if (new LengthOf(new IterableOf<>(pieces)).intValue() != 7) {
+123d121
+<             )
+130,133c128,132
+<         final String ident = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     0, new SplitText(this.transaction.value(), ";")
+---
+>         final String ident = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(0).asString()
+135,136c134
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+139,140c137,139
+<                 new UncheckedText(
+<                     new FormattedText(
+---
+>                 new Unchecked(
+>                     new Sticky<>(
+>                         () -> new FormattedText(
+144d142
+<                     )
+145a144,145
+>                     )
+>                 ).value()
+155,158c155,159
+<             new UncheckedText(
+<                 new IoCheckedScalar<>(
+<                     new ItemAt<>(
+<                         1, new SplitText(this.transaction.value(), ";")
+---
+>             new Unchecked(
+>                 new Sticky<>(
+>                     () -> Arrays.stream(this.transaction.value().split(";"))
+>                         .map(TextOf::new)
+>                         .collect(Collectors.toList()).get(1).asString()
+160,161c161
+<                 ).value()
+<             ).asString(),
+---
+>             ).value(),
+168,171c168,172
+<         final String amnt = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     2, new SplitText(this.transaction.value(), ";")
+---
+>         final String amnt = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(2).asString()
+173,174c174
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+177,178c177,179
+<                 new UncheckedText(
+<                     new FormattedText(
+---
+>                 new Unchecked(
+>                     new Sticky<>(
+>                         () -> new FormattedText(
+182d182
+<                     )
+183a184,185
+>                     )
+>                 ).value()
+192,196c194,198
+<         final String prefix = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     3, new SplitText(this.transaction.value(), ";")
+---
+>         final String prefix = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(3).asString()
+198,199c200
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+212,216c213,217
+<         final String bnf = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     4, new SplitText(this.transaction.value(), ";")
+---
+>         final String bnf = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(4).asString()
+218,219c219
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+222,223c222,224
+<                 new UncheckedText(
+<                     new FormattedText(
+---
+>                 new Unchecked(
+>                     new Sticky<>(
+>                         () -> new FormattedText(
+227d227
+<                     )
+228a229,230
+>                     )
+>                 ).value()
+236,240c238,242
+<         final String dtls = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     5, new SplitText(this.transaction.value(), ";")
+---
+>         final String dtls = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(5).asString()
+242,243c244
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+246,247c247,249
+<                 new UncheckedText(
+<                     new FormattedText(
+---
+>                 new Unchecked(
+>                     new Sticky<>(
+>                         () -> new FormattedText(
+251d252
+<                     )
+252a254,255
+>                     )
+>                 ).value()
+260,264c263,267
+<         final String sign = new UncheckedText(
+<             new IoCheckedScalar<>(
+<                 new ItemAt<>(
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     6, new SplitText(this.transaction.value(), ";")
+---
+>         final String sign = new Unchecked(
+>             new Sticky<>(
+>                 () -> Arrays.stream(this.transaction.value().split(";"))
+>                     .map(TextOf::new)
+>                     .collect(Collectors.toList()).get(6).asString()
+266,267c269
+<             ).value()
+<         ).asString();
+---
+>         ).value();
+272,273c274,276
+<                 new UncheckedText(
+<                     new FormattedText(
+---
+>                 new Unchecked(
+>                     new Sticky<>(
+>                         () -> new FormattedText(
+277d279
+<                     )
+278a281,282
+>                     )
+>                 ).value()
+286c290
+<         return new UncheckedScalar<>(this.transaction).value();
+---
+>         return new Unchecked(this.transaction).value();
+299c303,307
+<         return this.transaction.equals(that.transaction);
+---
+>         try {
+>             return this.transaction.value().equals(that.transaction.value());
+>         } catch (final Exception ex) {
+>             return false;
+>         }
+304c312,316
+<         return this.transaction.hashCode();
+---
+>         try {
+>             return this.transaction.value().hashCode();
+>         } catch (final Exception ex) {
+>             return 0;
+>         }

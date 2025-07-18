@@ -1,0 +1,4 @@
+242c242
+<                         writer.writeValue(segmentListFile, dataList);
+---
+>                         writer.writeValue(new File(segmentListFile.toString()), dataList);

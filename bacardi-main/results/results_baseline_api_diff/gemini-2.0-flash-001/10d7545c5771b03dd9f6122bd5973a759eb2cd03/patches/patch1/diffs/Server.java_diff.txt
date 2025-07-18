@@ -1,0 +1,10 @@
+50a51
+> import io.dropwizard.core.setup.Environment;
+53d53
+< import io.dropwizard.setup.Environment;
+162,163c162,163
+<                 .withProvider(MultiPartFeature.class)
+<                 .withProvider(JacksonJsonProvider.class)
+---
+>                 .register(MultiPartFeature.class)
+>                 .register(JacksonJsonProvider.class)

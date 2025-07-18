@@ -1,0 +1,35 @@
+0a1,6
+> package com.jcabi.http.mock;
+> 
+> import java.net.URI;
+> import org.hamcrest.Matcher;
+> import org.hamcrest.beans.HasPropertyWithValue;
+> 
+30,40d35
+< package com.jcabi.http.mock;
+< 
+< import java.net.URI;
+< import org.hamcrest.Matcher;
+< import org.hamcrest.Matchers;
+< 
+< /**
+<  * Convenient set of matchers for {@link MkQuery}.
+<  *
+<  * @since 1.5
+<  */
+84,86c79,81
+<         return new MkQueryUriMatcher(
+<             Matchers.<URI>hasProperty("rawPath", path)
+<         );
+---
+>         @SuppressWarnings("unchecked")
+>         Matcher<URI> uriMatcher = (Matcher<URI>) HasPropertyWithValue.hasProperty("rawPath", path);
+>         return new MkQueryUriMatcher(uriMatcher);
+96,98c91,93
+<         return new MkQueryUriMatcher(
+<             Matchers.<URI>hasProperty("rawQuery", query)
+<         );
+---
+>         @SuppressWarnings("unchecked")
+>         Matcher<URI> uriMatcher = (Matcher<URI>) HasPropertyWithValue.hasProperty("rawQuery", query);
+>         return new MkQueryUriMatcher(uriMatcher);

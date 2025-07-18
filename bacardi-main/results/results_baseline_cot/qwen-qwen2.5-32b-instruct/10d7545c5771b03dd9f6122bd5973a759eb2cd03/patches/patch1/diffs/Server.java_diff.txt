@@ -1,0 +1,19 @@
+32d31
+< import com.wire.lithium.server.monitoring.VersionResource;
+51d49
+< import io.dropwizard.servlets.tasks.Task;
+53a52
+> import io.dropwizard.setup.AdminEnvironment;
+169a169
+> 
+220,221c220,222
+<         addTask(new ConversationTask(getRepo()));
+<         addTask(new AvailablePrekeysTask(getRepo()));
+---
+>         AdminEnvironment admin = environment.admin();
+>         admin.addTask(new ConversationTask(getRepo()));
+>         admin.addTask(new AvailablePrekeysTask(getRepo()));
+258,260d258
+<         environment.metrics().register("logger.errors", (Gauge<Integer>) Logger::getErrorCount);
+<         environment.metrics().register("logger.warnings", (Gauge<Integer>) Logger::getWarningCount);
+< 

@@ -1,0 +1,15 @@
+3d2
+< import com.flowpowered.math.vector.Vector3d;
+12,13d10
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.data.key.Keys;
+18a16,18
+> import org.spongepowered.api.command.source.CommandSource;
+> import org.spongepowered.api.data.key.Key;
+> import org.spongepowered.api.data.key.Keys;
+99d98
+<         Vector3d rotation = receiver.getRotation();
+107c106
+<                     receiver.setLocationAndRotation(oldLocation, rotation);
+---
+>                     receiver.setLocation(oldLocation);

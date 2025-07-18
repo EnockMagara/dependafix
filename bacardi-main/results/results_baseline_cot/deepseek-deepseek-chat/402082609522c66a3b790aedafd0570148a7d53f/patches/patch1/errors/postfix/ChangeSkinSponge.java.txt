@@ -1,0 +1,20 @@
+92:cannot find symbol  symbol:   method getOrCreateRaw(com.github.games647.changeskin.sponge.ChangeSkinSponge,java.lang.String)   location: variable channelReg of type org.spongepowered.api.network.channel.ChannelManager 
+81:cannot find symbol  symbol:   method register(com.github.games647.changeskin.sponge.ChangeSkinSponge,org.spongepowered.api.command.parameter.CommandContext.Builder,java.lang.String)   location: variable cmdManager of type org.spongepowered.api.command.manager.CommandManager 
+139:cannot find symbol  symbol:   class CommandSource   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+24:cannot find symbol  symbol:   class CommandSource   location: package org.spongepowered.api.command 
+86:cannot find symbol  symbol:   method getEventManager()   location: class org.spongepowered.api.Sponge 
+34:package org.spongepowered.api.text does not exist
+142:package TextSerializers does not exist
+36:package org.spongepowered.api.text.serializer does not exist
+63:cannot find symbol  symbol:   class Server   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+79:cannot find symbol  symbol:   method register(com.github.games647.changeskin.sponge.ChangeSkinSponge,org.spongepowered.api.command.parameter.CommandContext.Builder,java.lang.String,java.lang.String)   location: variable cmdManager of type org.spongepowered.api.command.manager.CommandManager 
+77:cannot find symbol  symbol:   method getManager()   location: variable initEvent of type org.spongepowered.api.event.lifecycle.RegisterCommandEvent<org.spongepowered.api.command.manager.CommandManager> 
+88:cannot find symbol  symbol:   method getChannelManager()   location: class org.spongepowered.api.Sponge 
+35:package org.spongepowered.api.text.serializer does not exist
+107:cannot find symbol  symbol:   class CommandSource   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+91:cannot find symbol  symbol:   method getOrCreateRaw(com.github.games647.changeskin.sponge.ChangeSkinSponge,java.lang.String)   location: variable channelReg of type org.spongepowered.api.network.channel.ChannelManager 
+44:cannot find symbol  symbol: class CommandSource 
+98:cannot find symbol  symbol:   class Server   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+93:cannot find symbol  symbol:   method addListener(org.spongepowered.api.Platform.Type,com.github.games647.changeskin.sponge.bungee.UpdateSkinListener)   location: variable updateChannel of type org.spongepowered.api.network.channel.raw.RawDataChannel 
+56:cannot find symbol  symbol:   class ConfigDir   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+94:cannot find symbol  symbol:   method addListener(org.spongepowered.api.Platform.Type,com.github.games647.changeskin.sponge.bungee.CheckPermissionListener)   location: variable permChannel of type org.spongepowered.api.network.channel.raw.RawDataChannel 

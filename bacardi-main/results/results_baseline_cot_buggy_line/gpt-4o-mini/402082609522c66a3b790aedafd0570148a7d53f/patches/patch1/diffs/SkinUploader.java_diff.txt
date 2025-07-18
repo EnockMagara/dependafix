@@ -1,0 +1,10 @@
+9a10
+> import org.spongepowered.api.command.CommandSource; // Adjusted import for new API
+15c16
+<     private final CommandSource invoker;
+---
+>     private final Object invoker; // Changed type to Object to accommodate API changes
+17c18
+<     public SkinUploader(ChangeSkinSponge plugin, CommandSource invoker, Account owner, String url) {
+---
+>     public SkinUploader(ChangeSkinSponge plugin, Object invoker, Account owner, String url) { // Updated parameter type

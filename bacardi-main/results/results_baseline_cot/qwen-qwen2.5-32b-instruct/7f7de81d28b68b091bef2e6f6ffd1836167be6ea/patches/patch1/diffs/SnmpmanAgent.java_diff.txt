@@ -1,0 +1,131 @@
+38,39c38
+<  * This class can be instantiated via the constructor {@link #SnmpmanAgent(com.oneandone.snmpman.configuration.AgentConfiguration)}, which
+<  * requires an instance of the {@link com.oneandone.snmpman.configuration.AgentConfiguration}.
+---
+>  * See {@code AgentConfiguration.name} for more information on the return value.
+112c111,112
+<      * @return the translated {@code String}
+---
+>      * @return a a {@code String} instance with the specified type and value
+>      * @throws IllegalArgumentException if the type could not be mapped to a {@code Variable} implementation
+124,164d123
+<      * Returns the root OIDs of the bindings.
+<      *
+<      * @param bindings the variable bindings
+<      * @return the roots of the specified variable bindings
+<      */
+<     private static List<OID> getRoots(final SortedMap<OID, Variable> bindings) {
+<         final List<OID> potentialRoots = new ArrayList<>(bindings.size());
+< 
+<         OID last = null;
+<         for (final OID oid : bindings.keySet()) {
+<             if (last != null) {
+<                 int min = Math.min(oid.size(), last.size());
+<                 while (min > 0) {
+<                     if (oid.leftMostCompare(min, last) == 0) {
+<                         OID root = new OID(last.getValue(), 0, min);
+<                         potentialRoots.add(root);
+<                         break;
+<                     }
+<                     min--;
+<                 }
+<             }
+<             last = oid;
+<         }
+<         Collections.sort(potentialRoots);
+< 
+<         final List<OID> roots = new ArrayList<>(potentialRoots.size());
+<         potentialRoots.stream().filter(potentialRoot -> potentialRoot.size() > 0).forEach(potentialRoot -> {
+<             OID trimmedPotentialRoot = new OID(potentialRoot.getValue(), 0, potentialRoot.size() - 1);
+<             while (trimmedPotentialRoot.size() > 0 && Collections.binarySearch(potentialRoots, trimmedPotentialRoot) < 0) {
+<                 trimmedPotentialRoot.trim(1);
+<             }
+<             if (trimmedPotentialRoot.size() == 0 && !roots.contains(potentialRoot)) {
+<                 roots.add(potentialRoot);
+<             }
+<         });
+< 
+<         log.trace("identified roots {}", roots);
+<         return roots;
+<     }
+< 
+<     /**
+170c129
+<      * @throws IllegalArgumentException if the type could not be mapped to a {@link Variable} implementation
+---
+>      * @throws IllegalArgumentException if the type could not be mapped to a {@code Variable} implementation
+259,261c218
+<                 final OctetString context = new OctetString(String.valueOf(vlan));
+< 
+<                 final List<OID> roots = SnmpmanAgent.getRoots(variableBindings);
+---
+>                 final List<OID> roots = SnpmanAgent.getRoots(variableBindings);
+265c222
+<                     DefaultMOContextScope scope = new DefaultMOContextScope(context, root, true, root.nextPeer(), false);
+---
+>                     DefaultMOContextScope scope = new DefaultMOContextScope(new OctetString(String.valueOf(vlan)), root, true, root.nextPeer(), false);
+270c227
+<                             scope = new DefaultMOContextScope(context, variableBinding.getOid(), true, variableBinding.getOid().nextPeer(), false);
+---
+>                             scope = new DefaultMOContextScope(new OctetString(String.valueOf(vlan)), variableBinding.getOid(), true, variableBinding.getOid().nextPeer(), false);
+276c233
+<                                 registerGroupAndContext(group, context);
+---
+>                                 registerGroupAndContext(group, new OctetString(String.valueOf(vlan));
+281c238
+<                         registerGroupAndContext(group, context);
+---
+>                         registerGroupAndContext(group, new OctetString(String.valueOf(vlan));
+312c269
+<             final List<OID> roots = SnmpmanAgent.getRoots(variableBindings);
+---
+>             final List<OID> roots = SnpmanAgent.getRoots(variableBindings);
+356,367c313,316
+<                 MOContextScope contextScope = new DefaultMOContextScope(new OctetString(), group.getScope());
+<                 ManagedObject other = server.lookup(new DefaultMOQuery(contextScope, false));
+<                 if (other != null) {
+<                     log.warn("group {} already existed", group);
+<                     return;
+<                 }
+< 
+<                 contextScope = new DefaultMOContextScope(null, group.getScope());
+<                 other = server.lookup(new DefaultMOQuery(contextScope, false));
+<                 if (other != null) {
+<                     registerHard(group);
+<                     return;
+---
+>                 MOContextScope contextScope = new DefaultMOContextScope(new OctetString(""), group.getScope());
+>                 ManagedObject query;
+>                 while ((query = server.lookup(new DefaultMOQuery(contextScope, false))) != null) {
+>                     server.unregister(query, context);
+379,398d327
+<      * Sets the private registry value of {@link DefaultMOServer} via reflection.
+<      * FIXME
+<      * If there is any possibility to avoid this, then replace!
+<      *
+<      * @param group {@link ManagedObject} to register.
+<      */
+<     private void registerHard(final MOGroup group) {
+<         try {
+<             final Field registry = server.getClass().getDeclaredField("registry");
+<             registry.setAccessible(true);
+<             final SortedMap<MOScope, ManagedObject> reg = server.getRegistry();
+<             DefaultMOContextScope contextScope = new DefaultMOContextScope(new OctetString(""), group.getScope());
+<             reg.put(contextScope, group);
+<             registry.set(server, reg);
+<         } catch (NoSuchFieldException | IllegalAccessException e) {
+<             log.warn("could not set server registry", e);
+<         }
+<     }
+< 
+<     /**
+415c344
+<                         variable = SnmpmanAgent.getVariable("STRING", "\"\"");
+---
+>                         variable = SnpmanAgent.getVariable("STRING", "\"\"");
+417c346
+<                         variable = SnmpmanAgent.getVariable(matcher.group(6), matcher.group(7));
+---
+>                         variable = SnpmanAgent.getVariable(matcher.group(6), matcher.group(7));
+543a473
+>     @SuppressWarnings("unchecked")

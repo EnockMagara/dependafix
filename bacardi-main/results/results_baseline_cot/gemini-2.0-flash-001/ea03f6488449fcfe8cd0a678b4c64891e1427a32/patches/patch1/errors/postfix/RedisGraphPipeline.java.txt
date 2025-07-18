@@ -1,0 +1,16 @@
+263:sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in com.redislabs.redisgraph.impl.api.RedisGraphPipeline cannot override sendCommand(redis.clients.jedis.commands.ProtocolCommand,java.lang.String...) in redis.clients.jedis.Pipeline  return type void is not compatible with redis.clients.jedis.Response<java.lang.Object> 
+260:cannot find symbol  symbol: method getResponse(redis.clients.jedis.Builder<T>) 
+28:no suitable constructor found for Pipeline(no arguments)    constructor redis.clients.jedis.Pipeline.Pipeline(redis.clients.jedis.Connection) is not applicable       (actual and formal argument lists differ in length)     constructor redis.clients.jedis.Pipeline.Pipeline(redis.clients.jedis.Jedis) is not applicable       (actual and formal argument lists differ in length) 
+264:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+12:cannot find symbol  symbol:   class CommandArguments   location: package redis.clients.jedis.util 
+9:cannot find symbol  symbol:   class RedisClusterCommands   location: package redis.clients.jedis.commands 
+6:cannot find symbol  symbol:   class ScriptingCommands   location: package redis.clients.jedis.commands 
+7:cannot find symbol  symbol:   class MultiKeyCommands   location: package redis.clients.jedis.commands 
+4:cannot find symbol  symbol:   class BasicCommands   location: package redis.clients.jedis.commands 
+23:cannot find symbol  symbol: class BasicCommands 
+21:cannot find symbol  symbol: class MultiKeyCommands 
+5:cannot find symbol  symbol:   class BasicBinaryCommands   location: package redis.clients.jedis.commands 
+22:cannot find symbol  symbol: class ScriptingCommands 
+20:cannot find symbol  symbol: class MultiKeyBinaryCommands 
+8:cannot find symbol  symbol:   class MultiKeyBinaryCommands   location: package redis.clients.jedis.commands 
+10:cannot find symbol  symbol:   class RedisPipeline   location: package redis.clients.jedis.commands 

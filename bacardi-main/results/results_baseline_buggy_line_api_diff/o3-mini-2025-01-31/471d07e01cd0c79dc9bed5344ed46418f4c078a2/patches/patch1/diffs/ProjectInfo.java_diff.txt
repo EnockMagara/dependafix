@@ -1,0 +1,50 @@
+27a28
+> import com.google.api.services.cloudresourcemanager.v3.model.Project;
+146,151c147,149
+<     com.google.api.services.cloudresourcemanager.model.ResourceId toPb() {
+<       com.google.api.services.cloudresourcemanager.model.ResourceId resourceIdPb =
+<           new com.google.api.services.cloudresourcemanager.model.ResourceId();
+<       resourceIdPb.setId(id);
+<       resourceIdPb.setType(type.toLowerCase());
+<       return resourceIdPb;
+---
+>     String toPb() {
+>       // In the new API, parent is represented as a String in the format "type/id".
+>       return type.toLowerCase() + "/" + id;
+154,156c152,160
+<     static ResourceId fromPb(
+<         com.google.api.services.cloudresourcemanager.model.ResourceId resourceIdPb) {
+<       return new ResourceId(resourceIdPb.getId(), resourceIdPb.getType());
+---
+>     static ResourceId fromPb(String parentPb) {
+>       if (parentPb == null) {
+>         return null;
+>       }
+>       String[] parts = parentPb.split("/", 2);
+>       if (parts.length < 2) {
+>         throw new IllegalArgumentException("Invalid parent format: " + parentPb);
+>       }
+>       return new ResourceId(parts[1], parts[0]);
+392,394c396,397
+<   com.google.api.services.cloudresourcemanager.model.Project toPb() {
+<     com.google.api.services.cloudresourcemanager.model.Project projectPb =
+<         new com.google.api.services.cloudresourcemanager.model.Project();
+---
+>   Project toPb() {
+>     Project projectPb = new Project();
+399,401c402
+<     if (state != null) {
+<       projectPb.setLifecycleState(state.toString());
+<     }
+---
+>     // Removed lifecycle state conversion since setLifecycleState is no longer available.
+414c415
+<   static ProjectInfo fromPb(com.google.api.services.cloudresourcemanager.model.Project projectPb) {
+---
+>   static ProjectInfo fromPb(Project projectPb) {
+423,425c424
+<     if (projectPb.getLifecycleState() != null) {
+<       builder.setState(State.valueOf(projectPb.getLifecycleState()));
+<     }
+---
+>     // Removed lifecycle state conversion since getLifecycleState is not present.

@@ -1,0 +1,3 @@
+212:cannot find symbol  symbol:   class VersionResource   location: class com.wire.lithium.Server<Config> 
+236:cannot find symbol  symbol:   class Task   location: class com.wire.lithium.Server<Config> 
+159:cannot access io.dropwizard.core.setup.Environment  class file for io.dropwizard.core.setup.Environment not found 

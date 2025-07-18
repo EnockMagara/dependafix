@@ -1,0 +1,20 @@
+17a18
+> import com.artipie.http.auth.AuthUser;
+30a32
+> import java.util.Optional;
+353c355
+<                             .map(user -> new Authentication.User(user.name()))
+---
+>                             .map(user -> new SimpleAuthUser(user.name()))
+376a379,389
+>     
+>     private static final class SimpleAuthUser implements AuthUser {
+>         private final String name;
+>         SimpleAuthUser(final String name) {
+>             this.name = name;
+>         }
+>         @Override
+>         public String name() {
+>             return this.name;
+>         }
+>     }

@@ -1,0 +1,48 @@
+```java
+/*
+ * The MIT License (MIT) Copyright (c) 2020-2022 artipie.com
+ * https://github.com/artipie/http/blob/master/LICENSE.txt
+ */
+package com.artipie.security.policy;
+
+import com.amihaiemil.eoyaml.Yaml;
+import com.artipie.asto.blocking.BlockingStorage;
+import com.artipie.asto.Storage;
+import com.artipie.asto.factory.Config;
+import com.artipie.asto.fs.FileStorageFactory;
+import com.artipie.asto.etcd.EtcdStorageFactory;
+import com.artipie.asto.s3.S3StorageFactory;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+
+@ArtipiePolicyFactory("yaml_policy")
+public final class YamlPolicyFactory implements PolicyFactory {
+
+    @Override
+    public Policy<?> getPolicy(final PolicyConfig config) {
+        final PolicyConfig sub = config.config("storage");
+        try {
+            final String type = sub.string("type");
+            final com.amihaiemil.eoyaml.YamlMapping mapping = Yaml.createYamlInput(sub.toString()).readYamlMapping();
+            final Config storageConfig = new Config.Yaml(mapping);
+            final Storage storage;
+            switch (type) {
+                case "fs":
+                    storage = new FileStorageFactory().newStorage(storageConfig);
+                    break;
+                case "etcd":
+                    storage = new EtcdStorageFactory().newStorage(storageConfig);
+                    break;
+                case "s3":
+                    storage = new S3StorageFactory().newStorage(storageConfig);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported storage type: " + type);
+            }
+            return new YamlPolicy(new BlockingStorage(storage));
+        } catch (final IOException err) {
+            throw new UncheckedIOException(err);
+        }
+    }
+}
+```

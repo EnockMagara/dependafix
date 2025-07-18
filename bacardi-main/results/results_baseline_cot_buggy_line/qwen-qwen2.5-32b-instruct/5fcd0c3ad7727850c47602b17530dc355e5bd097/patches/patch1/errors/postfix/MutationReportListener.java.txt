@@ -1,0 +1,2 @@
+105:cannot find symbol  symbol:   method getName()   location: class org.pitest.classinfo.ClassName 
+107:cannot find symbol  symbol:   method getClassInfo(java.util.Set<java.lang.String>)   location: variable coverage of type org.pitest.coverage.CoverageDatabase 

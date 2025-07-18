@@ -1,0 +1,2 @@
+181:The method getProperties(Class<? extends Object>) in the type Representer is not applicable for the arguments (Class<capture#11-of ? extends Object>, BeanAccess)
+189:The method getProperties(Class<? extends Object>) in the type Representer is not applicable for the arguments (Class<capture#12-of ? extends Object>, BeanAccess)

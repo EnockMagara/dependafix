@@ -1,0 +1,12 @@
+265:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+173:cannot access org.slf4j.spi.LoggingEventAware  class file for org.slf4j.spi.LoggingEventAware not found 
+179:cannot find symbol  symbol:   variable jdbcUrl   location: variable configuration of type com.feedzai.commons.sql.abstraction.engine.testconfig.DatabaseConfiguration 
+303:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+210:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+292:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+240:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+355:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+224:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+197:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+252:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+538:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 

@@ -1,0 +1,42 @@
+21c21
+< import org.spongepowered.api.Platform.Type;
+---
+> import org.spongepowered.api.Platform;
+23c23
+< import org.spongepowered.api.command.CommandManager;
+---
+> import org.spongepowered.api.command.Command;
+27,31c27,31
+< import org.spongepowered.api.event.game.state.GameInitializationEvent;
+< import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+< import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelRegistrar;
+---
+> import org.spongepowered.api.event.lifecycle.GameInitializationEvent;
+> import org.spongepowered.api.event.lifecycle.GamePreInitializationEvent;
+> import org.spongepowered.api.event.lifecycle.GameStoppingServerEvent;
+> import org.spongepowered.api.network.channel.raw.RawDataChannel;
+> import org.spongepowered.api.network.channel.ChannelRegistrar;
+77c77
+<         CommandManager cmdManager = Sponge.getCommandManager();
+---
+>         org.spongepowered.api.command.CommandManager cmdManager = Sponge.getCommandManager();
+80,84c80,84
+<         cmdManager.register(this, injector.getInstance(SelectCommand.class).buildSpec(), "skin-select", "skinselect");
+<         cmdManager.register(this, injector.getInstance(InfoCommand.class).buildSpec(), "skin-info");
+<         cmdManager.register(this, injector.getInstance(UploadCommand.class).buildSpec(), "skin-upload");
+<         cmdManager.register(this, injector.getInstance(SetCommand.class).buildSpec(), "changeskin", "setskin", "skin");
+<         cmdManager.register(this, injector.getInstance(InvalidateCommand.class)
+---
+>         cmdManager.register(this, (Command.Parameterized) injector.getInstance(SelectCommand.class).buildSpec(), "skin-select", "skinselect");
+>         cmdManager.register(this, (Command.Parameterized) injector.getInstance(InfoCommand.class).buildSpec(), "skin-info");
+>         cmdManager.register(this, (Command.Parameterized) injector.getInstance(UploadCommand.class).buildSpec(), "skin-upload");
+>         cmdManager.register(this, (Command.Parameterized) injector.getInstance(SetCommand.class).buildSpec(), "changeskin", "setskin", "skin");
+>         cmdManager.register(this, (Command.Parameterized) injector.getInstance(InvalidateCommand.class)
+95,96c95,96
+<         updateChannel.addListener(Type.SERVER, injector.getInstance(UpdateSkinListener.class));
+<         permChannel.addListener(Type.SERVER, injector.getInstance(CheckPermissionListener.class));
+---
+>         updateChannel.addListener(Platform.Type.SERVER, injector.getInstance(UpdateSkinListener.class));
+>         permChannel.addListener(Platform.Type.SERVER, injector.getInstance(CheckPermissionListener.class));

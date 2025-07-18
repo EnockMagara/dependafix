@@ -1,0 +1,9 @@
+4,5c4
+< 
+< import static develop.p2p.lib.LearnMath.sigmoid;
+---
+> import ml.peya.plugins.LearnMath; // Updated import to the correct package
+50c49
+<         setValue(sigmoid(sum));
+---
+>         setValue(LearnMath.sigmoid(sum)); // Updated to use the correct method reference

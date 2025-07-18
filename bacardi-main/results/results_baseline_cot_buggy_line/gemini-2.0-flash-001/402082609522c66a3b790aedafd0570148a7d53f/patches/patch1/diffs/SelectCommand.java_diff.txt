@@ -1,0 +1,36 @@
+7a8
+> import org.spongepowered.api.command.Command;
+9,12c10,11
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+16,17c15,19
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import com.google.common.collect.ImmutableList;
+> import org.spongepowered.api.command.CommandExecutor;
+> import org.spongepowered.api.command.CommandSource;
+> import org.spongepowered.api.command.CommandSpec;
+> import org.spongepowered.api.text.Text;
+35c37,43
+<         String skinName = args.<String>getOne("skinName").get().toLowerCase().replace("skin-", "");
+---
+>         Parameter.Value<String> skinNameValue = args.one(Parameter.string().key("skinName").build());
+>         if (!skinNameValue.isPresent()) {
+>             plugin.sendMessage(src, "invalid-skin-name");
+>             return CommandResult.empty();
+>         }
+> 
+>         String skinName = skinNameValue.get().toLowerCase().replace("skin-", "");
+49a58,59
+>         Parameter<String> skinNameParameter = Parameter.string().key("skinName").build();
+> 
+52c62
+<                 .arguments(string(of("skinName")))
+---
+>                 .arguments(skinNameParameter)

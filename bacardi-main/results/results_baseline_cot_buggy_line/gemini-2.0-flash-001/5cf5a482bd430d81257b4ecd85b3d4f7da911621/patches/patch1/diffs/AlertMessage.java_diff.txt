@@ -1,0 +1,8 @@
+5a6
+> import javax.enterprise.context.RequestScoped;
+7d7
+< import javax.mvc.RedirectScoped;
+14c14
+< @RedirectScoped
+---
+> @RequestScoped

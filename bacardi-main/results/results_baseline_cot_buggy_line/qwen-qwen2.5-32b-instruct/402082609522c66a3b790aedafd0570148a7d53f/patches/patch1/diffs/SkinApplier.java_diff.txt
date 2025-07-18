@@ -1,0 +1,13 @@
+3d2
+< import com.flowpowered.math.vector.Vector3d;
+12,13c11
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.data.key.Keys;
+---
+> import org.spongepowered.api.command.source.CommandSource;
+84,85c82,83
+<         receiver.offer(Keys.VANISH, true);
+<         receiver.offer(Keys.VANISH, false);
+---
+>         receiver.offer(Sponge.getDataManager().getRegistry().getValue(Keys.VANISH).get(), true);
+>         receiver.offer(Sponge.getDataManager().getRegistry().getValue(Keys.VANISH).get(), false);

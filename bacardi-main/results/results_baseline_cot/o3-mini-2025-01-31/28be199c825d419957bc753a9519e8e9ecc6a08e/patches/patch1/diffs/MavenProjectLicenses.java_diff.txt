@@ -1,0 +1,9 @@
+111c111
+<       MavenProject project = getProjectBuilder().build(artifact, getBuildingRequest()).getProject();
+---
+>       MavenProject project = getProjectBuilder().build(artifact, getBuildingRequest());
+174,177d173
+< 
+<     // tempting, but does not resolve dependencies after the scope in which this
+<     // plugin is invoked
+<     // return project.getArtifacts();

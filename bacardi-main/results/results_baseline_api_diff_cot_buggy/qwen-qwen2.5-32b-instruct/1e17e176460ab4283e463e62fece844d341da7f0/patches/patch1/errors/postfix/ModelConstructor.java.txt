@@ -1,0 +1,3 @@
+9:No cannot be resolved to a type
+8:compile cannot be resolved to a type
+1:Syntax error on tokens, delete these tokens

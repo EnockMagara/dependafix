@@ -1,0 +1,46 @@
+27c27,28
+< import org.codehaus.plexus.util.xml.Xpp3Dom;
+---
+> import org.w3c.dom.Element;
+> import org.w3c.dom.NodeList;
+38a40,48
+> import javax.xml.parsers.DocumentBuilder;
+> import javax.xml.parsers.DocumentBuilderFactory;
+> import java.io.ByteArrayInputStream;
+> import javax.xml.xpath.XPath;
+> import javax.xml.xpath.XPathConstants;
+> import javax.xml.xpath.XPathExpression;
+> import javax.xml.xpath.XPathFactory;
+> 
+> 
+157a168
+>   @SneakyThrows
+159a171
+> 
+162,165c174,194
+<         .map(exec -> (Xpp3Dom) exec.getConfiguration())
+<         .map(config -> config.getChild("processors"))
+<         .map(Xpp3Dom::getChildren)
+<         .map(arr -> Arrays.stream(arr).map(Xpp3Dom::getValue).collect(Collectors.toSet()))
+---
+>             .map(exec -> {
+>               try {
+>                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+>                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+>                 org.w3c.dom.Document doc = dBuilder.parse(new ByteArrayInputStream(exec.getConfiguration().toString().getBytes()));
+> 
+>                 XPathFactory xPathfactory = XPathFactory.newInstance();
+>                 XPath xpath = xPathfactory.newXPath();
+>                 XPathExpression expr = xpath.compile("//processors/processor/text()");
+>                 NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+> 
+>                 Set<String> processors = new HashSet<>();
+>                 for (int i = 0; i < nodes.getLength(); i++) {
+>                   processors.add(nodes.item(i).getNodeValue());
+>                 }
+>                 return processors;
+>               } catch (Exception e) {
+>                 logger.error("Error parsing processors configuration", e);
+>                 return null;
+>               }
+>             })

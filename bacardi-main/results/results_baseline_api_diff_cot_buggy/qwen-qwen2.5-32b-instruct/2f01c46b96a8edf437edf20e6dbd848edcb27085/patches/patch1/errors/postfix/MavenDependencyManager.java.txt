@@ -1,0 +1,4 @@
+169:cannot find symbol  symbol:   class Serializable   location: class se.kth.depclean.wrapper.MavenDependencyManager 
+43:cannot find symbol  symbol:   class Log   location: class se.kth.depclean.wrapper.MavenDependencyManager 
+57:cannot find symbol  symbol:   class Log   location: class se.kth.depclean.wrapper.MavenDependencyManager 
+38:cannot find symbol  symbol:   class Log   location: class se.kth.depclean.wrapper.MavenDependencyManager 

@@ -1,0 +1,16 @@
+98:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+55:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+83:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+68:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+14:cannot find symbol  symbol:   class LanguagesResource   location: package com.google.api.services.translate.v3.model 
+66:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+57:cannot find symbol  symbol:   class DetectLanguageRequest   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+76:cannot find symbol  symbol:   class LanguagesResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+13:cannot find symbol  symbol:   class DetectionsResourceItems   location: package com.google.api.services.translate.v3.model 
+90:cannot find symbol  symbol:   method setTargetLanguage(java.lang.String)   location: class com.google.api.services.translate.v3.model.TranslateTextRequest 
+59:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+58:cannot find symbol  symbol:   class DetectionsResourceItems   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+100:cannot find symbol  symbol: class TranslationsResource 
+95:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 
+15:cannot find symbol  symbol:   class TranslationsResource   location: package com.google.api.services.translate.v3.model 
+97:cannot find symbol  symbol:   class TranslationsResource   location: class com.google.cloud.translate.spi.v2.HttpTranslateRpc 

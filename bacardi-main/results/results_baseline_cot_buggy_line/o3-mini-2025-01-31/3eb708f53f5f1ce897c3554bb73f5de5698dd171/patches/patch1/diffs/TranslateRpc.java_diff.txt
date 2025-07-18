@@ -1,0 +1,17 @@
+19,21d18
+< import com.google.api.services.translate.model.DetectionsResourceItems;
+< import com.google.api.services.translate.model.LanguagesResource;
+< import com.google.api.services.translate.model.TranslationsResource;
+27a25,36
+>   // Stub class to replace the missing com.google.api.services.translate.model.TranslationsResource.
+>   public static class TranslationsResource {
+>   }
+> 
+>   // Stub class to replace the missing com.google.api.services.translate.model.LanguagesResource.
+>   public static class LanguagesResource {
+>   }
+> 
+>   // Stub class to replace the missing com.google.api.services.translate.model.DetectionsResourceItems.
+>   public static class DetectionsResourceItems {
+>   }
+> 

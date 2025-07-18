@@ -1,0 +1,129 @@
+package com.redislabs.redisgraph.impl.api;
+
+import java.util.List;
+
+import com.redislabs.redisgraph.RedisGraphContext;
+import com.redislabs.redisgraph.ResultSet;
+import com.redislabs.redisgraph.exceptions.JRedisGraphException;
+import com.redislabs.redisgraph.impl.Utils;
+import com.redislabs.redisgraph.impl.graph_cache.RedisGraphCaches;
+import com.redislabs.redisgraph.impl.transaction.RedisGraphTransaction;
+import com.redislabs.redisgraph.impl.transaction.RedisGraphPipeline;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisException;
+import redis.clients.jedis.Pipeline;
+import redis.clients.jedis.Transaction;
+
+import com.redislabs.redisgraph.impl.resultset.ResultSetImpl;
+
+public class ContextedRedisGraph extends AbstractRedisGraph implements RedisGraphContext, RedisGraphCacheHolder {
+
+    private final Jedis connectionContext;
+    private RedisGraphCaches caches;
+
+    public ContextedRedisGraph(Jedis connectionContext) {
+        this.connectionContext = connectionContext;
+    }
+
+    @Override
+    protected Jedis getConnection() {
+        return this.connectionContext;
+    }
+
+    @Override
+    protected ResultSet sendQuery(String graphId, String preparedQuery) {
+        Jedis conn = getConnection();
+        try {
+            @SuppressWarnings("unchecked")
+            List<Object> rawResponse = (List<Object>) conn.sendCommand(RedisGraphCommand.QUERY, graphId, preparedQuery, Utils.COMPACT_STRING);
+            return new ResultSetImpl(rawResponse, this, caches.getGraphCache(graphId));
+        } catch (JRedisGraphException rt) {
+            throw rt;
+        } catch (JedisException j) {
+            throw new JRedisGraphException(j);
+        }
+    }
+
+    @Override
+    protected ResultSet sendReadOnlyQuery(String graphId, String preparedQuery) {
+        Jedis conn = getConnection();
+        try {
+            @SuppressWarnings("unchecked")
+            List<Object> rawResponse = (List<Object>) conn.sendCommand(RedisGraphCommand.RO_QUERY, graphId, preparedQuery, Utils.COMPACT_STRING);
+            return new ResultSetImpl(rawResponse, this, caches.getGraphCache(graphId));
+        } catch (JRedisGraphException ge) {
+            throw ge;
+        } catch (JedisException de) {
+            throw new JRedisGraphException(de);
+        }
+    }
+
+    @Override
+    protected ResultSet sendQuery(String graphId, String preparedQuery, long timeout) {
+        Jedis conn = getConnection();
+        try {
+            @SuppressWarnings("unchecked")
+            List<Object> rawResponse = (List<Object>) conn.sendBlockingCommand(RedisGraphCommand.QUERY,
+                    graphId, preparedQuery, Utils.COMPACT_STRING, Utils.TIMEOUT_STRING, Long.toString(timeout));
+            return new ResultSetImpl(rawResponse, this, caches.getGraphCache(graphId));
+        } catch (Exception e) {
+            conn.close();
+            throw e;
+        }
+    }
+
+    @Override
+    protected ResultSet sendReadOnlyQuery(String graphId, String preparedQuery, long timeout) {
+        Jedis conn = getConnection();
+        try {
+            @SuppressWarnings("unchecked")
+            List<Object> rawResponse = (List<Object>) conn.sendBlockingCommand(RedisGraphCommand.RO_QUERY,
+                    graphId, preparedQuery, Utils.COMPACT_STRING, Utils.TIMEOUT_STRING, Long.toString(timeout));
+            return new ResultSetImpl(rawResponse, this, caches.getGraphCache(graphId));
+        } catch (JRedisGraphException ge) {
+            throw ge;
+        } catch (JedisException de) {
+            throw new JRedisGraphException(de);
+        }
+    }
+
+    @Override
+    public String watch(String... keys) {
+        return this.getConnection().watch(keys);
+    }
+
+    @Override
+    public String unwatch() {
+        return this.getConnection().unwatch();
+    }
+
+    @Override
+    public RedisGraphTransaction multi() {
+        Jedis jedis = getConnection();
+        Pipeline pipeline = jedis.pipelined();
+        RedisGraphTransaction transaction = new RedisGraphTransaction(pipeline, this);
+        transaction.setRedisGraphCaches(caches);
+        return transaction;
+    }
+
+    @Override
+    public RedisGraphPipeline pipelined() {
+        Jedis jedis = getConnection();
+        Pipeline pipeline = jedis.pipelined();
+        RedisGraphPipeline pipelineObj = new RedisGraphPipeline(pipeline, this);
+        pipelineObj.setRedisGraphCaches(caches);
+        return pipelineObj;
+    }
+
+    @Override
+    public void close() {
+        this.connectionContext.close();
+    }
+
+    @Override
+    public void setRedisGraphCaches(RedisGraphCaches caches) {
+        this.caches = caches;
+    }
+
+}

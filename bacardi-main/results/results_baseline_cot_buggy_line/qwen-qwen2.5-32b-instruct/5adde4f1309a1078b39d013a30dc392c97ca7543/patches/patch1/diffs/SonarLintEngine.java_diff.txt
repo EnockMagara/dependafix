@@ -1,0 +1,21 @@
+36,37d35
+< import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneAnalysisConfiguration;
+< import org.sonarsource.sonarlint.core.client.api.standalone.StandaloneGlobalConfiguration;
+46c44
+< import org.sonarsource.sonarlint.core.plugin.commons.PluginsLoader.Configuration;
+---
+> import org.sonarsource.sonarlint.core.plugin.commons.Configuration;
+77c75
+<         this.analysisEngine = new AnalysisEngine(analysisGlobalConfig, loadedPlugins, null);
+---
+>         this.analysisEngine = new AnalysisEngine(analysisGlobalConfig, loadedPlugins, logOutput);
+223d220
+<                                             logOutput),
+274,275c271,272
+<      * Overriding this class to ensure that plugin instance loader never closes throughout the
+<      * lifecycle of JVM.
+---
+>      * Override this class to ensure that plugin instance loader never closes throughout the lifecycle
+>      * of JVM.
+278a276
+>     {

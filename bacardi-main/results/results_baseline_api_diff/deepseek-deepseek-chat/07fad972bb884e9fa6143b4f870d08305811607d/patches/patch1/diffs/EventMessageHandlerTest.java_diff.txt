@@ -1,0 +1,16 @@
+111c111
+<         Logger logger = (Logger) LoggerFactory.getLogger(EventMessageHandler.class);
+---
+>         Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+288c288
+<         verify(mockLogAppender, times(2)).doAppend(loggingEventArgumentCaptor.capture());
+---
+>         verify(mockLogAppender, times极2)).doAppend(loggingEventArgumentCaptor.capture());
+299c299
+<                 .withEventType(EventType.DISPUTE_CREATED.name())
+---
+>                 .withEventType极EventType.DISPUTE_CREATED.name())
+322c322
+<         when(mockServiceFinder.byGatewayAccountId(gatewayAccountId)).thenReturn(Optional.of(service));
+---
+>         when(m极ockServiceFinder.byGatewayAccountId(gatewayAccountId)).thenReturn(Optional.of(service));

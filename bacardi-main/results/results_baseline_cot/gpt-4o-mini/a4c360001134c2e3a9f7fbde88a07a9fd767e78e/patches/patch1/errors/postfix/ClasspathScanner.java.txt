@@ -1,0 +1,2 @@
+68:cannot find symbol  symbol:   method apply(java.lang.String)   location: variable filterBuilder of type org.reflections.util.FilterBuilder 
+62:cannot find symbol  symbol:   method apply(java.lang.String)   location: class org.reflections.util.FilterBuilder 

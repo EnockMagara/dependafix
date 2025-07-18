@@ -1,0 +1,29 @@
+12,14c12,13
+< import javax.mvc.Controller;
+< import javax.mvc.Models;
+< import javax.mvc.View;
+---
+> import javax.mvc.annotation.Controller;
+> import javax.mvc.annotation.View;
+41c40
+<     private Models models;
+---
+>     private javax.mvc.annotation.Models models;
+90d88
+<     //@ValidateOnExecution(type = ExecutableType.NONE)
+108c106
+<         task.setDescription(form.getDescription());
+---
+>         task.description(form.getDescription());
+127c125
+<         form.setDescription(task.getDescription());
+---
+>         form.description(task.getDescription());
+152,153c150,151
+<         task.setName(form.getName());
+<         task.setDescription(form.getDescription());
+---
+>         task.name(form.getName());
+>         task.description(form.getDescription());
+164d161
+<     //@CsrfProtected

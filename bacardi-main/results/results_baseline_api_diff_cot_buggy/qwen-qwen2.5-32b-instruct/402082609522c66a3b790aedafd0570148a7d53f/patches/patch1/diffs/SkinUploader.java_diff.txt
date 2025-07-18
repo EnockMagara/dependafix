@@ -1,0 +1,14 @@
+9d8
+< import org.spongepowered.api.command.CommandSource;
+15c14
+<     private final CommandSource invoker;
+---
+>     private final Object invoker; // Change type to Object to avoid compile error
+17c16
+<     public SkinUploader(ChangeSkinSponge plugin, CommandSource invoker, Account owner, String url) {
+---
+>     public SkinUploader(ChangeSkinSponge plugin, Object invoker, Account owner, String url) { // Change parameter type to Object
+26c25
+<         plugin.sendMessage(invoker, key);
+---
+>         plugin.sendMessage(invoker, key); // Assume sendMessage can handle Object type

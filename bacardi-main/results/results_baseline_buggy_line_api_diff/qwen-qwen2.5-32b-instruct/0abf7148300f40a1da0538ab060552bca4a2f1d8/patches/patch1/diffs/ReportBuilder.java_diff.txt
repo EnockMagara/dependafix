@@ -1,0 +1,92 @@
+25d24
+< 
+34d32
+< import net.sf.jasperreports.engine.JRLineBox;
+42d39
+< import net.sf.jasperreports.engine.design.JRDesignTextElement;
+55a53
+> import xdev.tableexport.export.ExportException;
+59d56
+< 
+75d71
+<         
+81d76
+<         
+91d85
+<         
+101d94
+<         
+121d113
+<         
+155,159d146
+<         
+<         /**
+<          * 
+<          * @return
+<          */
+162d148
+<                 
+169,171c155,156
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+<                         //get the normal height of the label
+---
+>                         final Font f = style.getFont();
+>                         lbl.setFont(f);
+173c158
+<                         //add the column border width
+---
+>                         //Add border width
+189d173
+<                 
+196,197c180,181
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+---
+>                         final Font f = style.getFont();
+>                         lbl.setFont(f);
+213d196
+<         
+238d220
+<         
+255d236
+<         
+268,269d248
+<                 final boolean createHeader = this.config.hasAnyHeader();
+<                 
+275c254
+<                         if(createHeader)
+---
+>                         if(this.config.hasAnyHeader())
+295d273
+<                                         
+330,333d307
+<                         if(this.config.isBlankWhenNullValue())
+<                         {
+<                                 textField.setBlankWhenNull(true);
+<                         }
+353d326
+<                 
+360d332
+<         
+369c341,342
+<                 textField.getLineBox().getPen().setLineWidth(border.getLineWidth());
+---
+>                 // Convert int to float for setLineWidth
+>                 textField.getLineBox().getPen().setLineWidth((float)border.getLineWidth());
+379d351
+<                 
+386d357
+<         
+394d364
+<         
+397,401c367
+<          * Assemble and compile a {@link JasperReport} based on the information of
+<          * the {@link TemplateConfig} object.
+<          * 
+<          * @return the compiled {@link JasperReport}
+<          * @throws ExportException
+---
+>          * @return
+428d393
+<         

@@ -1,0 +1,27 @@
+7a8,9
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.CommandExecutor;
+9,12c11,12
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.source.CommandSource;
+25d24
+<     @Override
+31d29
+< 
+38,39c36,43
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public CommandResult execute(CommandContext context) throws Exception {
+>         CommandSource src = context.cause().root();
+>         return execute(src, context);
+>     }
+> 
+>     @Override
+>     public Command buildSpec() {
+>         return Command.builder()

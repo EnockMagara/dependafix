@@ -1,0 +1,3 @@
+23:cannot find symbol  symbol:   class InvocationContext   location: class de.hilling.junit.cdi.scope.CallRedirectionInterceptor 
+35:cannot find symbol  symbol:   class InvocationContext   location: class de.hilling.junit.cdi.scope.CallRedirectionInterceptor 
+50:cannot find symbol  symbol:   class InvocationContext   location: class de.hilling.junit.cdi.scope.CallRedirectionInterceptor 

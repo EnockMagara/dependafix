@@ -1,0 +1,13 @@
+49c49,58
+<             this.usernameMd5 = DigestUtils.md5Hex(username);
+---
+>             this.usernameMd5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(username);
+>             return this;
+>         }
+> 
+>         /**
+>          * @return An instance of {@code Account} created from the
+>          * fields set on this builder.
+>          */
+>         public Account.Builder usernameMd5(String usernameMd5) {
+>             this.usernameMd5 = usernameMd5;

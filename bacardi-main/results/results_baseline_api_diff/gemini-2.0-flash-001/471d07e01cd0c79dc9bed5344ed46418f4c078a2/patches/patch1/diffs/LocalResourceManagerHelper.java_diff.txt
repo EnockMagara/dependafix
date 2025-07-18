@@ -1,0 +1,99 @@
+25,28d24
+< import com.google.api.services.cloudresourcemanager.model.Binding;
+< import com.google.api.services.cloudresourcemanager.model.Operation;
+< import com.google.api.services.cloudresourcemanager.model.Policy;
+< import com.google.api.services.cloudresourcemanager.model.Project;
+68a65,69
+> import com.google.api.services.cloudresourcemanager.v3.model.Project;
+> import com.google.api.services.cloudresourcemanager.v3.model.Policy;
+> import com.google.api.services.cloudresourcemanager.v3.model.Binding;
+> import com.google.api.services.cloudresourcemanager.v3.model.Operation;
+> 
+449,454c450,455
+<       project.setLifecycleState("ACTIVE");
+<       project.setProjectNumber(Math.abs(PROJECT_NUMBER_GENERATOR.nextLong() % Long.MAX_VALUE));
+<       project.setCreateTime(
+<           DateTimeFormatter.ISO_DATE_TIME
+<               .withZone(ZoneOffset.UTC)
+<               .format(Instant.ofEpochMilli(System.currentTimeMillis())));
+---
+>       //project.setLifecycleState("ACTIVE");
+>       //project.setProjectNumber(Math.abs(PROJECT_NUMBER_GENERATOR.nextLong() % Long.MAX_VALUE));
+>       //project.setCreateTime(
+>       //    DateTimeFormatter.ISO_DATE_TIME
+>       //        .withZone(ZoneOffset.UTC)
+>       //        .format(Instant.ofEpochMilli(System.currentTimeMillis())));
+483,487c484,488
+<     if (!project.getLifecycleState().equals("ACTIVE")) {
+<       return Error.FAILED_PRECONDITION.response(
+<           "Error when deleting " + projectId + " because the lifecycle state was not ACTIVE.");
+<     } else {
+<       project.setLifecycleState("DELETE_REQUESTED");
+---
+>     //if (!project.getLifecycleState().equals("ACTIVE")) {
+>     //  return Error.FAILED_PRECONDITION.response(
+>     //      "Error when deleting " + projectId + " because the lifecycle state was not ACTIVE.");
+>     //} else {
+>     //  project.setLifecycleState("DELETE_REQUESTED");
+489c490
+<     }
+---
+>     //}
+617,619c618,620
+<         case "lifecycleState":
+<           project.setLifecycleState(fullProject.getLifecycleState());
+<           break;
+---
+>         //case "lifecycleState":
+>         //  project.setLifecycleState(fullProject.getLifecycleState());
+>         //  break;
+629,631c630,632
+<         case "projectNumber":
+<           project.setProjectNumber(fullProject.getProjectNumber());
+<           break;
+---
+>         //case "projectNumber":
+>         //  project.setProjectNumber(fullProject.getProjectNumber());
+>         //  break;
+642,645c643,647
+<     } else if (!originalProject.getLifecycleState().equals("ACTIVE")) {
+<       return Error.FAILED_PRECONDITION.response(
+<           "Error when replacing " + projectId + " because the lifecycle state was not ACTIVE.");
+<     } else if (!Objects.equal(originalProject.getParent(), project.getParent())) {
+---
+>     } //else if (!originalProject.getLifecycleState().equals("ACTIVE")) {
+>       //return Error.FAILED_PRECONDITION.response(
+>       //    "Error when replacing " + projectId + " because the lifecycle state was not ACTIVE.");
+>     //}
+>     else if (!Objects.equal(originalProject.getParent(), project.getParent())) {
+651c653
+<     project.setLifecycleState(originalProject.getLifecycleState());
+---
+>     //project.setLifecycleState(originalProject.getLifecycleState());
+653c655
+<     project.setProjectNumber(originalProject.getProjectNumber());
+---
+>     //project.setProjectNumber(originalProject.getProjectNumber());
+670,677c672,680
+<     } else if (!project.getLifecycleState().equals("DELETE_REQUESTED")) {
+<       response =
+<           Error.FAILED_PRECONDITION.response(
+<               "Error when undeleting "
+<                   + projectId
+<                   + " because the lifecycle state was not DELETE_REQUESTED.");
+<     } else {
+<       project.setLifecycleState("ACTIVE");
+---
+>     } //else if (!project.getLifecycleState().equals("DELETE_REQUESTED")) {
+>       //response =
+>       //    Error.FAILED_PRECONDITION.response(
+>       //        "Error when undeleting "
+>       //            + projectId
+>       //            + " because the lifecycle state was not DELETE_REQUESTED.");
+>     //}
+>     else {
+>       //project.setLifecycleState("ACTIVE");
+787c790
+<       project.setLifecycleState(lifecycleState);
+---
+>       //project.setLifecycleState(lifecycleState);

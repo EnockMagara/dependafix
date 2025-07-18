@@ -1,0 +1,6 @@
+73:cannot find symbol  symbol:   variable MAX_AUDIT_HISTORY_SIZE   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+121:cannot find symbol  symbol: method timeProvider() 
+125:cannot find symbol  symbol: method nisCache() 
+119:cannot find symbol  symbol: method blockChain() 
+123:cannot find symbol  symbol: method blockChain() 
+116:cannot find symbol  symbol: method nisConfiguration() 

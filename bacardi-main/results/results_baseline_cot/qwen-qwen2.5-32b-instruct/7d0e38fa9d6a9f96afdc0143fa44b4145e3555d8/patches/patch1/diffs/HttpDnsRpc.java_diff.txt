@@ -1,0 +1,188 @@
+1,16d0
+< /*
+<  * Copyright 2016 Google LLC
+<  *
+<  * Licensed under the Apache License, Version 2.0 (the "License");
+<  * you may not use this file except in compliance with the License.
+<  * You may obtain a copy of the License at
+<  *
+<  *       http://www.apache.org/licenses/LICENSE-2.0
+<  *
+<  * Unless required by applicable law or agreed to in writing, software
+<  * distributed under the License is distributed on an "AS IS" BASIS,
+<  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+<  */
+< 
+42d25
+< /** A default implementation of the DnsRpc interface. */
+59c42
+<         RpcBatch.Callback<ManagedZonesListResponse> callback, Map<DnsRpc.Option, ?> options) {
+---
+>         RpcBatch.Callback<ManagedZonesListResponse> callback, Map<Option, ?> options) {
+109c92
+<         Map<DnsRpc.Option, ?> options) {
+---
+>         Map<Option, ?> options) {
+121c104
+<         Map<DnsRpc.Option, ?> options) {
+---
+>         Map<Option, ?> options) {
+134c117
+<         Map<DnsRpc.Option, ?> options) {
+---
+>         Map<Option, ?> options) {
+146c129
+<         Change change,
+---
+>         Change changeRequest,
+148c131
+<         Map<DnsRpc.Option, ?> options) {
+---
+>         Map<Option, ?> options) {
+150c133,134
+<         applyChangeRequestCall(zoneName, change, options).queue(batch, toJsonCallback(callback));
+---
+>         applyChangeRequestCall(zoneName, changeRequest, options)
+>             .queue(batch, toJsonCallback(callback));
+181,182c165,166
+<   private static DnsException translate(IOException exception, boolean idempotent) {
+<     return new DnsException(exception, idempotent);
+---
+>   private static DnsException translate(IOException ex, boolean idempotent) {
+>     return new DnsException(ex, idempotent);
+185d168
+<   /** Constructs an instance of this rpc client with provided {@link DnsOptions}. */
+203,204c186
+<       // todo this can cause misleading report of a failure, intended to be fixed within #924
+<       throw translate(ex, true);
+---
+>       throw translate(ex, false);
+217d198
+<     // just fields option
+238d218
+<     // fields, page token, page size
+240,241c220,221
+<       ManagedZonesListResponse zoneList = listZonesCall(options).execute();
+<       return ListResult.of(zoneList.getNextPageToken(), zoneList.getManagedZones());
+---
+>       ManagedZonesListResponse response = listZonesCall(options).execute();
+>       return ListResult.of(response.getNextPageToken(), response.getManagedZones());
+247c227
+<   private Dns.ManagedZones.List listZonesCall(Map<DnsRpc.Option, ?> options) throws IOException {
+---
+>   private Dns.ManagedZones.List listZonesCall(Map<Option, ?> options) throws IOException {
+252d231
+<         .setDnsName(Option.DNS_NAME.getString(options))
+271,294c250,251
+<     return dns.managedZones().delete(this.options.getProjectId(), zoneName);
+<   }
+< 
+<   @Override
+<   public ListResult<ResourceRecordSet> listRecordSets(String zoneName, Map<Option, ?> options)
+<       throws DnsException {
+<     try {
+<       ResourceRecordSetsListResponse response = listRecordSetsCall(zoneName, options).execute();
+<       return ListResult.of(response.getNextPageToken(), response.getRrsets());
+<     } catch (IOException ex) {
+<       throw translate(ex, true);
+<     }
+<   }
+< 
+<   private Dns.ResourceRecordSets.List listRecordSetsCall(String zoneName, Map<Option, ?> options)
+<       throws IOException {
+<     // options are fields, page token, dns name, type
+<     return dns.resourceRecordSets()
+<         .list(this.options.getProjectId(), zoneName)
+<         .setFields(Option.FIELDS.getString(options))
+<         .setPageToken(Option.PAGE_TOKEN.getString(options))
+<         .setMaxResults(Option.PAGE_SIZE.getInt(options))
+<         .setName(Option.NAME.getString(options))
+<         .setType(Option.DNS_TYPE.getString(options));
+---
+>     return dns.managedZones()
+>         .delete(this.options.getProjectId(), zoneName);
+313,330c270
+<   public Change applyChangeRequest(String zoneName, Change changeRequest, Map<Option, ?> options)
+<       throws DnsException {
+<     try {
+<       return applyChangeRequestCall(zoneName, changeRequest, options).execute();
+<     } catch (IOException ex) {
+<       throw translate(ex, false);
+<     }
+<   }
+< 
+<   private Dns.Changes.Create applyChangeRequestCall(
+<       String zoneName, Change changeRequest, Map<Option, ?> options) throws IOException {
+<     return dns.changes()
+<         .create(this.options.getProjectId(), zoneName, changeRequest)
+<         .setFields(Option.FIELDS.getString(options));
+<   }
+< 
+<   @Override
+<   public Change getChangeRequest(String zoneName, String changeRequestId, Map<Option, ?> options)
+---
+>   public ListResult<ResourceRecordSet> listRecordSets(String zoneName, Map<Option, ?> options)
+333c273,274
+<       return getChangeRequestCall(zoneName, changeRequestId, options).execute();
+---
+>       ResourceRecordSetsListResponse response = listRecordSetsCall(zoneName, options).execute();
+>       return ListResult.of(response.getNextPageToken(), response.getRrsets());
+335,345c276
+<       DnsException serviceException = translate(ex, true);
+<       if (serviceException.getCode() == HTTP_NOT_FOUND) {
+<         if ("entity.parameters.changeId".equals(serviceException.getLocation())
+<             || (serviceException.getMessage() != null
+<                 && serviceException.getMessage().contains("parameters.changeId"))) {
+<           // the change id was not found, but the zone exists
+<           return null;
+<         }
+<         // the zone does not exist, so throw an exception
+<       }
+<       throw serviceException;
+---
+>       throw translate(ex, true);
+349,353c280,286
+<   private Dns.Changes.Get getChangeRequestCall(
+<       String zoneName, String changeRequestId, Map<Option, ?> options) throws IOException {
+<     return dns.changes()
+<         .get(this.options.getProjectId(), zoneName, changeRequestId)
+<         .setFields(Option.FIELDS.getString(options));
+---
+>   private Dns.ResourceRecordSets.List listRecordSetsCall(String zoneName, Map<Option, ?> options)
+>       throws IOException {
+>     return dns.resourceRecordSets()
+>         .list(this.options.getProjectId(), zoneName)
+>         .setFields(Option.FIELDS.getString(options))
+>         .setMaxResults(Option.PAGE_SIZE.getInt(options))
+>         .setPageToken(Option.PAGE_TOKEN.getString(options));
+369,371c302
+<     // options are fields, page token, page size, sort order
+<     Dns.Changes.List request =
+<         dns.changes()
+---
+>     return dns.changes()
+376,378d306
+<     if (Option.SORTING_ORDER.getString(options) != null) {
+<       // todo check and change if more sorting options are implemented, issue #604
+<       request = request.setSortBy(SORT_BY).setSortOrder(Option.SORTING_ORDER.getString(options));
+380c308,323
+<     return request;
+---
+> 
+>   @Override
+>   public Change applyChangeRequest(
+>       String zoneName, Change changeRequest, Map<Option, ?> options) throws DnsException {
+>     try {
+>       return applyChangeRequestCall(zoneName, changeRequest, options).execute();
+>     } catch (IOException ex) {
+>       throw translate(ex, false);
+>     }
+>   }
+> 
+>   private Dns.Changes.Create applyChangeRequestCall(
+>       String zoneName, Change changeRequest, Map<Option, ?> options) throws IOException {
+>     return dns.changes()
+>         .create(this.options.getProjectId(), zoneName, changeRequest)
+>         .setFields(Option.FIELDS.getString(options));

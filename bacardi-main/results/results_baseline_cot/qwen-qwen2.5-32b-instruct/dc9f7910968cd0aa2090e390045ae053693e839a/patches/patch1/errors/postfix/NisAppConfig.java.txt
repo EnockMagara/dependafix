@@ -1,0 +1,14 @@
+124:cannot find symbol  symbol: method nisConfiguration() 
+113:cannot find symbol  symbol: method nisConfiguration() 
+131:cannot find symbol  symbol: method nisCache() 
+116:cannot find symbol  symbol: method namespaceCache() 
+122:cannot find symbol  symbol: method nisConfiguration() 
+71:cannot find symbol  symbol: method timeProvider() 
+107:cannot find symbol  symbol:   variable SessionFactoryLoader   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+128:cannot find symbol  symbol: method nisConfiguration() 
+56:cannot find symbol  symbol:   class TransferDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+132:cannot find symbol  symbol: method nisConfiguration() 
+117:cannot find symbol  symbol: method nisConfiguration() 
+129:cannot find symbol  symbol: method weighedBalancesSupplier() 
+46:cannot find symbol  symbol:   class AccountDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+49:cannot find symbol  symbol:   class BlockDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 

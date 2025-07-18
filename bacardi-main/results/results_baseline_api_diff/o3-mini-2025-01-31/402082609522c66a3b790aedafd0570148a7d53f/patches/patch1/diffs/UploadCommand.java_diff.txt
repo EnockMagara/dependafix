@@ -1,0 +1,58 @@
+9d8
+< 
+11c10,11
+< 
+---
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.CommandExecutor;
+13,20c13,17
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+< import org.spongepowered.api.scheduler.Task;
+< 
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+> import org.spongepowered.api.command.CommandCause;
+> import net.kyori.adventure.audience.Audience;
+33,35c30,33
+<     @Override
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+<         String url = args.<String>getOne("url").get();
+---
+>     public CommandResult execute(CommandContext args) throws CommandException {
+>         CommandCause cause = args.cause();
+>         Audience audience = cause.audience();
+>         String url = args.requireOne("url");
+39c37
+<                 plugin.sendMessage(src, "no-accounts");
+---
+>                 plugin.sendMessage(audience, "no-accounts");
+42,43c40,41
+<                 Runnable skinUploader = new SkinUploader(plugin, src, uploadAccount, url);
+<                 Task.builder().async().execute(skinUploader).submit(plugin);
+---
+>                 Runnable skinUploader = new SkinUploader(plugin, audience, uploadAccount, url);
+>                 plugin.getGame().scheduler().executor(plugin).submit(skinUploader);
+46c44
+<             plugin.sendMessage(src, "no-valid-url");
+---
+>             plugin.sendMessage(audience, "no-valid-url");
+48d45
+< 
+52,54c49,50
+<     @Override
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command buildSpec() {
+>         return Command.builder()
+56c52
+<                 .arguments(string(of("url")))
+---
+>                 .addParameter(Parameter.string().key("url").build())

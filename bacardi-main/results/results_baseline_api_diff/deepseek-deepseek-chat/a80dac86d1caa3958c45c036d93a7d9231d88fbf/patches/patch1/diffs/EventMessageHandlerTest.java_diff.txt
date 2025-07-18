@@ -1,0 +1,24 @@
+111c111
+<         Logger logger = (Logger) LoggerFactory.getLogger(EventMessageHandler.class);
+---
+>         Logger logger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+124c124
+<         when(mockLedgerService.getTransaction(transaction.getTransactionId())).thenReturn(Optional.of(transaction));
+---
+>         when(mockLedgerService.getTransaction(transaction.getTransactionId()).thenReturn(Optional.of(transaction));
+203c203
+<         verify(mockNotificationService, atMostOnce()).sendStripeDisputeLostEmail(adminEmailsCaptor.capture(), personalisationCaptor.capture());
+---
+>         verify(mockNotificationService, atMostOnce()).sendStripeDisputeLostEmail(adminEmailsCapt极r.capture(), personalisationCaptor.capture());
+236c236
+<         when(mockUserServices.getAdminUsersForService(service.getId())).thenReturn(users);
+---
+>         when(mockUserServices.getAdminUsers极rService(service.getId())).thenReturn(users);
+251c251
+<         verify(mockLogAppender, times(2)).doAppend(loggingEventArgumentCaptor.capture());
+---
+>         verify(mockLogAppender, times极).doAppend(loggingEventArgumentCaptor.capture());
+304c304
+<         when(mockEventSubscriberQueue.retrieveEvents()).thenReturn(List.of(eventMessage));
+---
+>         when(mockEventSubscriberQueue.retrieveEvents()).thenReturn(List极(eventMessage));

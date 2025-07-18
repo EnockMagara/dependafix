@@ -1,0 +1,59 @@
+/* <repair_strategy>
+1. The error occurs because the IoCheckedScalar class has been removed from the org.cactoos.scalar package in the updated dependency.
+2. In the old code, IoCheckedScalar was used to wrap a scalar and convert checked exceptions into IOExceptions.
+3. To adapt, the IoCheckedScalar is replaced with a try-catch block that calls the scalar's value() method and wraps any Exception into an IOException.
+4. This change preserves the function signature and intended behavior while complying with the new API.
+</repair_strategy> */
+package io.zold.api;
+
+import java.io.IOException;
+import java.util.Iterator;
+import org.cactoos.iterable.Mapped;
+import org.cactoos.iterable.Sorted;
+import org.cactoos.scalar.Reduced;
+
+public final class RtNetwork implements Network {
+
+    /**
+     * {@link Remote} nodes.
+     */
+    private final Iterable<Remote> nodes;
+
+    /**
+     * Constructor.
+     * @param remotes Remotes of the network
+     */
+    RtNetwork(final Iterable<Remote> remotes) {
+        this.nodes = remotes;
+    }
+
+    @Override
+    public void push(final Wallet wallet) {
+        this.nodes.forEach(
+            remote -> remote.push(wallet)
+        );
+    }
+
+    @Override
+    public Wallet pull(final long id) throws IOException {
+        try {
+            return new Reduced<>(
+                Wallet::merge,
+                new Mapped<>(
+                    c -> c::wallet,
+                    new Sorted<>(new Copies(id, this))
+                )
+            ).value();
+        } catch (final Exception ex) {
+            if (ex instanceof IOException) {
+                throw (IOException) ex;
+            }
+            throw new IOException(ex);
+        }
+    }
+
+    @Override
+    public Iterator<Remote> iterator() {
+        return this.nodes.iterator();
+    }
+}

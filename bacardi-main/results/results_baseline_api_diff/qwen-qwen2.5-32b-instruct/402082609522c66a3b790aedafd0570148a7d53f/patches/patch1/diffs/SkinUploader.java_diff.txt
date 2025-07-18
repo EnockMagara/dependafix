@@ -1,0 +1,12 @@
+9c9
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.text.channel.MessageChannel;
+15c15
+<     private final CommandSource invoker;
+---
+>     private final MessageChannel.Target invoker;
+17c17
+<     public SkinUploader(ChangeSkinSponge plugin, CommandSource invoker, Account owner, String url) {
+---
+>     public SkinUploader(ChangeSkinSponge plugin, MessageChannel.Target invoker, Account owner, String url) {

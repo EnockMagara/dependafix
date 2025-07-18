@@ -1,0 +1,34 @@
+3c3
+< import develop.p2p.lib.*;
+---
+> import tokyo.peya.lib.*;
+113,114c113,116
+<                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
+<                     connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) head));
+---
+>                     ((CraftPlayer) player).getHandle().playerConnection
+>                         .sendPacket(new PacketPlayOutEntityTeleport(target));
+>                     ((CraftPlayer) player).getHandle().playerConnection
+>                         .sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) head));
+123c125,127
+<                             Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc"))
+---
+>                             Bukkit.getOnlinePlayers()
+>                                 .parallelStream()
+>                                 .filter(p -> p.hasPermission("psac.viewnpc"))
+128,129d131
+<                                     ((CraftPlayer) p).getHandle().playerConnection
+<                                         .sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
+161c163
+<         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
+---
+>         WaveCreator ypp = new WaveCreator(10.0, 100.0, 0.0);
+179,180c181
+<                         rangeTmp = new WaveCreator(radius - 0.1, radius, config.getDouble("npc.waveMin"))
+<                             .get(0.01, true);
+---
+>                         rangeTmp = new WaveCreator(radius - 0.1, radius, 0 - config.getDouble("npc.waveRange")).get(0.01, true);
+188c189
+<                         (float) ypp.getStatic(),
+---
+>                         (float) ypp.get(0.01, false),

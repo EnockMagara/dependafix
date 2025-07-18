@@ -1,0 +1,2 @@
+23:com.artipie.asto.factory.Config is abstract; cannot be instantiated
+26:non-static method newStorage(com.artipie.asto.factory.Config) cannot be referenced from a static context

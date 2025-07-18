@@ -1,0 +1,9 @@
+24d23
+< import jakarta.servlet.http.HttpSessionContext;
+66d64
+<   @Override
+121a120,123
+> 
+>   // Dummy stub for HttpSessionContext missing from the updated dependency
+>   public static interface HttpSessionContext {
+>   }

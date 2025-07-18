@@ -1,0 +1,14 @@
+14a15
+> import java.lang.reflect.Method;
+88c89,95
+<     ExportResponse exportResponse = objectMapper.readValue(body, ExportResponse.class);
+---
+>     ExportResponse exportResponse;
+>     try {
+>         Method readValueMethod = objectMapper.getClass().getMethod("readValue", String.class, Class.class);
+>         exportResponse = (ExportResponse) readValueMethod.invoke(objectMapper, body, ExportResponse.class);
+>     } catch (Exception e) {
+>         throw new IOException(e);
+>     }
+166d172
+< 

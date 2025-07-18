@@ -1,0 +1,11 @@
+6a7
+> import org.spongepowered.api.command.CommandResult;
+7a9,10
+> import org.spongepowered.api.text.Text;
+> import org.spongepowered.api.text.serializer.TextSerializer;
+20d22
+<     @Override
+22c24
+<         invoker.sendMessage(TextSerializers.LEGACY_FORMATTING_CODE.deserialize(localeMessage));
+---
+>         invoker.sendMessage(Text.of(localeMessage));

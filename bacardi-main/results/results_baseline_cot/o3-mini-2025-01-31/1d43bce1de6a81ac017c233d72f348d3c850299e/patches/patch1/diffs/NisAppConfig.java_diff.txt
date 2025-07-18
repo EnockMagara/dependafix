@@ -1,0 +1,21 @@
+2a3,8
+> /* <repair_strategy>
+> 1. The Flyway API has changed; the no-arg constructor and setter methods (setDataSource, setClassLoader, setLocations, setValidateOnMigrate) have been replaced by the fluent builder provided by Flyway.configure().
+> 2. Update the flyway() bean method to use Flyway.configure() with the new methods: dataSource(), classLoader(), locations(), validateOnMigrate(), and then load() to create the Flyway instance.
+> 3. This minimal change fixes the dependency update issue without modifying any other client code.
+> </repair_strategy> */
+> 
+108,113c114,119
+<                 final org.flywaydb.core.Flyway flyway = new Flyway();
+<                 flyway.setDataSource(this.dataSource());
+<                 flyway.setClassLoader(NisAppConfig.class.getClassLoader());
+<                 flyway.setLocations(prop.getProperty("flyway.locations"));
+<                 flyway.setValidateOnMigrate(Boolean.valueOf(prop.getProperty("flyway.validate")));
+<                 return flyway;
+---
+>                 return Flyway.configure()
+>                                 .dataSource(this.dataSource())
+>                                 .classLoader(NisAppConfig.class.getClassLoader())
+>                                 .locations(prop.getProperty("flyway.locations"))
+>                                 .validateOnMigrate(Boolean.valueOf(prop.getProperty("flyway.validate")))
+>                                 .load();

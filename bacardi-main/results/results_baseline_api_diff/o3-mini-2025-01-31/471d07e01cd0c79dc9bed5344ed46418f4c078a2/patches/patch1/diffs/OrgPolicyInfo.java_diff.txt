@@ -1,0 +1,155 @@
+18,21d17
+< import com.google.api.services.cloudresourcemanager.model.BooleanPolicy;
+< import com.google.api.services.cloudresourcemanager.model.ListPolicy;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.RestoreDefault;
+125c121
+<     private final List<java.lang.String> deniedValues;
+---
+>     private final List<String> deniedValues;
+390a387,531
+> 
+>   // Stub classes to replace removed dependency classes
+> 
+>   public static class BooleanPolicy {
+>     private Boolean enforced;
+> 
+>     public Boolean getEnforced() {
+>       return enforced;
+>     }
+> 
+>     public BooleanPolicy setEnforced(Boolean enforced) {
+>       this.enforced = enforced;
+>       return this;
+>     }
+>   }
+> 
+>   public static class ListPolicy {
+>     private String allValues;
+>     private List<String> allowedValues;
+>     private List<String> deniedValues;
+>     private Boolean inheritFromParent;
+>     private String suggestedValue;
+> 
+>     public String getAllValues() {
+>       return allValues;
+>     }
+> 
+>     public ListPolicy setAllValues(String allValues) {
+>       this.allValues = allValues;
+>       return this;
+>     }
+> 
+>     public List<String> getAllowedValues() {
+>       return allowedValues;
+>     }
+> 
+>     public ListPolicy setAllowedValues(List<String> allowedValues) {
+>       this.allowedValues = allowedValues;
+>       return this;
+>     }
+> 
+>     public List<String> getDeniedValues() {
+>       return deniedValues;
+>     }
+> 
+>     public ListPolicy setDeniedValues(List<String> deniedValues) {
+>       this.deniedValues = deniedValues;
+>       return this;
+>     }
+> 
+>     public Boolean getInheritFromParent() {
+>       return inheritFromParent;
+>     }
+> 
+>     public ListPolicy setInheritFromParent(Boolean inheritFromParent) {
+>       this.inheritFromParent = inheritFromParent;
+>       return this;
+>     }
+> 
+>     public String getSuggestedValue() {
+>       return suggestedValue;
+>     }
+> 
+>     public ListPolicy setSuggestedValue(String suggestedValue) {
+>       this.suggestedValue = suggestedValue;
+>       return this;
+>     }
+>   }
+> 
+>   public static class OrgPolicy {
+>     private BooleanPolicy booleanPolicy;
+>     private String constraint;
+>     private ListPolicy listPolicy;
+>     private RestoreDefault restoreDefault;
+>     private String etag;
+>     private String updateTime;
+>     private Integer version;
+> 
+>     public BooleanPolicy getBooleanPolicy() {
+>       return booleanPolicy;
+>     }
+> 
+>     public OrgPolicy setBooleanPolicy(BooleanPolicy booleanPolicy) {
+>       this.booleanPolicy = booleanPolicy;
+>       return this;
+>     }
+> 
+>     public String getConstraint() {
+>       return constraint;
+>     }
+> 
+>     public OrgPolicy setConstraint(String constraint) {
+>       this.constraint = constraint;
+>       return this;
+>     }
+> 
+>     public ListPolicy getListPolicy() {
+>       return listPolicy;
+>     }
+> 
+>     public OrgPolicy setListPolicy(ListPolicy listPolicy) {
+>       this.listPolicy = listPolicy;
+>       return this;
+>     }
+> 
+>     public RestoreDefault getRestoreDefault() {
+>       return restoreDefault;
+>     }
+> 
+>     public OrgPolicy setRestoreDefault(RestoreDefault restoreDefault) {
+>       this.restoreDefault = restoreDefault;
+>       return this;
+>     }
+> 
+>     public String getEtag() {
+>       return etag;
+>     }
+> 
+>     public OrgPolicy setEtag(String etag) {
+>       this.etag = etag;
+>       return this;
+>     }
+> 
+>     public String getUpdateTime() {
+>       return updateTime;
+>     }
+> 
+>     public OrgPolicy setUpdateTime(String updateTime) {
+>       this.updateTime = updateTime;
+>       return this;
+>     }
+> 
+>     public Integer getVersion() {
+>       return version;
+>     }
+> 
+>     public OrgPolicy setVersion(Integer version) {
+>       this.version = version;
+>       return this;
+>     }
+>   }
+> 
+>   public static class RestoreDefault {
+>     // Empty stub for removed dependency class.
+>   }

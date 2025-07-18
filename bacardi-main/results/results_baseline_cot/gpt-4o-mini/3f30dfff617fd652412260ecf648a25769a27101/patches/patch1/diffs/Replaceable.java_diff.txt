@@ -1,0 +1,4 @@
+3a4
+> import jakarta.interceptor.InterceptorBinding; // Updated import
+5d5
+< import javax.interceptor.InterceptorBinding;

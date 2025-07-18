@@ -1,0 +1,66 @@
+11a12
+> import org.spongepowered.api.command.Command;
+13,17c14,17
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.args.GenericArguments;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.CommandExecutor;
+> import org.spongepowered.api.command.source.CommandSource;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.GenericArguments;
+21,22c21,22
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+---
+> import static org.spongepowered.api.command.parameter.GenericArguments.flags;
+> import static org.spongepowered.api.command.parameter.GenericArguments.string;
+75d74
+<     @Override
+84a84,127
+> 
+>     public static class CommandSpec {
+> 
+>         private final Command command;
+> 
+>         public CommandSpec(Command command) {
+>             this.command = command;
+>         }
+> 
+>         public Command getCommand() {
+>             return command;
+>         }
+> 
+>         public static Builder builder() {
+>             return new Builder();
+>         }
+> 
+>         public static class Builder {
+>             private final Command.Builder delegate;
+> 
+>             public Builder() {
+>                 this.delegate = Command.builder();
+>             }
+> 
+>             public Builder executor(CommandExecutor executor) {
+>                 delegate.executor(executor);
+>                 return this;
+>             }
+> 
+>             public Builder arguments(Object... args) {
+>                 delegate.arguments(args);
+>                 return this;
+>             }
+> 
+>             public Builder permission(String permission) {
+>                 delegate.permission(permission);
+>                 return this;
+>             }
+> 
+>             public CommandSpec build() {
+>                 return new CommandSpec(delegate.build());
+>             }
+>         }
+>     }

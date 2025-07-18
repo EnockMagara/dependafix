@@ -1,0 +1,8 @@
+22a23
+> import org.yaml.snakeyaml.introspector.PropertyUtils;
+37a39
+>     super(new org.yaml.snakeyaml.DumperOptions());
+237c239
+<       Set<Property> standard = super.getProperties(type);
+---
+>       Set<Property> standard = PropertyUtils.getProperties(type);

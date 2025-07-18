@@ -1,0 +1,5 @@
+87:cannot find symbol  symbol:   class TranslationResponse   location: class com.google.cloud.translate.Translation 
+21:cannot find symbol  symbol: class TranslationResponse 
+19:cannot find symbol  symbol:   class Function   location: class com.google.cloud.translate.Translation 
+20:cannot find symbol  symbol:   class Function   location: class com.google.cloud.translate.Translation 
+63:cannot find symbol  symbol:   variable MoreObjects   location: class com.google.cloud.translate.Translation 

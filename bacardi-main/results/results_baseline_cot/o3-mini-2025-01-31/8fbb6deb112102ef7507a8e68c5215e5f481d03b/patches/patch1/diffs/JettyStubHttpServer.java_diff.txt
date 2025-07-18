@@ -1,0 +1,28 @@
+9a10
+> import org.eclipse.jetty.server.ServerConnector;
+14,15d14
+< import org.eclipse.jetty.server.nio.SelectChannelConnector;
+< 
+24c23
+<     private final Connector httpConnector;
+---
+>     private final ServerConnector httpConnector;
+30d28
+< 
+33,34c31
+<         this.server.setSendServerVersion(false);
+<         this.server.setSendDateHeader(true);
+---
+>         // The methods setSendServerVersion and setSendDateHeader are no longer available in the updated Jetty API.
+36c33
+<         this.httpConnector = new SelectChannelConnector();
+---
+>         this.httpConnector = new ServerConnector(server);
+41d37
+< 
+52d47
+< 
+63d57
+< 
+74d67
+< 

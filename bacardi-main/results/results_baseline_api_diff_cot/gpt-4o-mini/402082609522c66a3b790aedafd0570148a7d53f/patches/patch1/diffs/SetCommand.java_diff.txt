@@ -1,0 +1,16 @@
+13d12
+< import org.spongepowered.api.command.CommandSource;
+19a19
+> import org.spongepowered.api.command.CommandSource;
+25c25
+< public class SetCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class SetCommand implements CommandExecutor {
+36d35
+<     @Override
+50c49
+<         String targetSkin = args.<String>getOne("skin").get();
+---
+>         String targetSkin = args.<String>getOne("skin").orElse("");
+75d73
+<     @Override

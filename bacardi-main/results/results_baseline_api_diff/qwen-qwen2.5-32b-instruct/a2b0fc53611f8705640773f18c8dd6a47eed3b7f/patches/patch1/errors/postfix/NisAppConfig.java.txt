@@ -1,0 +1,11 @@
+111:method setLocations in class org.flywaydb.core.api.configuration.ClassicConfiguration cannot be applied to given types;  required: org.flywaydb.core.api.Location[]   found: java.lang.String[]   reason: varargs mismatch; java.lang.String[] cannot be converted to org.flywaydb.core.api.Location 
+303:method nisCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+275:method accountCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+290:method poxFacade() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+263:method harvester() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+295:method namespaceCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+285:method transactionHashCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+310:method importanceCalculator() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+399:cannot find symbol  symbol:   variable WB_IMMEDIATE_VESTINGING   location: class org.nem.core.model.BlockChainFeature 
+280:method accountStateCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+398:cannot find symbol  symbol:   variable WB_TIME_BASED_VESTINGING   location: class org.nem.core.model.BlockChainFeature 

@@ -1,0 +1,8 @@
+24a25
+> import com.cryptomorin.xseries.XEnchantment.XEnchant;
+79a81
+>                                 XEnchant ench = XEnchantment.matchXEnchantment("power").get();
+81c83
+<                                         currentLangMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                         currentLangMeta.addEnchant(ench.parseEnchantment(), 1, false);

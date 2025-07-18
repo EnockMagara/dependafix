@@ -1,0 +1,72 @@
+9d8
+< 
+12d10
+< 
+14d11
+< import org.spongepowered.api.command.CommandException;
+16,19c13,16
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.executor.CommandExecutor;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.source.CommandSource;
+22,23c19,20
+< import org.spongepowered.api.text.Text;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+---
+> import net.kyori.adventure.text.Component;
+> import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+33d29
+< 
+52d47
+<     @Override
+70c65
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+---
+>                 Component text = LegacyComponentSerializer.legacySection().deserialize(formatted);
+76a72,112
+> 
+>     public static class CommandSpec {
+>         private final CommandExecutor executor;
+>         private final String permission;
+> 
+>         private CommandSpec(CommandExecutor executor, String permission) {
+>             this.executor = executor;
+>             this.permission = permission;
+>         }
+> 
+>         public static Builder builder() {
+>             return new Builder();
+>         }
+> 
+>         public CommandExecutor getExecutor() {
+>             return executor;
+>         }
+> 
+>         public String getPermission() {
+>             return permission;
+>         }
+> 
+>         public static class Builder {
+>             private CommandExecutor executor;
+>             private String permission;
+> 
+>             public Builder executor(CommandExecutor executor) {
+>                 this.executor = executor;
+>                 return this;
+>             }
+> 
+>             public Builder permission(String permission) {
+>                 this.permission = permission;
+>                 return this;
+>             }
+> 
+>             public CommandSpec build() {
+>                 return new CommandSpec(executor, permission);
+>             }
+>         }
+>     }

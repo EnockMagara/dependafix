@@ -1,0 +1,4 @@
+315:cannot find symbol  symbol:   class JRDesignTextElement   location: class xdev.tableexport.export.ReportBuilder 
+347:cannot find symbol  symbol:   class JRDesignTextElement   location: class xdev.tableexport.export.ReportBuilder 
+350:cannot find symbol  symbol:   class JRLineBox   location: class xdev.tableexport.export.ReportBuilder 
+333:cannot find symbol  symbol:   class JRDesignTextElement   location: class xdev.tableexport.export.ReportBuilder 

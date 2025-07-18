@@ -1,0 +1,7 @@
+241,242c241,243
+<                         ObjectWriter writer = mapper.writer();
+<                         writer.writeValue(segmentListFile, dataList);
+---
+>             try (FileWriter fw = new FileWriter(segmentListFile)) {
+>                 mapper.writeValue(fw, dataList);
+>             }

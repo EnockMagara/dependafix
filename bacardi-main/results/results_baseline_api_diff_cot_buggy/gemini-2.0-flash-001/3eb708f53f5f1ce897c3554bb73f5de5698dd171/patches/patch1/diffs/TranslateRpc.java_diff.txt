@@ -1,0 +1,26 @@
+19,22c19,24
+< import com.google.api.services.translate.model.DetectionsResourceItems;
+< import com.google.api.services.translate.model.LanguagesResource;
+< import com.google.api.services.translate.model.TranslationsResource;
+< import com.google.cloud.ServiceRpc;
+---
+> import com.google.cloud.translate.Detection;
+> import com.google.cloud.translate.Language;
+> import com.google.cloud.translate.Translate.TranslateOption;
+> import com.google.cloud.translate.Translation;
+> import com.google.cloud.StringListOption;
+> import com.google.common.collect.Lists;
+24a27
+> import java.util.stream.Collectors;
+59c62
+<   List<LanguagesResource> listSupportedLanguages(Map<Option, ?> optionMap);
+---
+>   List<Language> listSupportedLanguages(Map<Option, ?> optionMap);
+67c70
+<   List<List<DetectionsResourceItems>> detect(List<String> texts);
+---
+>   List<List<Detection>> detect(List<String> texts);
+77c80
+<   List<TranslationsResource> translate(List<String> texts, Map<Option, ?> optionMap);
+---
+>   List<Translation> translate(List<String> texts, Map<Option, ?> optionMap);

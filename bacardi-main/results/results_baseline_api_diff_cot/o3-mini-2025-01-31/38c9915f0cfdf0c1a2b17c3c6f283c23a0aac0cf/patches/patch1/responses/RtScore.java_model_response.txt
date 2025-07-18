@@ -1,0 +1,45 @@
+<repair_strategy>
+1. The error occurs because the class org.cactoos.iterable.LengthOf has been removed in the new dependency version.
+2. The new API provides org.cactoos.scalar.LengthOf with a constructor that accepts a java.lang.Iterable.
+3. To fix the issue, update the import statement from org.cactoos.iterable.LengthOf to org.cactoos.scalar.LengthOf.
+4. This change accommodates the new API without modifying any method signatures.
+</repair_strategy>
+```java
+package io.zold.api;
+
+import org.cactoos.Text;
+import org.cactoos.scalar.LengthOf;
+
+/**
+ * Default implementation for {@link Score}.
+ *
+ * @since 1.0
+ */
+public final class RtScore implements Score {
+
+    /**
+     * The suffixes.
+     */
+    private final Iterable<Text> sfxs;
+
+    /**
+     * Ctor.
+     *
+     * @param sfxs The suffixes.
+     */
+    RtScore(final Iterable<Text> sfxs) {
+        this.sfxs = sfxs;
+    }
+
+    @Override
+    public int compareTo(final Score other) {
+        return new LengthOf(other.suffixes()).intValue()
+            - new LengthOf(this.sfxs).intValue();
+    }
+
+    @Override
+    public Iterable<Text> suffixes() {
+        return this.sfxs;
+    }
+}
+```

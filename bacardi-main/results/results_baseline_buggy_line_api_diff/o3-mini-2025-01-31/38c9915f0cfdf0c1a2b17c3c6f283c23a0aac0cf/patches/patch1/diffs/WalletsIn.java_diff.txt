@@ -1,0 +1,51 @@
+21,22c21
+<  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+<  * SOFTWARE.
+---
+>  * OUT OF OR IN THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+37,38d35
+< import org.cactoos.scalar.IoCheckedScalar;
+< import org.cactoos.scalar.SolidScalar;
+40d36
+< import org.cactoos.text.JoinedText;
+53c49
+<     private final IoCheckedScalar<Path> path;
+---
+>     private final Path path;
+101,105c97,102
+<     public WalletsIn(final Scalar<Path> pth, final String ext,
+<         final Random random) {
+<         this.path = new IoCheckedScalar<>(
+<             new SolidScalar<>(pth)
+<         );
+---
+>     public WalletsIn(final Scalar<Path> pth, final String ext, final Random random) {
+>         try {
+>             this.path = pth.value();
+>         } catch (final Exception e) {
+>             throw new IllegalStateException(e);
+>         }
+118,124c115,116
+<         final Path wpth = this.path.value().resolve(
+<             new JoinedText(
+<                 ".",
+<                 Long.toHexString(this.random.nextLong()),
+<                 this.ext
+<             ).asString()
+<         );
+---
+>         final String filename = Long.toHexString(this.random.nextLong()) + "." + this.ext;
+>         final Path wpth = this.path.resolve(filename);
+140,145c132
+<     // @todo #65:30min Create the new wallet in the path with all wallets.
+<     //  It should contain the correct content according to the
+<     //  white paper (network, protocol version, id and public RSA key). After
+<     //  this remove exception expect for tests on WalletsInTest.
+<     public Wallet create(final long id, final String pubkey, final String
+<         network) throws IOException {
+---
+>     public Wallet create(final long id, final String pubkey, final String network) throws IOException {
+156c143
+<                 new Filtered<>(this.filter, new Directory(this.path.value()))
+---
+>                 new Filtered<>(this.filter, new Directory(this.path))

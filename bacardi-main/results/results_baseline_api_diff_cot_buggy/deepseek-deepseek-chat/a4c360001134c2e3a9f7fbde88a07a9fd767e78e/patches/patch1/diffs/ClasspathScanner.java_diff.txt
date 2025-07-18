@@ -1,0 +1,10 @@
+21a22
+> import java.util.regex.Pattern;
+64c65
+<             return new FilterBuilder().include(".+\\.class").apply(s);
+---
+>             return Pattern.matches(".+\\.class", s);
+69c70
+<             if (new FilterBuilder().include(regex).apply(s)) {
+---
+>             if (Pattern.matches(regex, s)) {

@@ -1,0 +1,18 @@
+155:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+203:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; java.lang.String cannot be converted to redis.clients.jedis.Builder<T>) 
+72:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+88:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+116:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+44:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+56:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+135:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+13:cannot find symbol  symbol:   class CommandArgs   location: package redis.clients.jedis.util 
+102:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; com.redislabs.redisgraph.impl.resultset.ResultSetImpl cannot be converted to redis.clients.jedis.Builder<T>) 
+7:cannot find symbol  symbol:   class ScriptingCommands   location: package redis.clients.jedis.commands 
+18:cannot find symbol  symbol: class BinaryCommands 
+17:cannot find symbol  symbol: class MultiKeyCommands 
+4:cannot find symbol  symbol:   class BasicCommands   location: package redis.clients.jedis.commands 
+6:cannot find symbol  symbol:   class MultiKeyCommands   location: package redis.clients.jedis.commands 
+19:cannot find symbol  symbol: class BasicCommands 
+20:cannot find symbol  symbol: class ScriptingCommands 
+5:cannot find symbol  symbol:   class BinaryCommands   location: package redis.clients.jedis.commands 

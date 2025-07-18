@@ -1,0 +1,1 @@
+72:bad operand types for binary operator '!='  first type:  int   second type: <nulltype> 

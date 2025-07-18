@@ -1,0 +1,58 @@
+package io.github.wesleyosantos91.api.v1.mapper;
+
+import io.github.wesleyosantos91.api.v1.request.PersonRequest;
+import io.github.wesleyosantos91.api.v1.response.PersonResponse;
+import io.github.wesleyosantos91.core.domain.PersonDomain;
+import java.util.ArrayList;
+import java.util.List;
+
+public interface PersonHttpMapper {
+
+    PersonHttpMapper INSTANCE = new PersonHttpMapperImpl();
+
+    PersonDomain toDomain(PersonRequest request);
+    PersonRequest toRequest(PersonDomain domain);
+    PersonDomain toDomain(PersonResponse response);
+    PersonResponse toResponse(PersonDomain domain);
+
+    default List<PersonResponse> toListResponse(List<PersonDomain> domains) {
+        List<PersonResponse> list = new ArrayList<>();
+        domains.forEach(d -> list.add(toResponse(d)));
+        return list;
+    }
+
+    class PersonHttpMapperImpl implements PersonHttpMapper {
+
+        @Override
+        public PersonDomain toDomain(PersonRequest request) {
+            if (request == null) {
+                return null;
+            }
+            return new PersonDomain();
+        }
+
+        @Override
+        public PersonRequest toRequest(PersonDomain domain) {
+            if (domain == null) {
+                return null;
+            }
+            return new PersonRequest();
+        }
+
+        @Override
+        public PersonDomain toDomain(PersonResponse response) {
+            if (response == null) {
+                return null;
+            }
+            return new PersonDomain();
+        }
+
+        @Override
+        public PersonResponse toResponse(PersonDomain domain) {
+            if (domain == null) {
+                return null;
+            }
+            return new PersonResponse();
+        }
+    }
+}

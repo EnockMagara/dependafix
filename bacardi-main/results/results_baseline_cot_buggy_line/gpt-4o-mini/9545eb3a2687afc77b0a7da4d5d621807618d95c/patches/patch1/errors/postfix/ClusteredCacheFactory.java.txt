@@ -1,0 +1,5 @@
+6:cannot find symbol  symbol:   class MaxSizeConfig   location: package com.hazelcast.config 
+11:cannot find symbol  symbol:   class Cluster   location: package com.hazelcast.core 
+547:cannot find symbol  symbol:   class Member   location: package com.hazelcast.core 
+14:cannot find symbol  symbol:   class Member   location: package com.hazelcast.core 
+409:cannot find symbol  symbol:   class Member   location: package com.hazelcast.core 

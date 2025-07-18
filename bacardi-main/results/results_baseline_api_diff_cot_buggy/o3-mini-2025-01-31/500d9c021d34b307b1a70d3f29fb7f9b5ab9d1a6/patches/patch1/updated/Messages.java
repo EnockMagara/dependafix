@@ -1,0 +1,50 @@
+/*
+<repair_strategy>
+1. The external dependency removed the MvcContext class; therefore, its injection and usage cause a compile-time error.
+2. Replace the injection of MvcContext with HttpServletRequest to obtain the locale via request.getLocale(), which is available in a request-scoped CDI bean.
+3. Update the import statements accordingly, removing javax.mvc.MvcContext and adding javax.servlet.http.HttpServletRequest.
+4. Update Javadoc references from MvcContext#getLocale() to HttpServletRequest#getLocale() to reflect the change.
+</repair_strategy>
+*/
+
+import java.util.ResourceBundle;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
+//https://www.mvc-spec.org/learn/cookbook/multilang_en.html
+/**
+ * Provides I18n messages for the UI per request. To get the correct locale, the method {@link HttpServletRequest#getLocale()}
+ * is used. This method leverages the locale information from the current HTTP request.
+ *
+ * @author Tobias Erdle
+ * @see HttpServletRequest#getLocale()
+ * @see javax.mvc.locale.LocaleResolver
+ */
+@RequestScoped
+@Named("msg")
+public class Messages {
+
+    private static final String BASE_NAME = "messages";
+
+    @Inject
+    private HttpServletRequest request;
+
+    /**
+     * Get the assigned message to some key based on the {@link java.util.Locale} of the current request.
+     *
+     * @param key the message key to use
+     * @return the correct translation assigned to the key for the request locale, a fallback translation or a
+     * placeholder for unknown keys.
+     */
+    public final String get(final String key) {
+        final ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, request.getLocale());
+
+        return bundle.containsKey(key) ? bundle.getString(key) : formatUnknownKey(key);
+    }
+
+    private static String formatUnknownKey(final String key) {
+        return String.format("???%s???", key);
+    }
+}

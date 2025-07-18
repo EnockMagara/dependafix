@@ -1,0 +1,13 @@
+```java
+package com.github.games647.changeskin.sponge.command;
+
+import org.spongepowered.api.command.spec.CommandSpecBuilder;
+
+@FunctionalInterface
+public interface ChangeSkinCommand {
+
+    default CommandSpecBuilder buildSpec() {
+        return CommandSpecBuilder.builder();
+    }
+}
+```

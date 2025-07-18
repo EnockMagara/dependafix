@@ -1,0 +1,7 @@
+885:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+905:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+153:cannot access org.slf4j.spi.LoggingEventAware  class file for org.slf4j.spi.LoggingEventAware not found 
+877:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+822:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+854:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+867:cannot find symbol  symbol:   variable engine   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 

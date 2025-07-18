@@ -1,0 +1,118 @@
+55a56
+> import xdev.tableexport.export.ExportException;
+59d59
+< 
+156,255d155
+<         /**
+<          * 
+<          * @return
+<          */
+<         private int calcMaxHeaderHeight()
+<         {
+<                 
+<                 final JLabel lbl = new JLabel("a");
+<                 int maxHeight = 0;
+<                 
+<                 for(final TemplateColumn col : this.config.getColumns())
+<                 {
+<                         final ColumnStyle style = col.getHeaderColumn().getStyle();
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+<                         //get the normal height of the label
+<                         int lblHeigh = (int)lbl.getPreferredSize().getHeight();
+<                         //add the column border width
+<                         lblHeigh+= style.getColBorder().getLineWidth()*2;
+<                         //Add padding
+<                         lblHeigh+= style.getColumnPadding().getTopWidth() + style.getColumnPadding().getBottomWidth();
+<                         
+<                         if(lblHeigh > maxHeight)
+<                         {
+<                                 maxHeight = lblHeigh;
+<                         }
+<                 }
+<                 
+<                 return maxHeight;
+<         }
+<         
+<         private int calcMaxContentHeight()
+<         {
+<                 
+<                 final JLabel lbl = new JLabel("a");
+<                 int maxHeight = 0;
+<                 
+<                 for(final TemplateColumn col : this.config.getColumns())
+<                 {
+<                         final ColumnStyle style = col.getContentColumn().getStyle();
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+<                         int lblHeigh = (int)lbl.getPreferredSize().getHeight();
+<                         //Add border width
+<                         lblHeigh+= style.getColBorder().getLineWidth()*2;
+<                         //Add padding
+<                         lblHeigh+= style.getColumnPadding().getTopWidth() + style.getColumnPadding().getBottomWidth();
+<                         
+<                         if(lblHeigh > maxHeight)
+<                         {
+<                                 maxHeight = lblHeigh;
+<                         }
+<                 }
+<                 
+<                 return maxHeight;
+<         }
+<         
+<         
+<         private void createTemplateFields(final JasperDesign jasperDesign) throws ExportException
+<         {
+<                 JRDesignField field;
+<                 
+<                 for(final TemplateColumn col : this.config.getColumns())
+<                 {
+<                         field = new JRDesignField();
+<                         field.setName(col.getContentColumn().getFieldName());
+<                         this.chooseValueClass(col,field);
+<                         
+<                         try
+<                         {
+<                                 jasperDesign.addField(field);
+<                                 this.fieldSet.add(field);
+<                         }
+<                         catch(final JRException e)
+<                         {
+<                                 throw new ExportException("error during add the field "
+<                                                 + col.getContentColumn().getFieldName(),e);
+<                         }
+<                 }
+<                 
+<         }
+< 
+<         
+<         private JRDesignField chooseValueClass(final TemplateColumn col, final JRDesignField field)
+<         {
+<                 final Class<?> valueClass = col.getContentColumn().getColumnValueClass();
+<                 
+<                 if(valueClass.isAssignableFrom(byte[].class) || valueClass.isAssignableFrom(XdevBlob.class) || valueClass.isAssignableFrom(XdevClob.class))
+<                 {
+<                         field.setValueClass(String.class);
+<                 }
+<                 else
+<                 {
+<                         field.setValueClass(valueClass);
+<                 }
+<                 
+<                 return field;
+<         }
+<         
+<         
+330,333d229
+<                         if(this.config.isBlankWhenNullValue())
+<                         {
+<                                 textField.setBlankWhenNull(true);
+<                         }
+369c265
+<                 textField.getLineBox().getPen().setLineWidth(border.getLineWidth());
+---
+>                 textField.getLineBox().getPen().setLineWidth((float)border.getLineWidth()); // Cast to float
+398c294
+<          * the {@link TemplateConfig} object.
+---
+>          * the {@link TemplateConfig}.

@@ -1,0 +1,2 @@
+8:cannot find symbol  symbol:   class MemberAdapter   location: package com.hazelcast.core 
+25:cannot find symbol  symbol:   class MemberAdapter   location: class org.jivesoftware.openfire.plugin.util.cluster.HazelcastClusterNodeInfo 

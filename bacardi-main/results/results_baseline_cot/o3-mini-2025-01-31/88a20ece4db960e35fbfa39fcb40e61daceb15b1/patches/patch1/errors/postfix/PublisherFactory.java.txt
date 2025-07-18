@@ -1,0 +1,2 @@
+3:cannot find symbol  symbol:   class TopicPublishMetadata   location: package com.google.cloud.pubsublite 
+9:cannot find symbol  symbol:   class TopicPublishMetadata   location: interface com.google.pubsublite.kafka.sink.PublisherFactory 

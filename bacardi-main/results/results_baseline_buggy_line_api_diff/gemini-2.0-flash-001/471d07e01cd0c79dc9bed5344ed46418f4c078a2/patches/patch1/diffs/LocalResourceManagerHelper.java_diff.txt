@@ -1,0 +1,59 @@
+25,28d24
+< import com.google.api.services.cloudresourcemanager.model.Binding;
+< import com.google.api.services.cloudresourcemanager.model.Operation;
+< import com.google.api.services.cloudresourcemanager.model.Policy;
+< import com.google.api.services.cloudresourcemanager.model.Project;
+68a65,69
+> import com.google.api.services.cloudresourcemanager.v3.model.Binding;
+> import com.google.api.services.cloudresourcemanager.v3.model.Operation;
+> import com.google.api.services.cloudresourcemanager.v3.model.Policy;
+> import com.google.api.services.cloudresourcemanager.v3.model.Project;
+> 
+449c450,451
+<       project.setLifecycleState("ACTIVE");
+---
+>       //project.setLifecycleState("ACTIVE");
+>           project.setState(Project.State.ACTIVE);
+483c485
+<     if (!project.getLifecycleState().equals("ACTIVE")) {
+---
+>     if (!Project.State.ACTIVE.equals(project.getState())) {
+487c489,490
+<       project.setLifecycleState("DELETE_REQUESTED");
+---
+>       //project.setLifecycleState("DELETE_REQUESTED");
+>           project.setState(Project.State.DELETE_REQUESTED);
+618c621,622
+<           project.setLifecycleState(fullProject.getLifecycleState());
+---
+>           //project.setLifecycleState(fullProject.getLifecycleState());
+>                   project.setState(fullProject.getState());
+642c646
+<     } else if (!originalProject.getLifecycleState().equals("ACTIVE")) {
+---
+>     } else if (!Project.State.ACTIVE.equals(originalProject.getState())) {
+651c655,656
+<     project.setLifecycleState(originalProject.getLifecycleState());
+---
+>     //project.setLifecycleState(originalProject.getLifecycleState());
+>         project.setState(originalProject.getState());
+670c675
+<     } else if (!project.getLifecycleState().equals("DELETE_REQUESTED")) {
+---
+>     } else if (!Project.State.DELETE_REQUESTED.equals(project.getState())) {
+677c682,683
+<       project.setLifecycleState("ACTIVE");
+---
+>       //project.setLifecycleState("ACTIVE");
+>           project.setState(Project.State.ACTIVE);
+787c793,800
+<       project.setLifecycleState(lifecycleState);
+---
+>       //project.setLifecycleState(lifecycleState);
+>           if("ACTIVE".equals(lifecycleState)) {
+>                   project.setState(Project.State.ACTIVE);
+>           } else if ("DELETE_REQUESTED".equals(lifecycleState)) {
+>                   project.setState(Project.State.DELETE_REQUESTED);
+>           } else {
+>                   project.setState(Project.State.DELETE_IN_PROGRESS);
+>           }

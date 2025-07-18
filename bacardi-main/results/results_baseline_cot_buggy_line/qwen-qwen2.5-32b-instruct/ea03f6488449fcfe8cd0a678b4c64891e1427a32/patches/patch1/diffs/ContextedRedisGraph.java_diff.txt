@@ -1,0 +1,32 @@
+12d11
+< import redis.clients.jedis.Client;
+142,147c141,148
+<         Client client = jedis.getClient();
+<         client.multi();
+<         client.getOne();
+<         RedisGraphTransaction transaction = new RedisGraphTransaction(client, this);
+<         transaction.setRedisGraphCaches(caches);
+<         return transaction;
+---
+>         // Client client = jedis.getClient();
+>         // client.multi();
+>         // client.getOne();
+>         // RedisGraphTransaction transaction = new RedisGraphTransaction(client, this);
+>         // transaction.setRedisGraphCaches(caches);
+>         // return transaction;
+>         // Placeholder for the new transaction handling logic
+>         return null; // Placeholder return, replace with actual transaction handling
+157,160c158,163
+<         Client client = jedis.getClient();
+<         RedisGraphPipeline pipeline = new RedisGraphPipeline(client, this);
+<         pipeline.setRedisGraphCaches(caches);
+<         return pipeline;
+---
+>         // Client client = jedis.getClient();
+>         // RedisGraphPipeline pipeline = new RedisGraphPipeline(client, this);
+>         // pipeline.setRedisGraphCaches(caches);
+>         // return pipeline;
+>         // Placeholder for the new pipeline handling logic
+>         return null; // Placeholder return, replace with actual pipeline handling
+208d210
+< 

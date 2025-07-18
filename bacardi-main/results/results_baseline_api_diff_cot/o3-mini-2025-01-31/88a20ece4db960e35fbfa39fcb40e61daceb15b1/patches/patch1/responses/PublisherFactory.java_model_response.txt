@@ -1,0 +1,14 @@
+```java
+package com.google.pubsublite.kafka.sink;
+
+import com.google.cloud.pubsublite.internal.Publisher;
+import java.util.Map;
+
+interface PublisherFactory {
+
+  // Dummy replacement for the removed PublishMetadata class.
+  class PublishMetadata {}
+
+  Publisher<PublishMetadata> newPublisher(Map<String, String> params);
+}
+```

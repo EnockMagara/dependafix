@@ -1,0 +1,45 @@
+55a56
+> import xdev.tableexport.export.ExportException;
+59d59
+< 
+156,159d155
+<         /**
+<          * 
+<          * @return
+<          */
+169,171c165,166
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+<                         //get the normal height of the label
+---
+>                         final Font f = style.getFont();
+>                         lbl.setFont(f);
+173c168
+<                         //add the column border width
+---
+>                         //Add border width
+196,197c191,192
+<                         final Font font = style.getFont();
+<                         lbl.setFont(font);
+---
+>                         final Font f = style.getFont();
+>                         lbl.setFont(f);
+330,333d324
+<                         if(this.config.isBlankWhenNullValue())
+<                         {
+<                                 textField.setBlankWhenNull(true);
+<                         }
+348,350c339,341
+<                 txtField.setFontSize(Float.valueOf(f.getSize()));
+<                 txtField.setBold(Boolean.valueOf(f.isBold()));
+<                 txtField.setItalic(Boolean.valueOf(f.isItalic()));
+---
+>                 txtField.setFontSize(f.getSize());
+>                 txtField.setBold(f.isBold());
+>                 txtField.setItalic(f.isItalic());
+397,398c388,389
+<          * Assemble and compile a {@link JasperReport} based on the information of
+<          * the {@link TemplateConfig} object.
+---
+>          * Assemble and compile a {@link JasperReport} based on the information of the
+>          * {@link TemplateConfig}.

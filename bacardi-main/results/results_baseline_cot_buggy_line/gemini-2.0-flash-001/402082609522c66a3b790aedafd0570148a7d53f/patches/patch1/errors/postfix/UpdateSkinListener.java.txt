@@ -1,0 +1,4 @@
+17:cannot find symbol  symbol:   class MessageReader   location: package org.spongepowered.api.network 
+15:package org.spongepowered.api.network.ChannelBinding does not exist
+28:cannot find symbol  symbol:   class RawDataChannel   location: class com.github.games647.changeskin.sponge.bungee.UpdateSkinListener 
+16:cannot find symbol  symbol:   class ChannelBuf   location: package org.spongepowered.api.network 

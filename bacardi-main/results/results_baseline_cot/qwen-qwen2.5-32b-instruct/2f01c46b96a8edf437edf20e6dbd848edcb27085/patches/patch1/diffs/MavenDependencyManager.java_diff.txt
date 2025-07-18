@@ -1,0 +1,6 @@
+24d23
+< import org.apache.maven.project.ProjectBuildingRequest;
+27c26
+< import org.codehaus.plexus.util.xml.Xpp3Dom;
+---
+> import org.apache.maven.shared.utils.xml.Xpp3Dom;

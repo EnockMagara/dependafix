@@ -1,0 +1,16 @@
+15a16
+> import org.yaml.snakeyaml.DumperOptions;
+37a39
+>     super(new DumperOptions());
+217d218
+<   @Override
+230a232
+>       try {
+231a234,236
+>       } catch (java.beans.IntrospectionException e) {
+>         throw new RuntimeException(e);
+>       }
+237c242
+<       Set<Property> standard = super.getProperties(type);
+---
+>       Set<Property> standard = getPropertyUtils().getProperties(type);

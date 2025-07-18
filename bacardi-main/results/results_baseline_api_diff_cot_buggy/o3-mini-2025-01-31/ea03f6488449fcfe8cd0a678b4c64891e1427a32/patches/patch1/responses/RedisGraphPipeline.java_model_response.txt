@@ -1,0 +1,43 @@
+```java
+package com.redislabs.redisgraph;
+
+import redis.clients.jedis.ClusterPipeline;
+import redis.clients.jedis.Response;
+
+import java.io.Closeable;
+import java.util.List;
+import java.util.Map;
+
+public interface RedisGraphPipeline extends ClusterPipeline, Closeable {
+
+    Response<ResultSet> query(String graphId, String query);
+
+    Response<ResultSet> readOnlyQuery(String graphId, String query);
+
+    Response<ResultSet> query(String graphId, String query, long timeout);
+
+    Response<ResultSet> readOnlyQuery(String graphId, String query, long timeout);
+
+    Response<ResultSet> query(String graphId, String query, Map<String, Object> params);
+
+    Response<ResultSet> readOnlyQuery(String graphId, String query, Map<String, Object> params);
+
+    Response<ResultSet> query(String graphId, String query, Map<String, Object> params, long timeout);
+
+    Response<ResultSet> readOnlyQuery(String graphId, String query, Map<String, Object> params, long timeout);
+
+    Response<ResultSet> callProcedure(String graphId, String procedure);
+
+    Response<ResultSet> callProcedure(String graphId, String procedure, List<String> args);
+
+    Response<ResultSet> callProcedure(String graphId, String procedure, List<String> args, Map<String, List<String>> kwargs);
+
+    Response<String> deleteGraph(String graphId);
+
+    List<Object> syncAndReturnAll();
+
+    void sync();
+
+    Response<Long> waitReplicas(int replicas, long timeout);
+}
+```

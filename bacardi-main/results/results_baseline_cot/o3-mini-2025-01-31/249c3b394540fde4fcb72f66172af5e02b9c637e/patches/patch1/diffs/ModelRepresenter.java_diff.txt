@@ -1,0 +1,29 @@
+24d23
+< import java.beans.IntrospectionException;
+94d92
+< 
+178d175
+< 
+191d187
+< 
+198,199d193
+<           //"repositories",
+<           //"pluginRepositories",
+218,219c212
+<   protected Set<Property> getProperties(Class<? extends Object> type)
+<           throws IntrospectionException {
+---
+>   protected Set<Property> getProperties(Class<? extends Object> type) {
+235,236c228
+<   private Set<Property> sortTypeWithOrder(Class<? extends Object> type, List<String> order)
+<           throws IntrospectionException {
+---
+>   private Set<Property> sortTypeWithOrder(Class<? extends Object> type, List<String> order) {
+251d242
+<       // important go first
+258d248
+<       // all the rest
+268c258
+<       return 0;// compare further
+---
+>       return 0;

@@ -1,0 +1,3 @@
+26:package org.spongepowered.api.text does not exist
+24:cannot find symbol  symbol:   static FLAGS   location: class org.spongepowered.api.command.parameter.CommonParameters 
+25:cannot find symbol  symbol:   static STRING   location: class org.spongepowered.api.command.parameter.CommonParameters 

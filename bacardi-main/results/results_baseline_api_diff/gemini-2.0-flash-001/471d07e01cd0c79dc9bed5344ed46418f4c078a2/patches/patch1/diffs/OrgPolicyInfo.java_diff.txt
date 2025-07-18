@@ -1,0 +1,104 @@
+18,21d17
+< import com.google.api.services.cloudresourcemanager.model.BooleanPolicy;
+< import com.google.api.services.cloudresourcemanager.model.ListPolicy;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.RestoreDefault;
+38,39c34,36
+<   static final Function<OrgPolicy, OrgPolicyInfo> FROM_PROTOBUF_FUNCTION =
+<       new Function<OrgPolicy, OrgPolicyInfo>() {
+---
+>   static final Function<OrgPolicyInfo, com.google.api.services.cloudresourcemanager.v3.model.Policy>
+>       TO_PROTOBUF_FUNCTION =
+>           new Function<OrgPolicyInfo, com.google.api.services.cloudresourcemanager.v3.model.Policy>() {
+41,42c38,40
+<         public OrgPolicyInfo apply(OrgPolicy protobuf) {
+<           return OrgPolicyInfo.fromProtobuf(protobuf);
+---
+>             public com.google.api.services.cloudresourcemanager.v3.model.Policy apply(
+>                 OrgPolicyInfo orgPolicyInfo) {
+>               return orgPolicyInfo.toProtobuf();
+45,46c43,47
+<   static final Function<OrgPolicyInfo, OrgPolicy> TO_PROTOBUF_FUNCTION =
+<       new Function<OrgPolicyInfo, OrgPolicy>() {
+---
+>   static final Function<
+>           com.google.api.services.cloudresourcemanager.v3.model.Policy, OrgPolicyInfo>
+>       FROM_PROTOBUF_FUNCTION =
+>           new Function<
+>               com.google.api.services.cloudresourcemanager.v3.model.Policy, OrgPolicyInfo>() {
+48,49c49,51
+<         public OrgPolicy apply(OrgPolicyInfo orgPolicyInfo) {
+<           return orgPolicyInfo.toProtobuf();
+---
+>             public OrgPolicyInfo apply(
+>                 com.google.api.services.cloudresourcemanager.v3.model.Policy protobuf) {
+>               return OrgPolicyInfo.fromProtobuf(protobuf);
+96,97c98,100
+<     BooleanPolicy toProtobuf() {
+<       return new BooleanPolicy().setEnforced(enforce);
+---
+>     com.google.api.services.cloudresourcemanager.v3.model.BooleanPolicy toProtobuf() {
+>       return new com.google.api.services.cloudresourcemanager.v3.model.BooleanPolicy()
+>           .setEnforced(enforce);
+100c103,104
+<     static BoolPolicy fromProtobuf(BooleanPolicy booleanPolicy) {
+---
+>     static BoolPolicy fromProtobuf(
+>         com.google.api.services.cloudresourcemanager.v3.model.BooleanPolicy booleanPolicy) {
+200,201c204,205
+<     ListPolicy toProtobuf() {
+<       return new ListPolicy()
+---
+>     com.google.api.services.cloudresourcemanager.v3.model.ListPolicy toProtobuf() {
+>       return new com.google.api.services.cloudresourcemanager.v3.model.ListPolicy()
+209c213,214
+<     static Policies fromProtobuf(ListPolicy listPolicy) {
+---
+>     static Policies fromProtobuf(
+>         com.google.api.services.cloudresourcemanager.v3.model.ListPolicy listPolicy) {
+360,361c365,367
+<   OrgPolicy toProtobuf() {
+<     OrgPolicy orgPolicyProto = new OrgPolicy();
+---
+>   com.google.api.services.cloudresourcemanager.v3.model.Policy toProtobuf() {
+>     com.google.api.services.cloudresourcemanager.v3.model.Policy orgPolicyProto =
+>         new com.google.api.services.cloudresourcemanager.v3.model.Policy();
+365c371
+<     orgPolicyProto.setConstraint(constraint);
+---
+>     orgPolicyProto.setEtag(etag);
+369,371c375,376
+<     orgPolicyProto.setRestoreDefault(restoreDefault);
+<     orgPolicyProto.setEtag(etag);
+<     orgPolicyProto.setUpdateTime(updateTime);
+---
+> 
+>     if (version != null) {
+372a378
+>     }
+376c382,383
+<   static OrgPolicyInfo fromProtobuf(OrgPolicy orgPolicyProtobuf) {
+---
+>   static OrgPolicyInfo fromProtobuf(
+>       com.google.api.services.cloudresourcemanager.v3.model.Policy orgPolicyProtobuf) {
+379c386,387
+<       builder.setBoolPolicy(BoolPolicy.fromProtobuf(orgPolicyProtobuf.getBooleanPolicy()));
+---
+>       builder.setBoolPolicy(
+>           BoolPolicy.fromProtobuf(orgPolicyProtobuf.getBooleanPolicy())); // Corrected line
+381c389
+<     builder.setConstraint(orgPolicyProtobuf.getConstraint());
+---
+>     builder.setEtag(orgPolicyProtobuf.getEtag());
+385,387c393,394
+<     builder.setRestoreDefault(orgPolicyProtobuf.getRestoreDefault());
+<     builder.setEtag(orgPolicyProtobuf.getEtag());
+<     builder.setUpdateTime(orgPolicyProtobuf.getUpdateTime());
+---
+> 
+>     if (orgPolicyProtobuf.getVersion() != null) {
+388a396
+>     }
+390a399,400
+> 
+>   static class RestoreDefault {}

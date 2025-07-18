@@ -1,0 +1,260 @@
+```java
+/**
+ * Copyright 2019 Pinterest, Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.pinterest.singer.reader;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import org.apache.thrift.TBase;
+import org.apache.thrift.TException;
+import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TIOStreamTransport;
+import org.apache.thrift.transport.TTransport;
+import org.apache.thrift.transport.TTransportException;
+import org.apache.thrift.transport.layered.TFramedTransport;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+/**
+ * Reader that reads Thrift messages of thrift type from a file
+ * <p/>
+ * This class is NOT thread-safe.
+ */
+@SuppressWarnings("rawtypes")
+public class ThriftReader<T extends TBase> implements Closeable {
+
+  /**
+   * Factory that get a TBase instance of the thrift type to be read.
+   *
+   * @param <T> The thrift message type to be read.
+   */
+  public static interface TBaseFactory<T> {
+    T get();
+  }
+
+  /**
+   * Factory that get a TProtocol instance.
+   */
+  public static interface TProtocolFactory {
+    TProtocol get(TTransport transport);
+  }
+
+  // Factory that creates empty objects that will be initialized with values from the file.
+  private final TBaseFactory<T> baseFactory;
+
+  // The ByteOffsetInputStream to read from.
+  private final ByteOffsetInputStream byteOffsetInputStream;
+
+  // The framed transport.
+  private final TFramedTransport framedTransport;
+
+  // TProtocol implementation.
+  private final TProtocol protocol;
+
+  public ThriftReader(
+      String path,
+      TBaseFactory<T> baseFactory,
+      TProtocolFactory protocolFactory,
+      int readBufferSize,
+      int maxMessageSize) throws IOException {
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(path));
+    Preconditions.checkNotNull(protocolFactory);
+
+    this.byteOffsetInputStream = new ByteOffsetInputStream(
+        new RandomAccessFile(path, "r"), readBufferSize);
+    this.framedTransport =
+        new FramedTransportAdapter(new TIOStreamTransport(this.byteOffsetInputStream), maxMessageSize);
+    this.baseFactory = Preconditions.checkNotNull(baseFactory);
+    this.protocol = protocolFactory.get(this.framedTransport);
+  }
+
+  /**
+   * Read one thrift message.
+   *
+   * @return next thrift message from the reader. null if no thrift message in the reader.
+   * @throws IOException when file error.
+   * @throws TException  when parse error.
+   */
+  public T read() throws IOException, TException {
+    // If frame buffer is empty and we are at EOF of underlying input stream, return null.
+    if (framedTransport.getBytesRemainingInBuffer() == 0 && byteOffsetInputStream.isEOF()) {
+      return null;
+    }
+
+    T t = baseFactory.get();
+    t.read(protocol);
+    return t;
+  }
+
+  /**
+   * @return byte offset of the next message.
+   * @throws IOException on file error.
+   */
+  public long getByteOffset() throws IOException {
+    Preconditions.checkState(
+        byteOffsetInputStream.getByteOffset() >= framedTransport.getBytesRemainingInBuffer());
+    return byteOffsetInputStream.getByteOffset() - framedTransport.getBytesRemainingInBuffer();
+  }
+
+  /**
+   * Set byte offset of the next message to be read.
+   *
+   * @param byteOffset byte offset.
+   * @throws IOException on file error.
+   */
+  public void setByteOffset(long byteOffset) throws IOException {
+    // If we already at the byte offset, return.
+    if (getByteOffset() == byteOffset) {
+      return;
+    }
+
+    // Clear the buffer
+    framedTransport.consumeBuffer(framedTransport.getBytesRemainingInBuffer());
+
+    // Set underlying stream byte offset
+    byteOffsetInputStream.setByteOffset(byteOffset);
+  }
+
+  /**
+   * Close the reader.
+   *
+   * @throws IOException on file error.
+   */
+  public void close() throws IOException {
+    framedTransport.close();
+  }
+
+  private static class FramedTransportAdapter extends TTransport implements TFramedTransport {
+    private final TTransport underlying;
+    private final int maxFrameSize;
+    private byte[] frameBuffer = null;
+    private int frameBufferPos = 0;
+    private int frameBufferLen = 0;
+
+    public FramedTransportAdapter(TTransport underlying, int maxFrameSize) {
+      this.underlying = underlying;
+      this.maxFrameSize = maxFrameSize;
+    }
+
+    @Override
+    public boolean isOpen() {
+      return underlying.isOpen();
+    }
+
+    @Override
+    public void open() throws TTransportException {
+      underlying.open();
+    }
+
+    @Override
+    public void close() {
+      underlying.close();
+    }
+
+    @Override
+    public int read(byte[] buf, int off, int len) throws TTransportException {
+      try {
+        if (frameBuffer == null || frameBufferPos >= frameBufferLen) {
+          if (!underlying.isOpen()) {
+            throw new TTransportException("Underlying transport is closed");
+          }
+          if (!fillFrame()) {
+            return -1;
+          }
+        }
+        int available = frameBufferLen - frameBufferPos;
+        int count = Math.min(len, available);
+        System.arraycopy(frameBuffer, frameBufferPos, buf, off, count);
+        frameBufferPos += count;
+        return count;
+      } catch (IOException e) {
+        throw new TTransportException(e);
+      }
+    }
+
+    private boolean fillFrame() throws IOException, TTransportException {
+      byte[] sizeBytes = new byte[4];
+      int readBytes = 0;
+      while (readBytes < 4) {
+        int n = underlying.read(sizeBytes, readBytes, 4 - readBytes);
+        if (n < 0) {
+          if (readBytes == 0) {
+            return false;
+          }
+          throw new TTransportException("EOF reached while reading frame size");
+        }
+        readBytes += n;
+      }
+      int frameSize = ((sizeBytes[0] & 0xff) << 24) |
+                      ((sizeBytes[1] & 0xff) << 16) |
+                      ((sizeBytes[2] & 0xff) << 8) |
+                      (sizeBytes[3] & 0xff);
+      if (frameSize > maxFrameSize) {
+        throw new TTransportException("Frame size " + frameSize + " exceeds maximum of " + maxFrameSize);
+      }
+      frameBuffer = new byte[frameSize];
+      frameBufferPos = 0;
+      frameBufferLen = 0;
+      while (frameBufferLen < frameSize) {
+        int n = underlying.read(frameBuffer, frameBufferLen, frameSize - frameBufferLen);
+        if (n < 0) {
+          throw new TTransportException("EOF reached while reading frame");
+        }
+        frameBufferLen += n;
+      }
+      return true;
+    }
+
+    @Override
+    public void write(byte[] buf, int off, int len) throws TTransportException {
+      throw new TTransportException("Write not supported in FramedTransportAdapter");
+    }
+
+    @Override
+    public void flush() throws TTransportException {
+      try {
+        underlying.flush();
+      } catch (IOException e) {
+        throw new TTransportException(e);
+      }
+    }
+
+    @Override
+    public int getBytesRemainingInBuffer() {
+      return frameBuffer == null ? 0 : (frameBufferLen - frameBufferPos);
+    }
+
+    @Override
+    public void consumeBuffer(int len) {
+      frameBufferPos = Math.min(frameBufferPos + len, frameBufferLen);
+    }
+
+    @Override
+    public void readAll(byte[] buf, int off, int len) throws TTransportException {
+      int got = 0;
+      while (got < len) {
+        int ret = read(buf, off + got, len - got);
+        if (ret <= 0) {
+          throw new TTransportException("Cannot read. Remote side has closed.");
+        }
+        got += ret;
+      }
+    }
+  }
+}
+```

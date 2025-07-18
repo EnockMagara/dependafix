@@ -1,0 +1,6 @@
+48a49
+> import org.hamcrest.core.IsNot; // Added import for IsNot
+246c247
+<             Matchers.not(Matchers.emptyIterableOf(String.class))
+---
+>             IsNot.not(Matchers.emptyIterableOf(String.class)) // Updated matcher

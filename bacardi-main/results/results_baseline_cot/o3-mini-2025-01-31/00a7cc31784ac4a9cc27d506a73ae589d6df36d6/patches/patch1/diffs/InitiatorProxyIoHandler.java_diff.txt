@@ -1,0 +1,6 @@
+64,66c64
+<         if (this.sslFilter != null) {
+<             this.sslFilter.initiateHandshake(ioSession);
+<         }
+---
+>         // Handshake initiation removed due to updated SSLFilter API.

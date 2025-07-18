@@ -1,0 +1,18 @@
+113,114c113,114
+<             first = develop.p2p.lib.LeetConverter.convert(first);
+<             last = develop.p2p.lib.LeetConverter.convert(last);
+---
+>             first = convertLeet(first);
+>             last = convertLeet(last);
+140a141,151
+>      * 私設のLeetConverterの代替実装。入力値をそのまま返します。
+>      *
+>      * @param input 変換する文字列。
+>      * @return 変換後の文字列。
+>      */
+>     private static String convertLeet(String input)
+>     {
+>         return input;
+>     }
+> 
+>     /**

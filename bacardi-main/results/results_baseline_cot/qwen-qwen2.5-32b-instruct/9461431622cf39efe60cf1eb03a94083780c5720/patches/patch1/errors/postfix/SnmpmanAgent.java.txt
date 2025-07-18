@@ -1,0 +1,6 @@
+243:')' expected
+379:';' expected
+350:')' expected
+383:'else' without 'if'
+489:')' expected
+378:illegal start of expression

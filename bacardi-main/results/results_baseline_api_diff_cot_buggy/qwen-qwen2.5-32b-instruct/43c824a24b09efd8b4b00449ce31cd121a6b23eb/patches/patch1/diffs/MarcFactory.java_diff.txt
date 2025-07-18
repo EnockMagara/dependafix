@@ -1,0 +1,44 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+4a4
+> import de.gwdg.metadataqa.api.model.pathcache.JsonPathCache.JsonBranch;
+72c72
+<           marcRecord.setLeader(new Leader(extractFirst(cache, branch)));
+---
+>           marcRecord.setLeader(new Leader(extractFirst(cache, branch), version));
+75c75
+<           marcRecord.setControl001(new Control001(extractFirst(cache, branch)));
+---
+>           marcRecord.setControl001(new Control001(extractFirst(cache, branch));
+78c78
+<           marcRecord.setControl003(new Control003(extractFirst(cache, branch)));
+---
+>           marcRecord.setControl003(new Control003(extractFirst(cache, branch));
+81c81
+<           marcRecord.setControl005(new Control005(extractFirst(cache, branch), marcRecord));
+---
+>           marcRecord.setControl005(new Control005(extractFirst(cache, branch), marcRecord);
+85c85
+<             new Control006(extractFirst(cache, branch), marcRecord));
+---
+>             new Control006(extractFirst(cache, branch), marcRecord);
+89c89
+<             new Control007(extractFirst(cache, branch), marcRecord));
+---
+>             new Control007(extractFirst(cache, branch), marcRecord);
+93c93
+<             new Control008(extractFirst(cache, branch), marcRecord));
+---
+>             new Control008(extractFirst(cache, branch), marcRecord);
+259c259
+<               definition,
+---
+>               (definition,
+292c292
+<         definition,
+---
+>         (definition,
+384c384
+<             line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+---
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)

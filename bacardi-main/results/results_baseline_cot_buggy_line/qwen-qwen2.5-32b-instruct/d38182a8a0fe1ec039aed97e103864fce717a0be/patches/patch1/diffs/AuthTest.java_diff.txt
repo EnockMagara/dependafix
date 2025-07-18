@@ -1,0 +1,142 @@
+17a18
+> import com.artipie.http.auth.AuthUser;
+25,27d25
+< import com.artipie.http.rq.RequestLine;
+< import com.artipie.http.rq.RqMethod;
+< import com.artipie.http.rs.RsStatus;
+52c50
+< @SuppressWarnings("PMD.AvoidDuplicateLiterals")
+---
+> @SuppressWarnings("PMD.UnusedPrivateMethod")
+69c67,71
+<             method.slice("whatever").response(line.toString(), Headers.EMPTY, Content.EMPTY),
+---
+>             method.slice("whatever").response(
+>                 line.toString(),
+>                 Headers.EMPTY,
+>                 Content.EMPTY
+>             ),
+126,168d127
+<     @Test
+<     void shouldOverwriteManifestIfAllowed() {
+<         final Basic basic = new Basic(this.docker);
+<         final String path = "/v2/my-alpine/manifests/abc";
+<         final String line = new RequestLine(RqMethod.PUT, path).toString();
+<         final String action = "repository:my-alpine:overwrite";
+<         final Flowable<ByteBuffer> manifest = this.manifest();
+<         MatcherAssert.assertThat(
+<             "Manifest was created for the first time",
+<             basic.slice(action).response(
+<                 line,
+<                 basic.headers(TestAuthentication.ALICE),
+<                 manifest
+<             ),
+<             new ResponseMatcher(
+<                 RsStatus.CREATED,
+<                 new Header("Location", path),
+<                 new Header("Content-Length", "0"),
+<                 new Header(
+<                     "Docker-Content-Digest",
+<                     "sha256:ef0ff2adcc3c944a63f7cafb386abc9a1d95528966085685ae9fab2a1c0bedbf"
+<                 )
+<             )
+<         );
+<         MatcherAssert.assertThat(
+<             "Manifest was overwritten",
+<             basic.slice(action).response(
+<                 line,
+<                 basic.headers(TestAuthentication.ALICE),
+<                 manifest
+<             ),
+<             new ResponseMatcher(
+<                 RsStatus.CREATED,
+<                 new Header("Location", path),
+<                 new Header("Content-Length", "0"),
+<                 new Header(
+<                     "Docker-Content-Digest",
+<                     "sha256:ef0ff2adcc3c944a63f7cafb386abc9a1d95528966085685ae9fab2a1c0bedbf"
+<                 )
+<             )
+<         );
+<     }
+< 
+192,196d150
+<     @SuppressWarnings("PMD.UnusedPrivateMethod")
+<     private static Stream<Arguments> setups() {
+<         return Stream.of(new Basic(), new Bearer()).flatMap(AuthTest::setups);
+<     }
+< 
+214c168
+<     private static Stream<Arguments> setups(final Method method) {
+---
+>     private static Stream<Arguments> setups() {
+217c171
+<                 method,
+---
+>                 new Basic(this.docker),
+222c176
+<                 method,
+---
+>                 new Basic(this.docker),
+227c181
+<                 method,
+---
+>                 new Basic(this.docker),
+232c186
+<                 method,
+---
+>                 new Basic(this.docker),
+237c191
+<                 method,
+---
+>                 new Basic(this.docker),
+242,273c196,197
+<                 method,
+<                 new RequestLine(RqMethod.GET, "/v2/my-alpine/tags/list"),
+<                 "repository:my-alpine:pull"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.HEAD, "/v2/my-alpine/blobs/sha256:123"),
+<                 "repository:my-alpine:pull"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.GET, "/v2/my-alpine/blobs/sha256:012345"),
+<                 "repository:my-alpine:pull"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.POST, "/v2/my-alpine/blobs/uploads/"),
+<                 "repository:my-alpine:push"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.PATCH, "/v2/my-alpine/blobs/uploads/123"),
+<                 "repository:my-alpine:push"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.PUT, "/v2/my-alpine/blobs/uploads/12345"),
+<                 "repository:my-alpine:push"
+<             ),
+<             Arguments.of(
+<                 method,
+<                 new RequestLine(RqMethod.GET, "/v2/my-alpine/blobs/uploads/112233"),
+---
+>                 new Basic(this.docker),
+>                 new RequestLine(RqMethod.GET, "/v2/my-alpine/blobs/sha256:123"),
+277c201
+<                 method,
+---
+>                 new Basic(this.docker),
+353c277
+<                             .map(user -> new Authentication.User(user.name()))
+---
+>                             .map(user -> new AuthUser(user.name()))
+368,372d291
+<         @Override
+<         public String toString() {
+<             return "Bearer";
+<         }
+< 

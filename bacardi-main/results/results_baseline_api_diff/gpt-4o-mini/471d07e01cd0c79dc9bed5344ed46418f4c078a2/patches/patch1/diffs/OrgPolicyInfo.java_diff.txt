@@ -1,0 +1,54 @@
+6c6
+<  * You may obtain a copy of the License at
+---
+>  * you may obtain a copy of the License at
+18,21c18,21
+< import com.google.api.services.cloudresourcemanager.model.BooleanPolicy;
+< import com.google.api.services.cloudresourcemanager.model.ListPolicy;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.RestoreDefault;
+---
+> import com.google.api.services.cloudresourcemanager.v3.model.Policy;
+> import com.google.api.services.cloudresourcemanager.v3.model.OrgPolicy;
+> import com.google.api.services.cloudresourcemanager.v3.model.ListConstraint;
+> import com.google.api.services.cloudresourcemanager.v3.model.RestoreDefault;
+96,97c96,97
+<     BooleanPolicy toProtobuf() {
+<       return new BooleanPolicy().setEnforced(enforce);
+---
+>     ListConstraint toProtobuf() {
+>       return new ListConstraint().setEnforced(enforce);
+100,101c100,101
+<     static BoolPolicy fromProtobuf(BooleanPolicy booleanPolicy) {
+<       return new BoolPolicy(booleanPolicy.getEnforced());
+---
+>     static BoolPolicy fromProtobuf(ListConstraint listConstraint) {
+>       return new BoolPolicy(listConstraint.getEnforced());
+125c125
+<     private final List<java.lang.String> deniedValues;
+---
+>     private final List<String> deniedValues;
+200,201c200,201
+<     ListPolicy toProtobuf() {
+<       return new ListPolicy()
+---
+>     ListConstraint toProtobuf() {
+>       return new ListConstraint()
+205d204
+<           .setInheritFromParent(inheritFromParent)
+209c208
+<     static Policies fromProtobuf(ListPolicy listPolicy) {
+---
+>     static Policies fromProtobuf(ListConstraint listConstraint) {
+211,215c210,214
+<           listPolicy.getAllValues(),
+<           listPolicy.getAllowedValues(),
+<           listPolicy.getDeniedValues(),
+<           listPolicy.getInheritFromParent(),
+<           listPolicy.getSuggestedValue());
+---
+>           listConstraint.getAllValues(),
+>           listConstraint.getAllowedValues(),
+>           listConstraint.getDeniedValues(),
+>           null, // inheritFromParent is not available in the new version
+>           listConstraint.getSuggestedValue());

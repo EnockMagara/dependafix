@@ -1,0 +1,10 @@
+13d12
+< import com.cryptomorin.xseries.XEnchantment;
+81c80
+<                                         currentLangMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                         currentLangMeta.addEnchant(org.bukkit.enchantments.Enchantment.PROTECTION_ENVIRONMENTAL, 1, false);
+91c90
+<                                 String outLang = main.getSupportedTranslatorLanguages().get(i).getLangCode();
+---
+>                                 String outLang = main.getSupportedTranslatorLanguages().get(i).getLangCode());

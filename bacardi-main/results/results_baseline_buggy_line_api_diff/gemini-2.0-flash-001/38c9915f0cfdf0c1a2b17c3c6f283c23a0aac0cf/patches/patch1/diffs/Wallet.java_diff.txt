@@ -1,0 +1,74 @@
+10,11c10
+<  * copies of the Software, and to permit persons to whom the Software is
+<  * furnished to do so, subject to the following conditions:
+---
+>  * copies of this software, and to permit persons to do so, subject to the following conditions:
+18c17
+<  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+---
+>  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+30c29,31
+< import org.cactoos.collection.Filtered;
+---
+> import java.util.Iterator;
+> import org.cactoos.Func;
+> import org.cactoos.iterable.Filtered;
+36d36
+< import org.cactoos.scalar.CheckedScalar;
+38d37
+< import org.cactoos.scalar.UncheckedScalar;
+40d38
+< import org.cactoos.text.SplitText;
+42a41,43
+> import org.cactoos.scalar.IoChecked;
+> import org.cactoos.scalar.Unchecked;
+> import org.cactoos.text.Split;
+201c202
+<             return new CheckedScalar<>(
+---
+>             return new IoChecked<>(
+204c205
+<                         new SplitText(
+---
+>                         new Split(
+211c212,213
+<                 ),
+---
+>                 )
+>                 ,
+248,261c250,265
+<                 incoming -> new Filtered<>(
+<                     origin -> new UncheckedScalar<>(
+<                         new Or(
+<                             () -> incoming.equals(origin),
+<                             () -> incoming.id() == origin.id()
+<                                 && incoming.bnf().equals(origin.bnf()),
+<                             () -> incoming.id() == origin.id()
+<                                 && incoming.amount() < 0L,
+<                             () -> incoming.prefix().equals(origin.prefix())
+<                         )
+<                     ).value(),
+<                     ledger
+<                 ).isEmpty(),
+<                 other.ledger()
+---
+>                 other.ledger(),
+>                 incoming -> {
+>                     final Iterator<Transaction> iterator = ledger.iterator();
+>                     while (iterator.hasNext()) {
+>                         final Transaction origin = iterator.next();
+>                         if (incoming.equals(origin)
+>                             || (incoming.id() == origin.id()
+>                                 && incoming.bnf().equals(origin.bnf()))
+>                             || (incoming.id() == origin.id()
+>                                 && incoming.amount() < 0L)
+>                             || incoming.prefix().equals(origin.prefix())) {
+>                             return false;
+>                         }
+>                     }
+>                     return true;
+>                 }
+275c279
+<                         new SplitText(
+---
+>                         new Split(

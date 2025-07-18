@@ -1,0 +1,7 @@
+7c7,8
+< import javax.mvc.Controller;
+---
+> import javax.mvc.annotation.Controller;
+> import javax.mvc.binding.MvcContext;
+9d9
+< import javax.mvc.MvcContext;

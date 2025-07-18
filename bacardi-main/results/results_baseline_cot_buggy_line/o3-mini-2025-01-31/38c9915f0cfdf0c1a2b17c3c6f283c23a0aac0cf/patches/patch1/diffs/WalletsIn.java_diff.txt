@@ -1,0 +1,52 @@
+29a30
+> import java.util.Arrays;
+37,38c38
+< import org.cactoos.scalar.IoCheckedScalar;
+< import org.cactoos.scalar.SolidScalar;
+---
+> import org.cactoos.scalar.StickyScalar;
+40c40
+< import org.cactoos.text.JoinedText;
+---
+> import org.cactoos.text.Joined;
+53c53
+<     private final IoCheckedScalar<Path> path;
+---
+>     private final Scalar<Path> path;
+103,105c103
+<         this.path = new IoCheckedScalar<>(
+<             new SolidScalar<>(pth)
+<         );
+---
+>         this.path = new StickyScalar<>(pth);
+118,119c116,117
+<         final Path wpth = this.path.value().resolve(
+<             new JoinedText(
+---
+>         final Path wpth = basePath().resolve(
+>             new Joined(
+120a119
+>                 Arrays.asList(
+122a122
+>                 )
+144,145c144
+<     public Wallet create(final long id, final String pubkey, final String
+<         network) throws IOException {
+---
+>     public Wallet create(final long id, final String pubkey, final String network) throws IOException {
+156c155
+<                 new Filtered<>(this.filter, new Directory(this.path.value()))
+---
+>                 new Filtered<>(this.filter, new Directory(basePath()))
+161a161,171
+>     
+>     private Path basePath() throws IOException {
+>         try {
+>             return this.path.value();
+>         } catch (final Exception ex) {
+>             if (ex instanceof IOException) {
+>                 throw (IOException) ex;
+>             }
+>             throw new IOException(ex);
+>         }
+>     }

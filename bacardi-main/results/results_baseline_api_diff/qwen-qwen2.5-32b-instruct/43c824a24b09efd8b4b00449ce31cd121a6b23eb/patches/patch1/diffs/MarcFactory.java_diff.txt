@@ -1,0 +1,39 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+4a4,7
+> import de.gwdg.metadataqa.api.model.pathcache.PathCache;
+> import de.gwdg.metadataqa.api.model.pathcache.PathCacheBranch;
+> import de.gwdg.metadataqa.api.model.pathcache.PathCacheBranch.PathCacheBranchType;
+> import de.gwdg.metadataqa.api.model.pathcache.PathCacheBranch.PathCacheBranchType;
+67c70
+<     for (JsonBranch branch : schema.getPaths()) {
+---
+>     for (PathCacheBranch branch : schema.getPaths()) {
+72c75
+<           marcRecord.setLeader(new Leader(extractFirst(cache, branch)));
+---
+>           marcRecord.setLeader(new Leader(extractFirst(cache, branch), version));
+155c158
+<           String.format(
+---
+>           (String.format(
+259c262
+<               definition,
+---
+>               (definition,
+292c295
+<         definition,
+---
+>         (definition,
+313c316
+<   private static List<String> extractList(JsonPathCache cache, JsonBranch branch) {
+---
+>   private static List<String> extractList(JsonPathCache cache, PathCacheBranch branch) {
+322c325
+<   private static String extractFirst(JsonPathCache cache, JsonBranch branch) {
+---
+>   private static String extractFirst(JsonPathCache cache, PathCacheBranch branch) {
+384c387
+<             line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+---
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)

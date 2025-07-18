@@ -1,0 +1,58 @@
+12a13
+> import net.kyori.adventure.text.Component;
+14c15
+< import org.spongepowered.api.command.CommandException;
+---
+> import org.spongepowered.api.command.Command;
+16,19c17
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+22,23d19
+< import org.spongepowered.api.text.Text;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+25c21,24
+< public class InfoCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.CommandCause;
+> 
+> public class InfoCommand implements org.spongepowered.api.command.CommandExecutor, ChangeSkinCommand {
+35c34,35
+<     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+---
+>     public CommandResult execute(CommandContext context) throws CommandException {
+>         CommandCause src = context.cause();
+38c38
+<             return CommandResult.empty();
+---
+>             return CommandResult.success();
+45c45
+<                     Task.builder().execute(() -> sendSkinDetails(uniqueId, preferences)).submit(plugin);
+---
+>                     Task.builder().execute(() -> sendSkinDetails(uniqueId, preferences, src)).submit(plugin);
+53,54c53,54
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command buildSpec() {
+>         return Command.builder()
+56c56
+<                 .permission(PomData.ARTIFACT_ID + ".command.skininfo.base")
+---
+>                 .addPermission(PomData.ARTIFACT_ID + ".command.skininfo.base")
+60c60
+<     private void sendSkinDetails(UUID uuid, UserPreference preference) {
+---
+>     private void sendSkinDetails(UUID uuid, UserPreference preference, CommandCause cause) {
+70c70
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+---
+>                 Component text = net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(formatted);
+73c73
+<                 plugin.sendMessage(player, "skin-not-found");
+---
+>                 plugin.sendMessage(cause, "skin-not-found");

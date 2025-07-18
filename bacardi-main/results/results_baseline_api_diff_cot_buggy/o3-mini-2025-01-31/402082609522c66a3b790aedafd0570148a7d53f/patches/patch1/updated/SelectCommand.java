@@ -1,0 +1,105 @@
+package com.github.games647.changeskin.sponge.command;
+
+import com.github.games647.changeskin.sponge.ChangeSkinSponge;
+import com.github.games647.changeskin.sponge.PomData;
+import com.github.games647.changeskin.sponge.task.SkinSelector;
+import com.google.inject.Inject;
+import net.kyori.adventure.text.Component;
+import static net.kyori.adventure.text.Component.text;
+import org.spongepowered.api.command.CommandExecutor;
+import org.spongepowered.api.command.parameter.CommandContext;
+import org.spongepowered.api.command.source.CommandSource;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.scheduler.Task;
+
+public class SelectCommand implements CommandExecutor, ChangeSkinCommand {
+
+    private final ChangeSkinSponge plugin;
+
+    @Inject
+    SelectCommand(ChangeSkinSponge plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public CommandResult execute(CommandSource src, CommandContext args) {
+        if (!(src instanceof Player)) {
+            plugin.sendMessage(src, "no-console");
+            return CommandResult.empty();
+        }
+
+        String skinName = args.<String>getOne("skinName").get().toLowerCase().replace("skin-", "");
+
+        try {
+            int targetId = Integer.parseInt(skinName);
+            Player receiver = (Player) src;
+            Task.builder().execute(new SkinSelector(plugin, receiver, targetId)).submit(plugin);
+        } catch (NumberFormatException numberFormatException) {
+            plugin.sendMessage(src, "invalid-skin-name");
+        }
+
+        return CommandResult.success();
+    }
+
+    @Override
+    public CommandSpec buildSpec() {
+        return CommandSpec.builder()
+                .executor(this)
+                .arguments(string(text("skinName")))
+                .permission(PomData.ARTIFACT_ID + ".command.skinselect.base")
+                .build();
+    }
+
+    private static Object string(Component component) {
+        return component;
+    }
+
+    public static class CommandResult {
+        public static CommandResult empty() {
+            return new CommandResult();
+        }
+
+        public static CommandResult success() {
+            return new CommandResult();
+        }
+    }
+
+    public static class CommandSpec {
+        private CommandExecutor executor;
+        private Object arguments;
+        private String permission;
+
+        public static Builder builder() {
+            return new Builder();
+        }
+
+        public static class Builder {
+            private CommandExecutor executor;
+            private Object arguments;
+            private String permission;
+
+            public Builder executor(CommandExecutor executor) {
+                this.executor = executor;
+                return this;
+            }
+
+            public Builder arguments(Object arguments) {
+                this.arguments = arguments;
+                return this;
+            }
+
+            public Builder permission(String permission) {
+                this.permission = permission;
+                return this;
+            }
+
+            public CommandSpec build() {
+                CommandSpec spec = new CommandSpec();
+                spec.executor = this.executor;
+                spec.arguments = this.arguments;
+                spec.permission = this.permission;
+                return spec;
+            }
+        }
+    }
+}

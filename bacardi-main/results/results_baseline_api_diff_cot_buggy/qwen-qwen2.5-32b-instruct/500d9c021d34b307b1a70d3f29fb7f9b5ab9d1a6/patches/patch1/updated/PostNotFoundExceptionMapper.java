@@ -1,0 +1,11 @@
+<repair_strategy>
+1. The error is caused by the removal of the `javax.mvc.Models` class and the introduction of the `jakarta.mvc.Models` interface in the new version of the dependency.
+2. The client code needs to be updated to use the new `jakarta.mvc.Models` interface.
+3. The import statement for `javax.mvc.Models` needs to be replaced with `jakarta.mvc.Models`.
+4. No function signatures need to be changed, but the import statement must be updated.
+5. The minimal change is to update the import statement.
+6. There should be no side effects as the change is purely an import update.
+7. The class will be fully compilable after the import statement is updated.
+8. The new import statement for `jakarta.mvc.Models` is required.
+</repair_strategy>
+

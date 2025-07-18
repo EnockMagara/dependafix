@@ -1,0 +1,19 @@
+115:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+88:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+62:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+130:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+155:cannot find symbol  symbol:   method getResponse(redis.clients.jedis.Builder<java.lang.String>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+75:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+37:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+49:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+101:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+23:cannot find symbol  symbol: class BinaryRedisPipeline 
+21:cannot find symbol  symbol: class MultiKeyCommandsPipeline 
+6:cannot find symbol  symbol:   class BinaryScriptingCommandsPipeline   location: package redis.clients.jedis.commands 
+5:cannot find symbol  symbol:   class BinaryRedisPipeline   location: package redis.clients.jedis.commands 
+8:cannot find symbol  symbol:   class MultiKeyCommandsPipeline   location: package redis.clients.jedis.commands 
+20:cannot find symbol  symbol: class MultiKeyBinaryRedisPipeline 
+7:cannot find symbol  symbol:   class MultiKeyBinaryRedisPipeline   location: package redis.clients.jedis.commands 
+22:cannot find symbol  symbol: class BinaryScriptingCommandsPipeline 
+9:cannot find symbol  symbol:   class RedisPipeline   location: package redis.clients.jedis.commands 
+10:cannot find symbol  symbol:   class ScriptingCommandsPipeline   location: package redis.clients.jedis.commands 

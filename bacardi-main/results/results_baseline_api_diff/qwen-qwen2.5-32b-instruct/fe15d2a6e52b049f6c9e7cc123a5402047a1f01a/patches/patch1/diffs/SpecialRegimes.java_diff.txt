@@ -1,0 +1,45 @@
+15d14
+< import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
+17d15
+< import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
+20d17
+< 
+108d104
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+110c106
+<         append(null, buffer, strategy);
+---
+>         append(null, buffer);
+114,138c110,115
+<     @Override
+<     public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+<         strategy.appendStart(locator, this, buffer);
+<         appendFields(locator, buffer, strategy);
+<         strategy.appendEnd(locator, this, buffer);
+<         return buffer;
+<     }
+< 
+<     @Override
+<     public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+<         {
+<             int theSelfBillingIndicator;
+<             theSelfBillingIndicator = this.getSelfBillingIndicator();
+<             strategy.appendField(locator, this, "selfBillingIndicator", buffer, theSelfBillingIndicator, true);
+<         }
+<         {
+<             int theCashVATSchemeIndicator;
+<             theCashVATSchemeIndicator = this.getCashVATSchemeIndicator();
+<             strategy.appendField(locator, this, "cashVATSchemeIndicator", buffer, theCashVATSchemeIndicator, true);
+<         }
+<         {
+<             int theThirdPartiesBillingIndicator;
+<             theThirdPartiesBillingIndicator = this.getThirdPartiesBillingIndicator();
+<             strategy.appendField(locator, this, "thirdPartiesBillingIndicator", buffer, theThirdPartiesBillingIndicator, true);
+<         }
+---
+>     public StringBuilder append(ObjectLocator locator, StringBuilder buffer) {
+>         buffer.append("SpecialRegimes{");
+>         buffer.append("selfBillingIndicator=").append(selfBillingIndicator);
+>         buffer.append(", cashVATSchemeIndicator=").append(cashVATSchemeIndicator);
+>         buffer.append(", thirdPartiesBillingIndicator=").append(thirdPartiesBillingIndicator);
+>         buffer.append("}");

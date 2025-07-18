@@ -1,0 +1,2 @@
+99:cannot find symbol  symbol:   method setProcessDependencies(boolean)   location: variable buildingRequest of type org.apache.maven.project.ProjectBuildingRequest 
+149:incompatible types: org.apache.maven.project.MavenProject cannot be converted to org.apache.maven.project.ProjectBuildingRequest

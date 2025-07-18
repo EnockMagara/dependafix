@@ -1,0 +1,14 @@
+82:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+46:cannot find symbol  symbol:   class BlockChainLastBlockLayer   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+126:cannot find symbol  symbol:   variable NemStateGlobals   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+75:cannot find symbol  symbol:   method setValidateOnMigrate(java.lang.Boolean)   location: variable flyway of type org.flywaydb.core.Flyway 
+129:cannot find symbol  symbol: method blockAnalyzer() 
+103:cannot find symbol  symbol:   variable SessionFactoryLoader   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+62:cannot find symbol  symbol:   variable MAX_AUDIT_HISTORY_SIZE   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+40:cannot find symbol  symbol:   class AccountDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+128:cannot find symbol  symbol: method nisCache() 
+49:cannot find symbol  symbol:   class TransferDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+114:cannot find symbol  symbol: method namespaceCache() 
+108:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+43:cannot find symbol  symbol:   class BlockDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+74:cannot find symbol  symbol:   method setBaselineOnMigrate(boolean)   location: variable flyway of type org.flywaydb.core.Flyway 

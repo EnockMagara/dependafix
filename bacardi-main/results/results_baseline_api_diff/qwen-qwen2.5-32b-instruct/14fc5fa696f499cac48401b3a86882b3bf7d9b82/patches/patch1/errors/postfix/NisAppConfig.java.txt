@@ -1,0 +1,17 @@
+305:method namespaceCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+285:method accountCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+399:cannot find symbol  symbol:   variable WB_TIME_BASED_VESTINGING   location: class org.nem.core.model.BlockChainFeature 
+273:method harvester() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+333:method unlockedAccounts() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+252:invalid method reference  cannot find symbol     symbol:   method getBlockDependentPoiOptions()     location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+295:method transactionHashCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+111:method setLocations in class org.flywaydb.core.api.configuration.ClassicConfiguration cannot be applied to given types;  required: org.flywaydb.core.api.Location[]   found: java.lang.String[]   reason: varargs mismatch; java.lang.String[] cannot be converted to org.flywaydb.core.api.Location 
+269:invalid method reference  cannot find symbol     symbol:   method getBlockDependentMinHarvesterBalance()     location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+323:invalid method reference  cannot find symbol     symbol:   method getBlockDependentPoiOptions()     location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+300:method poxFacade() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+400:cannot find symbol  symbol:   variable WB_IMMEDIATE_VESTINGING   location: class org.nem.core.model.BlockChainFeature 
+313:method nisCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+340:invalid method reference  cannot find symbol     symbol:   method getBlockDependentMinHarvesterBalance()     location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+339:method canHarvestPredicate() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+319:method importanceCalculator() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+290:method accountStateCache() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig

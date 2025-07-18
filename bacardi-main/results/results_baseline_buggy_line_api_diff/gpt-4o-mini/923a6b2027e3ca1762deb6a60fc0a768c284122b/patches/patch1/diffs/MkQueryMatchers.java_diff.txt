@@ -1,0 +1,12 @@
+34c34
+< import org.hamcrest.Matchers;
+---
+> import org.hamcrest.Matchers; // This import will be removed
+85c85
+<             Matchers.<URI>hasProperty("rawPath", path)
+---
+>             new PropertyMatcher<>("rawPath", path) // Updated to use a custom PropertyMatcher
+97c97
+<             Matchers.<URI>hasProperty("rawQuery", query)
+---
+>             new PropertyMatcher<>("rawQuery", query) // Updated to use a custom PropertyMatcher

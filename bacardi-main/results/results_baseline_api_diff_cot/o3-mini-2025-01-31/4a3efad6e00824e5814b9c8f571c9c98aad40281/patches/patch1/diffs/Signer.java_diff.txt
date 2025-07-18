@@ -1,0 +1,9 @@
+7d6
+< import eu.europa.esig.dss.pades.CertificationPermission;
+63d61
+<         ;
+71c69,70
+<         signatureParameters.setPermission(CertificationPermission.MINIMAL_CHANGES_PERMITTED);
+---
+>         
+>         // Removed the removed CertificationPermission because it is not part of the new API.

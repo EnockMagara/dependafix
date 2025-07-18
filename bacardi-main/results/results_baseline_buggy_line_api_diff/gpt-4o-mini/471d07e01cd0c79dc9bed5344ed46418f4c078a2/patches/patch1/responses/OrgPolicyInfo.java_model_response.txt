@@ -1,0 +1,195 @@
+```java
+/*
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.google.cloud.resourcemanager;
+
+import com.google.api.services.cloudresourcemanager.v3.model.BooleanPolicy;
+import com.google.api.services.cloudresourcemanager.v3.model.ListPolicy;
+import com.google.api.services.cloudresourcemanager.v3.model.Policy;
+import com.google.api.services.cloudresourcemanager.v3.model.OrgPolicy;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * A Google Cloud Resource Manager organization policy metadata object.
+ *
+ * <p>Defines a Cloud Organization Policy which specifies constraints for configurations of Cloud
+ * Platform resources.
+ *
+ * @deprecated v3 GAPIC client of ResourceManager is now available
+ */
+@Deprecated
+public class OrgPolicyInfo {
+
+  private BoolPolicy boolPolicy;
+  private String constraint;
+  private Policies policies;
+  private String updateTime;
+  private Integer version;
+
+  /** Used For boolean Constraints, whether to enforce the Constraint or not. */
+  static class BoolPolicy {
+
+    private final Boolean enforce;
+
+    BoolPolicy(Boolean enforce) {
+      this.enforce = enforce;
+    }
+
+    public boolean getEnforce() {
+      return enforce;
+    }
+
+    BooleanPolicy toProtobuf() {
+      return new BooleanPolicy().setEnforced(enforce);
+    }
+
+    static BoolPolicy fromProtobuf(BooleanPolicy booleanPolicy) {
+      return new BoolPolicy(booleanPolicy.getEnforced());
+    }
+  }
+
+  /**
+   * The organization ListPolicy object.
+   */
+  static class Policies {
+
+    private final List<String> allowedValues;
+    private final List<String> deniedValues;
+
+    Policies(List<String> allowedValues, List<String> deniedValues) {
+      this.allowedValues = allowedValues;
+      this.deniedValues = deniedValues;
+    }
+
+    ListPolicy toProtobuf() {
+      return new ListPolicy()
+          .setAllowedValues(allowedValues)
+          .setDeniedValues(deniedValues);
+    }
+
+    static Policies fromProtobuf(ListPolicy listPolicy) {
+      return new Policies(
+          listPolicy.getAllowedValues(),
+          listPolicy.getDeniedValues());
+    }
+  }
+
+  /** Builder for {@code OrganizationPolicyInfo}. */
+  static class Builder {
+    private BoolPolicy boolPolicy;
+    private String constraint;
+    private Policies policies;
+    private String updateTime;
+    private Integer version;
+
+    Builder() {}
+
+    Builder(OrgPolicyInfo info) {
+      this.boolPolicy = info.boolPolicy;
+      this.constraint = info.constraint;
+      this.policies = info.policies;
+      this.updateTime = info.updateTime;
+      this.version = info.version;
+    }
+
+    Builder setBoolPolicy(BoolPolicy boolPolicy) {
+      this.boolPolicy = boolPolicy;
+      return this;
+    }
+
+    Builder setConstraint(String constraint) {
+      this.constraint = constraint;
+      return this;
+    }
+
+    Builder setListPolicy(Policies policies) {
+      this.policies = policies;
+      return this;
+    }
+
+    Builder setUpdateTime(String updateTime) {
+      this.updateTime = updateTime;
+      return this;
+    }
+
+    Builder setVersion(Integer version) {
+      this.version = version;
+      return this;
+    }
+
+    OrgPolicyInfo build() {
+      return new OrgPolicyInfo(this);
+    }
+  }
+
+  OrgPolicyInfo(Builder builder) {
+    this.boolPolicy = builder.boolPolicy;
+    this.constraint = builder.constraint;
+    this.policies = builder.policies;
+    this.updateTime = builder.updateTime;
+    this.version = builder.version;
+  }
+
+  public BoolPolicy getBoolPolicy() {
+    return boolPolicy;
+  }
+
+  public String getConstraint() {
+    return constraint;
+  }
+
+  public Policies getPolicies() {
+    return policies;
+  }
+
+  public String getUpdateTime() {
+    return updateTime;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  OrgPolicy toProtobuf() {
+    OrgPolicy orgPolicyProto = new OrgPolicy();
+    if (boolPolicy != null) {
+      orgPolicyProto.setBooleanPolicy(boolPolicy.toProtobuf());
+    }
+    orgPolicyProto.setConstraint(constraint);
+    if (policies != null) {
+      orgPolicyProto.setListPolicy(policies.toProtobuf());
+    }
+    orgPolicyProto.setUpdateTime(updateTime);
+    orgPolicyProto.setVersion(version);
+    return orgPolicyProto;
+  }
+
+  static OrgPolicyInfo fromProtobuf(OrgPolicy orgPolicyProtobuf) {
+    Builder builder = new Builder();
+    if (orgPolicyProtobuf.getBooleanPolicy() != null) {
+      builder.setBoolPolicy(BoolPolicy.fromProtobuf(orgPolicyProtobuf.getBooleanPolicy()));
+    }
+    builder.setConstraint(orgPolicyProtobuf.getConstraint());
+    if (orgPolicyProtobuf.getListPolicy() != null) {
+      builder.setListPolicy(Policies.fromProtobuf(orgPolicyProtobuf.getListPolicy()));
+    }
+    builder.setUpdateTime(orgPolicyProtobuf.getUpdateTime());
+    builder.setVersion(orgPolicyProtobuf.getVersion());
+    return builder.build();
+  }
+}
+```

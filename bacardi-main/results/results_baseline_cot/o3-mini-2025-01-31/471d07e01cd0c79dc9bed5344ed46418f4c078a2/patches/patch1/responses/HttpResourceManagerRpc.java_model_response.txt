@@ -1,0 +1,267 @@
+```java
+package com.google.cloud.resourcemanager.spi.v1beta1;
+
+import com.google.api.gax.longrunning.OperationFuture;
+import com.google.api.gax.rpc.ApiException;
+import com.google.api.gax.rpc.StatusCode;
+import com.google.cloud.Tuple;
+import com.google.cloud.resourcemanager.ResourceManagerException;
+import com.google.cloud.resourcemanager.spi.v1beta1.Option;
+import com.google.cloud.resourcemanager.spi.v1beta1.ListResult;
+import com.google.cloud.resourcemanager.v3.ClearOrgPolicyRequest;
+import com.google.cloud.resourcemanager.v3.Constraint;
+import com.google.cloud.resourcemanager.v3.CreateProjectMetadata;
+import com.google.cloud.resourcemanager.v3.FoldersClient;
+import com.google.cloud.resourcemanager.v3.GetEffectiveOrgPolicyRequest;
+import com.google.cloud.resourcemanager.v3.GetOrgPolicyRequest;
+import com.google.cloud.resourcemanager.v3.ListAvailableOrgPolicyConstraintsRequest;
+import com.google.cloud.resourcemanager.v3.ListAvailableOrgPolicyConstraintsResponse;
+import com.google.cloud.resourcemanager.v3.ListOrgPoliciesRequest;
+import com.google.cloud.resourcemanager.v3.ListOrgPoliciesResponse;
+import com.google.cloud.resourcemanager.v3.OrgPolicy;
+import com.google.cloud.resourcemanager.v3.Project;
+import com.google.cloud.resourcemanager.v3.ProjectsClient;
+import com.google.cloud.resourcemanager.v3.SetIamPolicyRequest;
+import com.google.cloud.resourcemanager.v3.SetOrgPolicyRequest;
+import com.google.cloud.resourcemanager.v3.OrganizationsClient;
+import com.google.iam.v1.Policy;
+import com.google.iam.v1.TestIamPermissionsResponse;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
+@Deprecated
+public class HttpResourceManagerRpc implements ResourceManagerRpc {
+
+  public HttpResourceManagerRpc(ResourceManagerOptions options) {
+    // No initialization needed for the new GAPIC clients.
+  }
+
+  @Override
+  public Project create(Project project) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      OperationFuture<Project, CreateProjectMetadata> op =
+          projectsClient.createProjectAsync(project);
+      return op.get();
+    } catch (InterruptedException | ExecutionException | IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public void delete(String projectId) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      projectsClient.deleteProjectAsync("projects/" + projectId).get();
+    } catch (InterruptedException | ExecutionException | IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Project get(String projectId, Map<Option, ?> options) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      return projectsClient.getProject("projects/" + projectId);
+    } catch (ApiException ex) {
+      StatusCode.Code code = ex.getStatusCode().getCode();
+      if (code == StatusCode.Code.PERMISSION_DENIED || code == StatusCode.Code.NOT_FOUND) {
+        return null;
+      }
+      throw new ResourceManagerException(ex);
+    } catch (IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Tuple<String, Iterable<Project>> list(Map<Option, ?> options) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      com.google.cloud.resourcemanager.v3.ListProjectsRequest.Builder reqBuilder =
+          com.google.cloud.resourcemanager.v3.ListProjectsRequest.newBuilder();
+      if (options.get(Option.FILTER) != null) {
+        reqBuilder.setFilter((String) options.get(Option.FILTER));
+      }
+      if (options.get(Option.PAGE_SIZE) != null) {
+        reqBuilder.setPageSize((Integer) options.get(Option.PAGE_SIZE));
+      }
+      if (options.get(Option.PAGE_TOKEN) != null) {
+        reqBuilder.setPageToken((String) options.get(Option.PAGE_TOKEN));
+      }
+      ProjectsClient.ListProjectsPagedResponse response =
+          projectsClient.listProjects(reqBuilder.build());
+      String nextPageToken = response.getPage().getNextPageToken();
+      Iterable<Project> projects = response.iterateAll();
+      return Tuple.of(nextPageToken, projects);
+    } catch (IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public void undelete(String projectId) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      projectsClient.undeleteProjectAsync("projects/" + projectId).get();
+    } catch (InterruptedException | ExecutionException | IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Project replace(Project project) {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      return projectsClient.updateProjectAsync(project).get();
+    } catch (InterruptedException | ExecutionException | IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Policy getPolicy(String projectId) throws ResourceManagerException {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      return projectsClient.getIamPolicy("projects/" + projectId);
+    } catch (ApiException ex) {
+      if (ex.getStatusCode().getCode() == StatusCode.Code.PERMISSION_DENIED) {
+        return null;
+      }
+      throw new ResourceManagerException(ex);
+    } catch (IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Policy replacePolicy(String projectId, Policy newPolicy) throws ResourceManagerException {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      SetIamPolicyRequest req =
+          SetIamPolicyRequest.newBuilder().setPolicy(newPolicy).build();
+      return projectsClient.setIamPolicy("projects/" + projectId, req);
+    } catch (IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public List<Boolean> testPermissions(String projectId, List<String> permissions)
+      throws ResourceManagerException {
+    try (ProjectsClient projectsClient = ProjectsClient.create()) {
+      TestIamPermissionsResponse response =
+          projectsClient.testIamPermissions("projects/" + projectId, permissions);
+      Set<String> permissionsOwned = ImmutableSet.copyOf(response.getPermissionsList());
+      ImmutableList.Builder<Boolean> answer = ImmutableList.builder();
+      for (String p : permissions) {
+        answer.add(permissionsOwned.contains(p));
+      }
+      return answer.build();
+    } catch (IOException ex) {
+      throw new ResourceManagerException(ex);
+    }
+  }
+
+  @Override
+  public Map<String, Boolean> testOrgPermissions(String resource, List<String> permissions)
+      throws IOException {
+    try (OrganizationsClient organizationsClient = OrganizationsClient.create()) {
+      TestIamPermissionsResponse response =
+          organizationsClient.testIamPermissions(resource, permissions);
+      Set<String> permissionsOwned = ImmutableSet.copyOf(response.getPermissionsList());
+      ImmutableMap.Builder<String, Boolean> answer = ImmutableMap.builder();
+      for (String permission : permissions) {
+        answer.put(permission, permissionsOwned.contains(permission));
+      }
+      return answer.build();
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public void clearOrgPolicy(String resource, OrgPolicy orgPolicy) throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      ClearOrgPolicyRequest request =
+          ClearOrgPolicyRequest.newBuilder()
+              .setConstraint(orgPolicy.getConstraint())
+              .setEtag(orgPolicy.getEtag())
+              .build();
+      foldersClient.clearOrgPolicy(resource, request);
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public OrgPolicy getEffectiveOrgPolicy(String resource, String constraint) throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      GetEffectiveOrgPolicyRequest request =
+          GetEffectiveOrgPolicyRequest.newBuilder().setConstraint(constraint).build();
+      return foldersClient.getEffectiveOrgPolicy(resource, request);
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public OrgPolicy getOrgPolicy(String resource, String constraint) throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      GetOrgPolicyRequest request =
+          GetOrgPolicyRequest.newBuilder().setConstraint(constraint).build();
+      return foldersClient.getOrgPolicy(resource, request);
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public ListResult<Constraint> listAvailableOrgPolicyConstraints(
+      String resource, Map<Option, ?> options) throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      ListAvailableOrgPolicyConstraintsRequest.Builder reqBuilder =
+          ListAvailableOrgPolicyConstraintsRequest.newBuilder();
+      if (options.get(Option.PAGE_SIZE) != null) {
+        reqBuilder.setPageSize((Integer) options.get(Option.PAGE_SIZE));
+      }
+      if (options.get(Option.PAGE_TOKEN) != null) {
+        reqBuilder.setPageToken((String) options.get(Option.PAGE_TOKEN));
+      }
+      ListAvailableOrgPolicyConstraintsResponse response =
+          foldersClient.listAvailableOrgPolicyConstraints(resource, reqBuilder.build());
+      return ListResult.of(response.getNextPageToken(), response.getConstraintsList());
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public ListResult<OrgPolicy> listOrgPolicies(String resource, Map<Option, ?> options)
+      throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      ListOrgPoliciesRequest.Builder reqBuilder = ListOrgPoliciesRequest.newBuilder();
+      if (options.get(Option.PAGE_SIZE) != null) {
+        reqBuilder.setPageSize((Integer) options.get(Option.PAGE_SIZE));
+      }
+      if (options.get(Option.PAGE_TOKEN) != null) {
+        reqBuilder.setPageToken((String) options.get(Option.PAGE_TOKEN));
+      }
+      ListOrgPoliciesResponse response =
+          foldersClient.listOrgPolicies(resource, reqBuilder.build());
+      return ListResult.of(response.getNextPageToken(), response.getPoliciesList());
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+
+  @Override
+  public OrgPolicy replaceOrgPolicy(String resource, OrgPolicy orgPolicy) throws IOException {
+    try (FoldersClient foldersClient = FoldersClient.create()) {
+      SetOrgPolicyRequest request =
+          SetOrgPolicyRequest.newBuilder().setPolicy(orgPolicy).build();
+      return foldersClient.setOrgPolicy(resource, request);
+    } catch (Exception ex) {
+      throw ResourceManagerException.translateAndThrow(ex);
+    }
+  }
+}
+```

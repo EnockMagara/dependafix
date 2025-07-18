@@ -1,0 +1,25 @@
+20d19
+< import com.google.cloud.pubsublite.PublishMetadata;
+48,50c47,50
+<     builder.setPublisherFactory(
+<         partition ->
+<             SinglePartitionPublisherBuilder.newBuilder()
+---
+>     builder.setPublisherFactory(new com.google.cloud.pubsublite.internal.wire.PartitionPublisherFactory() {
+>       @Override
+>       public Publisher<PublishMetadata> newPublisher(int partition) {
+>         return SinglePartitionPublisherBuilder.newBuilder()
+54c54,61
+<                 .build());
+---
+>             .build();
+>       }
+> 
+>       @Override
+>       public void close() {
+>         // No cleanup required.
+>       }
+>     });
+56a64,65
+> 
+>   public static class PublishMetadata {}

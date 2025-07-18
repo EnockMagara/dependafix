@@ -1,0 +1,16 @@
+[
+  {
+    "name" : "se.kth.Main",
+    "allDeclaredConstructors" : true,
+    "allPublicConstructors" : true,
+    "allDeclaredMethods" : true,
+    "allPublicMethods" : true,
+    "fields" : [
+      { "name" : "methodName" },
+      { "name" : "newVersionImage" },
+      { "name" : "oldVersionImage" },
+      { "name" : "outputPath" },
+      { "name" : "semanticAgentPath" }
+    ]
+  }
+]

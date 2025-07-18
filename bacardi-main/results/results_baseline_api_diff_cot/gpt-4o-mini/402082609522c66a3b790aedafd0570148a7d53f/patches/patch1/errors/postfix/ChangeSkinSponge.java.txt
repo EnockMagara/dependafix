@@ -1,0 +1,10 @@
+28:cannot find symbol  symbol:   class ChannelRegistrar   location: package org.spongepowered.api.network 
+67:cannot find symbol  symbol:   class GameInitializationEvent   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+26:cannot find symbol  symbol:   class GameStoppingEvent   location: package org.spongepowered.api.event.lifecycle 
+30:package org.spongepowered.api.text does not exist
+50:cannot find symbol  symbol:   class ConfigDir   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+57:cannot find symbol  symbol:   class GamePreInitializationEvent   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+27:package org.spongepowered.api.network.ChannelBinding does not exist
+25:cannot find symbol  symbol:   class GameInitializationEvent   location: package org.spongepowered.api.event.lifecycle 
+91:cannot find symbol  symbol:   class GameStoppingEvent   location: class com.github.games647.changeskin.sponge.ChangeSkinSponge 
+31:package org.spongepowered.api.text.serializer does not exist

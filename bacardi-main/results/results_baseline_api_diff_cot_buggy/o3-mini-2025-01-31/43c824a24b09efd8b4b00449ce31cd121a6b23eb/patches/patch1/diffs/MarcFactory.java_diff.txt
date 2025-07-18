@@ -1,0 +1,36 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+24d22
+< 
+27d24
+< 
+67c64,66
+<     for (JsonBranch branch : schema.getPaths()) {
+---
+>     // Adapt to new API: schema.getPaths() now returns List<String>
+>     for (String path : schema.getPaths()) {
+>       JsonBranch branch = new JsonBranch(path);
+483a483,505
+>   }
+>   
+>   // Local compatibility class to replace the removed de.gwdg.metadataqa.api.json.JsonBranch
+>   private static class JsonBranch {
+>     private final String label;
+> 
+>     public JsonBranch(String label) {
+>       this.label = label;
+>     }
+> 
+>     public Object getParent() {
+>       // In the new API, the concept of parent is removed; assume root branch.
+>       return null;
+>     }
+> 
+>     public String getLabel() {
+>       return label;
+>     }
+> 
+>     public String getJsonPath() {
+>       // In the new API, we assume that the label itself can serve as the json path.
+>       return label;
+>     }

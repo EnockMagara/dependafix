@@ -1,25 +1,66 @@
 {
-  "name": "sample_bot",
+  "name": "dependafix-bot",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Automated dependency update fix system with comprehensive build validation",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "start": "probot run ./src/index.js",
-    "dev": "probot run ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha test/unit/**/*.test.js --recursive",
+    "test:integration": "mocha test/integration/**/*.test.js --recursive --timeout 10000",
+    "test:watch": "mocha test/**/*.test.js --recursive --watch",
+    "test:coverage": "nyc npm run test",
+    "test:use-cases": "node test-use-cases.js",
+    "test:build-validation": "node test-build-validation.js",
+    "test:java-deps": "node test-java-dependencies.js",
+    "test:mock-webhook": "node test/mock/webhook-simulator.js",
+    "lint": "eslint src/ test/ --ext .js",
+    "lint:fix": "eslint src/ test/ --ext .js --fix",
+    "format": "prettier --write src/ test/",
+    "validate": "npm run lint && npm run test && npm run test:use-cases",
+    "setup": "npm install && npm run validate",
+    "mock:server": "node test/mock/mock-server.js",
+    "demo": "node demo.js",
+    "demo:full": "npm run mock:server & sleep 2 && npm run test:mock-webhook"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "dependency-management",
+    "automated-fixes",
+    "build-validation",
+    "github-bot",
+    "llm-integration"
+  ],
+  "author": "Dependafix Team",
+  "license": "MIT",
   "dependencies": {
-    "@octokit/auth-app": "^8.0.1",
-    "@octokit/core": "^7.0.2",
-    "@octokit/webhooks": "^14.0.0",
-    "dotenv": "^16.5.0",
-    "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "probot": "^13.4.7"
-    
+    "probot": "^12.3.1",
+    "axios": "^1.6.0",
+    "simple-git": "^3.20.0",
+    "fs-extra": "^11.1.1",
+    "xml2js": "^0.6.2",
+    "semver": "^7.5.4",
+    "chalk": "^5.3.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.10",
+    "sinon": "^17.0.1",
+    "nyc": "^15.1.0",
+    "nodemon": "^3.0.1",
+    "eslint": "^8.52.0",
+    "prettier": "^3.0.3",
+    "supertest": "^6.3.3",
+    "nock": "^13.3.8"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/dependafix-bot.git"
   }
 }

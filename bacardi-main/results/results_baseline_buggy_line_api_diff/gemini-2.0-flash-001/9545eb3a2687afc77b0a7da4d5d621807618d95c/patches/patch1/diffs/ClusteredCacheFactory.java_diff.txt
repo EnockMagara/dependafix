@@ -1,0 +1,47 @@
+22d21
+< import com.hazelcast.config.MaxSizeConfig;
+27d25
+< import com.hazelcast.core.Cluster;
+30c28,31
+< import com.hazelcast.core.Member;
+---
+> import com.hazelcast.cluster.MembershipEvent;
+> import com.hazelcast.cluster.MembershipListener;
+> import com.hazelcast.cluster.Member;
+> import com.hazelcast.cluster.Cluster;
+209c210,225
+<                 membershipListener = cluster.addMembershipListener(clusterListener);
+---
+>                 membershipListener = cluster.addMembershipListener(new MembershipListener() {
+>                     @Override
+>                     public void memberAdded(MembershipEvent membershipEvent) {
+>                         clusterListener.memberAdded(membershipEvent);
+>                     }
+> 
+>                     @Override
+>                     public void memberRemoved(MembershipEvent membershipEvent) {
+>                          clusterListener.memberRemoved(membershipEvent);
+>                     }
+> 
+>                     @Override
+>                     public void memberAttributeChanged(com.hazelcast.cluster.MemberAttributeEvent memberAttributeEvent) {
+>                         clusterListener.memberAttributeChanged(memberAttributeEvent);
+>                     }
+>                 });
+248c264
+<         cluster.removeMembershipListener(membershipListener);
+---
+>         cluster.removeMembershipListener((MembershipListener) membershipListener);
+288c304
+<             dynamicConfig.setMaxSizeConfig(new MaxSizeConfig(hazelcastMaxCacheSizeInMegaBytes, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+---
+>             dynamicConfig.setMaxSizeConfig(new com.hazelcast.config.MaxSizeConfig().setSize(hazelcastMaxCacheSizeInMegaBytes).setMaxSizePolicy(com.hazelcast.config.MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+656c672,673
+<         return NodeID.getInstance(member.getStringAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE).getBytes(StandardCharsets.UTF_8));
+---
+>         // Use the new method to get the attribute
+>         return NodeID.getInstance(member.getAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE).toString().getBytes(StandardCharsets.UTF_8));
+701,703d717
+< 
+< 
+< 

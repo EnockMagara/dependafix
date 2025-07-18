@@ -1,0 +1,10 @@
+36c36
+< import org.yaml.snakeyaml.inspector.TrustedTagInspector;
+---
+> import org.yaml.snakeyaml.introspector.BeanAccess;
+38d37
+< import org.yaml.snakeyaml.representer.Representer;
+66c65
+<         loadingConfig.setTagInspector(new TrustedTagInspector());
+---
+>         loadingConfig.setBeanAccess(BeanAccess.FIELD);

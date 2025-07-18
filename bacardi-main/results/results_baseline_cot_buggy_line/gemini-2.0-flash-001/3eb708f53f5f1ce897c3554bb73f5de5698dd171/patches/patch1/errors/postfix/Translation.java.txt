@@ -1,0 +1,2 @@
+20:class TranslationInfo is public, should be declared in a file named TranslationInfo.java
+96:cannot find symbol  symbol:   method getSourceLanguageCode()   location: variable translation of type com.google.cloud.translate.v3.Translation 

@@ -1,0 +1,16 @@
+169:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+82:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+195:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+60:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+104:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+144:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+42:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+20:com.redislabs.redisgraph.impl.api.RedisGraphPipeline is not abstract and does not override abstract method waitReplicas(int,long) in com.redislabs.redisgraph.RedisGraphPipeline
+251:cannot infer type arguments for redis.clients.jedis.Response<>  reason: cannot infer type-variable(s) T     (argument mismatch; redis.clients.jedis.Response<java.lang.String> cannot be converted to redis.clients.jedis.Builder<T>) 
+124:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+249:cannot find symbol  symbol:   method getResponse(redis.clients.jedis.Builder<java.lang.String>)   location: variable pipeline of type redis.clients.jedis.Pipeline 
+5:cannot find symbol  symbol:   class RedisCommandsPipeline   location: package redis.clients.jedis.commands 
+17:cannot find symbol  symbol: class RedisCommandsPipeline 
+16:cannot find symbol  symbol: class RedisBinaryCommandsPipeline 
+6:cannot find symbol  symbol:   class RedisScriptingCommandsPipeline   location: package redis.clients.jedis.commands 
+4:cannot find symbol  symbol:   class RedisBinaryCommandsPipeline   location: package redis.clients.jedis.commands 

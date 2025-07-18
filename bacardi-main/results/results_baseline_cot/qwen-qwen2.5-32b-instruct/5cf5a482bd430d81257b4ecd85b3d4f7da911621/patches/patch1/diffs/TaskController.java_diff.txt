@@ -1,0 +1,24 @@
+12d11
+< import javax.mvc.Controller;
+33d31
+< @Controller
+90d87
+<     //@ValidateOnExecution(type = ExecutableType.NONE)
+108c105
+<         task.setDescription(form.getDescription());
+---
+>         task.description(form.getDescription());
+127c124
+<         form.setDescription(task.getDescription());
+---
+>         form.description(task.getDescription());
+152,153c149,150
+<         task.setName(form.getName());
+<         task.setDescription(form.getDescription());
+---
+>         task.name(form.getName());
+>         task.description(form.getDescription());
+164c161
+<     //@CsrfProtected
+---
+>     @CsrfProtected

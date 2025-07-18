@@ -1,0 +1,11 @@
+13,14d12
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+23d20
+< import org.apache.thrift.transport.TFramedTransport;
+25a23
+> import org.apache.thrift.transport.layered.TFramedTransport;
+81c79
+<         .byteOffsetInputStream), maxMessageSize);
+---
+>         .byteOffsetInputStream));

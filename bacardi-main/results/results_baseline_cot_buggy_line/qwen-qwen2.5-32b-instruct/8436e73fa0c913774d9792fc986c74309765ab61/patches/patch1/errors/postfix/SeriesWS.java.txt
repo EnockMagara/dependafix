@@ -1,0 +1,42 @@
+162:illegal start of type
+171:= expected
+138:illegal start of expression
+130:illegal start of expression
+139:= expected
+123:= expected
+166:illegal start of expression
+167:= expected
+89:= expected
+93:= expected
+96:illegal start of expression
+94:illegal start of expression
+90:illegal start of expression
+131:= expected
+125:= expected
+129:= expected
+133:= expected
+127:= expected
+87:= expected
+122:illegal start of type
+172:illegal start of expression
+137:= expected
+168:illegal start of expression
+88:illegal start of expression
+124:illegal start of expression
+128:illegal start of expression
+164:illegal start of expression
+92:illegal start of expression
+132:illegal start of expression
+135:= expected
+126:illegal start of expression
+165:= expected
+163:= expected
+91:= expected
+97:= expected
+136:illegal start of expression
+170:illegal start of expression
+169:= expected
+173:= expected
+134:illegal start of expression
+86:illegal start of type
+95:= expected

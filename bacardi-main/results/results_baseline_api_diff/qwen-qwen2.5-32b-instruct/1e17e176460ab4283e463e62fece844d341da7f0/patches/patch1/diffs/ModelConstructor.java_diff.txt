@@ -1,0 +1,23 @@
+16a17
+> import org.yaml.snakeyaml.LoaderOptions;
+43,44c44
+<     super(Model.class);
+< 
+---
+>     super(new LoaderOptions());
+168c168
+<           child = toDom(child, (Map) entryValue);
+---
+>           toDom(child, (Map) entryValue);
+188c188
+<           if (pair[1] != null && pair[1] instanceof Map)
+---
+>           if (pair[1] instanceof Map)
+252c252,254
+<           Node keyNode = valueNode.getKeyNode();
+---
+>           ScalarNode keyNode = (ScalarNode) valueNode.getKeyNode();
+>           String key = keyNode.getValue();
+>           if ("configuration".equals(key)) {
+254d255
+<           if (keyNode instanceof ScalarNode && "configuration".equals(((ScalarNode) keyNode).getValue())) {

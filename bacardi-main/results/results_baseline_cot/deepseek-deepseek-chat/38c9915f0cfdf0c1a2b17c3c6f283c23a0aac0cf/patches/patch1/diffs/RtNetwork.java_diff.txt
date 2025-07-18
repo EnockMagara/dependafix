@@ -1,0 +1,11 @@
+30,31c30
+< import org.cactoos.scalar.IoCheckedScalar;
+< import org.cactoos.scalar.Reduced;
+---
+> import org.cactoos.scalar.Unchecked;
+66,67c65,66
+<         return new IoCheckedScalar<>(
+<             new Reduced<>(
+---
+>         return new Unchecked<>(
+>             new org.cactoos.scalar.Reduced<>(

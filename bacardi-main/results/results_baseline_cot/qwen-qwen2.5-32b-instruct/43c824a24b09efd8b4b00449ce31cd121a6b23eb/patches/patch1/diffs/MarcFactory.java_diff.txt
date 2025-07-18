@@ -1,0 +1,43 @@
+93c93
+<             new Control008(extractFirst(cache, branch), marcRecord));
+---
+>             new Control008(extractFirst(cache, branch), marcRecord);
+259c259
+<               definition,
+---
+>               (definition,
+292c292
+<         definition,
+---
+>         (definition,
+384c384
+<             line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+---
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+391c391
+<                 "parse error in record #%s) tag %s: '%s'",
+---
+>                 ("parse error in record #%s) tag %s: '%s'",
+393c393,394
+<               ));
+---
+>                 )
+>               );
+422c423
+<                 "parse error in record #%s) tag %s: '%s'",
+---
+>                 ("parse error in record #%s) tag %s: '%s'",
+424c425,426
+<               ));
+---
+>                 )
+>               );
+453c455
+<                 "parse error in record #%s) tag %s: '%s'",
+---
+>                 ("parse error in record #%s) tag %s: '%s'",
+455c457,458
+<               ));
+---
+>                 )
+>               );

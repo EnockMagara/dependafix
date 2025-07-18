@@ -1,0 +1,19 @@
+1c1
+< 
+---
+> import java.util.Locale;
+3,6c3,6
+< import javax.enterprise.context.RequestScoped;
+< import javax.inject.Inject;
+< import javax.inject.Named;
+< import javax.mvc.MvcContext;
+---
+> import jakarta.enterprise.context.RequestScoped;
+> import jakarta.inject.Inject;
+> import jakarta.inject.Named;
+> import jakarta.mvc.MvcContext;
+33c33,34
+<         final ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, mvcContext.getLocale());
+---
+>         Locale locale = mvcContext.getLocale();
+>         final ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME, locale);

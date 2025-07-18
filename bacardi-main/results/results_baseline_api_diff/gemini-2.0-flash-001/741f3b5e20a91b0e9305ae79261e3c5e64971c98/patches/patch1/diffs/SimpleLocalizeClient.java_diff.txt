@@ -1,0 +1,4 @@
+134c134
+<   private void throwOnError(HttpResponse<?> httpResponse)
+---
+>   private void throwOnError(HttpResponse<?> httpResponse) throws IOException

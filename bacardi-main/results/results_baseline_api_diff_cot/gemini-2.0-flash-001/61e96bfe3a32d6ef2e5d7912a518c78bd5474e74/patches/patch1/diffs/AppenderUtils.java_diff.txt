@@ -1,0 +1,18 @@
+57d56
+<     @Override
+68d66
+<     @Override
+78d75
+<     @Override
+81a79,89
+> 
+>     @Override
+>     public byte[] encode(LogMessage logMessage) throws IOException {
+>       try {
+>         logMessage.write(protocol);
+>         framedTransport.flush();
+>         return new byte[0]; // Return an empty byte array as the message is already written to the output stream
+>       } catch (TException e) {
+>         throw new IOException(e);
+>       }
+>     }

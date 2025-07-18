@@ -1,0 +1,14 @@
+2a3
+> import com.fasterxml.jackson.core.type.TypeReference;
+26,29d26
+< import java.util.Optional;
+< 
+< import static io.simplelocalize.cli.TemplateKeys.LANGUAGE_TEMPLATE_KEY;
+< import static io.simplelocalize.cli.TemplateKeys.NAMESPACE_TEMPLATE_KEY;
+88c85
+<     ExportResponse exportResponse = objectMapper.readValue(body, ExportResponse.class);
+---
+>     ExportResponse exportResponse = objectMapper.readValue(body, new TypeReference<ExportResponse>() {});
+165,166d161
+< 
+< 

@@ -1,0 +1,25 @@
+64:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+87:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+21:com.redislabs.redisgraph.impl.api.RedisGraphTransaction is not abstract and does not override abstract method execGetResponse() in com.redislabs.redisgraph.RedisGraphTransaction
+282:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+110:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+229:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+157:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+179:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+13:cannot find symbol  symbol:   class CommandArguments   location: package redis.clients.jedis.util 
+204:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+44:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+135:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+25:cannot find symbol  symbol: class BinaryScriptingCommands 
+24:cannot find symbol  symbol: class MultiKeyCommands 
+5:cannot find symbol  symbol:   class AdvancedCommands   location: package redis.clients.jedis.commands 
+9:cannot find symbol  symbol:   class MultiKeyBinaryCommands   location: package redis.clients.jedis.commands 
+6:cannot find symbol  symbol:   class ScriptingCommands   location: package redis.clients.jedis.commands 
+26:cannot find symbol  symbol: class BinaryBasicCommands 
+4:cannot find symbol  symbol:   class AdvancedBinaryCommands   location: package redis.clients.jedis.commands 
+8:cannot find symbol  symbol:   class BinaryScriptingCommands   location: package redis.clients.jedis.commands 
+11:cannot find symbol  symbol:   class BinaryBasicCommands   location: package redis.clients.jedis.commands 
+23:cannot find symbol  symbol: class MultiKeyBinaryCommands 
+10:cannot find symbol  symbol:   class MultiKeyCommands   location: package redis.clients.jedis.commands 
+7:cannot find symbol  symbol:   class BasicCommands   location: package redis.clients.jedis.commands 
+12:cannot find symbol  symbol:   class BinaryCommands   location: package redis.clients.jedis.commands 

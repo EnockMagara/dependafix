@@ -1,0 +1,9 @@
+18d17
+< import org.junit.runner.RunWith;
+20c19,20
+< import org.mockito.runners.MockitoJUnitRunner;
+---
+> import org.mockito.MockedStatic;
+> import org.mockito.Mockito;
+22d21
+< @RunWith(MockitoJUnitRunner.class)

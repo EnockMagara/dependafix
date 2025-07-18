@@ -1,0 +1,6 @@
+20,22d19
+< /**
+<  * @author Erik Engstrom
+<  */
+37d33
+<         getContainer().getLoggerManager().setThreshold( Logger.LEVEL_DEBUG );

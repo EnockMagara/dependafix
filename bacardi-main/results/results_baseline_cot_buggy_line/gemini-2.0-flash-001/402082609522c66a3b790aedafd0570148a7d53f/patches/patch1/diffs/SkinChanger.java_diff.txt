@@ -1,0 +1,13 @@
+7c7,8
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.service.permission.Subject;
+> import org.spongepowered.api.text.Text;
+12c13
+<     private final CommandSource invoker;
+---
+>     private final Subject invoker;
+14c15
+<     public SkinChanger(ChangeSkinSponge plugin, Account owner, String url, String oldSkinUrl, CommandSource invoker) {
+---
+>     public SkinChanger(ChangeSkinSponge plugin, Account owner, String url, String oldSkinUrl, Subject invoker) {

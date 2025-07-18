@@ -1,0 +1,13 @@
+30c30
+< import org.cactoos.scalar.IoCheckedScalar;
+---
+> import org.cactoos.scalar.Checked;
+66c66
+<         return new IoCheckedScalar<>(
+---
+>         return new Checked<>(
+73c73,74
+<             )
+---
+>             ),
+>             IOException.class

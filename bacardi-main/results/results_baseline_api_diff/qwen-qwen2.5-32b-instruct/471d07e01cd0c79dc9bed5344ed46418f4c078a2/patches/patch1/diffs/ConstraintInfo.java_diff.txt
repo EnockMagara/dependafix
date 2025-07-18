@@ -1,0 +1,98 @@
+1,15d0
+< /*
+<  * Copyright 2020 Google LLC
+<  *
+<  * Licensed under the Apache License, Version 2.0 (the "License");
+<  * you may not use this file except in compliance with the License.
+<  * You may obtain a copy of the License at
+<  *
+<  *       http://www.apache.org/licenses/LICENSE-2.0
+<  *
+<  * Unless required by applicable law or agreed to in writing, software
+<  * distributed under the License is distributed on an "AS IS" BASIS,
+<  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+<  */
+18,20c3,4
+< import com.google.api.services.cloudresourcemanager.model.BooleanConstraint;
+< import com.google.api.services.cloudresourcemanager.model.Constraint;
+< import com.google.api.services.cloudresourcemanager.model.ListConstraint;
+---
+> import com.google.api.services.cloudresourcemanager.v3.model.ListConstraint as ListConstraintV3;
+> import com.google.api.services.cloudresourcemanager.v3.model.Constraint as ConstraintV3;
+35,36c19,21
+<   static final Function<Constraint, ConstraintInfo> FROM_PROTOBUF_FUNCTION =
+<       new Function<Constraint, ConstraintInfo>() {
+---
+> {
+>   static final Function<ConstraintV3, ConstraintInfo> FROM_PROTOBUF_FUNCTION =
+>       new Function<ConstraintV3, ConstraintInfo>() {
+38c23
+<         public ConstraintInfo apply(Constraint protobuf) {
+---
+>         public ConstraintInfo apply(ConstraintV3 protobuf) {
+42,43c27,28
+<   static final Function<ConstraintInfo, Constraint> TO_PROTOBUF_FUNCTION =
+<       new Function<ConstraintInfo, Constraint>() {
+---
+>   static final Function<ConstraintInfo, ConstraintV3> TO_PROTOBUF_FUNCTION =
+>       new Function<ConstraintInfo, ConstraintV3>() {
+45c30
+<         public Constraint apply(ConstraintInfo constraintInfo) {
+---
+>         public ConstraintV3 apply(ConstraintInfo constraintInfo) {
+50c35
+<   private BooleanConstraint booleanConstraint;
+---
+>   private Boolean booleanConstraint;
+63a49
+>   {
+114,115c100,101
+<     ListConstraint toProtobuf() {
+<       return new ListConstraint().setSuggestedValue(suggestedValue).setSupportsUnder(supportsUnder);
+---
+>     ListConstraintV3 toProtobuf() {
+>       return new ListConstraintV3().setSuggestedValue(suggestedValue).setSupportsUnder(supportsUnder);
+118c104
+<     static Constraints fromProtobuf(ListConstraint listConstraint) {
+---
+>     static Constraints fromProtobuf(ListConstraintV3 listConstraint) {
+123c109
+<   /** Builder for {@code ConstraintInfo}. */
+---
+>   /** Builder for {@code ConstraintInfo} object. */
+125c111
+<     private BooleanConstraint booleanConstraint;
+---
+>     private Boolean booleanConstraint;
+147c133
+<     Builder setBooleanConstraint(BooleanConstraint booleanConstraint) {
+---
+>     Builder setBooleanConstraint(Boolean booleanConstraint) {
+198c184
+<   public BooleanConstraint getBooleanConstraint() {
+---
+>   public Boolean getBooleanConstraint() {
+212c198
+<   /** Returns the human readable name of the constraint. */
+---
+>   /** Returns the human-readable name of the constraint. */
+253c239
+<         booleanConstraint, constraintDefault, description, displayName, constraints, name, version);
+---
+>         (booleanConstraint, constraintDefault, description, displayName, constraints, name, version);
+266,267c252,253
+<   Constraint toProtobuf() {
+<     Constraint constraintProto = new Constraint();
+---
+>   ConstraintV3 toProtobuf() {
+>     ConstraintV3 constraintProto = new ConstraintV3();
+276d261
+<     constraintProto.setVersion(version);
+280c265
+<   static ConstraintInfo fromProtobuf(Constraint constraintProtobuf) {
+---
+>   static ConstraintInfo fromProtobuf(ConstraintV3 constraintProtobuf) {
+292d276
+<     builder.setVersion(constraintProtobuf.getVersion());

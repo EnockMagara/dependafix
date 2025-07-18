@@ -1,0 +1,21 @@
+15,17c15,17
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+---
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+> import com.pubnub.api.models.consumer.objects_api.user.PNUserResult;
+> import com.pubnub.api.models.consumer.objects_api.space.PNSpaceResult;
+28d27
+< /** Created by Lukas Zaoralek on 14.11.17. */
+40,41c39
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+<     pnConfiguration.setSubscribeKey(publicKey);
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+93d90
+<                 @Override
+98d94
+<                 @Override
+103d98
+<                 @Override

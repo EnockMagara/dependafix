@@ -1,0 +1,10 @@
+12d11
+< import redis.clients.jedis.Client;
+142c141
+<         Client client = jedis.getClient();
+---
+>         redis.clients.jedis.Client client = new redis.clients.jedis.Client(jedis.getConnection());
+157c156
+<         Client client = jedis.getClient();
+---
+>         redis.clients.jedis.Client client = new redis.clients.jedis.Client(jedis.getConnection());

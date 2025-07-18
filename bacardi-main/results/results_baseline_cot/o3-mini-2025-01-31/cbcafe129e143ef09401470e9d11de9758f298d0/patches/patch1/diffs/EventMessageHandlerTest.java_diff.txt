@@ -1,0 +1,27 @@
+5a6
+> import ch.qos.logback.classic.spi.LoggingEvent;
+84c85,86
+<     private Appender<ILoggingEvent> mockLogAppender;
+---
+>     private Appender<LoggingEvent> mockLogAppender;
+> 
+86c88
+<     ArgumentCaptor<ILoggingEvent> loggingEventArgumentCaptor;
+---
+>     ArgumentCaptor<LoggingEvent> loggingEventArgumentCaptor;
+179c181
+<         List<ILoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+---
+>         List<LoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+216c218
+<         List<ILoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+---
+>         List<LoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+253c255
+<         List<ILoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+---
+>         List<LoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+290c292
+<         List<ILoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();
+---
+>         List<LoggingEvent> logStatement = loggingEventArgumentCaptor.getAllValues();

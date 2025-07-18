@@ -1,0 +1,5 @@
+33:cannot find symbol  symbol:   class EtcdStorageFactory   location: class com.artipie.security.policy.YamlPolicyFactory 
+36:cannot find symbol  symbol:   class S3StorageFactory   location: class com.artipie.security.policy.YamlPolicyFactory 
+13:package com.artipie.asto.s3 does not exist
+12:package com.artipie.asto.etcd does not exist
+26:cannot find symbol  symbol:   class Yaml   location: interface com.artipie.asto.factory.Config 

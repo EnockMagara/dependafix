@@ -1,0 +1,13 @@
+56c56
+<                 .filterInputsBy(this::shouldScan);
+---
+>                 .filterInputsBy(new FilterBuilder().includePackage(PACKAGE_TO_SCAN));
+64c64
+<             return new FilterBuilder().include(".+\\.class").apply(s);
+---
+>             return s.endsWith(".class");
+68,69c68
+<             String regex = String.format(".?\\.??%s\\..+\\.class", packageToScan);
+<             if (new FilterBuilder().include(regex).apply(s)) {
+---
+>             if (s.startsWith(packageToScan.replace(".", "/")) && s.endsWith(".class")) {

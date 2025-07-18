@@ -1,0 +1,10 @@
+69:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+94:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+80:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+111:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+156:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+274:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+141:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 
+33:package io.dropwizard.core.setup does not exist
+143:cannot access jakarta.validation.Validator  class file for jakarta.validation.Validator not found 
+56:cannot find symbol  symbol:   class Environment   location: class com.wire.lithium.Server<Config> 

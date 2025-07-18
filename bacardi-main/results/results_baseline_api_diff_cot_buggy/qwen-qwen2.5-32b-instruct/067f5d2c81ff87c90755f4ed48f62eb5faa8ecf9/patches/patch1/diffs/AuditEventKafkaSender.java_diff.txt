@@ -1,0 +1,302 @@
+32c32
+< import org.apache.thrift.TException;
+---
+> import org.apache.thrift.protocol.TBinaryProtocol;
+33a34
+> import org.apache.thrift.TException;
+48,50c49
+<  *  LoggingAuditEventSender implementations that dequeue LoggingAuditEvent and send it to Kafka.
+<  *
+<  *  Each instance of this class should be executed in its own thread.
+---
+>  *  LoggingAuditEventSender implementations that dequeue LoggingAuditEvents and sends them to Kafka cluster.
+61,65c60
+<    *  When sender send audit events to Kafka,  it chooses a random partition and if it fails, it
+<    *  will choose another GOOD partition, this retry will happen at most numOfPartitionsToTrySending
+<    *  times before dropping the event. Note that, this is different from the retry handled by
+<    *  kafka client
+<    *  library when sending an event to a certain partition.
+---
+>    *  For each event, it will try at most NUM_OF_PARTITIONS_TO_TRY_SENDING times (3 times) before dropping this event.
+74,83d68
+< 
+<   /**
+<    *   when gracefully shutting down the Sender, the calling thread sleeps for some time and let
+<    *   the sender to send out audit events left in the queue if there are any.
+<    *   stopGracePeriodInSeconds is the maximum time reserved and
+<    *   stopGracePeriodInSeconds / THREAD_SLEEP_IN_SECONDS is the total rounds the calling thread
+<    *   will sleep.
+<    */
+<   private static final int THREAD_SLEEP_IN_SECONDS = 10;
+< 
+86c71
+<    *  to wait, in order to let the sender send out audit events left in the queue if there are any.
+---
+>    *  to wait, in order to let the sender send out LoggingAuditEvent left in the queue if there are any.
+90d74
+< 
+105,109c89,90
+<    *  The AuditEventKafkaSender dequeue from the beginning of the deque, if does not send out event
+<    *  successfully, it will enqueue this event to the beginning of the queue.  Note that, if enqueue
+<    *  the failed event at the end of the queue, this event could be processed with quite some delay
+<    *  and this is not the behavior we want.  That's we use LinkedBlockingDequeue,
+<    *  not ArrayBlockingQueue.
+---
+>    *  The Sender dequeues from the beginning of the deque, if does not send out event
+>    *  successfully, it will enqueue this event to the beginning of the deque.
+121c102
+<   private TSerializer serializer = new TSerializer();
+---
+>   private TSerializer serializer;
+154,155c135
+<    *  If sending out to one partition fails, this partition is added to set;
+<    *  If sending out to one partition succeeds, this partition is removed if it was added before.
+---
+>    *  If exception thrown (i.e. the send failed), the partition is added to badPartitions.
+160,163c140
+<    * For each event (identified by LoggingAuditHeaders, key of the map), track the number of tries
+<    * for sending to Kafka. Each try will choose a different and partition that is not in the
+<    * badPartitions.  When event is send out successfully or dropped, the corresponding entry in
+<    * this map is removed.
+---
+>    *  For each event (identified by LoggingAuditHeaders), track the number of tries.
+165d141
+< 
+169,172c145
+<    *  currentPartitionId specifies the partition of audit_event topic used to receive audit events.
+<    *  The currentPartitionId will be reset in resetCurrentPartitionIdIfNeeded() method. This reduces
+<    *  the number of TCP connections from audit client to the Kafka Cluster hosting the audit_event
+<    *  topic.
+---
+>    *  LoggingAuditEventSender implementations that dequeue LoggingAuditEvents and sends them to Kafka cluster.
+174,175d146
+<   private int currentPartitionId = -1;
+< 
+185c156,159
+<     this.badPartitions.add(-1);
+---
+>     try {
+>       this.serializer = new TSerializer(new TBinaryProtocol.Factory());
+>     } catch (TTransportException e) {
+>       LOG.error("Failed to initialize TSerializer", e);
+187,194d160
+< 
+< 
+<   public KafkaProducer<byte[], byte[]> getKafkaProducer() {
+<     return kafkaProducer;
+<   }
+< 
+<   public void setKafkaProducer(KafkaProducer<byte[], byte[]> kafkaProducer) {
+<     this.kafkaProducer = kafkaProducer;
+205,206c171,172
+<         OpenTsdbMetricConverter.incr(
+<             LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_PARTITIONS_REFRESH_COUNT, 1,
+---
+>         OpenTsdbMetricConverter
+>             .incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_PARTITIONS_REFRESH_COUNT, 1,
+209,211c175,177
+<         OpenTsdbMetricConverter.incr(
+<             LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_PARTITIONS_REFRESH_ERROR, 1,
+<                 "host=" + host, "stage=" + stage.toString());
+---
+>         OpenTsdbMetricConverter
+>             .incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_PARTITIONS_REFRESH_ERROR, 1,
+>                 "host=" + host, "stage=" + stage.toString(), "topic=" + topic);
+232,233c198,199
+<           OpenTsdbMetricConverter.incr(
+<               LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_CURRENT_PARTITION_RESET, 1,
+---
+>           OpenTsdbMetricConverter
+>               .incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_KAFKA_CURRENT_PARTITION_RESET, 1,
+241a208,209
+>     }
+>   }
+242a211,222
+>   /**
+>    *  start the executing thread and let the Sender run.
+>    */
+>   public synchronized void start() {
+>     if (this.thread == null) {
+>       thread = new Thread(this);
+>       thread.setDaemon(true);
+>       thread.setName(name);
+>       thread.start();
+>       LOG.warn(
+>           "[{}] created and started [{}] to let it dequeue LoggingAuditEvents and send to Kafka.",
+>           Thread.currentThread().getName(), name);
+247,251c227
+<    *  Sender dequeues LoggingAuditEvents and sends them to Kafka cluster. If send to one partition
+<    *  fails, it will choose another partition. For each event, it will try at most
+<    *  NUM_OF_PARTITIONS_TO_TRY_SENDING times (3 times) before dropping this event. Metrics are
+<    *  used to track the queue size and usuage, number of events sent out to Kafka successfully, and
+<    *  the number of events dropped.
+---
+>    *  reserve some time (by default 30 seconds at most)to let the Sender send out LoggingAuditEvents left in the queue if there are any.
+252a229,260
+>   public synchronized void stop() {
+>     LOG.warn(
+>         "[{}] waits up to {} seconds to let [{}] send out LoggingAuditEvents left in the queue if"
+>             + " any.",
+>         Thread.currentThread().getName(), stopGracePeriodInSeconds, name);
+>     int i = 0;
+>     int numOfRounds = stopGracePeriodInSeconds / THREAD_SLEEP_IN_SECONDS;
+>     while (queue.size() > 0 && this.thread != null && thread.isAlive() && i < numOfRounds) {
+>       i += 1;
+>       try {
+>         Thread.sleep(THREAD_SLEEP_IN_SECONDS * 1000);
+>         CommonUtils.reportQueueUsage(queue.size(), queue.remainingCapacity(), host, stage.toString());
+>         LOG.info("In {} round, [{}] waited {} seconds and the current queue size is {}", i,
+>             Thread.currentThread().getName(), THREAD_SLEEP_IN_SECONDS, queue.size());
+>       } catch (InterruptedException e) {
+>         LOG.warn("[{}] got interrupted while waiting for [{}] to send out LoggingAuditEvents left "
+>             + "in the queue.", Thread.currentThread().getName(), name, e);
+>       }
+>     }
+>     cancelled.set(true);
+>     if (this.thread != null && thread.isAlive()) {
+>       thread.interrupt();
+>     }
+>     try {
+>       this.kafkaProducer.close();
+>     } catch (Throwable t) {
+>       LOG.warn("Exception is thrown while stopping {}.", name, t);
+>     }
+>     LOG.warn("[{}] is stopped and the number of LoggingAuditEvents left in the queue is {}.", name,
+>         queue.size());
+>   }
+> 
+285,286c293,294
+<         OpenTsdbMetricConverter.incr(
+<             LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_DEQUEUE_INTERRUPTED_EXCEPTION, 1,
+---
+>         OpenTsdbMetricConverter
+>             .incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_DEQUEUE_INTERRUPTED_EXCEPTION, 1,
+291c299,300
+<         OpenTsdbMetricConverter.incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_EXCEPTION, 1,
+---
+>         OpenTsdbMetricConverter
+>             .incr(LoggingAuditClientMetrics.AUDIT_CLIENT_SENDER_EXCEPTION, 1,
+298,309c307
+< 
+<   public class KafkaProducerCallback implements Callback {
+< 
+<     private LoggingAuditEvent event;
+<     private int partition;
+< 
+<     public KafkaProducerCallback(LoggingAuditEvent event, int partition) {
+<       this.event = event;
+<       this.partition = partition;
+<     }
+< 
+<     public void checkAndEnqueueWhenSendFailed() {
+---
+>   private void checkAndEnqueueWhenSendFailed() {
+314,315c312
+<               "host=" + host, "stage=" + stage.toString(), "topic=" + topic,
+<               "partition=" + this.partition);
+---
+>             "host=" + host, "stage=" + stage.toString(), "topic=" + topic, "partition=" + this.partition);
+317,319c314,315
+<       // retry the failed event by inserting it at the beginning of the deque.
+<       // If number of tries reaches 3, meaning that 3 partitions have been tried sending to but
+<       // still failed, this event is dropped.
+---
+>     // retry the failed event by inserting it at the beginning of the queue.
+>     // If event is sent out successfully or dropped, the corresponding entry in this map is removed.
+326,327c322
+<                 eventTriedCount.size(), "host=" + host, "stage=" + stage.toString(),
+<                 "topic=" + topic);
+---
+>               eventTriedCount.size(), "host=" + host, "stage=" + stage.toString());
+329c324
+<           LOG.debug("Failed to send audit event after trying {} partitions. Drop event.", count);
+---
+>         LOG.debug("Failed to send audit event after {} partitions. Drop event.", count);
+334d328
+<           eventTriedCount.remove(event.getLoggingAuditHeaders());
+341c335
+<     public void insertEvent(LoggingAuditEvent event){
+---
+>   private void insertEvent(LoggingAuditEvent event){
+349c343
+<       } catch (InterruptedException ex) {
+---
+>     } catch (InterruptedException e) {
+351,352c345
+<             "Enqueuing LoggingAuditEvent at head of the queue was interrupted in callback. "
+<                 + "Drop this event");
+---
+>           "Enqueuing LoggingAuditEvent at head of the queue was interrupted in callback. Drop this event");
+357c350,359
+<     @Override
+---
+>   public class KafkaProducerCallback implements Callback {
+> 
+>     private LoggingAuditEvent event;
+>     private int partition;
+> 
+>     public KafkaProducerCallback(LoggingAuditEvent event, int partition) {
+>       this.event = event;
+>       this.partition = partition;
+>     }
+> 
+365,367d366
+< 
+<           // if send is successful, remove the event from the map eventTriedCount if it was added
+<           // LoggingAuditHeaders can uniquely identify an event.
+369,370d367
+<           // if send out successfully, remove the partition from the badPartitions if it was added.
+<           badPartitions.remove(recordMetadata.partition());
+382,433d378
+< 
+<   /**
+<    *  start the executing thread and let the Sender run.
+<    */
+<   public synchronized void start() {
+<     if (this.thread == null) {
+<       thread = new Thread(this);
+<       thread.setDaemon(true);
+<       thread.setName(name);
+<       thread.start();
+<       LOG.warn(
+<           "[{}] created and started [{}] to let it dequeue LoggingAuditEvents and send to Kafka.",
+<           Thread.currentThread().getName(), name);
+<     }
+<   }
+< 
+<   /**
+<    *  reserve some time (by default 30 seconds at most)to let AuditEventKafkaSender to send out
+<    *  LoggingAuditEvent in the queue and gracefully stop AuditEventKafkaSender.
+<    */
+<   public synchronized void stop() {
+<     LOG.warn(
+<         "[{}] waits up to {} seconds to let [{}] send out LoggingAuditEvents left in the queue if"
+<             + " any.",
+<         Thread.currentThread().getName(), stopGracePeriodInSeconds, name);
+<     int i = 0;
+<     int numOfRounds = stopGracePeriodInSeconds / THREAD_SLEEP_IN_SECONDS;
+<     while (queue.size() > 0 && this.thread != null && thread.isAlive() && i < numOfRounds) {
+<       i += 1;
+<       try {
+<         Thread.sleep(THREAD_SLEEP_IN_SECONDS * 1000);
+<         CommonUtils.reportQueueUsage(queue.size(), queue.remainingCapacity(), host, stage.toString());
+<         LOG.info("In {} round, [{}] waited {} seconds and the current queue size is {}", i,
+<             Thread.currentThread().getName(), THREAD_SLEEP_IN_SECONDS, queue.size());
+<       } catch (InterruptedException e) {
+<         LOG.warn("[{}] got interrupted while waiting for [{}] to send out LoggingAuditEvents left "
+<             + "in the queue.", Thread.currentThread().getName(), name, e);
+<       }
+<     }
+<     cancelled.set(true);
+<     if (this.thread != null && thread.isAlive()) {
+<       thread.interrupt();
+<     }
+<     try {
+<       this.kafkaProducer.close();
+<     } catch (Throwable t) {
+<       LOG.warn("Exception is thrown while stopping {}.", name, t);
+<     }
+<     LOG.warn("[{}] is stopped and the number of LoggingAuditEvents left in the queue is {}.", name,
+<         queue.size());
+<   }
+< 

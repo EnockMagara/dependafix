@@ -1,0 +1,9 @@
+346:method unconfirmedTransactions() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+362:method transactionManager() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+341:method lastBlockHeight() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+392:method weighedBalancesSupplier() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+111:method setLocations in class org.flywaydb.core.api.configuration.ClassicConfiguration cannot be applied to given types;  required: org.flywaydb.core.api.Location[]   found: java.lang.String[]   reason: varargs mismatch; java.lang.String[] cannot be converted to org.flywaydb.core.api.Location 
+357:method unconfirmedTransactionsFilter() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+396:incompatible types: bad return type in method reference    org.nem.nis.state.AlwaysVestedBalances cannot be converted to java.util.function.Supplier<org.nem.nis.state.WeightedBalances> 
+332:incompatible types: bad return type in method reference    org.nem.nis.state.AlwaysVestedBalances cannot be converted to java.util.function.Supplier<org.nem.nis.state.WeightedBalances> 
+367:method nisMain() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig

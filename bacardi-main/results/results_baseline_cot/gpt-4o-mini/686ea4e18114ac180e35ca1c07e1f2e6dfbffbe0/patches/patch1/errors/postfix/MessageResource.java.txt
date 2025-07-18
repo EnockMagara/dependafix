@@ -1,0 +1,10 @@
+58:cannot find symbol  symbol:   class POST   location: class com.wire.lithium.server.resources.MessageResource 
+39:package javax.ws.rs.core does not exist
+38:package javax.ws.rs does not exist
+40:package javax.ws.rs.core does not exist
+46:package javax.ws.rs does not exist
+48:cannot find symbol  symbol: class Path 
+91:cannot find symbol  symbol:   variable Response   location: class com.wire.lithium.server.resources.MessageResource 
+67:cannot find symbol  symbol:   class QueryParam   location: class com.wire.lithium.server.resources.MessageResource 
+66:cannot find symbol  symbol:   class Response   location: class com.wire.lithium.server.resources.MessageResource 
+47:package javax.ws.rs does not exist

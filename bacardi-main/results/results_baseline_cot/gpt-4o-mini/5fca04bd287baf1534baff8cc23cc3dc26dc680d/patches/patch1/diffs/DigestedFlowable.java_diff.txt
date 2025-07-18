@@ -1,0 +1,8 @@
+18a19
+> import org.cactoos.text.TextOf; // Added import for TextOf
+47d47
+<     @Override
+57c57
+<                 new Digest.Sha256(new HexOf(new BytesOf(sha.digest())).asString())
+---
+>                 new Digest.Sha256(new TextOf(new BytesOf(sha.digest())).asString()) // Changed HexOf to TextOf

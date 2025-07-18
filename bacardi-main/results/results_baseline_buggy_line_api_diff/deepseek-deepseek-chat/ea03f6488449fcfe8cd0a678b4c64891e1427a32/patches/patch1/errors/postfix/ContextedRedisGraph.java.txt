@@ -1,0 +1,2 @@
+141:incompatible types: redis.clients.jedis.Jedis cannot be converted to redis.clients.jedis.Connection
+153:incompatible types: redis.clients.jedis.Jedis cannot be converted to redis.clients.jedis.Connection

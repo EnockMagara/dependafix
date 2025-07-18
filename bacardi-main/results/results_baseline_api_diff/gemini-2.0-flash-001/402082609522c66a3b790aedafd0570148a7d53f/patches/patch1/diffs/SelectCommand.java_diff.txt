@@ -1,0 +1,44 @@
+7c7,8
+< 
+---
+> import net.kyori.adventure.text.Component;
+> import org.spongepowered.api.command.Command;
+9,12c10,11
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+16,19c15
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+< 
+< public class SelectCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class SelectCommand implements org.spongepowered.api.command.CommandExecutor, ChangeSkinCommand {
+29c25,27
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+---
+>     public CommandResult execute(CommandContext context) {
+>         org.spongepowered.api.command.CommandSource src = context.cause().root();
+> 
+35c33,34
+<         String skinName = args.<String>getOne("skinName").get().toLowerCase().replace("skin-", "");
+---
+>         Parameter.Key<String> skinNameKey = Parameter.key("skinName", String.class);
+>         String skinName = context.one(skinNameKey).orElse("").toLowerCase().replace("skin-", "");
+49,50c48,49
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command.Builder buildSpec() {
+>         return Command.builder()
+52,54c51,52
+<                 .arguments(string(of("skinName")))
+<                 .permission(PomData.ARTIFACT_ID + ".command.skinselect.base")
+<                 .build();
+---
+>                 .addParameter(Parameter.string().key("skinName").build())
+>                 .permission(PomData.ARTIFACT_ID + ".command.skinselect.base");

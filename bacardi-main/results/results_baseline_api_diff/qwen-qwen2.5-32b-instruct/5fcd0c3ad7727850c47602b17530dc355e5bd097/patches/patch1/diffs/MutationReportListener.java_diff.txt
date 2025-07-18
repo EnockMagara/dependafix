@@ -1,0 +1,19 @@
+2a3,4
+> import org.pitest.classinfo.ClassInfoVisitor;
+> import org.pitest.classinfo.ClassName;
+6d7
+< import org.pitest.mutationtest.SourceLocator;
+9d9
+< import org.pitest.elements.utils.JsonParser;
+103a104,110
+>     ClassInfoVisitor visitor = new ClassInfoVisitor() {
+>       @Override
+>       public void visit(ClassName className, byte[] classBytes, long timestamp) {
+>         // Implement the logic to handle class info if necessary
+>       }
+>     };
+>     coverage.accept(visitor);
+105c112
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), visitor.getClassInfo(data.getMutatedClass()));

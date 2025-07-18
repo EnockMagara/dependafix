@@ -1,0 +1,89 @@
+13c13,16
+< import org.snmp4j.agent.*;
+---
+> import org.snmp4j.agent.BaseAgent;
+> import org.snmp4j.agent.DuplicateRegistrationException;
+> import org.snmp4j.agent.MOScope;
+> import org.snmp4j.agent.ManagedObject;
+16c19,24
+< import org.snmp4j.agent.mo.snmp.*;
+---
+> import org.snmp4j.agent.mo.snmp.DefaultMOContextScope;
+> import org.snmp4j.agent.mo.snmp.DefaultMOQuery;
+> import org.snmp4j.agent.mo.snmp.SnmpCommunityMIB;
+> import org.snmp4j.agent.mo.snmp.SnmpNotificationMIB;
+> import org.snmp4j.agent.mo.snmp.SnmpTargetMIB;
+> import org.snmp4j.agent.mo.snmp.VacmMIB;
+22c30,41
+< import org.snmp4j.smi.*;
+---
+> import org.snmp4j.smi.Counter32;
+> import org.snmp4j.smi.Counter64;
+> import org.snmp4j.smi.Gauge32;
+> import org.snmp4j.smi.Integer32;
+> import org.snmp4j.smi.IpAddress;
+> import org.snmp4j.smi.OctetString;
+> import org.snmp4j.smi.OID;
+> import org.snmp4j.smi.RowStatus;
+> import org.snmp4j.smi.TimeTicks;
+> import org.snmp4j.smi.Variable;
+> import org.snmp4j.smi.VariableBinding;
+> import org.snmp4j.smi.StorageType;
+26c45,51
+< import java.io.*;
+---
+> import java.io.BufferedReader;
+> import java.io.File;
+> import java.io.FileInputStream;
+> import java.io.FileNotFoundException;
+> import java.io.IOException;
+> import java.io.InputStreamReader;
+> import java.io.UnsupportedEncodingException;
+30c55,61
+< import java.util.*;
+---
+> import java.util.ArrayList;
+> import java.util.Collections;
+> import java.util.HashMap;
+> import java.util.List;
+> import java.util.Map;
+> import java.util.SortedMap;
+> import java.util.TreeMap;
+62c93
+<     private final List<ManagedObject> groups = new ArrayList<>();
+---
+>     private final List<ManagedObject<?>> groups = new ArrayList<>();
+266c297
+<                     ManagedObject mo = server.lookup(new DefaultMOQuery(scope, false));
+---
+>                     ManagedObject<?> mo = server.lookup(new DefaultMOQuery(scope, false));
+356,357c387,388
+<                 MOContextScope contextScope = new DefaultMOContextScope(new OctetString(), group.getScope());
+<                 ManagedObject other = server.lookup(new DefaultMOQuery(contextScope, false));
+---
+>                 DefaultMOContextScope contextScope = new DefaultMOContextScope(new OctetString(), group.getScope());
+>                 ManagedObject<?> other = server.lookup(new DefaultMOQuery(contextScope, false));
+379c410
+<      * Sets the private registry value of {@link DefaultMOServer} via reflection.
+---
+>      * Sets the private registry value of {@link org.snmp4j.agent.DefaultMOServer} via reflection.
+387,389c418,420
+<             final Field registry = server.getClass().getDeclaredField("registry");
+<             registry.setAccessible(true);
+<             final SortedMap<MOScope, ManagedObject> reg = server.getRegistry();
+---
+>             final Field registryField = server.getClass().getDeclaredField("registry");
+>             registryField.setAccessible(true);
+>             final SortedMap<MOScope, ManagedObject<?>> reg = server.getRegistry();
+392c423
+<             registry.set(server, reg);
+---
+>             registryField.set(server, reg);
+440c471
+<         ManagedObject query;
+---
+>         Object query;
+489c520
+<         for (final ManagedObject mo : groups) {
+---
+>         for (final ManagedObject<?> mo : groups) {

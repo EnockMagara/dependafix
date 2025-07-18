@@ -1,0 +1,6 @@
+9c9,11
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.command.CommandSource; // This import is no longer valid
+> import org.spongepowered.api.command.CommandSource; // Replace with the new class or interface
+> import org.spongepowered.api.command.source.CommandSource; // Assuming the new class is in this package

@@ -1,0 +1,23 @@
+15,17d14
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+40,41c37
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+<     pnConfiguration.setSubscribeKey(publicKey);
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+93c89
+<                 @Override
+---
+>                 /*@Override
+106c102
+<                 }
+---
+>                 }*/
+112a109,113
+> 
+>                   @Override
+>                   public void uuid(PubNub pubnub, com.pubnub.api.models.consumer.objects.PNUUIDResult pnUUIDResult) {
+>                       LOG.debug("PubNub uuid: {}", pnUUIDResult.toString());
+>                   }

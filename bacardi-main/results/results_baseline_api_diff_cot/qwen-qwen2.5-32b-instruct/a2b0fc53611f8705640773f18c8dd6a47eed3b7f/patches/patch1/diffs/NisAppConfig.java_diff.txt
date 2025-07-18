@@ -1,0 +1,13 @@
+103c103
+<         @Bean(initMethod = "migrate")
+---
+>         @Bean
+108c108
+<                 final org.flywaydb.core.Flyway flyway = new Flyway();
+---
+>                 final Flyway flyway = new Flyway(new org.flywaydb.core.api.configuration.Configuration());
+110,111c110
+<                 flyway.setClassLoader(NisAppConfig.class.getClassLoader());
+<                 flyway.setLocations(prop.getProperty("flyway.locations"));
+---
+>                 flyway.setLocations(prop.getProperty("flyway.locations").split(","));

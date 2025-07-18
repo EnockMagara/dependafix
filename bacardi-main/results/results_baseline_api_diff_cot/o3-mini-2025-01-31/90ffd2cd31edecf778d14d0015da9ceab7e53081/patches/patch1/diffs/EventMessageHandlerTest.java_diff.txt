@@ -1,0 +1,13 @@
+4c4
+< import ch.qos.logback.classic.Logger;
+---
+> import ch.qos.logback.classic.LoggerContext;
+111,113c111,114
+<         Logger logger = (Logger) LoggerFactory.getLogger(EventMessageHandler.class);
+<         logger.setLevel(Level.INFO);
+<         logger.addAppender(mockLogAppender);
+---
+>         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+>         ch.qos.logback.classic.Logger testLogger = loggerContext.getLogger(EventMessageHandler.class);
+>         testLogger.setLevel(Level.INFO);
+>         testLogger.addAppender(mockLogAppender);

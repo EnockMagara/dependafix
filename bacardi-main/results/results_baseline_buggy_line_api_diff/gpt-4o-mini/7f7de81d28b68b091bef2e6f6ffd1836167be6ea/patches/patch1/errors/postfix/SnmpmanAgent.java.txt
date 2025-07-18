@@ -1,0 +1,2 @@
+442:incompatible types: java.lang.Object cannot be converted to org.snmp4j.agent.ManagedObject<?>
+393:Alternatives in a multi-catch statement cannot be related by subclassing  Alternative java.lang.NoSuchFieldException is a subclass of alternative java.lang.ReflectiveOperationException 

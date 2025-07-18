@@ -1,0 +1,15 @@
+7,11c7,9
+< import javax.mvc.Controller;
+< import javax.mvc.Models;
+< import javax.mvc.MvcContext;
+< import javax.ws.rs.GET;
+< import javax.ws.rs.Path;
+---
+> import jakarta.mvc.Controller;
+> import jakarta.mvc.Models;
+> import jakarta.mvc.annotation.MvcContext;
+23c21,22
+<     MvcContext mvc;
+---
+>     @MvcContext
+>     jakarta.mvc.MvcContext mvc;

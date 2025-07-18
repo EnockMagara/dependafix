@@ -1,0 +1,15 @@
+1a2,9
+> <repair_strategy>
+> 1. The external dependency update removed the PublishMetadata class from the package com.google.cloud.pubsublite.
+> 2. Analysis shows that in the new API version, PublishMetadata is now located in the package com.google.cloud.pubsublite.proto.
+> 3. To fix the issue, update the import for PublishMetadata to reflect the new package location.
+> 4. This minimal change preserves the function signature and allows the code to compile with the updated dependency.
+> </repair_strategy>
+> */
+> /*
+18c26
+< import com.google.cloud.pubsublite.PublishMetadata;
+---
+> import com.google.cloud.pubsublite.proto.PublishMetadata;
+23d30
+< 

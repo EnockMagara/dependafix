@@ -1,0 +1,11 @@
+140:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+56:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+245:cannot find symbol  symbol:   method getResponse(redis.clients.jedis.Builder<java.lang.String>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+78:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+165:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+120:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+100:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+191:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+38:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphPipeline 
+4:cannot find symbol  symbol:   class ClusterPipeline   location: package redis.clients.jedis.commands 
+14:cannot find symbol  symbol: class ClusterPipeline 

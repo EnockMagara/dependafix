@@ -1,0 +1,6 @@
+17d16
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+29c28
+<     private final RawDataChannel permissionsResultChannel;
+---
+>     private final org.spongepowered.api.network.channel.raw.RawDataChannel permissionsResultChannel;

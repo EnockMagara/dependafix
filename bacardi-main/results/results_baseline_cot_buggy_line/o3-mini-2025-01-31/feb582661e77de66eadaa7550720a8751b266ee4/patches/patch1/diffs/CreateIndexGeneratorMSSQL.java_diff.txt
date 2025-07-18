@@ -1,0 +1,13 @@
+12d11
+< import liquibase.util.StringUtils;
+87a87,96
+> 
+>   private static class StringUtils {
+>     public static String trimToNull(String input) {
+>       if (input == null) {
+>         return null;
+>       }
+>       String trimmed = input.trim();
+>       return trimmed.isEmpty() ? null : trimmed;
+>     }
+>   }

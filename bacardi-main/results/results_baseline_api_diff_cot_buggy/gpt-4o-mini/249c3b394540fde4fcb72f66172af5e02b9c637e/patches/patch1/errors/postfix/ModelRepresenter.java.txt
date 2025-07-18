@@ -1,0 +1,7 @@
+38:RepresentXpp3Dom cannot be resolved to a type
+55:ORDER_DEPENDENCY cannot be resolved to a variable
+53:ORDER_CONTRIBUTOR cannot be resolved to a variable
+49:ORDER_MODEL cannot be resolved to a variable
+51:ORDER_DEVELOPER cannot be resolved to a variable
+57:ORDER_PLUGIN cannot be resolved to a variable
+65:PropertyUtils cannot be resolved

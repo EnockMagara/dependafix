@@ -1,0 +1,5 @@
+283a284,285
+>         ConsoleLogger consoleLogger = new ConsoleLogger(Logger.LEVEL_DEBUG, "Sauce");
+>         unArchiver.enableLogging(consoleLogger);
+307d308
+<         unArchiver.enableLogging(new ConsoleLogger(Logger.LEVEL_DEBUG, "Sauce"));

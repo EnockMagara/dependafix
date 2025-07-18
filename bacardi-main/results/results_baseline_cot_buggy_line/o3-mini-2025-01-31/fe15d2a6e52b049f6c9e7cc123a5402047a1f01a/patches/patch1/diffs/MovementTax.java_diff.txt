@@ -1,0 +1,24 @@
+8d7
+< 
+22d20
+< 
+71d68
+<      *     
+83d79
+<      *     
+95d90
+<      *     
+107d101
+<      *     
+119d112
+<      *     
+131d123
+<      *     
+143d134
+<      *     
+155d145
+<      *     
+163c153
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>         final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE;

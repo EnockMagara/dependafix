@@ -1,0 +1,40 @@
+10a11
+> import java.util.Optional;
+11a13
+> import org.spongepowered.api.command.Command;
+13,14c15,16
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+16a19
+> import org.spongepowered.api.entity.living.player.Player;
+18,20c21,22
+< 
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import org.spongepowered.api.service.permission.Subject;
+> import org.spongepowered.api.text.Text;
+34,35c36,48
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+<         String url = args.<String>getOne("url").get();
+---
+>     public CommandResult execute(CommandContext args) {
+>         Subject src = args.cause().subject();
+> 
+>         Parameter.Value<String> urlValue = args.one(Text.of("url"));
+>         Optional<String> optUrl = urlValue.value();
+> 
+>         if (!optUrl.isPresent()) {
+>             plugin.sendMessage(src, "no-valid-url");
+>             return CommandResult.empty();
+>         }
+> 
+>         String url = optUrl.get();
+> 
+56c69
+<                 .arguments(string(of("url")))
+---
+>                 .addParameter(Parameter.string().key("url").build())

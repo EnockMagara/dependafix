@@ -1,0 +1,32 @@
+20c20
+< import com.google.cloud.pubsublite.PublishMetadata;
+---
+> // Removed: import com.google.cloud.pubsublite.PublishMetadata;
+35,36c35
+<   @Override
+<   public Publisher<PublishMetadata> newPublisher(Map<String, String> params) {
+---
+>   public Publisher<Void> newPublisher(Map<String, String> params) {
+40,46c39,42
+<         TopicPath.newBuilder()
+<             .setProject(
+<                 ProjectPath.parse("projects/" + config.get(ConfigDefs.PROJECT_FLAG).value())
+<                     .project())
+<             .setLocation(CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()))
+<             .setName(TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()))
+<             .build();
+---
+>         TopicPath.of(
+>             ProjectPath.parse("projects/" + config.get(ConfigDefs.PROJECT_FLAG).value()).project(),
+>             CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()),
+>             TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()));
+48,54c44
+<     builder.setPublisherFactory(
+<         partition ->
+<             SinglePartitionPublisherBuilder.newBuilder()
+<                 .setTopic(topic)
+<                 .setPartition(partition)
+<                 .setContext(PubsubContext.of(FRAMEWORK))
+<                 .build());
+---
+>     // Removed call to setPublisherFactory(...) since the PartitionPublisherFactory interface has been removed.

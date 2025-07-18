@@ -1,0 +1,36 @@
+48c48,49
+< import org.hamcrest.Matchers;
+---
+> import org.hamcrest.CoreMatchers;
+> import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+60,61c61,62
+<  *   .assertBody(Matchers.containsString("hello, world!"))
+<  *   .assertHeader("Content-Type", Matchers.hasItem("text/plain"))
+---
+>  *   .assertBody(org.hamcrest.CoreMatchers.containsString("hello, world!"))
+>  *   .assertHeader("Content-Type", IsIterableContainingInAnyOrder.hasItems("text/plain"))
+210c211
+<         return this.assertHeader(name, Matchers.hasItems(value));
+---
+>         return this.assertHeader(name, IsIterableContainingInAnyOrder.hasItems(value));
+246c247
+<             Matchers.not(Matchers.emptyIterableOf(String.class))
+---
+>             CoreMatchers.not(emptyIterableOf(String.class))
+284c285
+<             Matchers.notNullValue()
+---
+>             CoreMatchers.notNullValue()
+327d327
+<         @Override
+332a333,342
+>     private static <T> Matcher<Iterable<T>> emptyIterableOf(final Class<T> type) {
+>         return new CustomMatcher<Iterable<T>>("an empty iterable of type " + type.getSimpleName()) {
+>             public boolean matches(final Object item) {
+>                 if (item instanceof Iterable) {
+>                     return !((Iterable<?>) item).iterator().hasNext();
+>                 }
+>                 return false;
+>             }
+>         };
+>     }

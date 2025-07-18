@@ -1,0 +1,126 @@
+package com.premiumminds.billy.portugal.services.export.saftpt.v1_02_01.schema;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import org.jvnet.jaxb2_commons.lang.ToString2;
+import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "References", propOrder = {
+    "reference",
+    "reason"
+})
+public class References implements ToString2
+{
+
+    @XmlElement(name = "Reference")
+    protected String reference;
+    @XmlElement(name = "Reason")
+    protected String reason;
+
+    /**
+     * Gets the value of the reference property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getReference() {
+        return reference;
+    }
+
+    /**
+     * Sets the value of the reference property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setReference(String value) {
+        this.reference = value;
+    }
+
+    /**
+     * Gets the value of the reason property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getReason() {
+        return reason;
+    }
+
+    /**
+     * Sets the value of the reason property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setReason(String value) {
+        this.reason = value;
+    }
+
+    @Override
+    public String toString() {
+        final ToStringStrategy2 strategy = new DefaultToStringStrategy();
+        final StringBuilder buffer = new StringBuilder();
+        append(null, buffer, strategy);
+        return buffer.toString();
+    }
+
+    @Override
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        strategy.appendStart(locator, this, buffer);
+        appendFields(locator, buffer, strategy);
+        strategy.appendEnd(locator, this, buffer);
+        return buffer;
+    }
+
+    @Override
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
+        {
+            String theReference;
+            theReference = this.getReference();
+            strategy.appendField(locator, this, "reference", buffer, theReference, (this.reference != null));
+        }
+        {
+            String theReason;
+            theReason = this.getReason();
+            strategy.appendField(locator, this, "reason", buffer, theReason, (this.reason != null));
+        }
+        return buffer;
+    }
+
+    private static class DefaultToStringStrategy implements ToStringStrategy2 {
+
+        @Override
+        public void appendStart(ObjectLocator locator, Object object, StringBuilder buffer) {
+            buffer.append(object.getClass().getSimpleName()).append("[");
+        }
+
+        @Override
+        public void appendField(ObjectLocator locator, Object object, String fieldName, StringBuilder buffer, Object value, boolean isSet) {
+            if (isSet) {
+                if (buffer.charAt(buffer.length() - 1) != '[') {
+                    buffer.append(", ");
+                }
+                buffer.append(fieldName).append("=").append(value);
+            }
+        }
+
+        @Override
+        public void appendEnd(ObjectLocator locator, Object object, StringBuilder buffer) {
+            buffer.append("]");
+        }
+    }
+
+}

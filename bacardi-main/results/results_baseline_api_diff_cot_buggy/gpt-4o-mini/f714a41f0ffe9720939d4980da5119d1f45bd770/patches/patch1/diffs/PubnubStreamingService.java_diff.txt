@@ -1,0 +1,32 @@
+14,15c14,15
+< import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+---
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembership;
+17d16
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+40,41c39
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+<     pnConfiguration.setSubscribeKey(publicKey);
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+59c57
+<                     //              e.onComplete();
+---
+>                     e.onComplete();
+61c59
+<                     //              e.onError(pnStatus.getErrorData().getThrowable());
+---
+>                     e.onError(pnStatus.getErrorData().getThrowable());
+93,95c91,92
+<                 @Override
+<                 public void user(PubNub pubnub, PNUserResult pnUserResult) {
+<                   LOG.debug("PubNub user: {}", pnUserResult.toString());
+---
+>                 public void user(PubNub pubnub, PNMembershipResult pnMembershipResult) {
+>                   LOG.debug("PubNub user: {}", pnMembershipResult.toString());
+98d94
+<                 @Override
+103d98
+<                 @Override

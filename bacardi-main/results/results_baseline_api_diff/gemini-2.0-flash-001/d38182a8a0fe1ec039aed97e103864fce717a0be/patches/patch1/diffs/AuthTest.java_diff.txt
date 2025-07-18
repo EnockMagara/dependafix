@@ -1,0 +1,12 @@
+16a17
+> import com.artipie.http.auth.AuthUser;
+30a32
+> import java.util.Optional;
+353c355,357
+<                             .map(user -> new Authentication.User(user.name()))
+---
+>                             .map(user -> new AuthUser(user.name()))
+>                             .map(AuthUser::new)
+>                             .map(Optional::ofNullable)
+354a359
+>                             .orElse(Optional.empty())

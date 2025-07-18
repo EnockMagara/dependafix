@@ -1,0 +1,41 @@
+13,14d12
+< import org.spongepowered.api.Sponge;
+< import org.spongepowered.api.command.CommandException;
+23c21
+< import org.spongepowered.api.text.serializer.TextSerializers;
+---
+> import net.kyori.adventure.text.Component;
+25c23
+< public class InfoCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class InfoCommand implements CommandExecutor {
+33,35c31
+< 
+<     @Override
+<     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+---
+>     public CommandResult execute(CommandSource src, CommandContext args) {
+38c34
+<             return CommandResult.empty();
+---
+>             return CommandResult.success();
+42,43c38
+<         Task.builder().async()
+<                 .execute(() -> {
+---
+>         Task.builder().execute(() -> {
+46,47c41
+<                 })
+<                 .submit(plugin);
+---
+>         }).submit(plugin);
+52d45
+<     @Override
+61c54
+<         Optional<Player> optPlayer = Sponge.getServer().getPlayer(uuid);
+---
+>         Optional<Player> optPlayer = plugin.getServer().getPlayer(uuid);
+70c63
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+---
+>                 Text text = Text.of(formatted);

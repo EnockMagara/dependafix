@@ -1,0 +1,19 @@
+8c8,12
+< import org.apache.dubbo.rpc.*;
+---
+> import org.apache.dubbo.rpc.AsyncRpcResult;
+> import org.apache.dubbo.rpc.Invocation;
+> import org.apache.dubbo.rpc.RpcContext;
+> import org.apache.dubbo.rpc.RpcInvocation;
+> import org.apache.dubbo.rpc.Result;
+9a14,15
+> import org.apache.dubbo.rpc.future.FutureContext;
+> import java.util.concurrent.CompletableFuture;
+43c49
+<             RpcContext.getContext().setFuture(asyncRpcResult);
+---
+>             RpcContext.getContext().setFuture(asyncRpcResult.getAppResponseFuture());
+45c51
+<             FutureContext.getContext().setCompatibleFuture(asyncRpcResult);
+---
+>             FutureContext.getContext().setCompatibleFuture(asyncRpcResult.getAppResponseFuture());

@@ -1,0 +1,8 @@
+137,139c137,139
+<                                         if(constraint.getAnnotation() instanceof NotNull ||
+<                                            constraint.getAnnotation() instanceof NotEmpty ||
+<                                            constraint.getAnnotation() instanceof NotBlank)
+---
+>                                         if(constraint.getAnnotation().annotationType().equals(NotNull.class) ||
+>                                            constraint.getAnnotation().annotationType().equals(NotEmpty.class) ||
+>                                            constraint.getAnnotation().annotationType().equals(NotBlank.class))

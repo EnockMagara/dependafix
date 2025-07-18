@@ -1,0 +1,40 @@
+11a12
+> import org.spongepowered.api.command.Command;
+13,15c14,15
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.args.GenericArguments;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.CommonParameters;
+21,23c21,22
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import org.spongepowered.api.command.CommandSource;
+> import org.spongepowered.api.text.Text;
+25c24
+< public class SetCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class SetCommand implements CommandExecutor {
+37c36,37
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+---
+>     public CommandResult execute(CommandContext context) {
+>         CommandSource src = context.getCause().root();
+50,51c50,51
+<         String targetSkin = args.<String>getOne("skin").get();
+<         boolean keepSkin = args.hasAny("keep");
+---
+>         String targetSkin = context.one(CommonParameters.STRING).orElse("");
+>         boolean keepSkin = context.hasFlag("keep");
+75d74
+<     @Override
+79,81c78,79
+<                 .arguments(
+<                         string(of("skin")),
+<                         flags().flag("keep").buildWith(GenericArguments.none()))
+---
+>                 .addParameter(CommonParameters.string("skin"))
+>                 .addFlag(org.spongepowered.api.command.parameter.Flag.builder().setAliases("keep").build())

@@ -1,0 +1,7 @@
+5:<identifier> expected
+8:'{' expected
+3:illegal character: '`'
+1:class, interface, or enum expected
+4:illegal character: '`'
+9:<identifier> expected
+2:illegal character: '`'

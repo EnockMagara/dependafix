@@ -1,0 +1,9 @@
+21c21
+< import static org.apache.commons.lang3.StringUtils.*;
+---
+> import static org.apache.commons.lang3.StringUtils.isNotBlank;
+129c129,130
+<             if (isAllBlank(server.getUrl(), step.url)) {
+---
+>             boolean isUrlBlank = isNotBlank(server.getUrl()) || isNotBlank(step.url);
+>             if (!isUrlBlank) {

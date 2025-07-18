@@ -1,0 +1,97 @@
+9d8
+< 
+12c11,12
+< 
+---
+> import net.kyori.adventure.text.Component;
+> import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+14,19c14,17
+< import org.spongepowered.api.command.CommandException;
+< import org.spongepowered.api.command.CommandResult;
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.CommandExecutor;
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.parameter.CommandContext;
+21,23d18
+< import org.spongepowered.api.scheduler.Task;
+< import org.spongepowered.api.text.Text;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+33d27
+< 
+36c30
+<         if (!(src instanceof Player)) {
+---
+>         if (!Player.class.isInstance(src)) {
+42,43c36
+<         Task.builder().async()
+<                 .execute(() -> {
+---
+>         Sponge.server().scheduler().executor(plugin).submit(() -> {
+45,47c38,39
+<                     Task.builder().execute(() -> sendSkinDetails(uniqueId, preferences)).submit(plugin);
+<                 })
+<                 .submit(plugin);
+---
+>             Sponge.server().scheduler().executor(plugin).submit(() -> sendSkinDetails(uniqueId, preferences));
+>         });
+52d43
+<     @Override
+54c45
+<         return CommandSpec.builder()
+---
+>         Command cmd = Command.builder()
+57a49
+>         return new CommandSpecWrapper(cmd);
+61c53
+<         Optional<Player> optPlayer = Sponge.getServer().getPlayer(uuid);
+---
+>         Optional<Player> optPlayer = Sponge.server().player(uuid);
+70c62
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+---
+>                 Component text = LegacyComponentSerializer.legacyAmpersand().deserialize(formatted);
+74a67,105
+>         }
+>     }
+> 
+>     // Compatibility stub to replace the removed CommandSource type.
+>     public static interface CommandSource {
+>     }
+> 
+>     // Minimal compatibility implementation for CommandResult.
+>     public static class CommandResult {
+>         private final boolean success;
+> 
+>         private CommandResult(boolean success) {
+>             this.success = success;
+>         }
+> 
+>         public static CommandResult empty() {
+>             return new CommandResult(false);
+>         }
+> 
+>         public static CommandResult success() {
+>             return new CommandResult(true);
+>         }
+>     }
+> 
+>     // Stub interface for CommandSpec that extends the new Command interface.
+>     public static interface CommandSpec extends Command {
+>     }
+> 
+>     // Wrapper to adapt a Command from the new API into our CommandSpec.
+>     private static class CommandSpecWrapper implements CommandSpec {
+>         private final Command command;
+> 
+>         CommandSpecWrapper(Command command) {
+>             this.command = command;
+>         }
+> 
+>         @Override
+>         public CommandResult process(CommandContext context) throws CommandException {
+>             return command.process(context);

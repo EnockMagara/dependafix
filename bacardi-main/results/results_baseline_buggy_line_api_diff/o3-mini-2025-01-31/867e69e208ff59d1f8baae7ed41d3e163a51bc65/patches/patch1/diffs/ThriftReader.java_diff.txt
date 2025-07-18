@@ -1,0 +1,14 @@
+23d22
+< import org.apache.thrift.transport.TFramedTransport;
+25a25
+> import org.apache.thrift.transport.layered.TFramedTransport;
+63c63
+<   // The framed framedTransport.
+---
+>   // The framed transport.
+80,81c80,81
+<     this.framedTransport = new TFramedTransport(new TIOStreamTransport(this
+<         .byteOffsetInputStream), maxMessageSize);
+---
+>     // Use the new factory method provided by the updated dependency.
+>     this.framedTransport = TFramedTransport.newInstance(new TIOStreamTransport(this.byteOffsetInputStream), maxMessageSize);

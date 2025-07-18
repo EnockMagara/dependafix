@@ -1,0 +1,3569 @@
+8d7
+< 
+22a22
+> import org.jvnet.jaxb2_commons.lang.DefaultToStringStrategy;
+101c101
+<  *                                       &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax"/&gt;
+---
+>  *                                       &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementTax" minOccurs="0"/&gt;
+281a282
+>  *                                       &lt;element name="References" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}References" maxOccurs="unbounded" minOccurs="0"/&gt;
+308a310
+>  *                             &lt;element name="WithholdingTax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WithholdingTax" maxOccurs="unbounded" minOccurs="0"/&gt;
+334,335c336
+< public class SourceDocuments implements ToString2
+< {
+---
+> public class SourceDocuments implements ToString2 {
+418c419
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>         final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+452,556d452
+< 
+<     /**
+<      * <p>Java class for anonymous complex type.
+<      * 
+<      * <p>The following schema fragment specifies the expected content contained within this class.
+<      * 
+<      * <pre>
+<      * &lt;complexType&gt;
+<      *   &lt;complexContent&gt;
+<      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *       &lt;sequence&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NumberOfMovementLines"/&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TotalQuantityIssued"/&gt;
+<      *         &lt;element name="StockMovement" maxOccurs="unbounded" minOccurs="0"&gt;
+<      *           &lt;complexType&gt;
+<      *             &lt;complexContent&gt;
+<      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                 &lt;sequence&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DocumentNumber"/&gt;
+<      *                   &lt;element name="DocumentStatus"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatus"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatusDate"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementType"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TransactionID" minOccurs="0"/&gt;
+<      *                   &lt;choice&gt;
+<      *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<      *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SupplierID"/&gt;
+<      *                   &lt;/choice&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementComments" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipTo" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipFrom" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementEndTime" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStartTime"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ATDocCodeID" minOccurs="0"/&gt;
+<      *                   &lt;element name="Line" maxOccurs="unbounded"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<      *                             &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<      *                             &lt;choice&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<      *                             &lt;/choice&gt;
+<      *                             &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementTax" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element name="DocumentTotals"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<      *                             &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                 &lt;/sequence&gt;
+<      *               &lt;/restriction&gt;
+<      *             &lt;/complexContent&gt;
+<      *           &lt;/complexType&gt;
+<      *         &lt;/element&gt;
+<      *       &lt;/sequence&gt;
+<      *     &lt;/restriction&gt;
+<      *   &lt;/complexContent&gt;
+<      * &lt;/complexType&gt;
+<      * </pre>
+<      * 
+<      * 
+<      */
+563,564c459
+<     public static class MovementOfGoods implements ToString2
+<     {
+---
+>     public static class MovementOfGoods implements ToString2 {
+574,581d468
+<         /**
+<          * Gets the value of the numberOfMovementLines property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+586,593d472
+<         /**
+<          * Sets the value of the numberOfMovementLines property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+598,605d476
+<         /**
+<          * Gets the value of the totalQuantityIssued property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+610,617d480
+<         /**
+<          * Sets the value of the totalQuantityIssued property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+622,643d484
+<         /**
+<          * Gets the value of the stockMovement property.
+<          * 
+<          * <p>
+<          * This accessor method returns a reference to the live list,
+<          * not a snapshot. Therefore any modification you make to the
+<          * returned list will be present inside the JAXB object.
+<          * This is why there is not a <CODE>set</CODE> method for the stockMovement property.
+<          * 
+<          * <p>
+<          * For example, to add a new item, do as follows:
+<          * <pre>
+<          *    getStockMovement().add(newItem);
+<          * </pre>
+<          * 
+<          * 
+<          * <p>
+<          * Objects of the following type(s) are allowed in the list
+<          * {@link SourceDocuments.MovementOfGoods.StockMovement }
+<          * 
+<          * 
+<          */
+653c494
+<             final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>             final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+687,779d527
+< 
+<         /**
+<          * <p>Java class for anonymous complex type.
+<          * 
+<          * <p>The following schema fragment specifies the expected content contained within this class.
+<          * 
+<          * <pre>
+<          * &lt;complexType&gt;
+<          *   &lt;complexContent&gt;
+<          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *       &lt;sequence&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DocumentNumber"/&gt;
+<          *         &lt;element name="DocumentStatus"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatus"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatusDate"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementType"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TransactionID" minOccurs="0"/&gt;
+<          *         &lt;choice&gt;
+<          *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<          *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SupplierID"/&gt;
+<          *         &lt;/choice&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementComments" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipTo" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipFrom" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementEndTime" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStartTime"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ATDocCodeID" minOccurs="0"/&gt;
+<          *         &lt;element name="Line" maxOccurs="unbounded"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<          *                   &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<          *                   &lt;choice&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<          *                   &lt;/choice&gt;
+<          *                   &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementTax" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element name="DocumentTotals"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<          *                   &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *       &lt;/sequence&gt;
+<          *     &lt;/restriction&gt;
+<          *   &lt;/complexContent&gt;
+<          * &lt;/complexType&gt;
+<          * </pre>
+<          * 
+<          * 
+<          */
+804,805c552
+<         public static class StockMovement implements ToString2
+<         {
+---
+>         public static class StockMovement implements ToString2 {
+854,861d600
+<             /**
+<              * Gets the value of the documentNumber property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+866,873d604
+<             /**
+<              * Sets the value of the documentNumber property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+878,885d608
+<             /**
+<              * Gets the value of the documentStatus property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.MovementOfGoods.StockMovement.DocumentStatus }
+<              *     
+<              */
+890,897d612
+<             /**
+<              * Sets the value of the documentStatus property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.MovementOfGoods.StockMovement.DocumentStatus }
+<              *     
+<              */
+902,909d616
+<             /**
+<              * Gets the value of the hash property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+914,921d620
+<             /**
+<              * Sets the value of the hash property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+926,933d624
+<             /**
+<              * Gets the value of the hashControl property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+938,945d628
+<             /**
+<              * Sets the value of the hashControl property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+950,957d632
+<             /**
+<              * Gets the value of the period property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link Integer }
+<              *     
+<              */
+962,969d636
+<             /**
+<              * Sets the value of the period property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link Integer }
+<              *     
+<              */
+974,981d640
+<             /**
+<              * Gets the value of the movementDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+986,993d644
+<             /**
+<              * Sets the value of the movementDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+998,1005d648
+<             /**
+<              * Gets the value of the movementType property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1010,1017d652
+<             /**
+<              * Sets the value of the movementType property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1022,1029d656
+<             /**
+<              * Gets the value of the systemEntryDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1034,1041d660
+<             /**
+<              * Sets the value of the systemEntryDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1046,1053d664
+<             /**
+<              * Gets the value of the transactionID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1058,1065d668
+<             /**
+<              * Sets the value of the transactionID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1070,1077d672
+<             /**
+<              * Gets the value of the customerID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1082,1089d676
+<             /**
+<              * Sets the value of the customerID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1094,1101d680
+<             /**
+<              * Gets the value of the supplierID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1106,1113d684
+<             /**
+<              * Sets the value of the supplierID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1118,1125d688
+<             /**
+<              * Gets the value of the sourceID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1130,1137d692
+<             /**
+<              * Sets the value of the sourceID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1142,1149d696
+<             /**
+<              * Gets the value of the eacCode property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1154,1161d700
+<             /**
+<              * Sets the value of the eacCode property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1166,1173d704
+<             /**
+<              * Gets the value of the movementComments property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1178,1185d708
+<             /**
+<              * Sets the value of the movementComments property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1190,1197d712
+<             /**
+<              * Gets the value of the shipTo property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+1202,1209d716
+<             /**
+<              * Sets the value of the shipTo property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+1214,1221d720
+<             /**
+<              * Gets the value of the shipFrom property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+1226,1233d724
+<             /**
+<              * Sets the value of the shipFrom property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+1238,1245d728
+<             /**
+<              * Gets the value of the movementEndTime property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1250,1257d732
+<             /**
+<              * Sets the value of the movementEndTime property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1262,1269d736
+<             /**
+<              * Gets the value of the movementStartTime property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1274,1281d740
+<             /**
+<              * Sets the value of the movementStartTime property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+1286,1293d744
+<             /**
+<              * Gets the value of the atDocCodeID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+1298,1305d748
+<             /**
+<              * Sets the value of the atDocCodeID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+1310,1331d752
+<             /**
+<              * Gets the value of the line property.
+<              * 
+<              * <p>
+<              * This accessor method returns a reference to the live list,
+<              * not a snapshot. Therefore any modification you make to the
+<              * returned list will be present inside the JAXB object.
+<              * This is why there is not a <CODE>set</CODE> method for the line property.
+<              * 
+<              * <p>
+<              * For example, to add a new item, do as follows:
+<              * <pre>
+<              *    getLine().add(newItem);
+<              * </pre>
+<              * 
+<              * 
+<              * <p>
+<              * Objects of the following type(s) are allowed in the list
+<              * {@link SourceDocuments.MovementOfGoods.StockMovement.Line }
+<              * 
+<              * 
+<              */
+1339,1346d759
+<             /**
+<              * Gets the value of the documentTotals property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.MovementOfGoods.StockMovement.DocumentTotals }
+<              *     
+<              */
+1351,1358d763
+<             /**
+<              * Sets the value of the documentTotals property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.MovementOfGoods.StockMovement.DocumentTotals }
+<              *     
+<              */
+1365c770
+<                 final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                 final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+1489,1512d893
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatus"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStatusDate"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+1521,1522c902
+<             public static class DocumentStatus implements ToString2
+<             {
+---
+>             public static class DocumentStatus implements ToString2 {
+1536,1543d915
+<                 /**
+<                  * Gets the value of the movementStatus property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1548,1555d919
+<                 /**
+<                  * Sets the value of the movementStatus property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1560,1567d923
+<                 /**
+<                  * Gets the value of the movementStatusDate property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+1572,1579d927
+<                 /**
+<                  * Sets the value of the movementStatusDate property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+1584,1591d931
+<                 /**
+<                  * Gets the value of the reason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1596,1603d935
+<                 /**
+<                  * Sets the value of the reason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1608,1615d939
+<                 /**
+<                  * Gets the value of the sourceID property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1620,1627d943
+<                 /**
+<                  * Sets the value of the sourceID property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1632,1639d947
+<                 /**
+<                  * Gets the value of the sourceBilling property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1644,1651d951
+<                 /**
+<                  * Sets the value of the sourceBilling property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+1658c958
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+1701d1000
+< 
+1704,1726d1002
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<              *         &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+1734,1735c1010
+<             public static class DocumentTotals implements ToString2
+<             {
+---
+>             public static class DocumentTotals implements ToString2 {
+1746,1753d1020
+<                 /**
+<                  * Gets the value of the taxPayable property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1758,1765d1024
+<                 /**
+<                  * Sets the value of the taxPayable property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1770,1777d1028
+<                 /**
+<                  * Gets the value of the netTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1782,1789d1032
+<                 /**
+<                  * Sets the value of the netTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1794,1801d1036
+<                 /**
+<                  * Gets the value of the grossTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1806,1813d1040
+<                 /**
+<                  * Sets the value of the grossTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+1818,1825d1044
+<                 /**
+<                  * Gets the value of the currency property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+1830,1837d1048
+<                 /**
+<                  * Sets the value of the currency property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+1844c1055
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+1882d1092
+< 
+1885,1918d1094
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<              *         &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<              *         &lt;choice&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<              *         &lt;/choice&gt;
+<              *         &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementTax" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+1935,1936c1111
+<             public static class Line implements ToString2
+<             {
+---
+>             public static class Line implements ToString2 {
+1966,1973d1140
+<                 /**
+<                  * Gets the value of the lineNumber property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+1978,1985d1144
+<                 /**
+<                  * Sets the value of the lineNumber property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+1990,2011d1148
+<                 /**
+<                  * Gets the value of the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getOrderReferences().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link OrderReferences }
+<                  * 
+<                  * 
+<                  */
+2019,2026d1155
+<                 /**
+<                  * Gets the value of the productCode property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2031,2038d1159
+<                 /**
+<                  * Sets the value of the productCode property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2043,2050d1163
+<                 /**
+<                  * Gets the value of the productDescription property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2055,2062d1167
+<                 /**
+<                  * Sets the value of the productDescription property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2067,2074d1171
+<                 /**
+<                  * Gets the value of the quantity property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2079,2086d1175
+<                 /**
+<                  * Sets the value of the quantity property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2091,2098d1179
+<                 /**
+<                  * Gets the value of the unitOfMeasure property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2103,2110d1183
+<                 /**
+<                  * Sets the value of the unitOfMeasure property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2115,2122d1187
+<                 /**
+<                  * Gets the value of the unitPrice property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2127,2134d1191
+<                 /**
+<                  * Sets the value of the unitPrice property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2139,2146d1195
+<                 /**
+<                  * Gets the value of the description property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2151,2158d1199
+<                 /**
+<                  * Sets the value of the description property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2163,2170d1203
+<                 /**
+<                  * Gets the value of the debitAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2175,2182d1207
+<                 /**
+<                  * Sets the value of the debitAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2187,2194d1211
+<                 /**
+<                  * Gets the value of the creditAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2199,2206d1215
+<                 /**
+<                  * Sets the value of the creditAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2211,2218d1219
+<                 /**
+<                  * Gets the value of the tax property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link MovementTax }
+<                  *     
+<                  */
+2223,2230d1223
+<                 /**
+<                  * Sets the value of the tax property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link MovementTax }
+<                  *     
+<                  */
+2235,2242d1227
+<                 /**
+<                  * Gets the value of the taxExemptionReason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2247,2254d1231
+<                 /**
+<                  * Sets the value of the taxExemptionReason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+2259,2266d1235
+<                 /**
+<                  * Gets the value of the settlementAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2271,2278d1239
+<                 /**
+<                  * Sets the value of the settlementAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+2285c1246
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+2368d1328
+< 
+2370d1329
+< 
+2375,2481d1333
+< 
+<     /**
+<      * <p>Java class for anonymous complex type.
+<      * 
+<      * <p>The following schema fragment specifies the expected content contained within this class.
+<      * 
+<      * <pre>
+<      * &lt;complexType&gt;
+<      *   &lt;complexContent&gt;
+<      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *       &lt;sequence&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NumberOfEntries"/&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TotalDebit"/&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TotalCredit"/&gt;
+<      *         &lt;element name="Invoice" maxOccurs="unbounded" minOccurs="0"&gt;
+<      *           &lt;complexType&gt;
+<      *             &lt;complexContent&gt;
+<      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                 &lt;sequence&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceNo"/&gt;
+<      *                   &lt;element name="DocumentStatus"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatus"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatusDate"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceType"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SelfBillingIndicator"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TransactionID" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipTo" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipFrom" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementEndTime" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStartTime" minOccurs="0"/&gt;
+<      *                   &lt;element name="Line" maxOccurs="unbounded"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<      *                             &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<      *                             &lt;element name="References" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}References" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<      *                             &lt;choice&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<      *                             &lt;/choice&gt;
+<      *                             &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element name="DocumentTotals"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<      *                             &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<      *                             &lt;element name="Settlement" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Settlement" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                             &lt;element name="Payment" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Payment" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element name="WithholdingTax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WithholdingTax" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                 &lt;/sequence&gt;
+<      *               &lt;/restriction&gt;
+<      *             &lt;/complexContent&gt;
+<      *           &lt;/complexType&gt;
+<      *         &lt;/element&gt;
+<      *       &lt;/sequence&gt;
+<      *     &lt;/restriction&gt;
+<      *   &lt;/complexContent&gt;
+<      * &lt;/complexType&gt;
+<      * </pre>
+<      * 
+<      * 
+<      */
+2489,2490c1341
+<     public static class SalesInvoices implements ToString2
+<     {
+---
+>     public static class SalesInvoices implements ToString2 {
+2502,2509d1352
+<         /**
+<          * Gets the value of the numberOfEntries property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+2514,2521d1356
+<         /**
+<          * Sets the value of the numberOfEntries property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+2526,2533d1360
+<         /**
+<          * Gets the value of the totalDebit property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+2538,2545d1364
+<         /**
+<          * Sets the value of the totalDebit property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+2550,2557d1368
+<         /**
+<          * Gets the value of the totalCredit property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+2562,2569d1372
+<         /**
+<          * Sets the value of the totalCredit property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+2574,2595d1376
+<         /**
+<          * Gets the value of the invoice property.
+<          * 
+<          * <p>
+<          * This accessor method returns a reference to the live list,
+<          * not a snapshot. Therefore any modification you make to the
+<          * returned list will be present inside the JAXB object.
+<          * This is why there is not a <CODE>set</CODE> method for the invoice property.
+<          * 
+<          * <p>
+<          * For example, to add a new item, do as follows:
+<          * <pre>
+<          *    getInvoice().add(newItem);
+<          * </pre>
+<          * 
+<          * 
+<          * <p>
+<          * Objects of the following type(s) are allowed in the list
+<          * {@link SourceDocuments.SalesInvoices.Invoice }
+<          * 
+<          * 
+<          */
+2605c1386
+<             final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>             final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+2644,2737d1424
+< 
+<         /**
+<          * <p>Java class for anonymous complex type.
+<          * 
+<          * <p>The following schema fragment specifies the expected content contained within this class.
+<          * 
+<          * <pre>
+<          * &lt;complexType&gt;
+<          *   &lt;complexContent&gt;
+<          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *       &lt;sequence&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceNo"/&gt;
+<          *         &lt;element name="DocumentStatus"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatus"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatusDate"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceType"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SelfBillingIndicator"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TransactionID" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipTo" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ShipFrom" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementEndTime" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}MovementStartTime" minOccurs="0"/&gt;
+<          *         &lt;element name="Line" maxOccurs="unbounded"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<          *                   &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<          *                   &lt;element name="References" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}References" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<          *                   &lt;choice&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<          *                   &lt;/choice&gt;
+<          *                   &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element name="DocumentTotals"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<          *                   &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<          *                   &lt;element name="Settlement" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Settlement" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                   &lt;element name="Payment" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Payment" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element name="WithholdingTax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WithholdingTax" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *       &lt;/sequence&gt;
+<          *     &lt;/restriction&gt;
+<          *   &lt;/complexContent&gt;
+<          * &lt;/complexType&gt;
+<          * </pre>
+<          * 
+<          * 
+<          */
+2761,2762c1448
+<         public static class Invoice implements ToString2
+<         {
+---
+>         public static class Invoice implements ToString2 {
+2809,2816d1494
+<             /**
+<              * Gets the value of the invoiceNo property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+2821,2828d1498
+<             /**
+<              * Sets the value of the invoiceNo property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+2833,2840d1502
+<             /**
+<              * Gets the value of the documentStatus property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.SalesInvoices.Invoice.DocumentStatus }
+<              *     
+<              */
+2845,2852d1506
+<             /**
+<              * Sets the value of the documentStatus property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.SalesInvoices.Invoice.DocumentStatus }
+<              *     
+<              */
+2857,2864d1510
+<             /**
+<              * Gets the value of the hash property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+2869,2876d1514
+<             /**
+<              * Sets the value of the hash property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+2881,2888d1518
+<             /**
+<              * Gets the value of the hashControl property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+2893,2900d1522
+<             /**
+<              * Sets the value of the hashControl property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+2905,2912d1526
+<             /**
+<              * Gets the value of the period property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link Integer }
+<              *     
+<              */
+2917,2924d1530
+<             /**
+<              * Sets the value of the period property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link Integer }
+<              *     
+<              */
+2929,2936d1534
+<             /**
+<              * Gets the value of the invoiceDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+2941,2948d1538
+<             /**
+<              * Sets the value of the invoiceDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+2953,2960d1542
+<             /**
+<              * Gets the value of the invoiceType property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+2965,2972d1546
+<             /**
+<              * Sets the value of the invoiceType property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+2977,2980d1550
+<             /**
+<              * Gets the value of the selfBillingIndicator property.
+<              * 
+<              */
+2985,2988d1554
+<             /**
+<              * Sets the value of the selfBillingIndicator property.
+<              * 
+<              */
+2993,3000d1558
+<             /**
+<              * Gets the value of the sourceID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+3005,3012d1562
+<             /**
+<              * Sets the value of the sourceID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+3017,3024d1566
+<             /**
+<              * Gets the value of the eacCode property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+3029,3036d1570
+<             /**
+<              * Sets the value of the eacCode property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+3041,3048d1574
+<             /**
+<              * Gets the value of the systemEntryDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3053,3060d1578
+<             /**
+<              * Sets the value of the systemEntryDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3065,3072d1582
+<             /**
+<              * Gets the value of the transactionID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+3077,3084d1586
+<             /**
+<              * Sets the value of the transactionID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+3089,3096d1590
+<             /**
+<              * Gets the value of the customerID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+3101,3108d1594
+<             /**
+<              * Sets the value of the customerID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+3113,3120d1598
+<             /**
+<              * Gets the value of the shipTo property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+3125,3132d1602
+<             /**
+<              * Sets the value of the shipTo property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+3137,3144d1606
+<             /**
+<              * Gets the value of the shipFrom property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+3149,3156d1610
+<             /**
+<              * Sets the value of the shipFrom property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link ShippingPointStructure }
+<              *     
+<              */
+3161,3168d1614
+<             /**
+<              * Gets the value of the movementEndTime property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3173,3180d1618
+<             /**
+<              * Sets the value of the movementEndTime property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3185,3192d1622
+<             /**
+<              * Gets the value of the movementStartTime property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3197,3204d1626
+<             /**
+<              * Sets the value of the movementStartTime property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+3209,3230d1630
+<             /**
+<              * Gets the value of the line property.
+<              * 
+<              * <p>
+<              * This accessor method returns a reference to the live list,
+<              * not a snapshot. Therefore any modification you make to the
+<              * returned list will be present inside the JAXB object.
+<              * This is why there is not a <CODE>set</CODE> method for the line property.
+<              * 
+<              * <p>
+<              * For example, to add a new item, do as follows:
+<              * <pre>
+<              *    getLine().add(newItem);
+<              * </pre>
+<              * 
+<              * 
+<              * <p>
+<              * Objects of the following type(s) are allowed in the list
+<              * {@link SourceDocuments.SalesInvoices.Invoice.Line }
+<              * 
+<              * 
+<              */
+3238,3245d1637
+<             /**
+<              * Gets the value of the documentTotals property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.SalesInvoices.Invoice.DocumentTotals }
+<              *     
+<              */
+3250,3257d1641
+<             /**
+<              * Sets the value of the documentTotals property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.SalesInvoices.Invoice.DocumentTotals }
+<              *     
+<              */
+3262,3283d1645
+<             /**
+<              * Gets the value of the withholdingTax property.
+<              * 
+<              * <p>
+<              * This accessor method returns a reference to the live list,
+<              * not a snapshot. Therefore any modification you make to the
+<              * returned list will be present inside the JAXB object.
+<              * This is why there is not a <CODE>set</CODE> method for the withholdingTax property.
+<              * 
+<              * <p>
+<              * For example, to add a new item, do as follows:
+<              * <pre>
+<              *    getWithholdingTax().add(newItem);
+<              * </pre>
+<              * 
+<              * 
+<              * <p>
+<              * Objects of the following type(s) are allowed in the list
+<              * {@link WithholdingTax }
+<              * 
+<              * 
+<              */
+3293c1655
+<                 final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                 final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+3412,3435d1773
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatus"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}InvoiceStatusDate"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceBilling"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+3444,3445c1782
+<             public static class DocumentStatus implements ToString2
+<             {
+---
+>             public static class DocumentStatus implements ToString2 {
+3459,3466d1795
+<                 /**
+<                  * Gets the value of the invoiceStatus property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3471,3478d1799
+<                 /**
+<                  * Sets the value of the invoiceStatus property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3483,3490d1803
+<                 /**
+<                  * Gets the value of the invoiceStatusDate property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+3495,3502d1807
+<                 /**
+<                  * Sets the value of the invoiceStatusDate property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+3507,3514d1811
+<                 /**
+<                  * Gets the value of the reason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3519,3526d1815
+<                 /**
+<                  * Sets the value of the reason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3531,3538d1819
+<                 /**
+<                  * Gets the value of the sourceID property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3543,3550d1823
+<                 /**
+<                  * Sets the value of the sourceID property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3555,3562d1827
+<                 /**
+<                  * Gets the value of the sourceBilling property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3567,3574d1831
+<                 /**
+<                  * Sets the value of the sourceBilling property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+3581c1838
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+3624d1880
+< 
+3627,3651d1882
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<              *         &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<              *         &lt;element name="Settlement" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Settlement" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *         &lt;element name="Payment" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Payment" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+3657,3659c1888
+<                 "currency",
+<                 "settlement",
+<                 "payment"
+---
+>                 "currency"
+3661,3662c1890
+<             public static class DocumentTotals implements ToString2
+<             {
+---
+>             public static class DocumentTotals implements ToString2 {
+3672,3675d1899
+<                 @XmlElement(name = "Settlement")
+<                 protected List<Settlement> settlement;
+<                 @XmlElement(name = "Payment")
+<                 protected List<Payment> payment;
+3677,3684d1900
+<                 /**
+<                  * Gets the value of the taxPayable property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3689,3696d1904
+<                 /**
+<                  * Sets the value of the taxPayable property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3701,3708d1908
+<                 /**
+<                  * Gets the value of the netTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3713,3720d1912
+<                 /**
+<                  * Sets the value of the netTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3725,3732d1916
+<                 /**
+<                  * Gets the value of the grossTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3737,3744d1920
+<                 /**
+<                  * Sets the value of the grossTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+3749,3756d1924
+<                 /**
+<                  * Gets the value of the currency property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+3761,3768d1928
+<                 /**
+<                  * Sets the value of the currency property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+3773,3830d1932
+<                 /**
+<                  * Gets the value of the settlement property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the settlement property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getSettlement().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link Settlement }
+<                  * 
+<                  * 
+<                  */
+<                 public List<Settlement> getSettlement() {
+<                     if (settlement == null) {
+<                         settlement = new ArrayList<Settlement>();
+<                     }
+<                     return this.settlement;
+<                 }
+< 
+<                 /**
+<                  * Gets the value of the payment property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the payment property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getPayment().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link Payment }
+<                  * 
+<                  * 
+<                  */
+<                 public List<Payment> getPayment() {
+<                     if (payment == null) {
+<                         payment = new ArrayList<Payment>();
+<                     }
+<                     return this.payment;
+<                 }
+< 
+3833c1935
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+3869,3878d1970
+<                     {
+<                         List<Settlement> theSettlement;
+<                         theSettlement = (((this.settlement!= null)&&(!this.settlement.isEmpty()))?this.getSettlement():null);
+<                         strategy.appendField(locator, this, "settlement", buffer, theSettlement, ((this.settlement!= null)&&(!this.settlement.isEmpty())));
+<                     }
+<                     {
+<                         List<Payment> thePayment;
+<                         thePayment = (((this.payment!= null)&&(!this.payment.isEmpty()))?this.getPayment():null);
+<                         strategy.appendField(locator, this, "payment", buffer, thePayment, ((this.payment!= null)&&(!this.payment.isEmpty())));
+<                     }
+3881d1972
+< 
+3884,3919d1974
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<              *         &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<              *         &lt;element name="References" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}References" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<              *         &lt;choice&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<              *         &lt;/choice&gt;
+<              *         &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+3938,3939c1993
+<             public static class Line implements ToString2
+<             {
+---
+>             public static class Line implements ToString2 {
+3967c2021
+<                 @XmlElement(name = "Tax", required = true)
+---
+>                 @XmlElement(name = "Tax")
+3974,3981d2027
+<                 /**
+<                  * Gets the value of the lineNumber property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+3986,3993d2031
+<                 /**
+<                  * Sets the value of the lineNumber property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+3998,4020c2036
+<                 /**
+<                  * Gets the value of the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getOrderReferences().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link OrderReferences }
+<                  * 
+<                  * 
+<                  */
+<                 public List<OrderReferences> getOrderReferences() {
+---
+>                 public List<References> getOrderReferences() {
+4022c2038
+<                         orderReferences = new ArrayList<OrderReferences>();
+---
+>                         orderReferences = new ArrayList<References>();
+4027,4034d2042
+<                 /**
+<                  * Gets the value of the productCode property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4039,4046d2046
+<                 /**
+<                  * Sets the value of the productCode property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4051,4058d2050
+<                 /**
+<                  * Gets the value of the productDescription property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4063,4070d2054
+<                 /**
+<                  * Sets the value of the productDescription property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4075,4082d2058
+<                 /**
+<                  * Gets the value of the quantity property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4087,4094d2062
+<                 /**
+<                  * Sets the value of the quantity property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4099,4106d2066
+<                 /**
+<                  * Gets the value of the unitOfMeasure property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4111,4118d2070
+<                 /**
+<                  * Sets the value of the unitOfMeasure property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4123,4130d2074
+<                 /**
+<                  * Gets the value of the unitPrice property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4135,4142d2078
+<                 /**
+<                  * Sets the value of the unitPrice property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4147,4154d2082
+<                 /**
+<                  * Gets the value of the taxPointDate property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+4159,4166d2086
+<                 /**
+<                  * Sets the value of the taxPointDate property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+4171,4192d2090
+<                 /**
+<                  * Gets the value of the references property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the references property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getReferences().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link References }
+<                  * 
+<                  * 
+<                  */
+4200,4207d2097
+<                 /**
+<                  * Gets the value of the description property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4212,4219d2101
+<                 /**
+<                  * Sets the value of the description property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4224,4231d2105
+<                 /**
+<                  * Gets the value of the debitAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4236,4243d2109
+<                 /**
+<                  * Sets the value of the debitAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4248,4255d2113
+<                 /**
+<                  * Gets the value of the creditAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4260,4267d2117
+<                 /**
+<                  * Sets the value of the creditAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4272,4279d2121
+<                 /**
+<                  * Gets the value of the tax property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link Tax }
+<                  *     
+<                  */
+4284,4291d2125
+<                 /**
+<                  * Sets the value of the tax property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link Tax }
+<                  *     
+<                  */
+4296,4303d2129
+<                 /**
+<                  * Gets the value of the taxExemptionReason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4308,4315d2133
+<                 /**
+<                  * Sets the value of the taxExemptionReason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+4320,4327d2137
+<                 /**
+<                  * Gets the value of the settlementAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4332,4339d2141
+<                 /**
+<                  * Sets the value of the settlementAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+4346c2148
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+4368c2170
+<                         List<OrderReferences> theOrderReferences;
+---
+>                         List<References> theOrderReferences;
+4439d2240
+< 
+4441d2241
+< 
+4443d2242
+< 
+4446,4541d2244
+< 
+<     /**
+<      * <p>Java class for anonymous complex type.
+<      * 
+<      * <p>The following schema fragment specifies the expected content contained within this class.
+<      * 
+<      * <pre>
+<      * &lt;complexType&gt;
+<      *   &lt;complexContent&gt;
+<      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *       &lt;sequence&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NumberOfEntries"/&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TotalDebit"/&gt;
+<      *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TotalCredit"/&gt;
+<      *         &lt;element name="WorkDocument" maxOccurs="unbounded" minOccurs="0"&gt;
+<      *           &lt;complexType&gt;
+<      *             &lt;complexContent&gt;
+<      *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                 &lt;sequence&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DocumentNumber"/&gt;
+<      *                   &lt;element name="DocumentStatus"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatus"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatusDate"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkType"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<      *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<      *                   &lt;element name="Line" maxOccurs="unbounded"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<      *                             &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<      *                             &lt;choice&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<      *                               &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<      *                             &lt;/choice&gt;
+<      *                             &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                   &lt;element name="DocumentTotals"&gt;
+<      *                     &lt;complexType&gt;
+<      *                       &lt;complexContent&gt;
+<      *                         &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<      *                           &lt;sequence&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<      *                             &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<      *                             &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<      *                           &lt;/sequence&gt;
+<      *                         &lt;/restriction&gt;
+<      *                       &lt;/complexContent&gt;
+<      *                     &lt;/complexType&gt;
+<      *                   &lt;/element&gt;
+<      *                 &lt;/sequence&gt;
+<      *               &lt;/restriction&gt;
+<      *             &lt;/complexContent&gt;
+<      *           &lt;/complexType&gt;
+<      *         &lt;/element&gt;
+<      *       &lt;/sequence&gt;
+<      *     &lt;/restriction&gt;
+<      *   &lt;/complexContent&gt;
+<      * &lt;/complexType&gt;
+<      * </pre>
+<      * 
+<      * 
+<      */
+4549,4550c2252
+<     public static class WorkingDocuments implements ToString2
+<     {
+---
+>     public static class WorkingDocuments implements ToString2 {
+4562,4569d2263
+<         /**
+<          * Gets the value of the numberOfEntries property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+4574,4581d2267
+<         /**
+<          * Sets the value of the numberOfEntries property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigInteger }
+<          *     
+<          */
+4586,4593d2271
+<         /**
+<          * Gets the value of the totalDebit property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+4598,4605d2275
+<         /**
+<          * Sets the value of the totalDebit property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+4610,4617d2279
+<         /**
+<          * Gets the value of the totalCredit property.
+<          * 
+<          * @return
+<          *     possible object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+4622,4629d2283
+<         /**
+<          * Sets the value of the totalCredit property.
+<          * 
+<          * @param value
+<          *     allowed object is
+<          *     {@link BigDecimal }
+<          *     
+<          */
+4634,4655d2287
+<         /**
+<          * Gets the value of the workDocument property.
+<          * 
+<          * <p>
+<          * This accessor method returns a reference to the live list,
+<          * not a snapshot. Therefore any modification you make to the
+<          * returned list will be present inside the JAXB object.
+<          * This is why there is not a <CODE>set</CODE> method for the workDocument property.
+<          * 
+<          * <p>
+<          * For example, to add a new item, do as follows:
+<          * <pre>
+<          *    getWorkDocument().add(newItem);
+<          * </pre>
+<          * 
+<          * 
+<          * <p>
+<          * Objects of the following type(s) are allowed in the list
+<          * {@link SourceDocuments.WorkingDocuments.WorkDocument }
+<          * 
+<          * 
+<          */
+4665c2297
+<             final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>             final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+4704,4786d2335
+< 
+<         /**
+<          * <p>Java class for anonymous complex type.
+<          * 
+<          * <p>The following schema fragment specifies the expected content contained within this class.
+<          * 
+<          * <pre>
+<          * &lt;complexType&gt;
+<          *   &lt;complexContent&gt;
+<          *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *       &lt;sequence&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DocumentNumber"/&gt;
+<          *         &lt;element name="DocumentStatus"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatus"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatusDate"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Hash"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}HashControl" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Period" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkType"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}EACCode" minOccurs="0"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SystemEntryDate"/&gt;
+<          *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CustomerID"/&gt;
+<          *         &lt;element name="Line" maxOccurs="unbounded"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<          *                   &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<          *                   &lt;choice&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<          *                     &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<          *                   &lt;/choice&gt;
+<          *                   &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *         &lt;element name="DocumentTotals"&gt;
+<          *           &lt;complexType&gt;
+<          *             &lt;complexContent&gt;
+<          *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<          *                 &lt;sequence&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<          *                   &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<          *                   &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<          *                 &lt;/sequence&gt;
+<          *               &lt;/restriction&gt;
+<          *             &lt;/complexContent&gt;
+<          *           &lt;/complexType&gt;
+<          *         &lt;/element&gt;
+<          *       &lt;/sequence&gt;
+<          *     &lt;/restriction&gt;
+<          *   &lt;/complexContent&gt;
+<          * &lt;/complexType&gt;
+<          * </pre>
+<          * 
+<          * 
+<          */
+4803,4804c2352
+<         public static class WorkDocument implements ToString2
+<         {
+---
+>         public static class WorkDocument implements ToString2 {
+4835,4842d2382
+<             /**
+<              * Gets the value of the documentNumber property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+4847,4854d2386
+<             /**
+<              * Sets the value of the documentNumber property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+4859,4866d2390
+<             /**
+<              * Gets the value of the documentStatus property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.WorkingDocuments.WorkDocument.DocumentStatus }
+<              *     
+<              */
+4871,4878d2394
+<             /**
+<              * Sets the value of the documentStatus property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.WorkingDocuments.WorkDocument.DocumentStatus }
+<              *     
+<              */
+4883,4890d2398
+<             /**
+<              * Gets the value of the hash property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+4895,4902d2402
+<             /**
+<              * Sets the value of the hash property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+4907,4914d2406
+<             /**
+<              * Gets the value of the hashControl property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+4919,4926d2410
+<             /**
+<              * Sets the value of the hashControl property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+4931,4938d2414
+<             /**
+<              * Gets the value of the period property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link Integer }
+<              *     
+<              */
+4943,4950d2418
+<             /**
+<              * Sets the value of the period property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link Integer }
+<              *     
+<              */
+4955,4962d2422
+<             /**
+<              * Gets the value of the workDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+4967,4974d2426
+<             /**
+<              * Sets the value of the workDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+4979,4986d2430
+<             /**
+<              * Gets the value of the workType property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+4991,4998d2434
+<             /**
+<              * Sets the value of the workType property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+5003,5010d2438
+<             /**
+<              * Gets the value of the sourceID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+5015,5022d2442
+<             /**
+<              * Sets the value of the sourceID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+5027,5034d2446
+<             /**
+<              * Gets the value of the eacCode property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+5039,5046d2450
+<             /**
+<              * Sets the value of the eacCode property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+5051,5058d2454
+<             /**
+<              * Gets the value of the systemEntryDate property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+5063,5070d2458
+<             /**
+<              * Sets the value of the systemEntryDate property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link XMLGregorianCalendar }
+<              *     
+<              */
+5075,5082d2462
+<             /**
+<              * Gets the value of the customerID property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link String }
+<              *     
+<              */
+5087,5094d2466
+<             /**
+<              * Sets the value of the customerID property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link String }
+<              *     
+<              */
+5099,5120d2470
+<             /**
+<              * Gets the value of the line property.
+<              * 
+<              * <p>
+<              * This accessor method returns a reference to the live list,
+<              * not a snapshot. Therefore any modification you make to the
+<              * returned list will be present inside the JAXB object.
+<              * This is why there is not a <CODE>set</CODE> method for the line property.
+<              * 
+<              * <p>
+<              * For example, to add a new item, do as follows:
+<              * <pre>
+<              *    getLine().add(newItem);
+<              * </pre>
+<              * 
+<              * 
+<              * <p>
+<              * Objects of the following type(s) are allowed in the list
+<              * {@link SourceDocuments.WorkingDocuments.WorkDocument.Line }
+<              * 
+<              * 
+<              */
+5128,5135d2477
+<             /**
+<              * Gets the value of the documentTotals property.
+<              * 
+<              * @return
+<              *     possible object is
+<              *     {@link SourceDocuments.WorkingDocuments.WorkDocument.DocumentTotals }
+<              *     
+<              */
+5140,5147d2481
+<             /**
+<              * Sets the value of the documentTotals property.
+<              * 
+<              * @param value
+<              *     allowed object is
+<              *     {@link SourceDocuments.WorkingDocuments.WorkDocument.DocumentTotals }
+<              *     
+<              */
+5154c2488
+<                 final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                 final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+5238,5260d2571
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatus"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}WorkStatusDate"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Reason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SourceID"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+5268,5269c2579
+<             public static class DocumentStatus implements ToString2
+<             {
+---
+>             public static class DocumentStatus implements ToString2 {
+5281,5288d2590
+<                 /**
+<                  * Gets the value of the workStatus property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5293,5300d2594
+<                 /**
+<                  * Sets the value of the workStatus property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5305,5312d2598
+<                 /**
+<                  * Gets the value of the workStatusDate property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+5317,5324d2602
+<                 /**
+<                  * Sets the value of the workStatusDate property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+5329,5336d2606
+<                 /**
+<                  * Gets the value of the reason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5341,5348d2610
+<                 /**
+<                  * Sets the value of the reason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5353,5360d2614
+<                 /**
+<                  * Gets the value of the sourceID property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5365,5372d2618
+<                 /**
+<                  * Sets the value of the sourceID property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5379c2625
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+5417d2662
+< 
+5420,5442d2664
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPayable"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}NetTotal"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}GrossTotal"/&gt;
+<              *         &lt;element name="Currency" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Currency" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+5450,5451c2672
+<             public static class DocumentTotals implements ToString2
+<             {
+---
+>             public static class DocumentTotals implements ToString2 {
+5462,5469d2682
+<                 /**
+<                  * Gets the value of the taxPayable property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5474,5481d2686
+<                 /**
+<                  * Sets the value of the taxPayable property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5486,5493d2690
+<                 /**
+<                  * Gets the value of the netTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5498,5505d2694
+<                 /**
+<                  * Sets the value of the netTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5510,5517d2698
+<                 /**
+<                  * Gets the value of the grossTotal property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5522,5529d2702
+<                 /**
+<                  * Sets the value of the grossTotal property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5534,5541d2706
+<                 /**
+<                  * Gets the value of the currency property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+5546,5553d2710
+<                 /**
+<                  * Sets the value of the currency property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link Currency }
+<                  *     
+<                  */
+5560c2717
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+5598d2754
+< 
+5601,5635d2756
+< 
+<             /**
+<              * <p>Java class for anonymous complex type.
+<              * 
+<              * <p>The following schema fragment specifies the expected content contained within this class.
+<              * 
+<              * <pre>
+<              * &lt;complexType&gt;
+<              *   &lt;complexContent&gt;
+<              *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+<              *       &lt;sequence&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}LineNumber"/&gt;
+<              *         &lt;element name="OrderReferences" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}OrderReferences" maxOccurs="unbounded" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductCode"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}ProductDescription"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Quantity"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitOfMeasure"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}UnitPrice"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxPointDate"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Description"/&gt;
+<              *         &lt;choice&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}DebitAmount"/&gt;
+<              *           &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}CreditAmount"/&gt;
+<              *         &lt;/choice&gt;
+<              *         &lt;element name="Tax" type="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}Tax" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}TaxExemptionReason" minOccurs="0"/&gt;
+<              *         &lt;element ref="{urn:OECD:StandardAuditFile-Tax:PT_1.02_01}SettlementAmount" minOccurs="0"/&gt;
+<              *       &lt;/sequence&gt;
+<              *     &lt;/restriction&gt;
+<              *   &lt;/complexContent&gt;
+<              * &lt;/complexType&gt;
+<              * </pre>
+<              * 
+<              * 
+<              */
+5653,5654c2774
+<             public static class Line implements ToString2
+<             {
+---
+>             public static class Line implements ToString2 {
+5687,5694d2806
+<                 /**
+<                  * Gets the value of the lineNumber property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+5699,5706d2810
+<                 /**
+<                  * Sets the value of the lineNumber property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigInteger }
+<                  *     
+<                  */
+5711,5732d2814
+<                 /**
+<                  * Gets the value of the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * This accessor method returns a reference to the live list,
+<                  * not a snapshot. Therefore any modification you make to the
+<                  * returned list will be present inside the JAXB object.
+<                  * This is why there is not a <CODE>set</CODE> method for the orderReferences property.
+<                  * 
+<                  * <p>
+<                  * For example, to add a new item, do as follows:
+<                  * <pre>
+<                  *    getOrderReferences().add(newItem);
+<                  * </pre>
+<                  * 
+<                  * 
+<                  * <p>
+<                  * Objects of the following type(s) are allowed in the list
+<                  * {@link OrderReferences }
+<                  * 
+<                  * 
+<                  */
+5740,5747d2821
+<                 /**
+<                  * Gets the value of the productCode property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5752,5759d2825
+<                 /**
+<                  * Sets the value of the productCode property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5764,5771d2829
+<                 /**
+<                  * Gets the value of the productDescription property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5776,5783d2833
+<                 /**
+<                  * Sets the value of the productDescription property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5788,5795d2837
+<                 /**
+<                  * Gets the value of the quantity property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5800,5807d2841
+<                 /**
+<                  * Sets the value of the quantity property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5812,5819d2845
+<                 /**
+<                  * Gets the value of the unitOfMeasure property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5824,5831d2849
+<                 /**
+<                  * Sets the value of the unitOfMeasure property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5836,5843d2853
+<                 /**
+<                  * Gets the value of the unitPrice property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5848,5855d2857
+<                 /**
+<                  * Sets the value of the unitPrice property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5860,5867d2861
+<                 /**
+<                  * Gets the value of the taxPointDate property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+5872,5879d2865
+<                 /**
+<                  * Sets the value of the taxPointDate property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link XMLGregorianCalendar }
+<                  *     
+<                  */
+5884,5891d2869
+<                 /**
+<                  * Gets the value of the description property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5896,5903d2873
+<                 /**
+<                  * Sets the value of the description property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5908,5915d2877
+<                 /**
+<                  * Gets the value of the debitAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5920,5927d2881
+<                 /**
+<                  * Sets the value of the debitAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5932,5939d2885
+<                 /**
+<                  * Gets the value of the creditAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5944,5951d2889
+<                 /**
+<                  * Sets the value of the creditAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+5956,5963d2893
+<                 /**
+<                  * Gets the value of the tax property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link Tax }
+<                  *     
+<                  */
+5968,5975d2897
+<                 /**
+<                  * Sets the value of the tax property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link Tax }
+<                  *     
+<                  */
+5980,5987d2901
+<                 /**
+<                  * Gets the value of the taxExemptionReason property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link String }
+<                  *     
+<                  */
+5992,5999d2905
+<                 /**
+<                  * Sets the value of the taxExemptionReason property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link String }
+<                  *     
+<                  */
+6004,6011d2909
+<                 /**
+<                  * Gets the value of the settlementAmount property.
+<                  * 
+<                  * @return
+<                  *     possible object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+6016,6023d2913
+<                 /**
+<                  * Sets the value of the settlementAmount property.
+<                  * 
+<                  * @param value
+<                  *     allowed object is
+<                  *     {@link BigDecimal }
+<                  *     
+<                  */
+6030c2920
+<                     final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>                     final ToStringStrategy2 strategy = DefaultToStringStrategy.INSTANCE;
+6086a2977,2981
+>                         List<References> theReferences;
+>                         theReferences = (((this.references != null) && (!this.references.isEmpty())) ? this.getReferences() : null);
+>                         strategy.appendField(locator, this, "references", buffer, theReferences, ((this.references != null) && (!this.references.isEmpty())));
+>                     }
+>                     {
+6118d3012
+< 
+6120d3013
+< 
+6122d3014
+< 
+6124d3015
+< 

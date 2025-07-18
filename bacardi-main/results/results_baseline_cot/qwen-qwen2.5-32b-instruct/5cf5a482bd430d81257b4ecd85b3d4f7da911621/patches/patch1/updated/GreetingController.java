@@ -1,0 +1,55 @@
+package com.example.web;
+
+import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.mvc.annotation.Controller;
+import javax.mvc.binding.BindingResult;
+import javax.mvc.binding.BindingResult.Status;
+import javax.mvc.result.Redirect;
+import javax.validation.constraints.NotBlank;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
+@Controller
+@RequestScoped
+@Path("greeting")
+public class GreetingController {
+
+    @Inject
+    BindingResult bindingResult;
+
+    @Inject
+    Logger log;
+
+    @Inject
+    AlertMessage flashMessage;
+
+    @GET
+    public String get() {
+        return "greeting.xhtml";
+    }
+
+    @POST
+    public Redirect post(
+            @FormParam("greeting")
+            @NotBlank String greeting) {
+        if (bindingResult.getStatus() == Status.FAILED) {
+            AlertMessage alert = AlertMessage.danger("Validation voilations!");
+            bindingResult.getAllErrors()
+                    .forEach((t) -> {
+                        alert.addError(t.getParamName(), "", t.getMessage());
+                    });
+            flashMessage.notify(alert);
+            log.info("mvc binding failed.");
+            return new Redirect("greeting.xhtml");
+        }
+
+        log.info("redirect to greeting page.");
+        flashMessage.notify(AlertMessage.Type.success, "Message:" + greeting);
+        return new Redirect("greeting");
+    }
+
+}

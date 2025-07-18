@@ -1,0 +1,12 @@
+21d20
+< import static org.apache.commons.lang3.StringUtils.isAllBlank;
+224a224,232
+>     
+>     private static boolean isAllBlank(String... strings) {
+>         for (String s : strings) {
+>             if (isNotBlank(s)) {
+>                 return false;
+>             }
+>         }
+>         return true;
+>     }

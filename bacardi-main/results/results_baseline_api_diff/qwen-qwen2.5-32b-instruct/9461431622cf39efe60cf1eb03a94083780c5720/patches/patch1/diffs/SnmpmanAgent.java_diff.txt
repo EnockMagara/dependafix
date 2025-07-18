@@ -1,0 +1,123 @@
+38,39c38
+<  * This class can be instantiated via the constructor {@link #SnmpmanAgent(com.oneandone.snmpman.configuration.AgentConfiguration)}, which
+<  * requires an instance of the {@link com.oneandone.snmpman.configuration.AgentConfiguration}.
+---
+>  * See {@code AgentConfiguration.name} for more information on the return value.
+52c51
+<     private static final Pattern VARIABLE_BINDING_PATTERN = Pattern.compile("(((iso)?\\.[0-9]+)+) = ((([a-zA-Z0-9-]+): (.*)$)|(\"\"$))");
+---
+>     private static final Pattern VARIABLE_BINDING_PATTERN = Pattern.compile("(((iso)?\\.[0-9]+)+) = ((([a-zA-Z0-9-]+): (.*)$)|(\"\"$)");
+112c111,112
+<      * @return the translated {@code String}
+---
+>      * @return a a {@code String} instance with the specified type and value
+>      * @throws IllegalArgumentException if the type could not be mapped to a {@code Variable} implementation
+124,164d123
+<      * Returns the root OIDs of the bindings.
+<      *
+<      * @param bindings the variable bindings
+<      * @return the roots of the specified variable bindings
+<      */
+<     private static List<OID> getRoots(final SortedMap<OID, Variable> bindings) {
+<         final List<OID> potentialRoots = new ArrayList<>(bindings.size());
+< 
+<         OID last = null;
+<         for (final OID oid : bindings.keySet()) {
+<             if (last != null) {
+<                 int min = Math.min(oid.size(), last.size());
+<                 while (min > 0) {
+<                     if (oid.leftMostCompare(min, last) == 0) {
+<                         OID root = new OID(last.getValue(), 0, min);
+<                         potentialRoots.add(root);
+<                         break;
+<                     }
+<                     min--;
+<                 }
+<             }
+<             last = oid;
+<         }
+<         Collections.sort(potentialRoots);
+< 
+<         final List<OID> roots = new ArrayList<>(potentialRoots.size());
+<         potentialRoots.stream().filter(potentialRoot -> potentialRoot.size() > 0).forEach(potentialRoot -> {
+<             OID trimmedPotentialRoot = new OID(potentialRoot.getValue(), 0, potentialRoot.size() - 1);
+<             while (trimmedPotentialRoot.size() > 0 && Collections.binarySearch(potentialRoots, trimmedPotentialRoot) < 0) {
+<                 trimmedPotentialRoot.trim(1);
+<             }
+<             if (trimmedPotentialRoot.size() == 0 && !roots.contains(potentialRoot)) {
+<                 roots.add(potentialRoot);
+<             }
+<         });
+< 
+<         log.trace("identified roots {}", roots);
+<         return roots;
+<     }
+< 
+<     /**
+187c146
+<                 return new Gauge32(Long.parseLong(value.replaceAll("[^-?0-9]+", "")));
+---
+>                 return new Gauge32(Long.parseLong(value.replaceAll("[^-?0-9]+", ""));
+194c153
+<                 return new TimeTicks(Long.parseLong(value.substring(openBracket, closeBracket)));
+---
+>                 return new TimeTicks(Long.parseLong(value.substring(openBracket, closeBracket));
+196c155
+<                 return new Counter32(Long.parseLong(value.replaceAll("[^-?0-9]+", "")));
+---
+>                 return new Counter32(Long.parseLong(value.replaceAll("[^-?0-9]+", ""));
+201c160
+<                 return new Integer32(Integer.parseInt(value.replaceAll("[^-?0-9]+", "")));
+---
+>                 return new Integer32(Integer.parseInt(value.replaceAll("[^-?0-9]+", ""));
+244c203
+<         unregisterDefaultManagedObjects(new OctetString());
+---
+>         registerDefaultManagedObjects(new OctetString());
+247c206
+<             unregisterDefaultManagedObjects(new OctetString(String.valueOf(vlan)));
+---
+>             registerDefaultManagedObjects(new OctetString(String.valueOf(vlan)));
+256d214
+< 
+259,260d216
+<                 final OctetString context = new OctetString(String.valueOf(vlan));
+< 
+265c221
+<                     DefaultMOContextScope scope = new DefaultMOContextScope(context, root, true, root.nextPeer(), false);
+---
+>                     DefaultMOContextScope scope = new DefaultMOContextScope(new OctetString(String.valueOf(vlan)), root, true, root.nextPeer(), false);
+270c226
+<                             scope = new DefaultMOContextScope(context, variableBinding.getOid(), true, variableBinding.getOid().nextPeer(), false);
+---
+>                             scope = new DefaultMOContextScope(new OctetString(String.valueOf(vlan)), variableBinding.getOid(), true, variableBinding.getOid().nextPeer(), false);
+276c232
+<                                 registerGroupAndContext(group, context);
+---
+>                                 registerGroupAndContext(group, new OctetString(String.valueOf(vlan)));
+281c237
+<                         registerGroupAndContext(group, context);
+---
+>                         registerGroupAndContext(group, new OctetString(String.valueOf(vlan));
+325,337d280
+<      * Creates a list of {@link VariableBinding} out of a mapping of {@link OID} and {@link Variable}.
+<      *
+<      * @param variableBindings mapping of {@link OID} and {@link Variable}.
+<      * @param root             root SNMP OID.
+<      * @return list of {@link VariableBinding}.
+<      */
+<     private ArrayList<VariableBinding> generateSubtreeBindings(final SortedMap<OID, Variable> variableBindings, final OID root) {
+<         return variableBindings.entrySet().stream().filter(binding -> binding.getKey().size() >= root.size()).
+<                 filter(binding -> binding.getKey().leftMostCompare(root.size(), root) == 0).
+<                 map(binding -> new VariableBinding(binding.getKey(), binding.getValue())).collect(Collectors.toCollection(ArrayList::new));
+<     }
+< 
+<     /**
+356c299
+<                 MOContextScope contextScope = new DefaultMOContextScope(new OctetString(), group.getScope());
+---
+>                 MOContextScope contextScope = new DefaultMOContextScope(new OctetString(""), group.getScope());
+441c384
+<         while ((query = server.lookup(new DefaultMOQuery(hackScope, false))) != null) {
+---
+>         while ((query = server.lookup(new DefaultMOQuery(hackScope, false)) != null) {

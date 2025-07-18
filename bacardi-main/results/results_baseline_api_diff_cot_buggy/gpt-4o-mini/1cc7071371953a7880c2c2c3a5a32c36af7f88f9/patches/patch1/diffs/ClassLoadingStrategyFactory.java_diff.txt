@@ -1,0 +1,4 @@
+29c29
+<     static ClassLoadingStrategy<ClassLoader> classLoadingStrategy(Class<?> assertClass) {
+---
+>     static ClassLoadingStrategy<?> classLoadingStrategy(Class<?> assertClass) {

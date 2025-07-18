@@ -1,0 +1,4 @@
+5:package org.apache.commons.codec.binary does not exist
+160:cannot find symbol  symbol:   variable Hex   location: class com.maxmind.minfraud.request.Email 
+6:package org.apache.commons.codec.digest does not exist
+158:package MessageDigestAlgorithms does not exist

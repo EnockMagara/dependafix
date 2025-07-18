@@ -1,0 +1,15 @@
+5a6
+> import net.kyori.adventure.audience.Audience;
+9d9
+< import org.spongepowered.api.command.CommandSource;
+19,20c19
+<     public SkinDownloader(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, UUID targetUUID
+<             , boolean keepSkin) {
+---
+>     public SkinDownloader(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, UUID targetUUID, boolean keepSkin) {
+22d20
+< 
+37a36,38
+> 
+>     public static interface CommandSource extends Audience {
+>     }

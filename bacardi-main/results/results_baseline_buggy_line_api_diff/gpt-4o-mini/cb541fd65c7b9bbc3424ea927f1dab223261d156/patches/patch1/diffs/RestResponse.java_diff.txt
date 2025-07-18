@@ -1,0 +1,10 @@
+48d47
+< import org.hamcrest.Matchers;
+210c209
+<         return this.assertHeader(name, Matchers.hasItems(value));
+---
+>         return this.assertHeader(name, Matchers.hasItem(value));
+284c283
+<             Matchers.notNullValue()
+---
+>             org.hamcrest.Matchers.notNullValue()

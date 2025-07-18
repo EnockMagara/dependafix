@@ -1,0 +1,12 @@
+2a3,4
+> import org.pitest.classinfo.ClassInfoVisitor;
+> import org.pitest.classinfo.ClassName;
+103a106,109
+>     // Assuming the new method signature requires a byte[] and long as additional parameters
+>     // These parameters are placeholders and should be replaced with actual values
+>     byte[] classBytes = new byte[0];
+>     long timestamp = 0L;
+105c111
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), coverage.getClassInfo(ClassName.fromString(data.getMutatedClass().getName()), classBytes, timestamp));

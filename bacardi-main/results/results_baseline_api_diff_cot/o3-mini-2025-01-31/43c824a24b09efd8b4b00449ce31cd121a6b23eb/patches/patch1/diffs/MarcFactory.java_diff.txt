@@ -1,0 +1,56 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+24d22
+< 
+27d24
+< 
+38c35,39
+< import org.marc4j.marc.impl.*;
+---
+> import org.marc4j.marc.impl.ControlFieldImpl;
+> import org.marc4j.marc.impl.DataFieldImpl;
+> import org.marc4j.marc.impl.LeaderImpl;
+> import org.marc4j.marc.impl.RecordImpl;
+> import org.marc4j.marc.impl.SubfieldImpl;
+67c68,75
+<     for (JsonBranch branch : schema.getPaths()) {
+---
+>     List<?> branchList = schema.getPaths();
+>     for (Object obj : branchList) {
+>       JsonBranch branch;
+>       if (obj instanceof String) {
+>         branch = new JsonBranch((String) obj);
+>       } else {
+>         branch = (JsonBranch) obj;
+>       }
+96c104
+<           JSONArray fieldInstances = (JSONArray) cache.getFragment(branch.getJsonPath());
+---
+>           JSONArray fieldInstances = (JSONArray) cache.getFragment(branch.getLabel());
+314c322
+<     List<XmlFieldInstance> instances = cache.get(branch.getJsonPath());
+---
+>     List<XmlFieldInstance> instances = cache.get(branch.getLabel());
+472d479
+<       // String tag = schema.containsKey(line.getQualifiedTag()) ? line.getQualifiedTag() : line.getTag();
+484a492,511
+>   
+>   public static class JsonBranch {
+>     private final String label;
+> 
+>     public JsonBranch(String label) {
+>       this.label = label;
+>     }
+> 
+>     public Object getParent() {
+>       return null;
+>     }
+> 
+>     public String getLabel() {
+>       return label;
+>     }
+> 
+>     public String getJsonPath() {
+>       return label;
+>     }
+>   }

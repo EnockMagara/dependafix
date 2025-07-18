@@ -1,0 +1,21 @@
+3a4
+> import org.flywaydb.core.api.configuration.ClassicConfiguration;
+103c104
+<         @Bean(initMethod = "migrate")
+---
+>         @Bean
+108,112c109,116
+<                 final org.flywaydb.core.Flyway flyway = new Flyway();
+<                 flyway.setDataSource(this.dataSource());
+<                 flyway.setClassLoader(NisAppConfig.class.getClassLoader());
+<                 flyway.setLocations(prop.getProperty("flyway.locations"));
+<                 flyway.setValidateOnMigrate(Boolean.valueOf(prop.getProperty("flyway.validate")));
+---
+>                 ClassicConfiguration config = new ClassicConfiguration();
+>                 config.setDataSource(this.dataSource());
+>                 config.setLocations(new String[]{prop.getProperty("flyway.locations")});
+>                 config.setValidateOnMigrate(Boolean.valueOf(prop.getProperty("flyway.validate")));
+>                 config.setClassLoader(NisAppConfig.class.getClassLoader());
+> 
+>                 Flyway flyway = new Flyway(config);
+>                 flyway.migrate();

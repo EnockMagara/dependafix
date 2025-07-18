@@ -1,0 +1,55 @@
+30c30
+< import org.cactoos.collection.Filtered;
+---
+> import org.cactoos.iterable.Filtered;
+36c36
+< import org.cactoos.scalar.CheckedScalar;
+---
+> import org.cactoos.scalar.IoChecked;
+38c38
+< import org.cactoos.scalar.UncheckedScalar;
+---
+> import org.cactoos.scalar.Unchecked;
+40c40
+< import org.cactoos.text.SplitText;
+---
+> import org.cactoos.text.Split;
+201c201
+<             return new CheckedScalar<>(
+---
+>             return new IoChecked<>(
+204c204
+<                         new SplitText(
+---
+>                         new Split(
+209d208
+<                     // @checkstyle MagicNumber (1 line)
+211,212c210
+<                 ),
+<                 e -> new IOException(e)
+---
+>                 )
+224,232d221
+<         // @todo #16:30min Following transactions should be ignored according
+<         //  to the whitepaper:
+<         //  a) If the transaction is negative and its signature is not valid,
+<         //  it is ignored;
+<         //  b) If the transaction makes the balance of the wallet negative,
+<         //  it is ignored;
+<         //  c) If the transaction is positive and it’s absent in the paying
+<         //  wallet (which exists at the node), it’s ignored; If the paying
+<         //  wallet doesn’t exist at the node, the transaction is ignored;
+249c238
+<                     origin -> new UncheckedScalar<>(
+---
+>                     origin -> new Unchecked<>(
+275c264
+<                         new SplitText(
+---
+>                         new Split(
+280d268
+<                     // @checkstyle MagicNumberCheck (1 line)
+286,288d273
+<         // @todo #54:30min Implement key method. This should return the
+<         //  public RSA key of the wallet owner in Base64. Also add a unit test
+<         //  to replace WalletTest.keyIsNotYetImplemented().

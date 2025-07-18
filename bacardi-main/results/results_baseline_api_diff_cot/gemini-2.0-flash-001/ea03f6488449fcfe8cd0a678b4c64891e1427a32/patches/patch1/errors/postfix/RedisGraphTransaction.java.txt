@@ -1,0 +1,26 @@
+61:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+131:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+85:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+195:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+221:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+44:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+21:com.redislabs.redisgraph.impl.api.RedisGraphTransaction is not abstract and does not override abstract method execGetResponse() in com.redislabs.redisgraph.RedisGraphTransaction
+129:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+173:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+42:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+152:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+150:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+271:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+83:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+197:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+219:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+273:cannot find symbol  symbol: method getResponse(redis.clients.jedis.Builder<java.lang.String>) 
+105:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+171:cannot find symbol  symbol:   class CommandArguments   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+107:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+63:cannot find symbol  symbol: method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>) 
+13:cannot find symbol  symbol:   class CommandArguments   location: package redis.clients.jedis.util 
+4:cannot find symbol  symbol:   class RedisBinaryCommands   location: package redis.clients.jedis.commands 
+5:cannot find symbol  symbol:   class RedisCommands   location: package redis.clients.jedis.commands 
+15:cannot find symbol  symbol: class RedisBinaryCommands 
+16:cannot find symbol  symbol: class RedisCommands 

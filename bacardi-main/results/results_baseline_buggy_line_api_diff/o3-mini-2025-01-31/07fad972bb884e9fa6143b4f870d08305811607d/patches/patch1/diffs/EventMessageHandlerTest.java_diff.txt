@@ -1,0 +1,6 @@
+3d2
+< import ch.qos.logback.classic.Level;
+112c111
+<         logger.setLevel(Level.INFO);
+---
+>         // Removed setLevel call due to dependency API changes

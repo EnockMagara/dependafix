@@ -1,0 +1,36 @@
+13a14
+> import java.util.function.Consumer;
+17,21c18,21
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelBuf;
+< import org.spongepowered.api.network.ChannelRegistrar;
+< import org.spongepowered.api.network.RawDataListener;
+< import org.spongepowered.api.network.RemoteConnection;
+---
+> import org.spongepowered.api.network.channel.raw.RawDataChannel;
+> import org.spongepowered.api.network.channel.ChannelBuf;
+> import org.spongepowered.api.network.channel.ChannelRegistrar;
+> import org.spongepowered.api.network.EngineConnection;
+26c26
+< public class CheckPermissionListener implements RawDataListener {
+---
+> public class CheckPermissionListener  {
+36c36
+<         permissionsResultChannel = channelRegistrar.getOrCreateRaw(plugin, combinedName);
+---
+>         permissionsResultChannel = (RawDataChannel) channelRegistrar.findChannel(plugin, combinedName).orElse(channelRegistrar.createRawChannel(plugin, combinedName));
+39,40c39
+<     @Override
+<     public void handlePayload(ChannelBuf data, RemoteConnection connection, Type side) {
+---
+>     public void handlePayload(ChannelBuf data, EngineConnection connection, Type side) {
+42c41
+<         ByteArrayDataInput dataInput = ByteStreams.newDataInput(data.array());
+---
+>         ByteArrayDataInput dataInput = ByteStreams.newDataInput(data.asByteArray());
+83c82,84
+<         permissionsResultChannel.sendTo(receiver, buf -> buf.writeByteArray(dataOutput.toByteArray()));
+---
+>         byte[] bytes = dataOutput.toByteArray();
+>         Consumer<ChannelBuf> byteBufConsumer = channelBuf -> channelBuf.writeByteArray(bytes);
+>         permissionsResultChannel.sendTo(receiver, byteBufConsumer);

@@ -1,0 +1,7 @@
+5,6d4
+< import static develop.p2p.lib.LearnMath.sigmoid;
+< 
+50c48
+<         setValue(sigmoid(sum));
+---
+>         setValue(1 / (1 + Math.exp(-sum)));

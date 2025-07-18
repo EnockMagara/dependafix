@@ -1,0 +1,43 @@
+33a34
+> import java.io.ByteArrayOutputStream;
+57d57
+<     @Override
+60,61c60
+<       // Use the TFlushingFastFramedTransport to be compatible with singer_thrift
+<       // log.
+---
+>       // Use the TFastFramedTransport to be compatible with singer_thrift log.
+63,64c62
+<       framedTransport = new TFastFramedTransport(new TIOStreamTransport(os),
+<           bufferCapacity);
+---
+>       framedTransport = new TFastFramedTransport(new TIOStreamTransport(os), bufferCapacity);
+68d65
+<     @Override
+78d74
+<     @Override
+81a78,99
+> 
+>     public byte[] headerBytes() {
+>       return null;
+>     }
+> 
+>     public byte[] encode(LogMessage logMessage) throws IOException {
+>       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>       final int bufferCapacity = 10;
+>       TTransport transport = new TFastFramedTransport(new TIOStreamTransport(baos), bufferCapacity);
+>       TProtocol proto = new TBinaryProtocol(transport);
+>       try {
+>         logMessage.write(proto);
+>       } catch (TException e) {
+>         throw new IOException(e);
+>       }
+>       transport.flush();
+>       return baos.toByteArray();
+>     }
+> 
+>     public byte[] footerBytes() {
+>       return null;
+>     }
+91a110
+>    * @param maxRetentionHours maximum retention period in hours.

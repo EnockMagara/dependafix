@@ -1,0 +1,6 @@
+6d5
+< import javax.annotation.Priority;
+12a12
+> import javax.enterprise.util.AnnotationLiteral;
+27d26
+< @Priority(100)

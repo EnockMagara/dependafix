@@ -1,0 +1,4 @@
+32:cannot find symbol  symbol:   class CommandSource   location: class com.github.games647.changeskin.sponge.command.UploadCommand 
+20:cannot find symbol  symbol: class CommandExecutor 
+51:cannot find symbol  symbol:   class CommandSpec   location: class com.github.games647.changeskin.sponge.command.UploadCommand 
+18:package org.spongepowered.api.text does not exist

@@ -1,0 +1,15 @@
+0a1,6
+> <repair_strategy>
+> 1. The method JAXBToStringStrategy.getInstance() no longer exists in the updated dependency.
+> 2. The new API requires creating an instance using the constructor instead.
+> 3. Therefore, the call is replaced with "new JAXBToStringStrategy()" to obtain an instance.
+> 4. No other changes are required.
+> </repair_strategy>
+8d13
+< 
+20d24
+< 
+244c248
+<         final ToStringStrategy2 strategy = JAXBToStringStrategy.getInstance();
+---
+>         final ToStringStrategy2 strategy = new JAXBToStringStrategy();

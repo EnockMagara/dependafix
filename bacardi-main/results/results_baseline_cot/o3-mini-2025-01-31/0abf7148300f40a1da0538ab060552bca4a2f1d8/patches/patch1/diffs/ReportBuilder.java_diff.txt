@@ -1,0 +1,13 @@
+24a25,32
+> /* <repair_strategy>
+>    1. The error is caused by the call to txtField.setFontSize(Float.valueOf(f.getSize())),
+>       as f.getSize() returns an int and the updated API now expects a primitive float.
+>    2. Previously, the conversion via Float.valueOf(int) was tolerated, but now the API
+>       requires a float value.
+>    3. To fix, we simply cast f.getSize() to float.
+>    4. This is the minimal change to keep the code functional and compliant with the new API.
+> </repair_strategy> */
+348c356
+<                 txtField.setFontSize(Float.valueOf(f.getSize()));
+---
+>                 txtField.setFontSize((float) f.getSize());

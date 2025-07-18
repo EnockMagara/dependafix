@@ -1,0 +1,7 @@
+72c72,75
+<                                         currentEntryMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().parseEnchantment(), 1, false);
+---
+>                                         if (XEnchantment.matchXEnchantment("power").isPresent()) {
+>                                                 currentEntryMeta.addEnchant(XEnchantment.matchXEnchantment("power").get().getEnchant(), 1, false);
+>                                         }
+>                                         

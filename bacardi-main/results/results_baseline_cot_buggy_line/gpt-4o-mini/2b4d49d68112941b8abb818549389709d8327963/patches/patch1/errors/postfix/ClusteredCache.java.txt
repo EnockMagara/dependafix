@@ -1,0 +1,2 @@
+5:cannot find symbol  symbol:   class IMap   location: package com.hazelcast.core 
+7:package com.hazelcast.monitor does not exist

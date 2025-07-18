@@ -1,0 +1,8 @@
+57a58
+> import org.apache.fop.apps.FopFactoryBuilder;
+115c116
+<         FopFactory fopFactory = FopFactory.newInstance();
+---
+>         FopFactory fopFactory = new FopFactoryBuilder(new File(".")).build();
+146d146
+<             // everything will happen here..

@@ -1,0 +1,17 @@
+45c45
+<     private _JerseyClientConfiguration jerseyClient = new _JerseyClientConfiguration();
+---
+>     private JerseyClientConfiguration jerseyClient = new JerseyClientConfiguration();
+59c59
+<     public void setJerseyClient(_JerseyClientConfiguration jerseyClient) {
+---
+>     public void setJerseyClient(JerseyClientConfiguration jerseyClient) {
+68,75d67
+<     public static class _JerseyClientConfiguration extends JerseyClientConfiguration {
+<         public _JerseyClientConfiguration() {
+<             setChunkedEncodingEnabled(false);
+<             setGzipEnabled(false);
+<             setGzipEnabledForRequests(false);
+<         }
+<     }
+< 

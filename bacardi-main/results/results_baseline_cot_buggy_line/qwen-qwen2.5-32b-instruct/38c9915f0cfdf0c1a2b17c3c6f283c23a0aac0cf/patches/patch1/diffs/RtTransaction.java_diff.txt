@@ -1,0 +1,133 @@
+1,23d0
+< /*
+<  * The MIT License (MIT)
+<  *
+<  * Copyright (c) 2018-2023 Yegor Bugayenko
+<  *
+<  * Permission is hereby granted, free of charge, to any person obtaining a copy
+<  * of this software and associated documentation files (the "Software"), to deal
+<  * in the Software without restriction, including without limitation the rights
+<  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+<  * copies of the Software, and to permit persons to whom the Software is
+<  * furnished to do so, subject to the following conditions:
+<  *
+<  * The above copyright notice and this permission notice shall be included
+<  * in all copies or substantial portions of the Software.
+<  *
+<  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+<  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+<  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+<  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+<  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+<  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+<  * SOFTWARE.
+<  */
+33,38d9
+< import org.cactoos.iterable.LengthOf;
+< import org.cactoos.list.ListOf;
+< import org.cactoos.scalar.IoCheckedScalar;
+< import org.cactoos.scalar.ItemAt;
+< import org.cactoos.scalar.StickyScalar;
+< import org.cactoos.scalar.UncheckedScalar;
+40c11
+< import org.cactoos.text.SplitText;
+---
+> import org.cactoos.text.Splitter;
+88c59
+<     private final IoCheckedScalar<String> transaction;
+---
+>     private final String transaction;
+95,103c66,68
+<         this.transaction = new IoCheckedScalar<>(
+<             new StickyScalar<>(
+<                 () -> {
+<                     if (
+<                         new TrimmedText(
+<                             new TextOf(trnsct)
+<                         ).asString().isEmpty()
+<                     ) {
+<                         throw new IOException(
+---
+>         this.transaction = trnsct;
+>         if (this.transaction.isEmpty()) {
+>             throw new IllegalArgumentException(
+107,113c72,76
+<                     final List<Text> pieces =
+<                         new ListOf<>(
+<                             new SplitText(trnsct, ";")
+<                         );
+<                     // @checkstyle MagicNumberCheck (1 line)
+<                     if (new LengthOf(pieces).intValue() != 7) {
+<                         throw new IOException(
+---
+>         final List<Text> pieces = new Splitter(
+>             this.transaction, ";"
+>         ).toList();
+>         if (pieces.size() != 7) {
+>             throw new IllegalArgumentException(
+121,124d83
+<                     return trnsct;
+<                 }
+<             )
+<         );
+131d89
+<             new IoCheckedScalar<>(
+133,134c91
+<                     0, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 0, new Splitter(this.transaction, ";")
+156d112
+<                 new IoCheckedScalar<>(
+158,159c114
+<                         1, new SplitText(this.transaction.value(), ";")
+<                     )
+---
+>                     1, new Splitter(this.transaction, ";")
+169d123
+<             new IoCheckedScalar<>(
+171,172c125
+<                     2, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 2, new Splitter(this.transaction, ";")
+193d145
+<             new IoCheckedScalar<>(
+195,197c147
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     3, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 3, new Splitter(this.transaction, ";")
+200d149
+<         //@checkstyle MagicNumberCheck (1 line)
+213d161
+<             new IoCheckedScalar<>(
+215,217c163
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     4, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 4, new Splitter(this.transaction, ";")
+237d182
+<             new IoCheckedScalar<>(
+239,241c184
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     5, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 5, new Splitter(this.transaction, ";")
+261d203
+<             new IoCheckedScalar<>(
+263,265c205
+<                     //@checkstyle MagicNumberCheck (1 line)
+<                     6, new SplitText(this.transaction.value(), ";")
+<                 )
+---
+>                 6, new Splitter(this.transaction, ";")
+268d207
+<         // @checkstyle MagicNumber (1 line)
+286c225
+<         return new UncheckedScalar<>(this.transaction).value();
+---
+>         return this.transaction;

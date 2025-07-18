@@ -1,0 +1,19 @@
+0a1,6
+> package io.zold.api;
+> 
+> import org.cactoos.iterable.Repeated;
+> import org.cactoos.text.TextOf;
+> import java.util.UUID;
+> 
+25,29d30
+< package io.zold.api;
+< 
+< import org.cactoos.iterable.Repeated;
+< import org.cactoos.text.RandomText;
+< 
+35a37
+> 
+71c73
+<                 new Repeated<>(val, new RandomText())
+---
+>                 new Repeated<>(val, new TextOf(UUID.randomUUID().toString()))

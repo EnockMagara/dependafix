@@ -1,0 +1,36 @@
+10a11
+> import com.pubnub.api.models.consumer.pubsub.BasePubSubResult;
+15,17c16,18
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+---
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+> import com.pubnub.api.models.consumer.objects_api.space.PNSpaceResult;
+> import com.pubnub.api.models.consumer.objects_api.user.PNUserResult;
+40,41c41
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+<     pnConfiguration.setSubscribeKey(publicKey);
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+51d50
+<                 @Override
+65d63
+<                 @Override
+83d80
+<                 @Override
+88d84
+<                 @Override
+93d88
+<                 @Override
+98d92
+<                 @Override
+103d96
+<                 @Override
+108d100
+<                 @Override
+112a105,108
+> 
+>                 public void file(PubNub pubnub, BasePubSubResult pnFileEventResult) {
+>                   LOG.debug("PubNub file: {}", pnFileEventResult.toString());
+>                 }

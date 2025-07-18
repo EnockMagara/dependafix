@@ -1,0 +1,20 @@
+19a20,24
+> /* <repair_strategy>
+> 1. The error is caused by the removed class jakarta.servlet.http.HttpSessionContext.
+> 2. Remove the import and the getSessionContext() method which references the removed class.
+> 3. This minimal change resolves the compilation error while keeping the rest of the code intact.
+> </repair_strategy> */
+24d28
+< import jakarta.servlet.http.HttpSessionContext;
+41c45
+<     return new Vector(attributes.keySet()).elements();
+---
+>     return new Vector<>(attributes.keySet()).elements();
+67,73d70
+<   public HttpSessionContext getSessionContext() {
+<     return null;
+<   }
+< 
+<   /** @deprecated */
+<   @Deprecated
+<   @Override

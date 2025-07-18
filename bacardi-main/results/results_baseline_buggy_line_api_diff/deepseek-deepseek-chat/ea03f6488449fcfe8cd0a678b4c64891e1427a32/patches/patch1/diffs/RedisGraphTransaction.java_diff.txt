@@ -1,0 +1,6 @@
+4,6d3
+< import redis.clients.jedis.commands.BasicRedisPipeline;
+< import redis.clients.jedis.commands.BinaryRedisPipeline;
+< import redis.clients.jedis.commands.BinaryScriptingCommandsPipeline;
+7a5
+> import redis.clients.jedis.commands.BinaryScriptingCommandsPipeline;

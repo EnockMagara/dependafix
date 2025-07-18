@@ -1,0 +1,17 @@
+9c9,10
+< import com.artipie.asto.factory.Storages;
+---
+> import com.artipie.asto.Storage;
+> import com.artipie.asto.factory.AstoFactory;
+41,43c42,43
+<             return new YamlPolicy(
+<                 new BlockingStorage(
+<                     new Storages().newStorage(
+---
+>             final AstoFactory factory = new AstoFactory();
+>             final Storage storage = factory.create(
+45,46d44
+<                     )
+<                 )
+47a46
+>             return new YamlPolicy(new BlockingStorage(storage));

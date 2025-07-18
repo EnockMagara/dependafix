@@ -1,0 +1,8 @@
+7:cannot find symbol  symbol:   class MemberAttributeEvent   location: package com.hazelcast.cluster 
+9:package com.hazelcast.lifecycle does not exist
+35:cannot find symbol  symbol: class LifecycleListener 
+41:cannot find symbol  symbol:   class EntryListener   location: class org.jivesoftware.openfire.plugin.util.cache.ClusterListener 
+242:cannot find symbol  symbol:   class LifecycleEvent   location: class org.jivesoftware.openfire.plugin.util.cache.ClusterListener 
+67:cannot find symbol  symbol:   class EntryListener   location: class org.jivesoftware.openfire.plugin.util.cache.ClusterListener 
+8:package com.hazelcast.lifecycle does not exist
+250:cannot find symbol  symbol:   class MemberAttributeEvent   location: class org.jivesoftware.openfire.plugin.util.cache.ClusterListener 

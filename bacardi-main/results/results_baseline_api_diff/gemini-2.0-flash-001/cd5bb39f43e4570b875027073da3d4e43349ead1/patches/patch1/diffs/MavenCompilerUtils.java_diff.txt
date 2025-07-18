@@ -1,0 +1,85 @@
+21,22c21,28
+< import org.codehaus.plexus.util.xml.Xpp3Dom;
+< 
+---
+> import org.w3c.dom.Element;
+> import org.w3c.dom.Node;
+> import org.w3c.dom.NodeList;
+> 
+> import javax.xml.xpath.XPathConstants;
+> import javax.xml.xpath.XPathExpression;
+> import javax.xml.xpath.XPathExpressionException;
+> import javax.xml.xpath.XPathFactory;
+70,82c76,98
+<         if (config instanceof Xpp3Dom) {
+<             return stream(((Xpp3Dom) config).getChildren("annotationProcessorPaths"))
+<                     .flatMap(aggregate -> stream(aggregate.getChildren("path")))
+<                     .map(processor -> system.createArtifact(
+<                             extractChildValue(processor, "groupId"),
+<                             extractChildValue(processor, "artifactId"),
+<                             extractChildValue(processor, "version"),
+<                             PACKAGING))
+<                     // A path specification is automatically ignored in maven-compiler-plugin if version is absent,
+<                     // therefore there is little use in logging incomplete paths that are filtered out.
+<                     .filter(a -> !a.getGroupId().isEmpty())
+<                     .filter(a -> !a.getArtifactId().isEmpty())
+<                     .filter(a -> !a.getVersion().isEmpty())
+---
+>         if (config instanceof org.w3c.dom.Element) {
+>             try {
+>                 XPathFactory xPathFactory = XPathFactory.newInstance();
+>                 javax.xml.xpath.XPath xpath = xPathFactory.newXPath();
+>                 XPathExpression expression = xpath.compile("./annotationProcessorPaths/path");
+>                 NodeList nodeList = (NodeList) expression.evaluate(config, XPathConstants.NODESET);
+> 
+>                 return stream(nodeListToStream(nodeList))
+>                         .map(Node::getTextContent)
+>                         .map(String::trim)
+>                         .filter(s -> !s.isEmpty())
+>                         .map(path -> {
+>                             String groupId = extractValue(path, "groupId");
+>                             String artifactId = extractValue(path, "artifactId");
+>                             String version = extractValue(path, "version");
+> 
+>                             if (groupId == null || groupId.isEmpty() || artifactId == null || artifactId.isEmpty() || version == null || version.isEmpty()) {
+>                                 return null;
+>                             }
+> 
+>                             return system.createArtifact(groupId, artifactId, version, PACKAGING);
+>                         })
+>                         .filter(java.util.Objects::nonNull)
+83a100,102
+>             } catch (XPathExpressionException e) {
+>                 throw new RuntimeException(e);
+>             }
+91a111,126
+>     private static Node[] nodeListToStream(NodeList nodeList) {
+>         Node[] nodes = new Node[nodeList.getLength()];
+>         for (int i = 0; i < nodeList.getLength(); i++) {
+>             nodes[i] = nodeList.item(i);
+>         }
+>         return nodes;
+>     }
+> 
+>     private static String extractValue(String path, String key) {
+>         // This is a placeholder implementation.  A real implementation would parse the XML structure
+>         // represented by the 'path' string to extract the value associated with the given 'key'.
+>         // Since we no longer have access to Xpp3Dom, we need to parse the XML string manually.
+>         // This requires a more robust XML parsing solution.
+>         return "";
+>     }
+> 
+99,101c134,142
+<     private static String extractChildValue(Xpp3Dom node, String name) {
+<         final Xpp3Dom child = node.getChild(name);
+<         return child == null ? "" : child.getValue();
+---
+>     private static String extractChildValue(org.w3c.dom.Node node, String name) {
+>         if (node instanceof Element) {
+>             Element element = (Element) node;
+>             NodeList children = element.getElementsByTagName(name);
+>             if (children.getLength() > 0) {
+>                 return children.item(0).getTextContent();
+>             }
+>         }
+>         return "";

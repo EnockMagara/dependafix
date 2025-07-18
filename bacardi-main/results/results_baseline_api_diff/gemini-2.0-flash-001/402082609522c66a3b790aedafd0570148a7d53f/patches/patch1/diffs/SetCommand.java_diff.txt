@@ -1,0 +1,50 @@
+11a12
+> import org.spongepowered.api.command.Command;
+13,16c14,17
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.args.GenericArguments;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.CommonParameters;
+> import org.spongepowered.api.command.parameter.Parameter;
+> import org.spongepowered.api.command.CommandCause;
+21,23c22
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import java.util.Optional;
+25c24,26
+< public class SetCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> import org.spongepowered.api.text.Text;
+> 
+> public class SetCommand implements Command, ChangeSkinCommand {
+37c38,39
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+---
+>     public CommandResult execute(CommandCause cause, CommandContext args) {
+>         Object src = cause.root();
+50c52,58
+<         String targetSkin = args.<String>getOne("skin").get();
+---
+>         Optional<String> targetSkinOptional = args.one(CommonParameters.STRING);
+>         if (!targetSkinOptional.isPresent()) {
+>             plugin.sendMessage(src, "invalid-usage");
+>             return CommandResult.empty();
+>         }
+> 
+>         String targetSkin = targetSkinOptional.get();
+76a85,87
+>         Parameter.Key<String> skinKey = Parameter.key("skin", String.class);
+>         Parameter skinParameter = Parameter.string().key(skinKey).build();
+> 
+79,81c90,91
+<                 .arguments(
+<                         string(of("skin")),
+<                         flags().flag("keep").buildWith(GenericArguments.none()))
+---
+>                 .addParameter(skinParameter)
+>                 .addFlag(org.spongepowered.api.command.parameter.Flag.builder().alias("keep").build())

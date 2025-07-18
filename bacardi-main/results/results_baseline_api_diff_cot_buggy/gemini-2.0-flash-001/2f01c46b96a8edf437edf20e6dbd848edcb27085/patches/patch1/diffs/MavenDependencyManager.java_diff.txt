@@ -1,0 +1,6 @@
+162c162,164
+<         .map(exec -> (Xpp3Dom) exec.getConfiguration())
+---
+>         .map(exec -> (org.apache.maven.model.PluginExecution) exec)
+>         .map(org.apache.maven.model.PluginExecution::getConfiguration)
+>         .map(config -> (Xpp3Dom) config)

@@ -1,0 +1,22 @@
+6,12c6,8
+< import javax.mvc.Controller;
+< import javax.mvc.Models;
+< import javax.mvc.UriRef;
+< import javax.mvc.binding.BindingResult;
+< import javax.mvc.binding.MvcBinding;
+< import javax.mvc.binding.ParamError;
+< import javax.mvc.security.CsrfProtected;
+---
+> import javax.mvc.annotation.Controller;
+> import javax.mvc.annotation.Models;
+> import javax.mvc.annotation.UriRef;
+29c25
+<     BindingResult bindingResult;
+---
+>     javax.mvc.binding.BindingResult bindingResult;
+49d44
+<             @MvcBinding
+55c50
+<                     .forEach((ParamError t) -> {
+---
+>                     .forEach((javax.mvc.binding.ParamError t) -> {

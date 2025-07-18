@@ -1,0 +1,158 @@
+1,16d0
+< /*
+<  * Copyright (C) 2007-2009 Jive Software. All rights reserved.
+<  *
+<  * Licensed under the Apache License, Version 2.0 (the "License");
+<  * you may not use this file except in compliance with the License.
+<  * You may obtain a copy of the License at
+<  *
+<  *     http://www.apache.org/licenses/LICENSE-2.0
+<  *
+<  * Unless required by applicable law or agreed to in writing, software
+<  * distributed under the License is distributed on an "AS IS" BASIS,
+<  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+<  */
+< 
+18a3,4
+> import com.hazelcast.cluster.Cluster;
+> import com.hazelcast.cluster.Member;
+27d12
+< import com.hazelcast.core.Cluster;
+30c15,16
+< import com.hazelcast.core.Member;
+---
+> import com.hazelcast.core.LifecycleService;
+> import com.hazelcast.core.MemberSelector;
+63,64d48
+< import java.util.HashSet;
+< import java.util.List;
+83,133d66
+<     private static final SystemProperty<String> HAZELCAST_EXECUTOR_SERVICE_NAME = SystemProperty.Builder.ofType(String.class)
+<         .setKey("hazelcast.executor.service.name")
+<         .setDefaultValue("openfire::cluster::executor")
+<         .setDynamic(false)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Duration> MAX_CLUSTER_EXECUTION_TIME = SystemProperty.Builder.ofType(Duration.class)
+<         .setKey("hazelcast.max.execution.seconds")
+<         .setDefaultValue(Duration.ofSeconds(30))
+<         .setChronoUnit(ChronoUnit.SECONDS)
+<         .setDynamic(true)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Duration> CLUSTER_STARTUP_RETRY_TIME = SystemProperty.Builder.ofType(Duration.class)
+<         .setKey("hazelcast.startup.retry.seconds")
+<         .setDefaultValue(Duration.ofSeconds(10))
+<         .setChronoUnit(ChronoUnit.SECONDS)
+<         .setDynamic(true)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Integer> CLUSTER_STARTUP_RETRY_COUNT = SystemProperty.Builder.ofType(Integer.class)
+<         .setKey("hazelcast.startup.retry.count")
+<         .setDefaultValue(1)
+<         .setDynamic(true)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<String> HAZELCAST_CONFIG_FILE = SystemProperty.Builder.ofType(String.class)
+<         .setKey("hazelcast.config.xml.filename")
+<         .setDefaultValue("hazelcast-cache-config.xml")
+<         .setDynamic(false)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Boolean> HAZELCAST_JMX_ENABLED = SystemProperty.Builder.ofType(Boolean.class)
+<         .setKey("hazelcast.config.jmx.enabled")
+<         .setDefaultValue(Boolean.FALSE)
+<         .setDynamic(false)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Boolean> HAZELCAST_REST_ENABLED = SystemProperty.Builder.ofType(Boolean.class)
+<         .setKey("hazelcast.config.rest.enabled")
+<         .setDefaultValue(Boolean.FALSE)
+<         .setDynamic(false)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+<     private static final SystemProperty<Boolean> HAZELCAST_MEMCACHE_ENABLED = SystemProperty.Builder.ofType(Boolean.class)
+<         .setKey("hazelcast.config.memcache.enabled")
+<         .setDefaultValue(Boolean.FALSE)
+<         .setDynamic(false)
+<         .setPlugin(HazelcastPlugin.PLUGIN_NAME)
+<         .build();
+< 
+281c214
+<         final long openfireMaxCacheSizeInBytes = CacheFactory.getMaxCacheSize(name);
+---
+>         final long openfireMaxCacheSizeInBytes = CacheFactory.maxCacheSize(name);
+288c221
+<             dynamicConfig.setMaxSizeConfig(new MaxSizeConfig(hazelcastMaxCacheSizeInMegaBytes, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+---
+>             dynamicConfig.setMaxSizeConfig(new MaxSizeConfig(hazelcastMaxCacheSizeInMegaBytes, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE);
+341c274
+<             return getNodeID(cluster.getLocalMember()).toByteArray();
+---
+>             return nodeID(cluster.getLocalMember()).toByteArray();
+378d310
+< 
+423c355
+<         final Set<Member> members = new HashSet<>();
+---
+>         final Set<Member> membersSet = new HashSet<>();
+427c359
+<                 members.add(member);
+---
+>                 memberSet.add(member);
+431c363
+<         if (!members.isEmpty()) {
+---
+>         if (!memberSet.isEmpty()) {
+436,437c368,369
+<                 final Map<Member, ? extends Future<T>> futures = hazelcast.getExecutorService(HAZELCAST_EXECUTOR_SERVICE_NAME.getValue()).submitToMembers(new CallableTask<>(task), members);
+<                 long nanosLeft = TimeUnit.SECONDS.toNanos(MAX_CLUSTER_EXECUTION_TIME.getValue().getSeconds() * members.size());
+---
+>                 final Map<Member, ? extends Future<T>> futures = hazelcast.getExecutorService(HAZELCAST_EXECUTOR_SERVICE_NAME.getValue()).submitToMembers(new CallableTask<>(task), memberSet);
+>                 long nanosLeft = TimeUnit.SECONDS.toNanos(MAX_CLUSTER_EXECUTION_TIME.getValue().getSeconds() * memberSet.size());
+440c372
+<                     result.add(future.get(nanosLeft, TimeUnit.NANOSECONDS));
+---
+>                     result.add(future.get(nanoLeft, TimeUnit.NANOSECONDS));
+444c376
+<                 logger.error("Failed to execute cluster task within " + StringUtils.getFullElapsedTime(MAX_CLUSTER_EXECUTION_TIME.getValue()), te);
+---
+>                 logger.error("Failed to execute cluster task within " + MAX_CLUSTER_EXECUTION_TIME + " seconds", te);
+504c436
+<             if (memberToFind.equals(getNodeID(member))) {
+---
+>             if (memberToFind.equals(nodeID(member))) {
+518c450
+<             final String uid = getNodeID(cluster.getLocalMember()).toString();
+---
+>             final String uid = nodeID(cluster.getLocalMember()).toString();
+548c480
+<         // TODO: Update CacheFactoryStrategy so the signature is getLock(final Serializable key, Cache<Serializable, Serializable> cache)
+---
+>         // TODO: Better genericize this method in CacheFactoryStrategy so we can stop suppressing this warning
+583c515
+<             pluginClassLoaderWarnings.put(o.getClass().getName(), Instant.now()); // Note that this Instant is unused.
+---
+>             pluginClassLoaderWarnings.put(o.getClass().name(), Instant.now()); // Note that this Instant is unused.
+640c572
+<                 logger.trace("CallableTask[{}] result: {}", task.getClass().getName(), task.getResult());
+---
+>                 logger.trace("CallableTask[{}] result: {}", task.getClass().name(), task.getResult());
+643c575
+<                 logger.error("Unexpected exception running CallableTask[{}]", task.getClass().getName(), e);
+---
+>                 logger.error("Unexpected exception running CallableTask[{}]", task.getClass().name(), e);
+655c587
+<     public static NodeID getNodeID(final Member member) {
+---
+>     public static NodeID nodeID(final Member member) {
+691c623
+<                 logger.warn("Timeout waiting for leftCluster() event to be called [timeout={}]", StringUtils.getFullElapsedTime(timeout));
+---
+>                 logger.warn("Timeout waiting for leftCluster() event to be called [timeout={}]", StringUtils.getFullElapsedTime(timeout);
+701,703d632
+< 
+< 
+< 

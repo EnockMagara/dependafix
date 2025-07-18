@@ -1,0 +1,8 @@
+36d35
+< import org.yaml.snakeyaml.inspector.TrustedTagInspector;
+66c65,67
+<         loadingConfig.setTagInspector(new TrustedTagInspector());
+---
+>         // The TrustedTagInspector has been removed in the new dependency version.
+>         // The following line is removed to support the updated API.
+>         // loadingConfig.setTagInspector(new TrustedTagInspector());

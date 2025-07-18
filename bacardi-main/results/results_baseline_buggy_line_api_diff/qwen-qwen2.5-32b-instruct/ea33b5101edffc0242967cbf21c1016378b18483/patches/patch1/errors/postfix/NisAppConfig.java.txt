@@ -1,0 +1,16 @@
+150:cannot find symbol  symbol: method mosaicIdCache() 
+261:cannot find symbol  symbol: method nisCache() 
+202:cannot find symbol  symbol: method unconfirmedTransactionsFilter() 
+137:cannot find symbol  symbol: method unconfirmedTransactions() 
+205:cannot find symbol  symbol: method nisCache() 
+143:cannot find symbol  symbol: method unconfirmedTransactions() 
+111:method setLocations in class org.flywaydb.core.api.configuration.ClassicConfiguration cannot be applied to given types;  required: org.flywaydb.core.api.Location[]   found: java.lang.String[]   reason: varargs mismatch; java.lang.String[] cannot be converted to org.flywaydb.core.api.Location 
+136:cannot find symbol  symbol: method nisCache() 
+130:cannot find symbol  symbol:   class DefaultBlockChainServices   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+227:cannot find symbol  symbol: method importanceCalculator() 
+142:cannot find symbol  symbol: method nisCache() 
+200:cannot find symbol  symbol: method nisCache() 
+175:cannot find symbol  symbol: method observerOptions() 
+204:cannot find symbol  symbol: method nisCache() 
+206:cannot find symbol  symbol: method unlockedAccounts() 
+193:cannot find symbol  symbol: method nisCache() 

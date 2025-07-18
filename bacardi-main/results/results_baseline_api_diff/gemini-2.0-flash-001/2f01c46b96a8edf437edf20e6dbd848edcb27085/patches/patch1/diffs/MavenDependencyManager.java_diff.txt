@@ -1,0 +1,13 @@
+19a20
+> import org.apache.maven.model.Plugin;
+162c163,170
+<         .map(exec -> (Xpp3Dom) exec.getConfiguration())
+---
+>         .map(exec -> exec.getConfiguration())
+>         .map(config -> {
+>           if (config instanceof Xpp3Dom) {
+>             return (Xpp3Dom) config;
+>           } else {
+>             return null;
+>           }
+>         })

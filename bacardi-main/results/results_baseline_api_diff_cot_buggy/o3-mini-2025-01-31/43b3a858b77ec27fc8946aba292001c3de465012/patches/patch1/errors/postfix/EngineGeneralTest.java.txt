@@ -1,0 +1,40 @@
+2417:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+322:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+218:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+3067:method kEnumTest() is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+2890:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+822:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2857:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+856:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2616:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+252:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+1577:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+397:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2044:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+179:cannot access org.slf4j.spi.LoggingEventAware  class file for org.slf4j.spi.LoggingEventAware not found 
+2462:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+282:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+3086:method insertDuplicateDBError() is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+267:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+3037:method closingAnEngineUsingTheCreateDropPolicyShouldDropAllEntities() is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+2408:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+308:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2874:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+232:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2454:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+672:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2940:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+298:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+204:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2924:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+336:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2969:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2908:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+3122:enum com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest.TestEnum is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+3051:method doesRowCountIncrementTest() is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+791:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2627:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2247:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+3104:method batchInsertDuplicateDBError() is already defined in class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest
+757:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 
+2256:cannot find symbol  symbol:   variable BOOLEAN   location: class com.feedzai.commons.sql.abstraction.engine.impl.abs.EngineGeneralTest 

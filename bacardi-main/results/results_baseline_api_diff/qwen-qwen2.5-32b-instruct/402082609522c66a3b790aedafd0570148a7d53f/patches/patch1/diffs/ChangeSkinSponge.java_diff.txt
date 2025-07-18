@@ -1,0 +1,109 @@
+20,21c20,27
+< import org.slf4j.Logger;
+< import org.spongepowered.api.Platform.Type;
+---
+> import ninja.leaping.configurate.ConfigurationNode;
+> import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+> import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+> import ninja.leaping.configurate.loader.ConfigurationLoader;
+> 
+> import org.checkerframework.checker.nullness.qual.Nullable;
+> import org.spongepowered.api.Game;
+> import org.spongepowered.api.Platform;
+23c29,30
+< import org.spongepowered.api.command.CommandManager;
+---
+> import org.spongepowered.api.command.CommandMapping;
+> import org.spongepowered.api.command.CommandResult;
+24a32,33
+> import org.spongepowered.api.command.args.CommandContext;
+> import org.spongepowered.api.command.spec.CommandSpec;
+25a35
+> import org.spongepowered.api.event.EventManager;
+28d37
+< import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+30d38
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+32c40,44
+< import org.spongepowered.api.plugin.Plugin;
+---
+> import org.spongepowered.api.network.ChannelBinding;
+> import org.spongepowered.api.network.ChannelBinding.ChannelBuilder;
+> import org.spongepowered.api.plugin.PluginContainer;
+> import org.spongepowered.api.plugin.PluginContainer;
+> import org.spongepowered.api.text.Text;
+33a46,47
+> import org.spongepowered.api.util.event.EventResult;
+> import org.spongepowered.plugin.Plugin;
+43a58
+> {
+45c60
+<     private final Logger logger;
+---
+>     private final org.slf4j.Logger logger;
+53d67
+<     //We will place more than one config there (i.e. H2/SQLite database) -> sharedRoot = false
+55c69
+<     ChangeSkinSponge(Logger logger, @ConfigDir(sharedRoot = false) Path dataFolder, Injector injector) {
+---
+>     ChangeSkinSponge(org.slf4j.Logger logger, @ConfigDir(sharedRoot = false) Path dataFolder, Injector injector) {
+62,63c76
+<     public void onPreInit(GamePreInitializationEvent preInitEvent) {
+<         //load config and database
+---
+>     public void onPreInit(GameInitializationEvent preInitEvent) {
+77c90,104
+<         CommandManager cmdManager = Sponge.getCommandManager();
+---
+>         Game game = Sponge.game();
+>         EventManager eventManager = game.eventManager();
+>         PluginContainer pluginContainer = game.pluginManager().fromInstance(this).get();
+> 
+>         CommandSpec selectCommandSpec = injector.getInstance(SelectCommand.class).buildSpec();
+>         CommandSpec infoCommandSpec = injector.getInstance(InfoCommand.class).buildSpec();
+>         CommandSpec uploadCommandSpec = injector.getInstance(UploadCommand.class).buildSpec();
+>         CommandSpec setCommandSpec = injector.getInstance(SetCommand.class).buildSpec();
+>         CommandSpec invalidateCommandSpec = injector.getInstance(InvalidateCommand.class).buildSpec();
+> 
+>         game.commandManager().register(pluginContainer, selectCommandSpec, "skin-select", "skinselect");
+>         game.commandManager().register(pluginContainer, infoCommandSpec, "skin-info");
+>         game.commandManager().register(pluginContainer, uploadCommandSpec, "skin-upload");
+>         game.commandManager().register(pluginContainer, setCommandSpec, "changeskin", "setskin", "skin");
+>         game.commandManager().register(pluginContainer, invalidateCommandSpec, "skininvalidate", "skin-invalidate");
+79,85c106
+<         //command and event register
+<         cmdManager.register(this, injector.getInstance(SelectCommand.class).buildSpec(), "skin-select", "skinselect");
+<         cmdManager.register(this, injector.getInstance(InfoCommand.class).buildSpec(), "skin-info");
+<         cmdManager.register(this, injector.getInstance(UploadCommand.class).buildSpec(), "skin-upload");
+<         cmdManager.register(this, injector.getInstance(SetCommand.class).buildSpec(), "changeskin", "setskin", "skin");
+<         cmdManager.register(this, injector.getInstance(InvalidateCommand.class)
+<                 .buildSpec(), "skininvalidate", "skin-invalidate");
+---
+>         eventManager.registerListeners(pluginContainer, injector.getInstance(LoginListener.class));
+87,90c108
+<         Sponge.getEventManager().registerListeners(this, injector.getInstance(LoginListener.class));
+< 
+<         //incoming channel
+<         ChannelRegistrar channelReg = Sponge.getChannelRegistrar();
+---
+>         ChannelRegistrar channelRegistrar = game.channelRegistrar();
+93,96c111,114
+<         RawDataChannel updateChannel = channelReg.getOrCreateRaw(this, updateChannelName);
+<         RawDataChannel permChannel = channelReg.getOrCreateRaw(this, permissionChannelName);
+<         updateChannel.addListener(Type.SERVER, injector.getInstance(UpdateSkinListener.class));
+<         permChannel.addListener(Type.SERVER, injector.getInstance(CheckPermissionListener.class));
+---
+>         ChannelBuilder updateChannelBuilder = channelRegistrar.createChannelBuilder(updateChannelName);
+>         ChannelBuilder permissionChannelBuilder = channelRegistrar.createChannelBuilder(permissionChannelName);
+>         updateChannelBuilder.register(pluginContainer, injector.getInstance(UpdateSkinListener.class));
+>         permissionChannelBuilder.register(pluginContainer, injector.getInstance(CheckPermissionListener.class);
+114d131
+<         //disallow - not whitelisted or blacklisted
+137c154
+<     public Logger getLog() {
+---
+>     public org.slf4j.Logger getLog() {
+145c162
+<             receiver.sendMessage(TextSerializers.LEGACY_FORMATTING_CODE.deserialize(message));
+---
+>             receiver.sendMessage(Text.of(message));

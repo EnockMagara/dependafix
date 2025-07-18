@@ -1,0 +1,11 @@
+5c5
+< import liquibase.executor.ExecutorService;
+---
+> import liquibase.database.Database;
+18c18,21
+<         ExecutorService.getInstance().getExecutor(this).execute(new DropStoredProcedureStatement(this.getLiquibaseCatalogName(), this.getLiquibaseSchemaName()));
+---
+>         // ExecutorService.getInstance().getExecutor(this).execute(new DropStoredProcedureStatement(this.getLiquibaseCatalogName(), this.getLiquibaseSchemaName()));
+>         // Replaced with the new method signature
+>         Database database = this;
+>         ExecutorService.getExecutor("default", database).execute(new DropStoredProcedureStatement(this.getLiquibaseCatalogName(), this.getLiquibaseSchemaName()));

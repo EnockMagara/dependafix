@@ -1,0 +1,65 @@
+14,19d13
+< import org.spongepowered.api.command.CommandException;
+< import org.spongepowered.api.command.CommandResult;
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+22,23d15
+< import org.spongepowered.api.text.Text;
+< import org.spongepowered.api.text.serializer.TextSerializers;
+25c17,26
+< public class InfoCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> import net.kyori.adventure.text.Component;
+> import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+> 
+> import org.spongepowered.api.command.CommandResult;
+> import org.spongepowered.api.command.exception.CommandException;
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.source.CommandSource;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> 
+> public class InfoCommand implements ChangeSkinCommand {
+33,34d33
+< 
+<     @Override
+52c51,59
+<     @Override
+---
+>     public CommandResult process(CommandContext context) throws CommandException {
+>         Optional<CommandSource> optionalSource = context.cause().first(CommandSource.class);
+>         if (optionalSource.isEmpty()) {
+>             throw new CommandException(LegacyComponentSerializer.legacyAmpersand().deserialize("&cNo valid command source!"));
+>         }
+>         CommandSource src = optionalSource.get();
+>         return execute(src, context);
+>     }
+> 
+54,56c61,63
+<         return CommandSpec.builder()
+<                 .executor(this)
+<                 .permission(PomData.ARTIFACT_ID + ".command.skininfo.base")
+---
+>         Command command = Command.builder()
+>                 .executor(ctx -> this.process(ctx))
+>                 .requires(src -> src.hasPermission(PomData.ARTIFACT_ID + ".command.skininfo.base"))
+57a65
+>         return new CommandSpec(command);
+70c78
+<                 Text text = TextSerializers.LEGACY_FORMATTING_CODE.deserialize(formatted);
+---
+>                 Component text = LegacyComponentSerializer.legacyAmpersand().deserialize(formatted);
+76a85,96
+> 
+>     public static class CommandSpec {
+>         private final Command command;
+> 
+>         public CommandSpec(Command command) {
+>             this.command = command;
+>         }
+> 
+>         public Command getCommand() {
+>             return command;
+>         }
+>     }

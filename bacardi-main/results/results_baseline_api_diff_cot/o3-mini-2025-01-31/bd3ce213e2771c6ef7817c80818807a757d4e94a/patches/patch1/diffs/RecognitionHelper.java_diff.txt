@@ -1,0 +1,10 @@
+4a5,6
+> import java.io.FileOutputStream;
+> import java.io.OutputStream;
+241,242c243,245
+<                         ObjectWriter writer = mapper.writer();
+<                         writer.writeValue(segmentListFile, dataList);
+---
+>             try (OutputStream os = new FileOutputStream(segmentListFile)) {
+>                 mapper.writer().writeValue(os, dataList);
+>             }

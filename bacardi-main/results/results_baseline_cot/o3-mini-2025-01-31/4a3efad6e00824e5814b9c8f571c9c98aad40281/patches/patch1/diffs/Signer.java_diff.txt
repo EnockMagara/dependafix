@@ -1,0 +1,4 @@
+5a6
+> import eu.europa.esig.dss.enumerations.CertificationPermission;
+7d7
+< import eu.europa.esig.dss.pades.CertificationPermission;

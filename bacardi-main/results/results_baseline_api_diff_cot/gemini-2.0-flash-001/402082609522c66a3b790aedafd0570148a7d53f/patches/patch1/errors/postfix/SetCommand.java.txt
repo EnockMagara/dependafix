@@ -1,0 +1,6 @@
+45:cannot find symbol  symbol:   method getUniqueId()   location: interface org.spongepowered.api.entity.living.player.Player 
+42:cannot find symbol  symbol:   method empty()   location: interface org.spongepowered.api.command.CommandResult 
+48:cannot find symbol  symbol:   method empty()   location: interface org.spongepowered.api.command.CommandResult 
+20:cannot find symbol  symbol:   static string   location: class org.spongepowered.api.command.parameter.CommonParameters 
+21:cannot find symbol  symbol:   class Flag   location: package org.spongepowered.api.command.parameter 
+56:cannot find symbol  symbol:   method getUniqueId()   location: variable receiver of type org.spongepowered.api.entity.living.player.Player 

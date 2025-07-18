@@ -1,0 +1,22 @@
+3d2
+< import de.gwdg.metadataqa.api.json.JsonBranch;
+4a4
+> import de.gwdg.metadataqa.api.model.pathcache.JsonPathCache.JsonBranch;
+259c259
+<               definition,
+---
+>               (definition,
+292c292
+<         definition,
+---
+>         (definition,
+384c384
+<             line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+---
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+416c416,418
+<           var df = new DataFieldImpl(line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0));
+---
+>           var df = new DataFieldImpl(
+>             (line.getTag(), line.getInd1().charAt(0), line.getInd2().charAt(0)
+>           );

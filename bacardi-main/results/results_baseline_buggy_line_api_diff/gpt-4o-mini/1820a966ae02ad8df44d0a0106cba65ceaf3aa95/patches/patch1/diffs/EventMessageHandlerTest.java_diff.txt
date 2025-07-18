@@ -1,0 +1,5 @@
+4,5d3
+< import ch.qos.logback.classic.Logger;
+< import ch.qos.logback.classic.spi.ILoggingEvent;
+17a16
+> import org.slf4j.Logger;

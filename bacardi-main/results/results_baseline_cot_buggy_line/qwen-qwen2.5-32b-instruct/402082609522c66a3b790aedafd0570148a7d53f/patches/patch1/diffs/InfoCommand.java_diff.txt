@@ -1,0 +1,38 @@
+14,15d13
+< import org.spongepowered.api.command.CommandException;
+< import org.spongepowered.api.command.CommandResult;
+17,19c15,20
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.CommandResult;
+> import org.spongepowered.api.command.CommandMapping;
+> import org.spongepowered.api.command.CommandCompletion;
+> import org.spongepowered.api.command.CommandCallable;
+> import org.spongepowered.api.command.CommandException;
+> import org.spongepowered.api.command.CommandSpec;
+25c26
+< public class InfoCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class InfoCommand implements CommandCallable, ChangeSkinCommand {
+33d33
+< 
+35c35
+<     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException {
+---
+>     public CommandResult process(CommandSource src, String arguments) throws CommandException {
+53c53,63
+<     public CommandSpec buildSpec() {
+---
+>     public List<String> getSuggestions(CommandSource src, String arguments, CommandContext context, TextChannel channel) throws CommandException {
+>         return new ArrayList<>();
+>     }
+> 
+>     @Override
+>     public boolean testPermission(CommandSource src) {
+>         return src.hasPermission(PomData.ARTIFACT_ID + ".command.skininfo.base");
+>     }
+> 
+>     @Override
+>     public CommandSpec getSpec() {

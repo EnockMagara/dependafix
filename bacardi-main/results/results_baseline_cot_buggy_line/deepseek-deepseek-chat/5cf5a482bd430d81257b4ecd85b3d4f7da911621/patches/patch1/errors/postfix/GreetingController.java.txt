@@ -1,0 +1,13 @@
+18:package javax.mvc does not exist
+13:package javax.mvc.binding does not exist
+29:cannot find symbol  symbol:   class Models   location: class com.example.web.GreetingController 
+43:cannot find symbol  symbol:   class UriRef   location: class com.example.web.GreetingController 
+16:package javax.mvc does not exist
+15:package javax.mvc.security does not exist
+14:package javax.mvc.binding does not exist
+11:package javax.mvc does not exist
+26:cannot find symbol  symbol:   class BindingResult   location: class com.example.web.GreetingController 
+21:cannot find symbol  symbol: class Controller 
+12:package javax.mvc.binding does not exist
+17:package javax.mvc does not exist
+46:cannot find symbol  symbol:   class MvcBinding   location: class com.example.web.GreetingController 

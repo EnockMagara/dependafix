@@ -1,0 +1,2 @@
+105:cannot find symbol  symbol:   method getClassInfoVisitor()   location: variable coverage of type org.pitest.coverage.CoverageDatabase 
+107:incompatible types: org.pitest.classinfo.ClassInfoBuilder cannot be converted to java.util.Collection<org.pitest.classinfo.ClassInfo>

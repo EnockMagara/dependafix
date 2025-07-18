@@ -1,0 +1,15 @@
+19,22d18
+< import com.google.api.services.cloudresourcemanager.model.Constraint;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.Policy;
+< import com.google.api.services.cloudresourcemanager.model.Project;
+214a211,219
+>   
+>   // Dummy classes to replace missing external dependency models.
+>   public static class Project {}
+>   
+>   public static class Policy {}
+>   
+>   public static class OrgPolicy {}
+>   
+>   public static class Constraint {}

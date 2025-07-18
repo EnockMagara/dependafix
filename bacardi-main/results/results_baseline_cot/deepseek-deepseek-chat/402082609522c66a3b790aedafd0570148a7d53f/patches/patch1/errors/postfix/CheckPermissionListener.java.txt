@@ -1,0 +1,6 @@
+31:cannot find symbol  symbol:   class ChannelRegistrar   location: class com.github.games647.changeskin.sponge.bungee.CheckPermissionListener 
+39:cannot find symbol  symbol:   class ChannelBuf   location: class com.github.games647.changeskin.sponge.bungee.CheckPermissionListener 
+19:cannot find symbol  symbol:   class RawDataListener   location: package org.spongepowered.api.network 
+25:cannot find symbol  symbol: class RawDataListener 
+18:cannot find symbol  symbol:   class ChannelRegistrar   location: package org.spongepowered.api.network 
+17:cannot find symbol  symbol:   class ChannelBuf   location: package org.spongepowered.api.network 

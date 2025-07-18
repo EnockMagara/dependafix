@@ -1,0 +1,11 @@
+70c70
+<                         if (tree.size() == 0 || tree.query1NN(coords).dist() > distanceTolerance) {
+---
+>                         if (tree.size() == 0 || tree.queryKNN(coords, 1).get(0).getDistance() > distanceTolerance) {
+352c352,353
+<          * Generates a hexagon grid of points that lie within a bounding rectangle.
+---
+>          * Generates a hexagon grid/lattice of points that lie within a bounding
+>          * rectangle.
+981d981
+<                 @Override

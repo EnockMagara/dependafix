@@ -1,0 +1,14 @@
+9,11c9
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.entity.living.player.Player;
+< import org.spongepowered.api.scheduler.Task;
+---
+> import org.spongepowered.api.text.source.TextSource;
+16c14
+<     private final CommandSource invoker;
+---
+>     private final TextSource invoker;
+19c17
+<     public SkinDownloader(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, UUID targetUUID
+---
+>     public SkinDownloader(ChangeSkinSponge plugin, TextSource invoker, Player receiver, UUID targetUUID

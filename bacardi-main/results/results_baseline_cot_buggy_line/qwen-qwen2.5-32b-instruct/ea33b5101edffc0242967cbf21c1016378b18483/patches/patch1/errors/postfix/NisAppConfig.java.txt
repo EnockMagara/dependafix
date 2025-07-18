@@ -1,0 +1,14 @@
+378:method lastBlockHeight() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+340:method nisMain() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+93:cannot find symbol  symbol:   method getName()   location: class org.nem.core.model.NetworkInfo 
+335:method transactionManager() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+153:cannot find symbol  symbol:   variable WB_IMMEDIATE_VEST   location: class org.nem.core.model.BlockChainFeature 
+429:method weighedBalancesSupplier() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+404:method nisMain() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+107:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+108:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+399:method transactionManager() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+369:cannot find symbol  symbol:   variable WB_IMMEDIATE_VEST   location: class org.nem.core.model.BlockChainFeature 
+394:method unconfirmedTransactionsFilter() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+365:method weighedBalancesSupplier() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+383:method unconfirmedTransactions() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig

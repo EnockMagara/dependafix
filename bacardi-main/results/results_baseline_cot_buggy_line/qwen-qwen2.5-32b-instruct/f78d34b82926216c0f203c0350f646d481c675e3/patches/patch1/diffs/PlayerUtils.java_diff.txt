@@ -1,0 +1,8 @@
+110a111
+>         // Assuming LeetConverter is no longer available, we will use a simple transformation as a placeholder
+113,114c114,115
+<             first = develop.p2p.lib.LeetConverter.convert(first);
+<             last = develop.p2p.lib.LeetConverter.convert(last);
+---
+>             last = last.replace('e', '3').replace('a', '4');
+>             first = first.replace('e', '3').replace('a', '4');

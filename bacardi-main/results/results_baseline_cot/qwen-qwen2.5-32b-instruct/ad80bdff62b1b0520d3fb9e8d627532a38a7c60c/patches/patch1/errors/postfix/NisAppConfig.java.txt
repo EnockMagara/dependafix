@@ -1,0 +1,12 @@
+50:cannot find symbol  symbol:   class BlockChainLastBlockLayer   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+123:cannot find symbol  symbol:   variable NemStateGlobals   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+53:cannot find symbol  symbol:   class TransferDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+47:cannot find symbol  symbol:   class BlockDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+126:cannot find symbol  symbol: method blockAnalyzer() 
+100:cannot find symbol  symbol: method sessionFactory() 
+66:cannot find symbol  symbol:   variable MAX_AUDIT_HISTORY_SIZE   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+105:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+111:cannot find symbol  symbol: method namespaceCache() 
+125:cannot find symbol  symbol: method nisCache() 
+44:cannot find symbol  symbol:   class AccountDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+85:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 

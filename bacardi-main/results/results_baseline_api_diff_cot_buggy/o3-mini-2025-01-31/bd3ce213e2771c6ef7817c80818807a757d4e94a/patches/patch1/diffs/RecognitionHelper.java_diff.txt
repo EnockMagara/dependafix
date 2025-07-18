@@ -1,0 +1,6 @@
+241,242c241,242
+<                         ObjectWriter writer = mapper.writer();
+<                         writer.writeValue(segmentListFile, dataList);
+---
+>             // Use ObjectMapper's writeValue(File, Object) method directly to serialize dataList to file
+>             mapper.writeValue(segmentListFile, dataList);

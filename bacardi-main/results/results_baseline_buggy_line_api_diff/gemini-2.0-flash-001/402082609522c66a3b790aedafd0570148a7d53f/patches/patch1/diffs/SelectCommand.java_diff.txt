@@ -1,0 +1,44 @@
+7a8,9
+> import net.kyori.adventure.text.TextComponent;
+> import org.spongepowered.api.command.Command;
+9,12c11,12
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+16,19c16
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+< 
+< public class SelectCommand implements CommandExecutor, ChangeSkinCommand {
+---
+> public class SelectCommand implements org.spongepowered.api.command.CommandExecutor, ChangeSkinCommand {
+29c26,27
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+---
+>     public CommandResult execute(CommandContext context) {
+>         org.spongepowered.api.command.CommandSource src = context.getCause().root();
+35c33
+<         String skinName = args.<String>getOne("skinName").get().toLowerCase().replace("skin-", "");
+---
+>         String skinName = context.one(Parameter.string("skinName")).orElse("").toLowerCase().replace("skin-", "");
+40c38
+<             Task.builder().async().execute(new SkinSelector(plugin, receiver, targetId)).submit(plugin);
+---
+>             Task.builder().plugin(plugin).async().execute(new SkinSelector(plugin, receiver, targetId)).submit(plugin);
+49,50c47,48
+<     public CommandSpec buildSpec() {
+<         return CommandSpec.builder()
+---
+>     public Command.Builder buildSpec() {
+>         return Command.builder()
+52,54c50,51
+<                 .arguments(string(of("skinName")))
+<                 .permission(PomData.ARTIFACT_ID + ".command.skinselect.base")
+<                 .build();
+---
+>                 .addParameter(Parameter.string("skinName"))
+>                 .permission(PomData.ARTIFACT_ID + ".command.skinselect.base");

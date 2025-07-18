@@ -1,0 +1,6 @@
+99:cannot find symbol  symbol:   class Validator   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+103:cannot find symbol  symbol:   variable PropertyUtils   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+21:package javax.validation.constraints does not exist
+79:cannot find symbol  symbol:   variable PropertyUtils   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+23:package org.apache.commons.beanutils does not exist
+20:package javax.validation does not exist

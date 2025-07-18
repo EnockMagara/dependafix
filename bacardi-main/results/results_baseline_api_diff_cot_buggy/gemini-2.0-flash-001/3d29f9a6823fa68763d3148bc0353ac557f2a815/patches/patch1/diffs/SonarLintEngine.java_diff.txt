@@ -1,0 +1,8 @@
+162,164c162,164
+<         return AnalysisEngineConfiguration.builder()
+<                 .addEnabledLanguages(globalConfig.getEnabledLanguages())
+<                 .setClientPid(globalConfig.getClientPid())
+---
+>         AnalysisEngineConfiguration.Builder builder = AnalysisEngineConfiguration.builder();
+>         globalConfig.getEnabledLanguages().forEach(builder::addEnabledLanguage);
+>         return builder.setClientPid(globalConfig.getClientPid())

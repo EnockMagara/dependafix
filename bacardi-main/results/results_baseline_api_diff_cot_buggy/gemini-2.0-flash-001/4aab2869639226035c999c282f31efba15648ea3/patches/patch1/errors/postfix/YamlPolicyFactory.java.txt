@@ -1,0 +1,2 @@
+49:cannot find symbol  symbol:   class Default   location: interface com.artipie.asto.factory.StorageFactory 
+44:cannot find symbol  symbol:   class Yaml   location: interface com.artipie.asto.factory.Config 

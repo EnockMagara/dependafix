@@ -1,0 +1,8 @@
+3c3
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.CommandSource;
+8c8
+<     CommandSpec buildSpec();
+---
+>     void buildSpec(CommandSource src);

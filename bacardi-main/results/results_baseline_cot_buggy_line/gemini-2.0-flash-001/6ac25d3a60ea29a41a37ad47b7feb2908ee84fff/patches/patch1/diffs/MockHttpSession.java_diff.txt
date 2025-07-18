@@ -1,0 +1,17 @@
+24d23
+< import jakarta.servlet.http.HttpSessionContext;
+67,73d65
+<   public HttpSessionContext getSessionContext() {
+<     return null;
+<   }
+< 
+<   /** @deprecated */
+<   @Deprecated
+<   @Override
+121a114,119
+> 
+>   /** @deprecated */
+>   @Deprecated
+>   public HttpSessionContext getSessionContext() {
+>     return null;
+>   }

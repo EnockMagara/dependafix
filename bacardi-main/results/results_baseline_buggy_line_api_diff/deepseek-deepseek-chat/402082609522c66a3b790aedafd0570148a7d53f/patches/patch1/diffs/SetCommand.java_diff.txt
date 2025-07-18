@@ -1,0 +1,46 @@
+13,17c13,15
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+< import org.spongepowered.api.command.args.GenericArguments;
+< import org.spongepowered.api.command.spec.CommandExecutor;
+< import org.spongepowered.api.command.spec.CommandSpec;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+> import org.spongepowered.api.command.CommandExecutor;
+21,23c19,20
+< import static org.spongepowered.api.command.args.GenericArguments.flags;
+< import static org.spongepowered.api.command.args.GenericArguments.string;
+< import static org.spongepowered.api.text.Text.of;
+---
+> import static org.spongepowered.api.command.parameter.managed.Flag.of;
+> import static org.spongepowered.api.command.parameter.managed.StandardParameters.string;
+37,39c34,37
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+<         if (!(src instanceof Player)) {
+<             plugin.sendMessage(src, "no-console");
+---
+>     public CommandResult execute(CommandContext args) {
+>         Player src = args.getCause().first(Player.class).orElse(null);
+>         if (src == null) {
+>             plugin.sendMessage(null, "no-console");
+43c41
+<         UUID uniqueId = ((Player) src).getUniqueId();
+---
+>         UUID uniqueId = src.getUniqueId();
+49,51c47,49
+<         Player receiver = (Player) src;
+<         String targetSkin = args.<String>getOne("skin").get();
+<         boolean keepSkin = args.hasAny("keep");
+---
+>         Player receiver = src;
+>         String targetSkin = args.one(Parameter.string().key("skin")).orElse("");
+>         boolean keepSkin = args.hasFlag("keep");
+79,81c77,79
+<                 .arguments(
+<                         string(of("skin")),
+<                         flags().flag("keep").buildWith(GenericArguments.none()))
+---
+>                 .parameters(
+>                         Parameter.string().key("skin").build(),
+>                         Parameter.flags().flag("keep").build())

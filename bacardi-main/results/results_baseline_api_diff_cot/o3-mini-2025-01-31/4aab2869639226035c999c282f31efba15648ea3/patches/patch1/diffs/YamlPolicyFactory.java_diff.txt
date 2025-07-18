@@ -1,0 +1,38 @@
+7a8
+> import com.amihaiemil.eoyaml.YamlMapping;
+9c10,11
+< import com.artipie.asto.factory.Storages;
+---
+> import com.artipie.asto.factory.Config;
+> import com.artipie.asto.factory.StorageFactory;
+13,33d14
+< /**
+<  * Policy factory to create {@link YamlPolicy}. Yaml policy is read from storage, and it's required
+<  * to describe this storage in the configuration. Configuration format is the following:
+<  *
+<  * policy:
+<  *   type: yaml_policy
+<  *   storage:
+<  *     type: fs
+<  *     path: /some/path
+<  *
+<  * The storage itself is expected to have yaml files with permissions in the following structure:
+<  *
+<  * ..
+<  * ├── roles.yaml
+<  * ├── users
+<  * │   ├── david.yaml
+<  * │   ├── jane.yaml
+<  * │   ├── ...
+<  *
+<  * @since 1.2
+<  */
+40a22,23
+>             final YamlMapping storageYaml = Yaml.createYamlInput(sub.toString()).readYamlMapping();
+>             final Config cfg = new Config(storageYaml);
+43,45c26
+<                     new Storages().newStorage(
+<                         sub.string("type"), Yaml.createYamlInput(sub.toString()).readYamlMapping()
+<                     )
+---
+>                     StorageFactory.newStorage(cfg)

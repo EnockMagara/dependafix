@@ -1,0 +1,58 @@
+1,18d0
+< /**
+<  * Copyright (C) 2014 Premium Minds.
+<  *
+<  * This file is part of wicket-crudifier.
+<  *
+<  * wicket-crudifier is free software: you can redistribute it and/or modify it under
+<  * the terms of the GNU Lesser General Public License as published by the Free
+<  * Software Foundation, either version 3 of the License, or (at your option) any
+<  * later version.
+<  *
+<  * wicket-crudifier is distributed in the hope that it will be useful, but WITHOUT ANY
+<  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+<  * A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+<  * details.
+<  *
+<  * You should have received a copy of the GNU Lesser General Public License
+<  * along with wicket-crudifier. If not, see <http://www.gnu.org/licenses/>.
+<  */
+36a19
+> import javax.validation.ConstraintViolation;
+38,40c21,22
+< import javax.validation.constraints.NotBlank;
+< import javax.validation.constraints.NotEmpty;
+< import javax.validation.constraints.NotNull;
+---
+> import javax.validation.ValidatorFactory;
+> import javax.validation.groups.Default;
+44,48d25
+< 
+< import com.premiumminds.webapp.wicket.validators.HibernateValidatorProperty;
+< import com.premiumminds.wicket.crudifier.IObjectRenderer;
+< import com.premiumminds.wicket.crudifier.form.CrudifierEntitySettings;
+< import com.premiumminds.wicket.crudifier.form.EntityProvider;
+111,112d87
+<         protected abstract EntityProvider<?> getEntityProvider(String name);
+< 
+119,121c94,95
+<                 Set<String> properties = getPropertiesByOrder(modelClass);
+< 
+<                 Validator validator = HibernateValidatorProperty.validatorFactory.getValidator();
+---
+>                 ValidatorFactory factory = javax.validation.Validation.buildDefaultValidatorFactory();
+>                 Validator validator = factory.getValidator();
+123c97
+<                 for(String property : properties){
+---
+>                 for(String property : getPropertiesByOrder(modelClass)){
+137,139c111,113
+<                                         if(constraint.getAnnotation() instanceof NotNull ||
+<                                            constraint.getAnnotation() instanceof NotEmpty ||
+<                                            constraint.getAnnotation() instanceof NotBlank)
+---
+>                                         if(constraint.getAnnotation().annotationType().equals(javax.validation.constraints.NotNull.class) ||
+>                                            constraint.getAnnotation().annotationType().equals(javax.validation.constraints.NotEmpty.class) ||
+>                                            constraint.getAnnotation().annotationType().equals(javax.validation.constraints.NotBlank.class))
+165d138
+< 

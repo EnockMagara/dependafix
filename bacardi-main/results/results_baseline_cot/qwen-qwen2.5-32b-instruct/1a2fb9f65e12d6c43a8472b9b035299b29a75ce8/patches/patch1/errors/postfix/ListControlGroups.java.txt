@@ -1,0 +1,8 @@
+135:cannot find symbol  symbol:   class IObjectRenderer   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+37:cannot find symbol  symbol:   class CrudifierEntitySettings   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+145:cannot find symbol  symbol:   method getEntityProvider(java.lang.String)   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+40:cannot find symbol  symbol:   class CrudifierEntitySettings   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+143:cannot find symbol  symbol:   method getEntityProvider(java.lang.String)   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+38:cannot find symbol  symbol:   class IObjectRenderer   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+133:cannot find symbol  symbol:   class IObjectRenderer   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 
+90:cannot find symbol  symbol:   variable properties   location: class com.premiumminds.wicket.crudifier.form.elements.ListControlGroups<T> 

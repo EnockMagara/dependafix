@@ -1,0 +1,10 @@
+16a17
+> import javax.mvc.MvcContext;
+29c30
+<     Models models;
+---
+>     MvcContext mvcContext;
+34c35
+<         models.put("error", exception.getMessage());
+---
+>         mvcContext.getModels().put("error", exception.getMessage());

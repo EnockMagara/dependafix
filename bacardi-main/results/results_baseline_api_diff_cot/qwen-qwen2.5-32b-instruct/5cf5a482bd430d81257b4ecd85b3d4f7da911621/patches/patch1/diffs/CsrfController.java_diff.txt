@@ -1,0 +1,35 @@
+6,17c6,14
+< import javax.mvc.Controller;
+< import javax.mvc.Models;
+< import javax.mvc.UriRef;
+< import javax.mvc.binding.BindingResult;
+< import javax.mvc.binding.MvcBinding;
+< import javax.mvc.binding.ParamError;
+< import javax.mvc.security.CsrfProtected;
+< import javax.validation.constraints.NotBlank;
+< import javax.ws.rs.FormParam;
+< import javax.ws.rs.GET;
+< import javax.ws.rs.POST;
+< import javax.ws.rs.Path;
+---
+> import jakarta.mvc.Controller;
+> import jakarta.mvc.Models;
+> import com.example.web.AlertMessage; // Assuming AlertMessage is a custom class, adjust the import if necessary
+> import jakarta.mvc.security.CsrfProtected;
+> import jakarta.validation.constraints.NotBlank;
+> import jakarta.ws.rs.FormParam;
+> import jakarta.ws.rs.GET;
+> import jakarta.ws.rs.POST;
+> import jakarta.ws.rs.Path;
+29c26
+<     BindingResult bindingResult;
+---
+>     jakarta.mvc.binding.BindingResult bindingResult;
+49c46
+<             @MvcBinding
+---
+>             @jakarta.mvc.binding.MvcBinding
+55c52
+<                     .forEach((ParamError t) -> {
+---
+>                     .forEach((t) -> {

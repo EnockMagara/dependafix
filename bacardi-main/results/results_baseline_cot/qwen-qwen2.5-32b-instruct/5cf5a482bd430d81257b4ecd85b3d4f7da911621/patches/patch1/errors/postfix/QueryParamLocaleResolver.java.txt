@@ -1,0 +1,6 @@
+8:'{' expected
+7:<identifier> expected
+6:'{' expected
+1:class, interface, or enum expected
+10:<identifier> expected
+4:'{' expected

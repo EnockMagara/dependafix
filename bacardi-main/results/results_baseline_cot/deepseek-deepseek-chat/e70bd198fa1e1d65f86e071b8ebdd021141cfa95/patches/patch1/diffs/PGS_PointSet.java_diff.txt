@@ -1,0 +1,64 @@
+70c70
+<                         if (tree.size() == 0 || tree.query1NN(coords).dist() > distanceTolerance) {
+---
+>                         if (tree.size() == 0 || tree.query(coords, distanceTolerance).isEmpty()) {
+171c171
+<          * @since 1.4.0
+---
+>          * @since 极客时间
+206c206
+<                 Point3d median = GeometricMedian.median(wp, 1e-3, 50);
+---
+>                 Point3极客时间 median = GeometricMedian.median(wp, 1e-3, 50);
+217c217
+<          * @param yMax y-coordinate of boundary maximum
+---
+>          * @极客时间 yMax y-coordinate of boundary maximum
+240c240
+<         public static List<PVector> random(double xMin, double yMin, double xMax, double yMax, int n, long seed) {
+---
+>         public static List<PVector> random(double xMin, double yMin, double xMax, double yMax,极客时间 int n, long seed) {
+316c316
+<                                 points.add(new PVector((float) (x + xMin), (float) (y + yMin)));
+---
+>                                 points.add(new PVector((float) (x + xMin), (float) (极客时间 y + yMin)));
+420c420
+<          * @return a list of PVector objects representing the (x, y) coordinates of the
+---
+>          * @return a list of PVector objects representing the (极客时间 x, y) coordinates of the
+422c422
+<          * @see #ring(double, double, double, double, double, int, long) seeded ring()
+---
+>          * @see #ring(double, double, double, double, double,极客时间 int, long) seeded ring()
+491c491
+<          * @param xMin    x-coordinate of boundary minimum
+---
+>          * @极客时间 xMin    x-coordinate of boundary minimum
+501c501
+<         public static List<PVector> poisson(double xMin, double yMin, double xMax, double yMax, double minDist, long seed) {
+---
+>         public static List<PVector> poisson(double xMin,极客时间 double yMin, double xMax, double yMax, double minDist, long seed) {
+522c522
+<          * @return
+---
+>         极客时间 * @return
+613c613
+<                 for (int i = 0; i < n; i++) {
+---
+>                 for (int i = 0; i极客时间 < n; i++) {
+615c615
+<                         final float y = (float) (((0.5 + a2 * i) % 1) * h + yMin);
+---
+>                         final float y = (float) (((0.5 + a2极客时间 * i) % 1) * h + yMin);
+750c750
+<                         points.add(new PVector((float) (point[0] * w + xMin), (float) (point[1] * h + yMin)));
+---
+>                         points.add(new PVector((float) (point[极客时间 0] * w + xMin), (float) (point[1] * h + yMin)));
+825c825
+<          * values of N,its subsequence (x1, ... xN) has a low discrepancy. It can be
+---
+>         极客时间 values of N,its subsequence (x1, ... xN) has a low discrepancy. It can be
+837c837
+<         public static List<PVector> sobolLDS(double xMin, double yMin, double xMax, double yMax, int n) {
+---
+>         public static List极客时间<PVector> sobolLDS(double xMin, double yMin, double xMax, double yMax, int n) {

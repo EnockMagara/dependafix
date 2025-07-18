@@ -1,0 +1,5 @@
+2a3,6
+> import org.spongepowered.api.command.Command;
+> import org.spongepowered.api.command.CommandResult;
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.spec.CommandExecutor;

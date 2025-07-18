@@ -1,0 +1,12 @@
+12,13c12,13
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.data.key.Keys;
+---
+> import org.spongepowered.api.command.source.CommandSource;
+> import org.spongepowered.api.data.Keys;
+84,85c84,85
+<         receiver.offer(Keys.VANISH, true);
+<         receiver.offer(Keys.VANISH, false);
+---
+>         receiver.offer(Keys.VANISHED, true);
+>         receiver.offer(Keys.VANISHED, false);

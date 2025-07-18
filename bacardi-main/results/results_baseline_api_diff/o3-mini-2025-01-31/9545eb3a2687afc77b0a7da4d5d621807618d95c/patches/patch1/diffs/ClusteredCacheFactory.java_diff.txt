@@ -1,0 +1,46 @@
+22c22
+< import com.hazelcast.config.MaxSizeConfig;
+---
+> import com.hazelcast.config.EvictionConfig;
+27d26
+< import com.hazelcast.core.Cluster;
+30c29,31
+< import com.hazelcast.core.Member;
+---
+> import com.hazelcast.cluster.Cluster;
+> import com.hazelcast.cluster.Member;
+> import com.hazelcast.cluster.MemberSelector;
+288c289,292
+<             dynamicConfig.setMaxSizeConfig(new MaxSizeConfig(hazelcastMaxCacheSizeInMegaBytes, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+---
+>             EvictionConfig evictionConfig = new EvictionConfig();
+>             evictionConfig.setSize(hazelcastMaxCacheSizeInMegaBytes);
+>             evictionConfig.setMaximumSizePolicy(EvictionConfig.MaxSizePolicy.USED_HEAP_SIZE);
+>             dynamicConfig.setEvictionConfig(evictionConfig);
+330,331c334,335
+<         if (cluster != null && !cluster.getMembers().isEmpty()) {
+<             final Member oldest = cluster.getMembers().iterator().next();
+---
+>         if (cluster != null && !cluster.getMembers(m -> true).isEmpty()) {
+>             final Member oldest = cluster.getMembers(m -> true).iterator().next();
+372c376
+<         for (final Member member : cluster.getMembers()) {
+---
+>         for (final Member member : cluster.getMembers(m -> true)) {
+425c429
+<         for (final Member member : cluster.getMembers()) {
+---
+>         for (final Member member : cluster.getMembers(m -> true)) {
+503c507
+<         for (final Member member : cluster.getMembers()) {
+---
+>         for (final Member member : cluster.getMembers(m -> true)) {
+656c660,661
+<         return NodeID.getInstance(member.getStringAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE).getBytes(StandardCharsets.UTF_8));
+---
+>         String nodeIdAttr = (String) member.getAttribute(HazelcastClusterNodeInfo.NODE_ID_ATTRIBUTE);
+>         return NodeID.getInstance(nodeIdAttr.getBytes(StandardCharsets.UTF_8));
+701,703d705
+< 
+< 
+< 

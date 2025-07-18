@@ -1,0 +1,12 @@
+9c9
+< import org.spongepowered.api.command.CommandSource;
+---
+> import org.spongepowered.api.command.source.CommandSource;
+19,22c19,20
+<     public SkinDownloader(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, UUID targetUUID
+<             , boolean keepSkin) {
+<         super(plugin.getCore(), keepSkin, targetUUID, receiver.getUniqueId());
+< 
+---
+>     public SkinDownloader(ChangeSkinSponge plugin, CommandSource invoker, Player receiver, UUID targetUUID, boolean keepSkin) {
+>         super(plugin.getCore(), keepSkin, targetUUID, receiver.uniqueId());

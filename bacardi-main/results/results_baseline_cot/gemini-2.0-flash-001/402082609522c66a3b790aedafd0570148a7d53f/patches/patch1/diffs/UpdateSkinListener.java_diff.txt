@@ -1,0 +1,16 @@
+12c12
+< import org.spongepowered.api.Platform.Type;
+---
+> import org.spongepowered.api.Platform;
+17c17
+< import org.spongepowered.api.network.RawDataListener;
+---
+> import org.spongepowered.api.network.MessageChannelListener;
+21c21
+< public class UpdateSkinListener implements RawDataListener {
+---
+> public class UpdateSkinListener implements MessageChannelListener {
+27c27
+<     public void handlePayload(ChannelBuf data, RemoteConnection connection, Type side) {
+---
+>     public void handlePayload(ChannelBuf data, RemoteConnection connection, Platform.Type side) {

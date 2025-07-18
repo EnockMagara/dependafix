@@ -1,0 +1,20 @@
+27a28
+> import org.yaml.snakeyaml.LoaderOptions;
+29c30,31
+< import org.yaml.snakeyaml.constructor.Constructor;
+---
+> import org.yaml.snakeyaml.representer.SafeRepresenter;
+> import org.yaml.snakeyaml.resolver.Resolver;
+114c116,118
+<             return (YamlNode) new Yaml(new Constructor(YamlNode.class)).load(in);
+---
+>             LoaderOptions loaderOptions = new LoaderOptions();
+>             Yaml yaml = new Yaml(loaderOptions);
+>             return yaml.loadAs(in, YamlNode.class);
+171c175,178
+<          return ByteSource.wrap(new Yaml(options).dump(prettier.build()).getBytes(Charsets.UTF_8));
+---
+>          LoaderOptions loaderOptions = new LoaderOptions();
+>          SafeRepresenter representer = new SafeRepresenter();
+>          Yaml yaml = new Yaml(representer, options, loaderOptions, new Resolver());
+>          return ByteSource.wrap(yaml.dump(prettier.build()).getBytes(Charsets.UTF_8));

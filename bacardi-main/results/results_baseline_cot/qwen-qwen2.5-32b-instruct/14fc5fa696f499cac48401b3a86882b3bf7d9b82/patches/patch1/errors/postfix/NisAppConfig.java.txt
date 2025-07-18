@@ -1,0 +1,32 @@
+112:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+99:cannot find symbol  symbol: method importanceCalculator() 
+78:cannot find symbol  symbol:   class Harvester   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+71:cannot find symbol  symbol:   class Harvester   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+188:cannot find symbol  symbol: method nisConfiguration() 
+162:cannot find symbol  symbol:   class ObserverOption   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+42:cannot find symbol  symbol:   class AccountDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+67:cannot find symbol  symbol:   variable MAX_AUDIT_HISTORY_SIZE   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+144:cannot find symbol  symbol: method blockAnalyzer() 
+143:cannot find symbol  symbol: method nisCache() 
+164:cannot find symbol  symbol:   variable ObserverOption   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+74:cannot find symbol  symbol: method lastBlockHeight() 
+167:cannot find symbol  symbol: method nisConfiguration() 
+51:cannot find symbol  symbol:   class NisConfiguration   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+153:cannot find symbol  symbol:   class TrustProvider   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+163:cannot find symbol  symbol: method nisConfiguration() 
+132:cannot find symbol  symbol: method nisConfiguration() 
+94:cannot find symbol  symbol: method nisConfiguration() 
+169:cannot find symbol  symbol:   variable ObserverOption   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+161:cannot find symbol  symbol:   class ObserverOption   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+186:method flyway() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+45:cannot find symbol  symbol:   class BlockDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+72:cannot find symbol  symbol:   class NewBlockTransactionsProvider   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+76:cannot find symbol  symbol:   class BlockGenerator   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+156:cannot find symbol  symbol:   class CachedTrustProvider   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+187:cannot find symbol  symbol: method nisConfiguration() 
+73:cannot find symbol  symbol: method transactionValidatorFactory() 
+138:cannot find symbol  symbol: method sessionFactory() 
+48:cannot find symbol  symbol:   class BlockChainLastBlockLayer   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+77:cannot find symbol  symbol: method blockValidatorFactory() 
+104:cannot find symbol  symbol: method nisConfiguration() 
+131:cannot find symbol  symbol: method nisConfiguration() 

@@ -1,0 +1,25 @@
+15c15
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+---
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+17d16
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+40,41c39
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+<     pnConfiguration.setSubscribeKey(publicKey);
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+59c57
+<                     //              e.onComplete();
+---
+>                     e.onComplete();
+61c59
+<                     //              e.onError(pnStatus.getErrorData().getThrowable());
+---
+>                     e.onError(pnStatus.getErrorData().getThrowable());
+94,95c92,93
+<                 public void user(PubNub pubnub, PNUserResult pnUserResult) {
+<                   LOG.debug("PubNub user: {}", pnUserResult.toString());
+---
+>                 public void user(PubNub pubnub, PNStatus pnStatus) {
+>                   LOG.debug("PubNub user: {}", pnStatus.toString());

@@ -1,0 +1,5 @@
+18:cannot find symbol  symbol: class ViewScoped 
+8:package jakarta.enterprise.context does not exist
+10:package jakarta.faces.application does not exist
+9:package jakarta.faces.context does not exist
+7:package jakarta.faces.view does not exist

@@ -1,0 +1,30 @@
+13,16c13,15
+< 
+< import javax.servlet.ServletException;
+< import javax.servlet.http.HttpServletRequest;
+< import javax.servlet.http.HttpServletResponse;
+---
+> import jakarta.servlet.ServletException;
+> import jakarta.servlet.http.HttpServletRequest;
+> import jakarta.servlet.http.HttpServletResponse;
+20,24d18
+< 
+< /**
+<  * Jetty Handler which handles all http communication by returning an http response according to a stub response
+<  * obtained from a {@link RequestManager} instance.
+<  */
+29,32d22
+< 
+<     /**
+<      * @param requestManager request manager instance to retrieve stub responses
+<      */
+38d27
+< 
+55d43
+< 
+63d50
+< 
+66d52
+< 
+72d57
+< 

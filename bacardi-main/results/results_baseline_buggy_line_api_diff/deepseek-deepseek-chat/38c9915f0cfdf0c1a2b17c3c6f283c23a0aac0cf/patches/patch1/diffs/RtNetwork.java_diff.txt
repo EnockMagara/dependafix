@@ -1,0 +1,15 @@
+30d29
+< import org.cactoos.scalar.IoCheckedScalar;
+31a31
+> import org.cactoos.Scalar;
+66,67c66
+<         return new IoCheckedScalar<>(
+<             new Reduced<>(
+---
+>         Scalar<Wallet> scalar = new Reduced<>(
+73,74c72,73
+<             )
+<         ).value();
+---
+>         );
+>         return scalar.value();

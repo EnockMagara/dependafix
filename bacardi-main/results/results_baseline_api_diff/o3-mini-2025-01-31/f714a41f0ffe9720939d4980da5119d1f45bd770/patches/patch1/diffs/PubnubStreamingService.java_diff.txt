@@ -1,0 +1,72 @@
+7a8
+> import com.pubnub.api.UserId;
+11,17c12,13
+< import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+< import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+< import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+< import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+---
+> import com.pubnub.api.models.consumer.pubsub.files.PNFileEventResult;
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+40c36
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(new UserId("xchange-stream-service"));
+52c48
+<                 public void status(PubNub pubNub, PNStatus pnStatus) {
+---
+>                 public void status(PubNub pubnub, PNStatus pnStatus) {
+66,67c62,68
+<                 public void message(PubNub pubNub, PNMessageResult pnMessageResult) {
+<                   String channelName = pnMessageResult.getChannel();
+---
+>                 public void membership(PubNub pubnub, PNMembershipResult pnMembershipResult) {
+>                   LOG.debug("PubNub membership: {}", pnMembershipResult.toString());
+>                 }
+> 
+>                 @Override
+>                 public void file(PubNub pubnub, PNFileEventResult pnFileEventResult) {
+>                   String channelName = pnFileEventResult.getChannel();
+69c70
+<                   LOG.debug("PubNub Message: {}", pnMessageResult.toString());
+---
+>                   LOG.debug("PubNub File Event: {}", pnFileEventResult.toString());
+73c74
+<                       jsonMessage = mapper.readTree(pnMessageResult.getMessage().toString());
+---
+>                       jsonMessage = mapper.readTree(pnFileEventResult.getMessage().toString());
+82,112d82
+< 
+<                 @Override
+<                 public void presence(PubNub pubNub, PNPresenceEventResult pnPresenceEventResult) {
+<                   LOG.debug("PubNub presence: {}", pnPresenceEventResult.toString());
+<                 }
+< 
+<                 @Override
+<                 public void signal(PubNub pubnub, PNSignalResult pnSignalResult) {
+<                   LOG.debug("PubNub signal: {}", pnSignalResult.toString());
+<                 }
+< 
+<                 @Override
+<                 public void user(PubNub pubnub, PNUserResult pnUserResult) {
+<                   LOG.debug("PubNub user: {}", pnUserResult.toString());
+<                 }
+< 
+<                 @Override
+<                 public void space(PubNub pubnub, PNSpaceResult pnSpaceResult) {
+<                   LOG.debug("PubNub space: {}", pnSpaceResult.toString());
+<                 }
+< 
+<                 @Override
+<                 public void membership(PubNub pubnub, PNMembershipResult pnMembershipResult) {
+<                   LOG.debug("PubNub membership: {}", pnMembershipResult.toString());
+<                 }
+< 
+<                 @Override
+<                 public void messageAction(
+<                     PubNub pubnub, PNMessageActionResult pnMessageActionResult) {
+<                   LOG.debug("PubNub messageAction: {}", pnMessageActionResult.toString());
+<                 }

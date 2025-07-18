@@ -1,0 +1,2 @@
+30:error: cannot find symbol
+29:error: cannot find symbol

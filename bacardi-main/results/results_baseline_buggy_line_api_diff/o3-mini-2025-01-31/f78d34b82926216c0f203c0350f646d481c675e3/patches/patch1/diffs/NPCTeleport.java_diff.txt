@@ -1,0 +1,16 @@
+3c3
+< import develop.p2p.lib.*;
+---
+> import tokyo.peya.lib.WaveCreator;
+89d88
+< 
+180c179
+<                             .get(0.01, true);
+---
+>                             .get(0.01, count[0] < 20);
+220c219
+<                     ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true)
+---
+>                     ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), -config.getDouble("npc.speed.waveRange")).get(0.001, true)
+235d233
+< 

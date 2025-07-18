@@ -1,0 +1,162 @@
+18,21d17
+< import com.google.api.services.cloudresourcemanager.model.BooleanPolicy;
+< import com.google.api.services.cloudresourcemanager.model.ListPolicy;
+< import com.google.api.services.cloudresourcemanager.model.OrgPolicy;
+< import com.google.api.services.cloudresourcemanager.model.RestoreDefault;
+27,35d22
+< /**
+<  * A Google Cloud Resource Manager organization policy metadata object.
+<  *
+<  * <p>Defines a Cloud Organization Policy which specifies constraints for configurations of Cloud
+<  * Platform resources.
+<  *
+<  * @deprecated v3 GAPIC client of ResourceManager is now available
+<  */
+< @Deprecated
+125c112
+<     private final List<java.lang.String> deniedValues;
+---
+>     private final List<String> deniedValues;
+391a379,519
+> 
+> class BooleanPolicy {
+>   private Boolean enforced;
+> 
+>   public BooleanPolicy setEnforced(Boolean enforced) {
+>     this.enforced = enforced;
+>     return this;
+>   }
+> 
+>   public Boolean getEnforced() {
+>     return this.enforced;
+>   }
+> }
+> 
+> class ListPolicy {
+>   private String allValues;
+>   private List<String> allowedValues;
+>   private List<String> deniedValues;
+>   private Boolean inheritFromParent;
+>   private String suggestedValue;
+> 
+>   public ListPolicy setAllValues(String allValues) {
+>     this.allValues = allValues;
+>     return this;
+>   }
+> 
+>   public ListPolicy setAllowedValues(List<String> allowedValues) {
+>     this.allowedValues = allowedValues;
+>     return this;
+>   }
+> 
+>   public ListPolicy setDeniedValues(List<String> deniedValues) {
+>     this.deniedValues = deniedValues;
+>     return this;
+>   }
+> 
+>   public ListPolicy setInheritFromParent(Boolean inheritFromParent) {
+>     this.inheritFromParent = inheritFromParent;
+>     return this;
+>   }
+> 
+>   public ListPolicy setSuggestedValue(String suggestedValue) {
+>     this.suggestedValue = suggestedValue;
+>     return this;
+>   }
+> 
+>   public String getAllValues() {
+>     return this.allValues;
+>   }
+> 
+>   public List<String> getAllowedValues() {
+>     return this.allowedValues;
+>   }
+> 
+>   public List<String> getDeniedValues() {
+>     return this.deniedValues;
+>   }
+> 
+>   public Boolean getInheritFromParent() {
+>     return this.inheritFromParent;
+>   }
+> 
+>   public String getSuggestedValue() {
+>     return this.suggestedValue;
+>   }
+> }
+> 
+> class OrgPolicy {
+>   private BooleanPolicy booleanPolicy;
+>   private String constraint;
+>   private ListPolicy listPolicy;
+>   private RestoreDefault restoreDefault;
+>   private String etag;
+>   private String updateTime;
+>   private Integer version;
+> 
+>   public OrgPolicy setBooleanPolicy(BooleanPolicy booleanPolicy) {
+>     this.booleanPolicy = booleanPolicy;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setConstraint(String constraint) {
+>     this.constraint = constraint;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setListPolicy(ListPolicy listPolicy) {
+>     this.listPolicy = listPolicy;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setRestoreDefault(RestoreDefault restoreDefault) {
+>     this.restoreDefault = restoreDefault;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setEtag(String etag) {
+>     this.etag = etag;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setUpdateTime(String updateTime) {
+>     this.updateTime = updateTime;
+>     return this;
+>   }
+> 
+>   public OrgPolicy setVersion(Integer version) {
+>     this.version = version;
+>     return this;
+>   }
+> 
+>   public BooleanPolicy getBooleanPolicy() {
+>     return this.booleanPolicy;
+>   }
+> 
+>   public String getConstraint() {
+>     return this.constraint;
+>   }
+> 
+>   public ListPolicy getListPolicy() {
+>     return this.listPolicy;
+>   }
+> 
+>   public RestoreDefault getRestoreDefault() {
+>     return this.restoreDefault;
+>   }
+> 
+>   public String getEtag() {
+>     return this.etag;
+>   }
+> 
+>   public String getUpdateTime() {
+>     return this.updateTime;
+>   }
+> 
+>   public Integer getVersion() {
+>     return this.version;
+>   }
+> }
+> 
+> class RestoreDefault {}
+\ No newline at end of file

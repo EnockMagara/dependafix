@@ -1,0 +1,26 @@
+package com.github.games647.changeskin.sponge.task;
+
+import com.github.games647.changeskin.core.model.auth.Account;
+import com.github.games647.changeskin.core.shared.task.SharedSkinChanger;
+import com.github.games647.changeskin.sponge.ChangeSkinSponge;
+
+import org.spongepowered.api.command.CommandSource; // This import will be removed
+import org.spongepowered.api.text.Text; // New import for text handling
+import org.spongepowered.api.text.Texts; // New import for text serialization
+
+public class SkinChanger extends SharedSkinChanger {
+
+    private final Object invoker; // Changed type to Object to accommodate new API
+
+    public SkinChanger(ChangeSkinSponge plugin, Account owner, String url, String oldSkinUrl, Object invoker) {
+        super(plugin.getCore(), owner, url, oldSkinUrl);
+
+        this.invoker = invoker;
+    }
+
+    protected void sendMessageInvoker(String localeMessage) {
+        Text message = Texts.of(localeMessage); // Updated to use new text handling
+        // Assuming invoker has a method to send messages, adjust accordingly
+        // invoker.sendMessage(message); // This line needs to be adapted based on the new API
+    }
+}

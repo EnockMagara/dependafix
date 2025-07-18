@@ -1,0 +1,8 @@
+3c3
+< import develop.p2p.lib.*;
+---
+> import tokyo.peya.lib.WaveCreator;
+180c180
+<                             .get(0.01, true);
+---
+>                             .get(0.01, count[0] < 20);

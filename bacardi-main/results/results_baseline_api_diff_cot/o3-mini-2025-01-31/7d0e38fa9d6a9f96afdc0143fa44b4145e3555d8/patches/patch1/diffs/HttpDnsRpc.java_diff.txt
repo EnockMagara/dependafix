@@ -1,0 +1,50 @@
+211,212c211
+<         .create(this.options.getProjectId(), zone)
+<         .setFields(Option.FIELDS.getString(options));
+---
+>         .create(this.options.getProjectId(), zone.getName(), zone);
+232,233c231
+<         .get(this.options.getProjectId(), zoneName)
+<         .setFields(Option.FIELDS.getString(options));
+---
+>         .get(this.options.getProjectId(), zoneName, Option.FIELDS.getString(options));
+249,250c247
+<         .list(this.options.getProjectId())
+<         .setFields(Option.FIELDS.getString(options))
+---
+>         .list(this.options.getProjectId(), Option.FIELDS.getString(options))
+271c268
+<     return dns.managedZones().delete(this.options.getProjectId(), zoneName);
+---
+>     return dns.managedZones().delete(this.options.getProjectId(), zoneName, "");
+287d283
+<     // options are fields, page token, dns name, type
+289,290c285
+<         .list(this.options.getProjectId(), zoneName)
+<         .setFields(Option.FIELDS.getString(options))
+---
+>         .list(this.options.getProjectId(), zoneName, Option.FIELDS.getString(options))
+308,309c303
+<         .get(this.options.getProjectId())
+<         .setFields(Option.FIELDS.getString(options));
+---
+>         .get(this.options.getProjectId(), Option.FIELDS.getString(options));
+325,326c319
+<         .create(this.options.getProjectId(), zoneName, changeRequest)
+<         .setFields(Option.FIELDS.getString(options));
+---
+>         .create(this.options.getProjectId(), zoneName, Option.FIELDS.getString(options), changeRequest);
+352,353c345
+<         .get(this.options.getProjectId(), zoneName, changeRequestId)
+<         .setFields(Option.FIELDS.getString(options));
+---
+>         .get(this.options.getProjectId(), zoneName, changeRequestId, Option.FIELDS.getString(options));
+369d360
+<     // options are fields, page token, page size, sort order
+372,373c363
+<             .list(this.options.getProjectId(), zoneName)
+<             .setFields(Option.FIELDS.getString(options))
+---
+>             .list(this.options.getProjectId(), zoneName, Option.FIELDS.getString(options))
+377d366
+<       // todo check and change if more sorting options are implemented, issue #604

@@ -1,0 +1,6 @@
+25a26
+> import org.tinspin.index.Entry;
+70c71
+<                         if (tree.size() == 0 || tree.query1NN(coords).dist() > distanceTolerance) {
+---
+>                         if (tree.size() == 0 || tree.queryKNN(coords, 1).get(0).getDistance() > distanceTolerance) {

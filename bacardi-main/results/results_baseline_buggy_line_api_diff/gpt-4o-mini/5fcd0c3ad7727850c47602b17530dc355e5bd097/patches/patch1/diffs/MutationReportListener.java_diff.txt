@@ -1,0 +1,10 @@
+11a12,13
+> import org.pitest.classinfo.ClassName;
+> import org.pitest.classinfo.ClassInfoVisitor;
+103a106,107
+>     ClassName mutatedClass = data.getMutatedClass();
+>     byte[] classBytes = coverage.getClassInfo(Collections.singleton(mutatedClass)).getBytes();
+105c109
+<         data.getMutations(), coverage.getClassInfo(Collections.singleton(data.getMutatedClass())));
+---
+>         data.getMutations(), classBytes);

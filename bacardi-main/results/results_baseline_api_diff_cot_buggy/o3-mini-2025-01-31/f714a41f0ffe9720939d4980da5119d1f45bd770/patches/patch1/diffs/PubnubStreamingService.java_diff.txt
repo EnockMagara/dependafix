@@ -1,0 +1,43 @@
+11,17c11,18
+< import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
+< import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+< import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+< import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+< import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
+---
+> import com.pubnub.api.models.consumer.objects_api.message.PNMessageResult;
+> import com.pubnub.api.models.consumer.objects_api.signal.PNSignalResult;
+> import com.pubnub.api.models.consumer.objects_api.message_actions.PNMessageActionResult;
+> import com.pubnub.api.models.consumer.objects_api.membership.PNMembershipResult;
+> import com.pubnub.api.models.consumer.objects_api.space.PNSpaceResult;
+> import com.pubnub.api.models.consumer.objects_api.user.PNUserResult;
+> import com.pubnub.api.models.consumer.objects_api.presence.PNPresenceEventResult;
+> import com.pubnub.api.models.consumer.pubsub.files.PNFileEventResult;
+28d28
+< /** Created by Lukas Zaoralek on 14.11.17. */
+40c40
+<     PNConfiguration pnConfiguration = new PNConfiguration();
+---
+>     PNConfiguration pnConfiguration = new PNConfiguration(publicKey);
+65d64
+<                 @Override
+83d81
+<                 @Override
+88d85
+<                 @Override
+93d89
+<                 @Override
+98d93
+<                 @Override
+103d97
+<                 @Override
+108d101
+<                 @Override
+111a105,109
+>                 }
+>                 
+>                 @Override
+>                 public void file(PubNub pubnub, PNFileEventResult pnFileEventResult) {
+>                   LOG.debug("PubNub file: {}", pnFileEventResult.toString());

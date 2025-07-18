@@ -1,0 +1,16 @@
+136:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+131:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+113:cannot find symbol  symbol:   method of(com.artipie.docker.http.TestAuthentication.User)   location: class com.artipie.docker.http.TestAuthentication.User 
+88:cannot find symbol  symbol:   class MethodSource   location: class com.artipie.docker.http.AuthTest 
+97:cannot find symbol  symbol:   method of(com.artipie.docker.http.TestAuthentication.User)   location: class com.artipie.docker.http.TestAuthentication.User 
+108:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+63:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+76:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+62:cannot find symbol  symbol:   class MethodSource   location: class com.artipie.docker.http.AuthTest 
+114:cannot find symbol  symbol: method manifest() 
+80:cannot find symbol  symbol:   method of(java.lang.String,java.lang.String)   location: class com.artipie.docker.http.TestAuthentication.User 
+91:cannot find symbol  symbol:   class RequestLine   location: class com.artipie.docker.http.AuthTest 
+119:cannot find symbol  symbol:   method of(com.artipie.docker.http.TestAuthentication.User)   location: class com.artipie.docker.http.TestAuthentication.User 
+75:cannot find symbol  symbol:   class MethodSource   location: class com.artipie.docker.http.AuthTest 
+122:cannot find symbol  symbol:   variable RsStatus   location: class com.artipie.docker.http.AuthTest 
+209:cannot find symbol  symbol:   method of(com.artipie.docker.http.TestAuthentication.User,com.artipie.docker.http.TestAuthentication.User)   location: class com.artipie.docker.http.TestAuthentication.User 

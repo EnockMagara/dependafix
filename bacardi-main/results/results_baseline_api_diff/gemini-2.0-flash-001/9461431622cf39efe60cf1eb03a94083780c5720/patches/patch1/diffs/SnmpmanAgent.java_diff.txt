@@ -1,0 +1,33 @@
+232,233c232
+<     @Override
+<     @SuppressWarnings("unchecked")
+---
+>     
+241c240
+<     @Override
+---
+>     
+389c388
+<             final SortedMap<MOScope, ManagedObject> reg = server.getRegistry();
+---
+>             final SortedMap<MOScope, ManagedObject<?>> reg = server.getRegistry();
+486c485
+<     @Override
+---
+>     
+494c493
+<     @Override
+---
+>     
+500c499
+<     @Override
+---
+>     
+506c505
+<     @Override
+---
+>     
+543c542
+<     @Override
+---
+>     

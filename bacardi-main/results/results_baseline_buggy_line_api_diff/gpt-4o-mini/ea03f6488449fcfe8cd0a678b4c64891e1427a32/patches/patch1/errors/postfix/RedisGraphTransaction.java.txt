@@ -1,0 +1,15 @@
+264:<anonymous com.redislabs.redisgraph.impl.api.RedisGraphTransaction$10> is not abstract and does not override abstract method build(java.lang.Object) in redis.clients.jedis.Builder
+213:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+189:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+80:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+18:com.redislabs.redisgraph.impl.api.RedisGraphTransaction is not abstract and does not override abstract method execGetResponse() in com.redislabs.redisgraph.RedisGraphTransaction
+165:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+125:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+40:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+145:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+102:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+58:cannot find symbol  symbol:   method getResponse(<anonymous redis.clients.jedis.Builder<com.redislabs.redisgraph.ResultSet>>)   location: class com.redislabs.redisgraph.impl.api.RedisGraphTransaction 
+16:cannot find symbol  symbol: class MultiKeyCommandsPipeline 
+4:cannot find symbol  symbol:   class ClusterPipeline   location: package redis.clients.jedis.commands 
+6:cannot find symbol  symbol:   class ScriptingCommandsPipeline   location: package redis.clients.jedis.commands 
+5:cannot find symbol  symbol:   class MultiKeyCommandsPipeline   location: package redis.clients.jedis.commands 

@@ -1,0 +1,52 @@
+22c22
+< import ch.qos.logback.core.encoder.EncoderBase;
+---
+> import ch.qos.logback.core.encoder.Encoder;
+33a34
+> import java.io.ByteArrayOutputStream;
+51c52
+<   public static class LogMessageEncoder extends EncoderBase<LogMessage> {
+---
+>   public static class LogMessageEncoder implements Encoder<LogMessage> {
+53,55c54
+<     private TTransport framedTransport;
+<     private TProtocol protocol;
+<     private OutputStream os;
+---
+>     private OutputStream outputStream;
+58,65c57,58
+<     public void init(OutputStream os) {
+<       this.os = os;
+<       // Use the TFlushingFastFramedTransport to be compatible with singer_thrift
+<       // log.
+<       final int bufferCapacity = 10;
+<       framedTransport = new TFastFramedTransport(new TIOStreamTransport(os),
+<           bufferCapacity);
+<       protocol = new TBinaryProtocol(framedTransport);
+---
+>     public void init(OutputStream os) throws IOException {
+>       this.outputStream = os;
+69c62,66
+<     public void doEncode(LogMessage logMessage) throws IOException {
+---
+>     public byte[] encode(LogMessage logMessage) throws IOException {
+>       ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>       final int bufferCapacity = 10;
+>       TTransport framedTransport = new TFastFramedTransport(new TIOStreamTransport(baos), bufferCapacity);
+>       TProtocol protocol = new TBinaryProtocol(framedTransport);
+75a73,83
+>       return baos.toByteArray();
+>     }
+> 
+>     @Override
+>     public byte[] headerBytes() {
+>       return new byte[0];
+>     }
+> 
+>     @Override
+>     public byte[] footerBytes() {
+>       return new byte[0];
+80c88
+<       framedTransport.close();
+---
+>       // No underlying resources to close.

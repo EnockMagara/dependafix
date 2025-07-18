@@ -1,0 +1,51 @@
+12d11
+< 
+14d12
+< 
+17,20c15
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelBuf;
+< import org.spongepowered.api.network.ChannelRegistrar;
+< import org.spongepowered.api.network.RawDataListener;
+---
+> import org.spongepowered.api.entity.living.player.server.ServerPlayer;
+22c17
+< 
+---
+> import org.spongepowered.api.network.channel.ChannelBuf;
+26c21
+< public class CheckPermissionListener implements RawDataListener {
+---
+> public class CheckPermissionListener {
+29c24
+<     private final RawDataChannel permissionsResultChannel;
+---
+>     private final String permissionsResultChannelName;
+34d28
+< 
+36c30
+<         permissionsResultChannel = channelRegistrar.getOrCreateRaw(plugin, combinedName);
+---
+>         this.permissionsResultChannelName = combinedName;
+39d32
+<     @Override
+41,42c34
+< 
+<         ByteArrayDataInput dataInput = ByteStreams.newDataInput(data.array());
+---
+>         ByteArrayDataInput dataInput = ByteStreams.newDataInput(data.readByteArray());
+66d57
+< 
+76d66
+< 
+83c73,80
+<         permissionsResultChannel.sendTo(receiver, buf -> buf.writeByteArray(dataOutput.toByteArray()));
+---
+>         if (receiver instanceof ServerPlayer) {
+>             ServerPlayer serverPlayer = (ServerPlayer) receiver;
+>             serverPlayer.getConnection().sendPluginMessage(permissionsResultChannelName, dataOutput.toByteArray());
+>         }
+>     }
+>     
+>     public static class ChannelRegistrar {
+>         // Dummy class to satisfy the constructor parameter after the API removal.

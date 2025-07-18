@@ -1,0 +1,8 @@
+48a49
+> import org.hamcrest.core.IsNull;
+284c285
+<             Matchers.notNullValue()
+---
+>             IsNull.notNullValue()
+327d327
+<         @Override

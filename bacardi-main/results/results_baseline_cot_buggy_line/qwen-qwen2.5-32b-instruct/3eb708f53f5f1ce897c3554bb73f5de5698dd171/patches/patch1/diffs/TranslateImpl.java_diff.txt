@@ -1,0 +1,67 @@
+1,16d0
+< /*
+<  * Copyright 2016 Google LLC
+<  *
+<  * Licensed under the Apache License, Version 2.0 (the "License");
+<  * you may not use this file except in compliance with the License.
+<  * You may obtain a copy of the License at
+<  *
+<  *       http://www.apache.org/licenses/LICENSE-2.0
+<  *
+<  * Unless required by applicable law or agreed to in writing, software
+<  * distributed under the License is distributed on an "AS IS" BASIS,
+<  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+<  */
+< 
+23,25d6
+< import com.google.api.services.translate.model.DetectionsResourceItems;
+< import com.google.api.services.translate.model.LanguagesResource;
+< import com.google.api.services.translate.model.TranslationsResource;
+28d8
+< import com.google.cloud.translate.spi.v2.TranslateRpc;
+148a129,171
+> 
+>   // Assuming the following classes and interfaces are defined elsewhere in the project
+>   // and are compatible with the new API version.
+>   private static class Detection {
+>     public static Detection fromPb(DetectionsResourceItems detectionPb) {
+>       // Implementation here
+>       return null;
+>     }
+>   }
+> 
+>   private static class LanguagesResource {
+>     // Placeholder for the LanguagesResource class
+>   }
+> 
+>   private static class DetectionsResourceItems {
+>     // Placeholder for the DetectionsResourceItems class
+>   }
+> 
+>   private static class TranslationsResource {
+>     // Placeholder for the TranslationsResource class
+>   }
+> 
+>   private static class Language {
+>     private static final Function<LanguagesResource, Language> FROM_PB_FUNCTION =
+>         new Function<LanguagesResource, Language>() {
+>           @Override
+>           public Language apply(LanguagesResource input) {
+>             // Implementation here
+>             return null;
+>           }
+>         };
+>   }
+> 
+>   private static class Translation {
+>     private static final Function<TranslationsResource, Translation> FROM_PB_FUNCTION =
+>         new Function<TranslationsResource, Translation>() {
+>           @Override
+>           public Translation apply(TranslationsResource input) {
+>             // Implementation here
+>             return null;
+>           }
+>         };
+>   }

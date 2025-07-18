@@ -1,0 +1,23 @@
+17a18
+> import com.artipie.http.auth.AuthUser;
+353c354
+<                             .map(user -> new Authentication.User(user.name()))
+---
+>                             .map(user -> new AuthUserImpl(user.name()))
+374a376,391
+>         }
+>     }
+>     
+>     /**
+>      * Minimal implementation of the AuthUser interface for the updated authentication API.
+>      */
+>     private static final class AuthUserImpl implements AuthUser {
+>         private final String name;
+> 
+>         AuthUserImpl(final String name) {
+>             this.name = name;
+>         }
+> 
+>         @Override
+>         public String name() {
+>             return this.name;

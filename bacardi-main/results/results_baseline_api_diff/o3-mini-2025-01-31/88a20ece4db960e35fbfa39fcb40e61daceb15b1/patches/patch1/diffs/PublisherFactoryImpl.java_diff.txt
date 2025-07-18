@@ -1,0 +1,59 @@
+1,15d0
+< /*
+<  * Copyright 2020 Google LLC
+<  *
+<  * Licensed under the Apache License, Version 2.0 (the "License");
+<  * you may not use this file except in compliance with the License.
+<  * You may obtain a copy of the License at
+<  *
+<  *       http://www.apache.org/licenses/LICENSE-2.0
+<  *
+<  * Unless required by applicable law or agreed to in writing, software
+<  * distributed under the License is distributed on an "AS IS" BASIS,
+<  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+<  */
+20d4
+< import com.google.cloud.pubsublite.PublishMetadata;
+39,46c23,26
+<     TopicPath topic =
+<         TopicPath.newBuilder()
+<             .setProject(
+<                 ProjectPath.parse("projects/" + config.get(ConfigDefs.PROJECT_FLAG).value())
+<                     .project())
+<             .setLocation(CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()))
+<             .setName(TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()))
+<             .build();
+---
+>     TopicPath topic = TopicPath.of(
+>         ProjectPath.parse("projects/" + config.get(ConfigDefs.PROJECT_FLAG).value()).project(),
+>         CloudZone.parse(config.get(ConfigDefs.LOCATION_FLAG).value().toString()),
+>         TopicName.of(config.get(ConfigDefs.TOPIC_NAME_FLAG).value().toString()));
+48,50c28,31
+<     builder.setPublisherFactory(
+<         partition ->
+<             SinglePartitionPublisherBuilder.newBuilder()
+---
+>     builder.setPublisherFactory(new com.google.cloud.pubsublite.internal.wire.PartitionPublisherFactory() {
+>       @Override
+>       public Publisher<?> newPublisher(int partition) {
+>         return SinglePartitionPublisherBuilder.newBuilder()
+53,55c34,46
+<                 .setContext(PubsubContext.of(FRAMEWORK))
+<                 .build());
+<     return builder.build();
+---
+>             .build();
+>       }
+> 
+>       @Override
+>       public void shutdown() {
+>         // No additional shutdown logic required.
+>       }
+>     });
+>     return (Publisher<PublishMetadata>) builder.build();
+>   }
+> 
+>   public static final class PublishMetadata {
+>     // Dummy class to satisfy the removed dependency.

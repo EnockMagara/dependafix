@@ -1,0 +1,39 @@
+27,28c27
+< import org.spongepowered.api.event.game.state.GameInitializationEvent;
+< import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+---
+> import org.spongepowered.api.event.game.state.GameStartingServerEvent;
+30,32c29,32
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelRegistrar;
+< import org.spongepowered.api.plugin.Plugin;
+---
+> import org.spongepowered.api.network.channel.ChannelBinding;
+> import org.spongepowered.api.network.channel.packet.PacketChannel;
+> import org.spongepowered.api.plugin.PluginContainer;
+> import org.spongepowered.api.text.Text;
+40,41d39
+< @Plugin(id = ARTIFACT_ID, name = PomData.NAME, version = PomData.VERSION,
+<         url = PomData.URL, description = PomData.DESCRIPTION)
+62c60
+<     public void onPreInit(GamePreInitializationEvent preInitEvent) {
+---
+>     public void onPreInit(GameStartingServerEvent preInitEvent) {
+73c71
+<     public void onInit(GameInitializationEvent initEvent) {
+---
+>     public void onInit(GameStartingServerEvent initEvent) {
+90c88
+<         ChannelRegistrar channelReg = Sponge.getChannelRegistrar();
+---
+>         ChannelBinding channelReg = Sponge.getChannelRegistrar();
+93,94c91,92
+<         RawDataChannel updateChannel = channelReg.getOrCreateRaw(this, updateChannelName);
+<         RawDataChannel permChannel = channelReg.getOrCreateRaw(this, permissionChannelName);
+---
+>         PacketChannel updateChannel = channelReg.getOrCreateRaw(this, updateChannelName);
+>         PacketChannel permChannel = channelReg.getOrCreateRaw(this, permissionChannelName);
+96c94
+<         permChannel.addListener(Type.SERVER, injector.getInstance(CheckPermissionListener.class));
+---
+>         permChannel.addListener(Type.SERVER, injector.getInstance(CheckPermissionListener.class);

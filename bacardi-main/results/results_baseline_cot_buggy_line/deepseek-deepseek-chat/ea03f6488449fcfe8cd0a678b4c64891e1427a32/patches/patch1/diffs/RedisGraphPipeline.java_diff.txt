@@ -1,0 +1,16 @@
+3a4,6
+> import redis.clients.jedis.commands.*;
+> import redis.clients.jedis.commands.ClusterPipeline;
+> import redis.clients.jedis.commands.BinaryScriptingCommandsPipeline;
+6,9d8
+< import redis.clients.jedis.commands.BinaryScriptingCommandsPipeline;
+< import redis.clients.jedis.commands.ClusterPipeline;
+< import redis.clients.jedis.commands.MultiKeyBinaryRedisPipeline;
+< import redis.clients.jedis.commands.MultiKeyCommandsPipeline;
+10a10,11
+> import redis.clients.jedis.commands.MultiKeyCommandsPipeline;
+> import redis.clients.jedis.commands.MultiKeyBinaryRedisPipeline;
+132d132
+<     
+148d147
+<     

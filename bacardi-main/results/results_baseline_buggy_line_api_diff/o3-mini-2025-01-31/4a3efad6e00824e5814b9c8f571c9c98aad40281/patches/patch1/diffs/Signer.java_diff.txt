@@ -1,0 +1,10 @@
+7d6
+< import eu.europa.esig.dss.pades.CertificationPermission;
+63d61
+<         ;
+71c69
+<         signatureParameters.setPermission(CertificationPermission.MINIMAL_CHANGES_PERMITTED);
+---
+>         // Removed the call to setPermission as CertificationPermission is no longer available in the dependency.
+123d120
+< 

@@ -1,0 +1,21 @@
+7a8
+> import org.spongepowered.api.command.Command;
+9,10c10,11
+< import org.spongepowered.api.command.CommandSource;
+< import org.spongepowered.api.command.args.CommandContext;
+---
+> import org.spongepowered.api.command.parameter.CommandContext;
+> import org.spongepowered.api.command.parameter.Parameter;
+14a16
+> import org.spongepowered.api.command.CommandSource;
+26c28,29
+<     public CommandResult execute(CommandSource src, CommandContext args) {
+---
+>     public CommandResult execute(CommandContext context) {
+>         CommandSource src = context.getCause().get(CommandSource.class).orElse(null);
+43a47,51
+> 
+>     @Override
+>     public CommandResult execute(org.spongepowered.api.command.CommandSource src, org.spongepowered.api.command.args.CommandContext args) throws org.spongepowered.api.command.CommandException {
+>         return null;
+>     }

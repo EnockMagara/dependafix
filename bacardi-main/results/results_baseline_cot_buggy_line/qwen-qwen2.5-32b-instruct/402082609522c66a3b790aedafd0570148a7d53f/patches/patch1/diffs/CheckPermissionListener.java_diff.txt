@@ -1,0 +1,30 @@
+6d5
+< import com.github.games647.changeskin.core.model.skin.SkinModel;
+17,18c16,19
+< import org.spongepowered.api.network.ChannelBinding.RawDataChannel;
+< import org.spongepowered.api.network.ChannelBuf;
+---
+> import org.spongepowered.api.network.ChannelBinding;
+> import org.spongepowered.api.network.ChannelBinding.ChannelReader;
+> import org.spongepowered.api.network.ChannelBinding.ChannelWriter;
+> import org.spongepowered.api.network.ChannelId;
+20,21d20
+< import org.spongepowered.api.network.RawDataListener;
+< import org.spongepowered.api.network.RemoteConnection;
+26c25
+< public class CheckPermissionListener implements RawDataListener {
+---
+> public class CheckPermissionListener implements ChannelReader<ChannelBuf> {
+29c28
+<     private final RawDataChannel permissionsResultChannel;
+---
+>     private final ChannelWriter<ChannelBuf> permissionsResultChannel;
+36c35,36
+<         permissionsResultChannel = channelRegistrar.getOrCreateRaw(plugin, combinedName);
+---
+>         ChannelId channelId = ChannelId.of(combinedName);
+>         permissionsResultChannel = channelRegistrar.registerOutgoing(channelId, ChannelBuf.class);
+40c40
+<     public void handlePayload(ChannelBuf data, RemoteConnection connection, Type side) {
+---
+>     public void handle(ChannelBuf data, RemoteConnection connection) {

@@ -1,0 +1,12 @@
+1,4d0
+< /*
+<  * The MIT License (MIT) Copyright (c) 2020-2021 artipie.com
+<  * https://github.com/artipie/docker-adapter/LICENSE.txt
+<  */
+12a9
+> import java.nio.charset.StandardCharsets;
+16c13,14
+< import org.cactoos.io.BytesOf;
+---
+> import org.cactoos.bytes.BytesOf;
+> import org.cactoos.text.TextOf;

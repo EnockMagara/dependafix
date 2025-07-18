@@ -1,0 +1,26 @@
+1,4d0
+< /*
+<  * The MIT License (MIT) Copyright (c) 2020-2021 artipie.com
+<  * https://github.com/artipie/docker-adapter/LICENSE.txt
+<  */
+12a9
+> import java.nio.charset.StandardCharsets;
+16,17c13,14
+< import org.cactoos.io.BytesOf;
+< import org.cactoos.text.HexOf;
+---
+> import org.cactoos.bytes.BytesOf;
+> import org.cactoos.text.LowerHexString;
+54c51,53
+<                         sha.update(buf);
+---
+>                         byte[] bytes = new byte[buf.remaining()];
+>                         buf.get(bytes);
+>                         sha.update(bytes);
+61c60,63
+<                     () -> new Digest.Sha256(new HexOf(new BytesOf(sha.digest())).asString())
+---
+>                     () -> {
+>                         final byte[] digest = sha.digest();
+>                         return new Digest.Sha256(new LowerHexString(new BytesOf(digest).asBytes()).asString());
+>                     }

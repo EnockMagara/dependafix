@@ -1,0 +1,19 @@
+53:cannot find symbol  symbol:   class AccountDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+83:cannot find symbol  symbol: method nisConfiguration() 
+138:cannot find symbol  symbol:   method name()   location: class org.nem.core.model.NetworkInfo 
+149:method flyway() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+90:cannot find symbol  symbol:   method getName()   location: class org.nem.core.model.NetworkInfo 
+130:method dataSource() is already defined in class org.nem.specific.deploy.appconfig.NisAppConfig
+152:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+131:cannot find symbol  symbol: method nisConfiguration() 
+56:cannot find symbol  symbol:   class BlockDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+78:cannot find symbol  symbol: method timeProvider() 
+123:cannot find symbol  symbol: method blockChain() 
+105:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+153:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+112:cannot find symbol  symbol: method sessionFactory() 
+104:cannot find symbol  symbol:   variable prop   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+125:cannot find symbol  symbol: method nisCache() 
+126:cannot find symbol  symbol: method blockAnalyzer() 
+63:cannot find symbol  symbol:   class TransferDao   location: class org.nem.specific.deploy.appconfig.NisAppConfig 
+117:cannot find symbol  symbol: method nisConfiguration() 

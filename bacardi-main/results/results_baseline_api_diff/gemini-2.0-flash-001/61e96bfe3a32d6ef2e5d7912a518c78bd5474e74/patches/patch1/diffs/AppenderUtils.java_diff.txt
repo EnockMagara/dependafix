@@ -1,0 +1,30 @@
+57a58,62
+>     public void start() {
+>       super.start();
+>     }
+> 
+>     @Override
+69c74
+<     public void doEncode(LogMessage logMessage) throws IOException {
+---
+>     public byte[] encode(LogMessage logMessage) {
+73,74c78,86
+<       } catch (TException e) {
+<         throw new IOException(e);
+---
+>         return new byte[0]; // Return an empty byte array as encode() requires a return value
+>       } catch (TException | IOException e) {
+>         throw new RuntimeException(e); // Or handle the exception as appropriate
+>       }
+>     }
+> 
+>     @Override
+>     public byte[] headerBytes() {
+>       return null;
+75a88,91
+> 
+>     @Override
+>     public byte[] footerBytes() {
+>       return null;
+77a94
+> 

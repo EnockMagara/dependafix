@@ -1,0 +1,130 @@
+package com.github.games647.changeskin.sponge.command;
+
+import com.github.games647.changeskin.sponge.ChangeSkinSponge;
+import com.github.games647.changeskin.sponge.PomData;
+import com.github.games647.changeskin.sponge.task.SkinInvalidator;
+import com.google.inject.Inject;
+import java.util.Optional;
+import org.spongepowered.api.command.Command;
+import org.spongepowered.api.command.CommandExecutor;
+import org.spongepowered.api.command.parameter.CommandContext;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.scheduler.Task;
+
+public class InvalidateCommand implements CommandExecutor, ChangeSkinCommand {
+
+    private final ChangeSkinSponge plugin;
+
+    @Inject
+    InvalidateCommand(ChangeSkinSponge plugin) {
+        this.plugin = plugin;
+    }
+
+    // This method is required by the new CommandExecutor interface.
+    @Override
+    public CommandResult execute(CommandContext args) {
+        Optional<Player> playerOpt = args.cause().first(Player.class);
+        CommandSource src = playerOpt.map(PlayerCommandSource::new).orElse(new DummyCommandSource());
+        return execute(src, args);
+    }
+
+    // Original execute logic preserved with a CommandSource parameter.
+    public CommandResult execute(CommandSource src, CommandContext args) {
+        if (!(src instanceof PlayerCommandSource)) {
+            plugin.sendMessage(src, "no-console");
+            return CommandResult.empty();
+        }
+        Player receiver = ((PlayerCommandSource) src).getPlayer();
+        Task.builder().execute(new SkinInvalidator(plugin, receiver)).submit(plugin);
+        return CommandResult.success();
+    }
+
+    @Override
+    public CommandSpec buildSpec() {
+        return CommandSpec.builder()
+                .executor(this)
+                .permission(PomData.ARTIFACT_ID + ".command.skinupdate.base")
+                .build();
+    }
+
+    // Adapter class for the removed CommandSpec.
+    public static class CommandSpec {
+        private final Command command;
+
+        public CommandSpec(Command command) {
+            this.command = command;
+        }
+
+        public Command getCommand() {
+            return command;
+        }
+
+        public static Builder builder() {
+            return new Builder();
+        }
+
+        public static class Builder {
+            private CommandExecutor executor;
+            private String permission;
+
+            public Builder executor(CommandExecutor executor) {
+                this.executor = executor;
+                return this;
+            }
+
+            public Builder permission(String permission) {
+                this.permission = permission;
+                return this;
+            }
+
+            public CommandSpec build() {
+                Command command = Command.builder()
+                        .executor(executor)
+                        .permission(permission)
+                        .build();
+                return new CommandSpec(command);
+            }
+        }
+    }
+
+    // Adapter class for the removed CommandResult.
+    public static class CommandResult {
+        private final boolean success;
+
+        private CommandResult(boolean success) {
+            this.success = success;
+        }
+
+        public static CommandResult empty() {
+            return new CommandResult(false);
+        }
+
+        public static CommandResult success() {
+            return new CommandResult(true);
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+    }
+
+    // Dummy interface to replace the removed CommandSource.
+    public interface CommandSource {
+    }
+
+    public static class DummyCommandSource implements CommandSource {
+    }
+
+    public static class PlayerCommandSource implements CommandSource {
+        private final Player player;
+
+        public PlayerCommandSource(Player player) {
+            this.player = player;
+        }
+
+        public Player getPlayer() {
+            return player;
+        }
+    }
+}

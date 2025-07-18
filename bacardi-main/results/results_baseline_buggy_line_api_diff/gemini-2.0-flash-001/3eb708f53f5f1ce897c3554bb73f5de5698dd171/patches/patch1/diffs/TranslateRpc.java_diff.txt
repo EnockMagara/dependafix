@@ -1,0 +1,20 @@
+13,14d12
+<  * See the License for the specific language governing permissions and
+<  * limitations under the License.
+19,22d16
+< import com.google.api.services.translate.model.DetectionsResourceItems;
+< import com.google.api.services.translate.model.LanguagesResource;
+< import com.google.api.services.translate.model.TranslationsResource;
+< import com.google.cloud.ServiceRpc;
+59c53
+<   List<LanguagesResource> listSupportedLanguages(Map<Option, ?> optionMap);
+---
+>   List<String> listSupportedLanguages(Map<Option, ?> optionMap);
+67c61
+<   List<List<DetectionsResourceItems>> detect(List<String> texts);
+---
+>   List<List<String>> detect(List<String> texts);
+77c71
+<   List<TranslationsResource> translate(List<String> texts, Map<Option, ?> optionMap);
+---
+>   List<String> translate(List<String> texts, Map<Option, ?> optionMap);
