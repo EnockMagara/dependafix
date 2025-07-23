@@ -1,59 +1,88 @@
-# Dependafix Bot
+# Java Breaking Change Detector
 
-🤖 **Automated Dependency Update Fix System** with comprehensive build validation and intelligent code fixes.
+A GitHub bot that automatically detects breaking changes in Java dependency updates and creates new branches with fixes, featuring comprehensive build validation and CI/CD integration.
 
-## Overview
+## 🎯 Overview
 
-Dependafix is an advanced GitHub bot that automatically detects and fixes issues caused by dependency updates. It uses sophisticated pattern recognition, LLM-powered code generation, and comprehensive build validation to ensure that dependency updates don't break your codebase.
+Java Breaking Change Detector is a Probot-based GitHub application that:
 
-### Key Features
+- **Detects breaking changes** in Java dependency updates by analyzing build logs
+- **Validates builds comprehensively** using Maven or Gradle
+- **Creates new branches** automatically when breaking changes are found
+- **Applies basic fixes** and adds documentation for the issues
+- **Supports Maven and Gradle** projects with build tool detection
+- **Integrates seamlessly** with GitHub workflows
+- **Provides CI/CD integration** with GitHub Actions, Jenkins, and GitLab CI
 
-- **🔍 Intelligent Issue Detection**: Identifies 5 types of dependency-related issues
-- **🤖 AI-Powered Fixes**: Uses Byam LLM to generate context-aware code fixes
-- **🔨 Build Validation**: Validates all fixes through comprehensive build testing
-- **📊 Comprehensive Reporting**: Detailed validation reports and PR descriptions
-- **🎯 Pattern-Based Fallbacks**: Robust fallback mechanisms when AI is unavailable
-- **🔧 Multi-Build Tool Support**: Maven, Gradle, and more
+## 🚀 Features
 
-## Architecture
+### Core Functionality
+- **Automatic Detection**: Monitors push events for Java dependency updates
+- **Build Validation**: Comprehensive build analysis (clean, compile, test, dependencies)
+- **Branch Creation**: Creates new branches with fixes when breaking changes are detected
+- **Issue Tracking**: Creates GitHub issues to track breaking changes
+- **Manual Triggers**: Supports manual breaking change checks via comments
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   GitHub Bot    │────│  Dependafix     │────│  Build          │
-│   (Webhooks)    │    │  Service        │    │  Validator      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-            ┌───────▼────────┐  ┌──────▼──────┐
-            │ Use Case       │  │ Byam LLM    │
-            │ Orchestrator   │  │ Service     │
-            └────────────────┘  └─────────────┘
-```
+### CI/CD Integration
+- **GitHub Actions**: Automatic workflow creation and integration
+- **Jenkins Support**: Jenkins pipeline integration (placeholder)
+- **GitLab CI**: GitLab CI/CD integration (placeholder)
+- **Workflow Monitoring**: Monitors CI/CD workflows for breaking changes
+- **Automatic Notifications**: Creates issues and notifications for CI/CD failures
+- **Platform Detection**: Automatically detects and configures CI/CD platforms
 
-## Supported Use Cases
+### Supported Java Build Tools
+- **Maven**: Analyzes `pom.xml` changes and Maven build logs
+- **Gradle**: Analyzes `build.gradle` changes and Gradle build logs
 
-1. **Deprecated Method Replacement**: Automatically replaces deprecated methods with modern alternatives
-2. **API Signature Changes**: Adapts method calls to new API signatures
-3. **Dependency Scope Resolution**: Fixes missing or incorrect dependency scopes
-4. **Removed Classes**: Refactors code to use replacement classes
-5. **Multi-File Synchronization**: Coordinates changes across multiple related files
+### Breaking Change Detection
+- **Removed Classes/Packages**: Detects when classes or packages are no longer available
+- **API Signature Changes**: Identifies method signature incompatibilities
+- **Deprecated APIs**: Finds usage of deprecated methods and classes
+- **Dependency Conflicts**: Detects version conflicts and incompatible dependencies
+- **Type Incompatibilities**: Identifies type-related breaking changes
+- **Build Failures**: Analyzes compilation and test failures
 
-## Quick Start
+### Build Validation Process
+1. **Clean Build**: Removes previous build artifacts
+2. **Compile**: Compiles source code and detects compilation errors
+3. **Test**: Runs unit tests and detects test failures
+4. **Dependency Analysis**: Checks for dependency conflicts
+5. **Failure Analysis**: Categorizes and prioritizes build failures
+
+## 🏗️ Architecture
+
+The project uses several design patterns for maintainability and extensibility:
+
+### Design Patterns
+- **Strategy Pattern**: Different detection strategies for Maven vs Gradle
+- **Factory Pattern**: Creates appropriate build validators and detectors
+- **Observer Pattern**: Webhook event handling and monitoring
+- **Template Method Pattern**: Common build validation workflow with tool-specific implementations
+- **Command Pattern**: Encapsulates build operations as commands
+
+### Core Services
+- **BreakingChangeDetector**: Main service for detecting Java breaking changes
+- **JavaBuildValidator**: Comprehensive build validation service
+- **BranchCreator**: Handles repository cloning and branch creation
+- **CICDIntegration**: CI/CD platform integration and workflow management
+- **Detection Strategies**: Maven and Gradle specific implementations
+
+## 📦 Installation
 
 ### Prerequisites
-
-- Node.js 18+
+- Node.js 18+ 
+- npm 8+
 - Git
 - Java 11+ (for Java projects)
-- Maven or Gradle (for build tools)
+- Maven 3.6+ (for Maven projects)
+- Gradle 7+ (for Gradle projects)
 
-### Installation
-
+### Setup
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-org/dependafix-bot.git
-   cd dependafix-bot
+   git clone https://github.com/your-org/java-breaking-change-detector.git
+   cd java-breaking-change-detector
    ```
 
 2. **Install dependencies**:
@@ -61,352 +90,318 @@ Dependafix is an advanced GitHub bot that automatically detects and fixes issues
    npm install
    ```
 
-3. **Set up environment**:
+3. **Configure environment**:
    ```bash
    cp env.example .env
-   # Edit .env with your configuration
+   # Edit .env with your GitHub App configuration
    ```
 
-4. **Run initial setup**:
-   ```bash
-   npm run setup
-   ```
-
-### Development Setup
-
-1. **Start the mock server** (for testing):
-   ```bash
-   npm run mock:server
-   ```
-
-2. **Run the application in development mode**:
-   ```bash
-   npm run dev
-   ```
-
-3. **Run tests**:
+4. **Run tests**:
    ```bash
    npm test
    ```
 
-## Testing Guide
-
-### Running Tests
-
-```bash
-# Run all tests
-npm test
-
-# Run unit tests only
-npm run test:unit
-
-# Run integration tests only
-npm run test:integration
-
-# Run with coverage
-npm run test:coverage
-
-# Watch mode for development
-npm run test:watch
-```
-
-### Test Categories
-
-#### 1. Unit Tests
-- **Location**: `test/unit/`
-- **Purpose**: Test individual components in isolation
-- **Mocking**: Extensive mocking of external dependencies
-
-```bash
-npm run test:unit
-```
-
-#### 2. Integration Tests
-- **Location**: `test/integration/`
-- **Purpose**: Test complete workflows with mocked external services
-- **Coverage**: Webhook processing, build validation, use case orchestration
-
-```bash
-npm run test:integration
-```
-
-#### 3. Use Case Tests
-- **Location**: `test-use-cases.js`
-- **Purpose**: Test all 5 dependency update scenarios
-- **Features**: Realistic dependency update simulations
-
-```bash
-npm run test:use-cases
-```
-
-#### 4. Build Validation Tests
-- **Location**: `test-build-validation.js`
-- **Purpose**: Test build validation with different outcomes
-- **Scenarios**: Success, failure, partial success, timeout
-
-```bash
-npm run test:build-validation
-```
-
-### Mock Testing
-
-The project includes comprehensive mocking for:
-
-#### Mock Server (`test/mock/mock-server.js`)
-- **GitHub API**: Repository, PR creation, file contents
-- **Byam LLM**: Fix generation, health checks
-- **Build Tools**: Maven/Gradle execution simulation
-- **Test Data**: Realistic build logs and dependency information
-
-```bash
-# Start mock server
-npm run mock:server
-
-# Run webhook simulation
-npm run test:mock-webhook
-```
-
-#### Webhook Simulator (`test/mock/webhook-simulator.js`)
-- **Pull Request Events**: Dependency update PRs
-- **Push Events**: Direct dependency changes
-- **Issue Comments**: Manual dependency checks
-- **Repository Events**: New repository setup
-
-```bash
-# Simulate specific webhook
-node test/mock/webhook-simulator.js http://localhost:3000/webhook pr
-
-# Run comprehensive simulation
-npm run test:mock-webhook
-```
-
-### Testing Best Practices
-
-1. **Use Descriptive Test Names**:
-   ```javascript
-   it('should block PR creation when build validation fails', async () => {
-     // Test implementation
-   });
+5. **Start the application**:
+   ```bash
+   npm start
    ```
 
-2. **Mock External Dependencies**:
-   ```javascript
-   sinon.stub(buildValidator, 'runCleanBuild').resolves({
-     success: false,
-     logs: '[ERROR] BUILD FAILED'
-   });
-   ```
-
-3. **Test Error Scenarios**:
-   ```javascript
-   it('should handle repository checkout failures gracefully', async () => {
-     // Test error handling
-   });
-   ```
-
-4. **Validate Build Integration**:
-   ```javascript
-   expect(result.buildValidated).to.be.true;
-   expect(result.shouldCreatePR).to.be.true;
-   ```
-
-## Usage Examples
-
-### 1. Basic Webhook Processing
-
-```javascript
-// Process a dependency update PR
-const result = await dependafixService.processWebhookEvent('pull_request', {
-  action: 'opened',
-  pull_request: {
-    title: 'Bump spring-core from 5.3.0 to 6.0.0',
-    user: { login: 'dependabot[bot]' }
-  },
-  repository: {
-    name: 'my-project',
-    full_name: 'org/my-project'
-  }
-});
-
-console.log(`Processing result: ${result.success}`);
-console.log(`Build validated: ${result.buildValidated}`);
-console.log(`Fixes applied: ${result.appliedFixes}`);
-```
-
-### 2. Manual Dependency Check
-
-```javascript
-// Trigger manual dependency analysis
-const result = await dependafixService.processDependencyUpdate({
-  repositoryUrl: 'https://github.com/org/my-project',
-  branch: 'main',
-  dependencyInfo: {
-    name: 'hibernate-core',
-    oldVersion: '5.6.0',
-    newVersion: '6.2.0'
-  }
-});
-```
-
-### 3. Build Validation
-
-```javascript
-// Validate fixes before creating PR
-const validationResult = await buildValidator.validateFixes(
-  './my-project',
-  'maven',
-  { isCritical: true }
-);
-
-if (validationResult.shouldCreatePR) {
-  // Create pull request
-  await prCreator.createPullRequest(/* ... */);
-}
-```
-
-## Configuration
+## 🔧 Configuration
 
 ### Environment Variables
-
-Key configuration options (see `env.example` for complete list):
-
 ```bash
-# GitHub Integration
-GITHUB_TOKEN=your_github_token
+# GitHub App Configuration
+GITHUB_APP_ID=your_app_id
+GITHUB_PRIVATE_KEY=your_private_key
 GITHUB_WEBHOOK_SECRET=your_webhook_secret
 
-# Byam LLM
-BYAM_ENDPOINT=http://localhost:8080/api/byam
-BYAM_API_KEY=your_api_key
-
-# Build Configuration
+# Application Settings
+NODE_ENV=production
+LOG_LEVEL=info
 BUILD_TIMEOUT=300000
-BUILD_MAX_RETRIES=3
+BRANCH_PREFIX=fix/breaking-changes
+BUILD_VALIDATION_ENABLED=true
 
-# Validation Thresholds
-TEST_FAILURE_THRESHOLD=0.2
-CRITICAL_TEST_FAILURE_THRESHOLD=0.05
+# CI/CD Integration Settings
+GITHUB_ACTIONS_ENABLED=true
+WORKFLOW_TRIGGERS=push,pull_request
+AUTO_CREATE_WORKFLOWS=true
 ```
 
-### Service Configuration
+### GitHub App Setup
+1. Create a new GitHub App in your organization
+2. Configure webhook events: `push`, `pull_request`, `issue_comment`, `workflow_run`
+3. Set repository permissions for contents and pull requests
+4. Install the app on Java repositories you want to monitor
 
-```javascript
-const dependafixService = new DependafixService(context, {
-  byam: {
-    endpoint: process.env.BYAM_ENDPOINT,
-    apiKey: process.env.BYAM_API_KEY,
-    timeout: 30000
-  },
-  buildValidator: {
-    timeout: 300000,
-    maxRetries: 3,
-    testFailureThreshold: 0.2
-  }
-});
-```
+## 🧪 Testing
 
-## Development Workflow
-
-### 1. Local Development
-
+### Run All Tests
 ```bash
-# Start development environment
-npm run dev
+npm test
+```
 
-# Run tests in watch mode
+### Test Breaking Changes
+```bash
+npm run test:breaking-changes
+```
+
+### Test Specific Features
+```bash
+# Unit tests
+npm run test:unit
+
+# Integration tests  
+npm run test:integration
+
+# Watch mode
 npm run test:watch
-
-# Check code quality
-npm run lint
-npm run format
 ```
 
-### 2. Testing Changes
-
-```bash
-# Run comprehensive validation
-npm run validate
-
-# Test specific use case
-npm run test:use-cases
-
-# Test build validation
-npm run test:build-validation
-```
-
-### 3. Mock Testing
-
+### Manual Testing
 ```bash
 # Start mock server
 npm run mock:server
 
-# In another terminal, simulate webhooks
+# Simulate webhook events
 npm run test:mock-webhook
-
-# Or run complete demo
-npm run demo
 ```
 
-## Debugging
+## 📋 Usage
 
-### Enable Debug Logging
+### Automatic Detection
+The bot automatically monitors:
+- **Push Events**: When Java dependency files are modified (primary focus)
+- **Pull Requests**: When opened or updated with dependency changes
+- **Manual Triggers**: When `/check-breaking-changes` is commented on issues
+- **CI/CD Workflows**: When workflow runs fail due to breaking changes
 
-```bash
-export LOG_LEVEL=debug
-npm run dev
+### Manual Commands
+Add a comment to any issue:
+```
+/check-breaking-changes
 ```
 
-### Mock Mode
-
-```bash
-export MOCK_MODE=true
-npm run dev
+Setup CI/CD integration:
+```
+/setup-cicd
 ```
 
-### Test Specific Scenarios
+### Expected Workflow
+1. **Java Dependency Update**: Someone updates dependencies in a push or PR
+2. **Build Validation**: Bot runs comprehensive build analysis
+3. **Breaking Change Detection**: Bot detects breaking changes in build logs
+4. **Branch Creation**: Bot creates a new branch with fixes
+5. **CI/CD Integration**: Bot sets up CI/CD workflows for future monitoring
+6. **Notification**: Bot comments on PR or creates issue with details
+7. **Review**: Team reviews the fix branch and creates PR if needed
 
-```bash
-# Test deprecated method scenario
-node test/mock/webhook-simulator.js http://localhost:3000/webhook pr
+## 🔍 Java Breaking Change Detection
 
-# Test build validation failure
-node test-build-validation.js
+### Detection Patterns
+The bot looks for these patterns in Java build logs:
+
+```java
+// Compilation errors
+cannot find symbol
+package does not exist
+incompatible types
+method cannot be applied
+ClassNotFoundException
+NoClassDefFoundError
+
+// Maven patterns
+[ERROR] cannot find symbol
+[ERROR] package does not exist
+[ERROR] method cannot be applied
+
+// Gradle patterns
+FAILED
+Test.*failed
+AssertionError
 ```
 
-## Contributing
+### Build Validation Steps
+1. **Clean**: `mvn clean` or `./gradlew clean`
+2. **Compile**: `mvn compile` or `./gradlew compileJava`
+3. **Test**: `mvn test` or `./gradlew test`
+4. **Dependencies**: `mvn dependency:tree` or `./gradlew dependencies`
+
+### Fix Application
+When breaking changes are detected, the bot:
+1. **Clones the repository** to a temporary directory
+2. **Creates a new branch** with a descriptive name
+3. **Applies basic fixes**:
+   - Adds TODO comments explaining the issues
+   - Creates resolution documentation
+   - Updates affected files
+4. **Commits and pushes** the changes
+5. **Cleans up** temporary files
+
+## 🔗 CI/CD Integration
+
+### Supported Platforms
+- **GitHub Actions**: Full integration with workflow creation and monitoring
+- **Jenkins**: Basic integration (placeholder for future implementation)
+- **GitLab CI**: Basic integration (placeholder for future implementation)
+
+### GitHub Actions Integration
+The bot automatically creates the following workflows:
+
+#### Breaking Change Detection Workflow
+```yaml
+name: Java Breaking Change Detection
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'pom.xml'
+      - 'build.gradle'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'pom.xml'
+      - 'build.gradle'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+
+jobs:
+  detect-breaking-changes:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    - name: Run build validation
+      run: |
+        if [ -f "pom.xml" ]; then
+          mvn clean compile test
+          mvn dependency:tree
+        elif [ -f "build.gradle" ]; then
+          ./gradlew clean build
+          ./gradlew dependencies
+        fi
+```
+
+#### Notification Workflow
+```yaml
+name: Breaking Change Notifications
+
+on:
+  workflow_run:
+    workflows: ["Java Breaking Change Detection"]
+    types: [completed]
+
+jobs:
+  notify-breaking-changes:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+    - name: Create issue for breaking changes
+      uses: actions/github-script@v7
+      with:
+        script: |
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '🚨 Breaking Changes Detected in CI/CD',
+            body: 'Breaking changes detected in Java dependencies...',
+            labels: ['breaking-changes', 'ci-cd-failure', 'java']
+          });
+```
+
+### CI/CD Features
+- **Automatic Workflow Creation**: Creates GitHub Actions workflows automatically
+- **Workflow Monitoring**: Monitors workflow runs for failures
+- **Issue Creation**: Creates issues for CI/CD failures with breaking changes
+- **Notification System**: Sends notifications via GitHub Issues and Slack (if configured)
+- **Platform Detection**: Automatically detects CI/CD platform and configures accordingly
+
+### Workflow Event Handling
+The bot monitors `workflow_run` events and:
+1. **Analyzes failed workflows** for breaking change patterns
+2. **Creates issues** for CI/CD failures with breaking changes
+3. **Provides detailed analysis** of the failure
+4. **Suggests remediation steps**
+
+## 🏛️ Project Structure
+
+```
+src/
+├── index.js                    # Main Probot application
+├── services/
+│   ├── breaking-change-detector.js  # Java detection service
+│   ├── branch-creator.js            # Branch creation service
+│   └── ci-cd-integration.js         # CI/CD integration service
+└── utils/
+    └── logger.js                    # Logging utilities
+```
+
+## 🤝 Contributing
 
 ### Development Setup
-
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Run tests: `npm run validate`
-5. Submit a pull request
+4. Add tests for new functionality
+5. Run the test suite
+6. Submit a pull request
 
-### Code Quality
+### Code Style
+- Use ESLint for code linting
+- Follow Prettier formatting
+- Write JSDoc comments for public APIs
+- Use conventional commit messages
 
-- **ESLint**: `npm run lint`
-- **Prettier**: `npm run format`
-- **Tests**: `npm test`
-- **Coverage**: `npm run test:coverage`
+### Testing Guidelines
+- Write unit tests for all new services
+- Add integration tests for webhook handling
+- Test breaking change detection with real Java scenarios
+- Test CI/CD integration with mock workflows
+- Ensure all tests pass before submitting PRs
 
-### Testing Requirements
-
-- Unit tests for all new components
-- Integration tests for new workflows
-- Mock external dependencies
-- Maintain >90% test coverage
-
-## License
+## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## Support
+## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-org/dependafix-bot/issues)
-- **Documentation**: [Wiki](https://github.com/your-org/dependafix-bot/wiki)
-- **Discord**: [Community Server](https://discord.gg/dependafix)
+### Common Issues
+- **Build Timeouts**: Increase `BUILD_TIMEOUT` in configuration
+- **Permission Errors**: Check GitHub App permissions
+- **Detection Failures**: Verify Java and build tools are properly installed
+- **Build Tool Detection**: Ensure `pom.xml` or `build.gradle` exists in repository
+- **CI/CD Integration**: Check repository permissions for workflow creation
+
+### Getting Help
+- Check the [Issues](https://github.com/your-org/java-breaking-change-detector/issues) page
+- Review the [Development Guide](DEVELOPMENT.md)
+- Contact the maintainers
+
+## 🔄 Roadmap
+
+### Planned Features
+- **Enhanced Fix Generation**: More sophisticated Java code fixes
+- **Custom Rules**: User-defined breaking change detection rules
+- **Metrics Dashboard**: Track breaking change trends
+- **Slack Integration**: Notifications via Slack
+- **Jenkins Integration**: Full Jenkins pipeline integration
+- **GitLab CI Integration**: Full GitLab CI/CD integration
+
+### Future Enhancements
+- **Machine Learning**: AI-powered breaking change prediction
+- **Dependency Graph Analysis**: Advanced dependency conflict resolution
+- **Multi-language Support**: Support for Kotlin and other JVM languages
+- **Performance Optimization**: Faster detection and processing
+- **Advanced CI/CD**: Support for more CI/CD platforms
 
 ---
 
-**Built with ❤️ by the Dependafix Team** 
+**Java Breaking Change Detector** - Making Java dependency updates safer, one breaking change at a time! ☕🚀 

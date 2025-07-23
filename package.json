@@ -1,7 +1,7 @@
 {
-  "name": "dependafix-bot",
+  "name": "breaking-change-detector",
   "version": "1.0.0",
-  "description": "Automated dependency update fix system with comprehensive build validation",
+  "description": "Automated breaking change detection and branch creation for dependency updates",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -12,27 +12,25 @@
     "test:integration": "mocha test/integration/**/*.test.js --recursive --timeout 10000",
     "test:watch": "mocha test/**/*.test.js --recursive --watch",
     "test:coverage": "nyc npm run test",
-    "test:use-cases": "node test-use-cases.js",
-    "test:build-validation": "node test-build-validation.js",
-    "test:java-deps": "node test-java-dependencies.js",
+    "test:breaking-changes": "node test-breaking-changes.js",
     "test:mock-webhook": "node test/mock/webhook-simulator.js",
     "lint": "eslint src/ test/ --ext .js",
     "lint:fix": "eslint src/ test/ --ext .js --fix",
     "format": "prettier --write src/ test/",
-    "validate": "npm run lint && npm run test && npm run test:use-cases",
+    "validate": "npm run lint && npm run test",
     "setup": "npm install && npm run validate",
     "mock:server": "node test/mock/mock-server.js",
     "demo": "node demo.js",
-    "demo:full": "npm run mock:server & sleep 2 && npm run test:mock-webhook"
+    "demo:breaking-changes": "npm run mock:server & sleep 2 && npm run test:mock-webhook"
   },
   "keywords": [
-    "dependency-management",
-    "automated-fixes",
-    "build-validation",
+    "breaking-changes",
+    "dependency-detection",
+    "automated-branching",
     "github-bot",
-    "llm-integration"
+    "probot"
   ],
-  "author": "Dependafix Team",
+  "author": "Breaking Change Detector Team",
   "license": "MIT",
   "dependencies": {
     "probot": "^12.3.1",
@@ -61,6 +59,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/dependafix-bot.git"
+    "url": "https://github.com/your-org/breaking-change-detector.git"
   }
 }
