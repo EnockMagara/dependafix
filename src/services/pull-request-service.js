@@ -36,6 +36,7 @@ export class PullRequestService {
     }
   }
 
+  
   /**
    * Create a new branch from the default branch
    * @param {string} branchName - Name of the new branch
