@@ -28,3 +28,4 @@ export default function probotApp(app) {
     app.log.info(`App uninstalled from account: ${installation.account.login}`);
   });
 } 
+
