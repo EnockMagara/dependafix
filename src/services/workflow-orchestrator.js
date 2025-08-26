@@ -26,9 +26,10 @@ export class WorkflowOrchestrator {
   /**
    * Main workflow orchestration
    * @param {string} triggerType - 'push', 'pull_request', or 'manual'
+   * @param {Object} options - Additional options for the workflow
    * @returns {Object} - Workflow result with context payload
    */
-  async executeWorkflow(triggerType = 'manual') {
+  async executeWorkflow(triggerType = 'manual', options = {}) {
     const { repository } = this.context.payload;
     this.log.info(`🚀 Starting Dependafix workflow for ${repository.full_name} (${triggerType})`);
     
@@ -61,8 +62,47 @@ export class WorkflowOrchestrator {
       workflowResult.workflowSteps[0].status = 'completed';
       workflowResult.workflowSteps[0].message = `Java project detected (${buildTool})`;
 
-      // Step 2: Check for dependency changes (for push/PR events)
-      if (triggerType !== 'manual') {
+      // Step 2: Handle different trigger types
+      if (triggerType === 'pull_request') {
+        // For pull requests, we already have pom.xml changes and compilation errors
+        workflowResult.workflowSteps.push({
+          step: 'pom_xml_analysis',
+          status: 'completed',
+          timestamp: new Date().toISOString(),
+          message: `pom.xml changes detected: ${options.pomChanges?.summary || 'Unknown'}`
+        });
+
+        workflowResult.workflowSteps.push({
+          step: 'compilation_error_detection',
+          status: 'completed',
+          timestamp: new Date().toISOString(),
+          message: `${options.compilationErrors?.length || 0} compilation errors detected`
+        });
+
+        // Use the provided compilation errors
+        const compilationErrors = options.compilationErrors || [];
+        const buildResult = {
+          success: compilationErrors.length === 0,
+          failures: compilationErrors,
+          logs: 'Compilation errors detected from pull request analysis',
+          buildTime: 0,
+          javaVersion: null,
+          buildTool
+        };
+
+        // Step 3: Analyze pom.xml changes and their impact
+        workflowResult.workflowSteps.push({
+          step: 'pom_impact_analysis',
+          status: 'running',
+          timestamp: new Date().toISOString()
+        });
+
+        const pomImpact = await this.analyzePomXmlImpact(options.pomChanges, compilationErrors);
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].status = 'completed';
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].message = `Analyzed ${pomImpact.issues.length} pom.xml related issues`;
+
+      } else {
+        // For other trigger types, use the original workflow
         workflowResult.workflowSteps.push({
           step: 'dependency_change_detection',
           status: 'running',
@@ -79,6 +119,32 @@ export class WorkflowOrchestrator {
 
         workflowResult.workflowSteps[1].status = 'completed';
         workflowResult.workflowSteps[1].message = 'Dependency changes detected';
+
+        // Step 3: Execute build and capture logs
+        workflowResult.workflowSteps.push({
+          step: 'build_execution',
+          status: 'running',
+          timestamp: new Date().toISOString()
+        });
+
+        const buildResult = await this.buildExecutor.executeBuild(buildTool);
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].status = 'completed';
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].message = `Build ${buildResult.success ? 'succeeded' : 'failed'}`;
+
+        // Step 4: Detect compilation errors and failures
+        workflowResult.workflowSteps.push({
+          step: 'error_detection',
+          status: 'running',
+          timestamp: new Date().toISOString()
+        });
+
+        const compilationErrors = await this.errorDetector.detectCompilationErrors();
+        const buildFailures = buildResult.success ? [] : buildResult.failures;
+        
+        const allErrors = [...compilationErrors, ...buildFailures];
+        
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].status = 'completed';
+        workflowResult.workflowSteps[workflowResult.workflowSteps.length - 1].message = `Found ${allErrors.length} errors`;
       }
 
       // Step 3: Execute build and capture logs
@@ -467,5 +533,202 @@ export class WorkflowOrchestrator {
       mediumConfidence: confidences.filter(c => c >= 50 && c < 80).length,
       lowConfidence: confidences.filter(c => c < 50).length
     };
+  }
+
+  /**
+   * Analyze pom.xml changes and their impact on compilation errors
+   * @param {Object} pomChanges - pom.xml changes information
+   * @param {Array} compilationErrors - Array of compilation errors
+   * @returns {Object} - Analysis result
+   */
+  async analyzePomXmlImpact(pomChanges, compilationErrors) {
+    const issues = [];
+    
+    if (!pomChanges || !pomChanges.changes) {
+      return { issues: [] };
+    }
+
+    // Analyze each pom.xml change for potential impact
+    for (const change of pomChanges.changes) {
+      const impact = this.analyzeChangeImpact(change, compilationErrors);
+      if (impact) {
+        issues.push(impact);
+      }
+    }
+
+    // Analyze dependency-related compilation errors
+    const dependencyErrors = compilationErrors.filter(error => 
+      error.type === 'compilation_error' && 
+      (error.message.includes('cannot find symbol') || 
+       error.message.includes('package') ||
+       error.message.includes('import'))
+    );
+
+    for (const error of dependencyErrors) {
+      const dependencyIssue = this.analyzeDependencyError(error, pomChanges);
+      if (dependencyIssue) {
+        issues.push(dependencyIssue);
+      }
+    }
+
+    return {
+      issues,
+      summary: {
+        totalIssues: issues.length,
+        dependencyIssues: issues.filter(i => i.type === 'dependency_breaking_change').length,
+        buildIssues: issues.filter(i => i.type === 'build_config_issue').length,
+        pomXmlIssues: issues.filter(i => i.type === 'pom_xml_issue').length
+      }
+    };
+  }
+
+  /**
+   * Analyze the impact of a specific pom.xml change
+   * @param {Object} change - pom.xml change
+   * @param {Array} compilationErrors - Array of compilation errors
+   * @returns {Object|null} - Impact analysis or null
+   */
+  analyzeChangeImpact(change, compilationErrors) {
+    switch (change.type) {
+      case 'dependency_change':
+        return this.analyzeDependencyChangeImpact(change, compilationErrors);
+      
+      case 'version_change':
+        return this.analyzeVersionChangeImpact(change, compilationErrors);
+      
+      case 'plugin_change':
+        return this.analyzePluginChangeImpact(change, compilationErrors);
+      
+      case 'build_config_change':
+        return this.analyzeBuildConfigChangeImpact(change, compilationErrors);
+      
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Analyze dependency change impact
+   * @param {Object} change - Dependency change
+   * @param {Array} compilationErrors - Compilation errors
+   * @returns {Object|null} - Impact analysis
+   */
+  analyzeDependencyChangeImpact(change, compilationErrors) {
+    if (change.status === 'removed' && change.dependency) {
+      // Check if removed dependency is causing compilation errors
+      const relatedErrors = compilationErrors.filter(error => 
+        error.message.includes(change.dependency.artifactId) ||
+        error.message.includes(change.dependency.groupId)
+      );
+
+      if (relatedErrors.length > 0) {
+        return {
+          type: 'dependency_breaking_change',
+          severity: 'high',
+          confidence: 90,
+          message: `Removed dependency ${change.dependency.groupId}:${change.dependency.artifactId} is causing compilation errors`,
+          dependency: change.dependency,
+          relatedErrors: relatedErrors.length,
+          file: change.file,
+          line: 0
+        };
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Analyze version change impact
+   * @param {Object} change - Version change
+   * @param {Array} compilationErrors - Compilation errors
+   * @returns {Object|null} - Impact analysis
+   */
+  analyzeVersionChangeImpact(change, compilationErrors) {
+    if (change.changeType === 'removed') {
+      return {
+        type: 'pom_xml_issue',
+        severity: 'high',
+        confidence: 85,
+        message: `Version removed for dependency, which may cause compilation issues`,
+        file: change.file,
+        line: 0
+      };
+    }
+
+    return null;
+  }
+
+  /**
+   * Analyze plugin change impact
+   * @param {Object} change - Plugin change
+   * @param {Array} compilationErrors - Compilation errors
+   * @returns {Object|null} - Impact analysis
+   */
+  analyzePluginChangeImpact(change, compilationErrors) {
+    if (change.artifactId === 'maven-compiler-plugin') {
+      return {
+        type: 'build_config_issue',
+        severity: 'medium',
+        confidence: 75,
+        message: `Maven compiler plugin configuration changed, may affect compilation`,
+        plugin: change,
+        file: change.file,
+        line: 0
+      };
+    }
+
+    return null;
+  }
+
+  /**
+   * Analyze build configuration change impact
+   * @param {Object} change - Build config change
+   * @param {Array} compilationErrors - Compilation errors
+   * @returns {Object|null} - Impact analysis
+   */
+  analyzeBuildConfigChangeImpact(change, compilationErrors) {
+    return {
+      type: 'build_config_issue',
+      severity: 'medium',
+      confidence: 70,
+      message: `Build configuration changed: ${change.element}`,
+      element: change.element,
+      file: change.file,
+      line: 0
+    };
+  }
+
+  /**
+   * Analyze dependency-related compilation error
+   * @param {Object} error - Compilation error
+   * @param {Object} pomChanges - pom.xml changes
+   * @returns {Object|null} - Analysis result
+   */
+  analyzeDependencyError(error, pomChanges) {
+    // Check if the error is related to any pom.xml changes
+    for (const change of pomChanges.changes) {
+      if (change.type === 'dependency_change' && change.dependency) {
+        const dependency = change.dependency;
+        
+        // Check if error mentions the dependency
+        if (error.message.includes(dependency.artifactId) ||
+            error.message.includes(dependency.groupId)) {
+          
+          return {
+            type: 'dependency_breaking_change',
+            severity: 'high',
+            confidence: 95,
+            message: `Compilation error related to dependency change: ${dependency.groupId}:${dependency.artifactId}`,
+            dependency: dependency,
+            error: error,
+            file: error.file,
+            line: error.line
+          };
+        }
+      }
+    }
+
+    return null;
   }
 }

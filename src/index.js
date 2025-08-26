@@ -1,5 +1,5 @@
 import { Probot } from 'probot';
-import { handlePushEvent } from './handlers/push-handler.js';
+import { handlePullRequestEvent } from './handlers/pull-request-handler.js';
 import { handleManualTrigger } from './handlers/manual-trigger-handler.js';
 import { setupLogging } from './utils/logger.js';
 
@@ -38,14 +38,17 @@ export default function probotApp(app) {
   });
 
   // Register event handlers
-  app.on('push', handlePushEvent);
+  // Pull request events - primary focus for pom.xml change detection
+  app.on('pull_request.opened', handlePullRequestEvent);
+  app.on('pull_request.synchronize', handlePullRequestEvent);
+  app.on('pull_request.reopened', handlePullRequestEvent);
   
   // Manual trigger for MVP - this is the primary interaction method
   app.on('issue_comment.created', handleManualTrigger);
 
   // Log when the app is loaded
   app.log.info('Dependafix MVP is loaded and ready!');
-  app.log.info('Available events: push, issue_comment.created');
+  app.log.info('Available events: pull_request.*, issue_comment.created');
 
   // Handle app installation
   app.on('installation.created', async (context) => {
