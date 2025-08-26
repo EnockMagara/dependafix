@@ -1,9 +1,7 @@
-import { PackageJsonAnalyzer } from '../services/package-analyzer.js';
-import { FixGenerator } from '../services/fix-generator.js';
-import { PullRequestService } from '../services/pull-request-service.js';
+import { WorkflowOrchestrator } from '../services/workflow-orchestrator.js';
 
 /**
- * Handles push events from GitHub
+ * Handles push events from GitHub (MVP - complete workflow up to context payload)
  * @param {import('probot').Context} context - The Probot context
  */
 export async function handlePushEvent(context) {
@@ -13,43 +11,38 @@ export async function handlePushEvent(context) {
   log.info(`🚀 Processing push event for ${repository.full_name}`);
   
   try {
-    // Check if package.json was modified
-    const packageJsonAnalyzer = new PackageJsonAnalyzer(context);
-    const hasPackageJsonChanges = await packageJsonAnalyzer.hasPackageJsonChanges(commits);
+    // Execute the complete workflow
+    const workflowOrchestrator = new WorkflowOrchestrator(context);
+    const workflowResult = await workflowOrchestrator.executeWorkflow('push');
     
-    if (!hasPackageJsonChanges) {
-      log.info(`❌ No package.json changes detected in ${repository.full_name}`);
-      return;
+    if (workflowResult.success) {
+      log.info(`✅ Push workflow completed successfully for ${repository.full_name}`);
+      
+      // Log workflow summary
+      if (workflowResult.contextPayload) {
+        const { summary } = workflowResult.contextPayload;
+        log.info(`📊 Workflow Summary: ${summary.totalFailures} failures, ${summary.totalAffectedFiles} affected files`);
+        
+        // Log high-confidence dependency issues
+        const dependencyIssues = workflowResult.contextPayload.failures.filter(f => 
+          f.type === 'dependency_breaking_change' || 
+          f.type === 'security_vulnerability' || 
+          f.type === 'dependency_outdated' ||
+          f.type === 'dependency_missing'
+        );
+        
+        if (dependencyIssues.length > 0) {
+          log.info(`🚨 Found ${dependencyIssues.length} high-confidence dependency-related issues`);
+        }
+      }
+    } else {
+      log.warn(`⚠️ Push workflow completed with issues for ${repository.full_name}`);
+      if (workflowResult.errors.length > 0) {
+        log.error(`❌ Workflow errors: ${workflowResult.errors.join(', ')}`);
+      }
     }
-    
-    log.info(`✅ Detected package.json changes in ${repository.full_name}`);
-    
-    // Analyze the changes for potential issues
-    const issues = await packageJsonAnalyzer.analyzeChanges(commits);
-    
-    if (issues.length === 0) {
-      log.info(`✅ No issues detected in package.json changes`);
-      return;
-    }
-    
-    log.info(`🔍 Found ${issues.length} potential issues`);
-    
-    // Generate fixes for the issues
-    const fixGenerator = new FixGenerator(context);
-    const fixes = await fixGenerator.generateFixes(issues);
-    
-    if (fixes.length === 0) {
-      log.info(`❌ No fixes could be generated`);
-      return;
-    }
-    
-    // Create pull request with fixes
-    const prService = new PullRequestService(context);
-    const pullRequest = await prService.createFixPullRequest(fixes);
-    
-    log.info(`🎉 Created PR #${pullRequest.number}: ${pullRequest.html_url}`);
     
   } catch (error) {
-    log.error(`❌ Error processing push event: ${error.message}`, error);
+    log.error(`❌ Error in push workflow: ${error.message}`);
   }
 } 

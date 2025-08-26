@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <app>
+        <name>Test Application</name>
+        <version>1.0.0</version>
+        <description>This is a test application with compilation errors</description>
+    </app>
+    
+    <database>
+        <url>jdbc:mysql://localhost:3306/testdb</url>
+        <username>testuser</username>
+        <password>testpass</password>
+    </database>
+    
+    <!-- Missing closing tag -->
+    <settings>
+        <debug>true</debug>
+        <logLevel>INFO</logLevel>
+    
+    <!-- Unclosed comment -->
+    <!-- This comment is not properly closed
+    
+    <!-- Invalid XML syntax -->
+    <invalidTag>
+        <nestedTag>value</nestedTag>
+    </invalidTag>
+    
+    <!-- Duplicate root element -->
+    <configuration>
+        <duplicate>This should not be here</duplicate>
+    </configuration>
+</configuration>
