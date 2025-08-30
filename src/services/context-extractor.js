@@ -515,4 +515,93 @@ export class ContextExtractor {
       return null;
     }
   }
+
+  /**
+   * Extract context payload for enhanced workflow
+   * @param {Object} options - Context extraction options
+   * @returns {Object} - Context payload
+   */
+  async extractContextPayload(options) {
+    const { pomChanges, compilationErrors, buildResult, dependencyAnalysis, buildTool, triggerType } = options;
+    const { repository } = this.context.payload;
+    
+    this.log.info(`🔍 Extracting enhanced context payload for ${repository.full_name}`);
+    
+    try {
+      // Extract API diffs
+      const apiDiffs = await this.extractAPIDiffs();
+      
+      // Extract dependency information
+      const dependencyInfo = await this.extractDependencyInfo();
+      
+      // Extract dependency changes
+      const dependencyChanges = await this.extractDependencyChanges();
+      
+      // Check for security vulnerabilities
+      const securityVulnerabilities = await this.checkSecurityVulnerabilities(dependencyInfo.dependencies || []);
+      
+      // Get affected files from compilation errors
+      const affectedFiles = this.getAffectedFilesFromErrors(compilationErrors);
+      
+      const contextPayload = {
+        repository: repository.full_name,
+        triggerType: triggerType,
+        buildTool: buildTool,
+        pomChanges: pomChanges,
+        compilationErrors: compilationErrors || [],
+        buildResult: buildResult,
+        dependencyAnalysis: dependencyAnalysis,
+        apiDiffs: apiDiffs,
+        dependencyInfo: dependencyInfo,
+        dependencyChanges: dependencyChanges,
+        securityVulnerabilities: securityVulnerabilities,
+        affectedFiles: affectedFiles,
+        timestamp: new Date().toISOString(),
+        totalIssues: (compilationErrors?.length || 0) + (securityVulnerabilities?.length || 0)
+      };
+      
+      this.log.info(`📊 Generated enhanced context payload with ${compilationErrors?.length || 0} compilation errors, ${affectedFiles.length} affected files`);
+      
+      return contextPayload;
+      
+    } catch (error) {
+      this.log.error(`Error extracting enhanced context payload: ${error.message}`);
+      
+      // Return minimal context payload on error
+      return {
+        repository: repository.full_name,
+        triggerType: triggerType,
+        buildTool: buildTool,
+        pomChanges: pomChanges,
+        compilationErrors: compilationErrors || [],
+        buildResult: buildResult,
+        dependencyAnalysis: dependencyAnalysis,
+        affectedFiles: this.getAffectedFilesFromErrors(compilationErrors),
+        timestamp: new Date().toISOString(),
+        totalIssues: compilationErrors?.length || 0,
+        error: error.message
+      };
+    }
+  }
+
+  /**
+   * Get affected files from compilation errors
+   * @param {Array} compilationErrors - Array of compilation errors
+   * @returns {Array} - Array of affected file paths
+   */
+  getAffectedFilesFromErrors(compilationErrors) {
+    if (!compilationErrors || compilationErrors.length === 0) {
+      return [];
+    }
+    
+    const affectedFiles = new Set();
+    
+    for (const error of compilationErrors) {
+      if (error.file && error.file !== 'unknown') {
+        affectedFiles.add(error.file);
+      }
+    }
+    
+    return Array.from(affectedFiles);
+  }
 }

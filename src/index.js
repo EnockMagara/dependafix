@@ -1,6 +1,6 @@
 import { Probot } from 'probot';
-import { handlePullRequestEvent } from './handlers/pull-request-handler.js';
-import { handleManualTrigger } from './handlers/manual-trigger-handler.js';
+import { handleEnhancedPullRequestEvent } from './handlers/enhanced-pull-request-handler.js';
+import { handleEnhancedManualTrigger } from './handlers/enhanced-manual-trigger-handler.js';
 import { setupLogging } from './utils/logger.js';
 
 /**
@@ -37,18 +37,19 @@ export default function probotApp(app) {
     }
   });
 
-  // Register event handlers
-  // Pull request events - primary focus for pom.xml change detection
-  app.on('pull_request.opened', handlePullRequestEvent);
-  app.on('pull_request.synchronize', handlePullRequestEvent);
-  app.on('pull_request.reopened', handlePullRequestEvent);
+  // Register event handlers with enhanced approach
+  // Pull request events - using enhanced dual-strategy approach
+  app.on('pull_request.opened', handleEnhancedPullRequestEvent);
+  app.on('pull_request.synchronize', handleEnhancedPullRequestEvent);
+  app.on('pull_request.reopened', handleEnhancedPullRequestEvent);
   
-  // Manual trigger for MVP - this is the primary interaction method
-  app.on('issue_comment.created', handleManualTrigger);
+  // Manual trigger for MVP - using enhanced dual-strategy approach
+  app.on('issue_comment.created', handleEnhancedManualTrigger);
 
   // Log when the app is loaded
-  app.log.info('Dependafix MVP is loaded and ready!');
-  app.log.info('Available events: pull_request.*, issue_comment.created');
+  app.log.info('Enhanced Dependafix MVP is loaded and ready!');
+  app.log.info('Available events: pull_request.* (enhanced), issue_comment.created (enhanced)');
+  app.log.info('Build Strategy: Dual-strategy (CI/CD + Automated Build)');
 
   // Handle app installation
   app.on('installation.created', async (context) => {

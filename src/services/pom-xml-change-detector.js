@@ -1,15 +1,27 @@
+import { SemanticVersionParser } from './semantic-version-parser.js';
+
 /**
- * Service for detecting and analyzing pom.xml changes in pull requests
+ * Enhanced service for detecting pom.xml version changes in pull requests
  */
 export class PomXmlChangeDetector {
   constructor(context) {
     this.context = context;
     this.octokit = context.octokit;
     this.log = context.log;
+    this.versionParser = new SemanticVersionParser();
+    
+    // Configuration for version detection
+    this.config = {
+      ignoredDependencies: [
+        'org.springframework.boot:spring-boot-starter-parent',
+        'org.springframework:spring-core'
+      ],
+      monitoredElements: ['dependency', 'plugin', 'parent', 'properties']
+    };
   }
 
   /**
-   * Detect pom.xml changes in a pull request
+   * Detect pom.xml changes in a pull request (legacy method)
    * @param {Object} pullRequest - The pull request object
    * @returns {Object} - Analysis result with change details
    */
@@ -71,7 +83,137 @@ export class PomXmlChangeDetector {
   }
 
   /**
-   * Analyze changes in a specific pom.xml file
+   * Enhanced method to detect version changes
+   * @param {Object} pullRequest - The pull request object
+   * @returns {Object} - Analysis result with version changes
+   */
+  async detectVersionChanges(pullRequest) {
+    const { repository } = this.context.payload;
+    
+    try {
+      this.log.info(`🔍 Analyzing version changes in PR #${pullRequest.number}`);
+      
+      // Get files changed in the pull request
+      const filesResponse = await this.octokit.rest.pulls.listFiles({
+        owner: repository.owner.login,
+        repo: repository.name,
+        pull_number: pullRequest.number
+      });
+
+      const pomXmlFiles = filesResponse.data.filter(file => 
+        file.filename === 'pom.xml' || 
+        file.filename.endsWith('/pom.xml')
+      );
+
+      if (pomXmlFiles.length === 0) {
+        this.log.info('No pom.xml files modified');
+        return {
+          hasVersionChanges: false,
+          versionChanges: [],
+          summary: 'No pom.xml files modified'
+        };
+      }
+
+      // Analyze each pom.xml file for version changes only
+      const allVersionChanges = [];
+      for (const file of pomXmlFiles) {
+        const fileVersionChanges = await this.analyzeVersionChanges(file);
+        allVersionChanges.push(...fileVersionChanges);
+      }
+
+      // Filter out ignored dependencies
+      const filteredChanges = allVersionChanges.filter(change => {
+        if (change.context && change.context.fullName) {
+          return !this.config.ignoredDependencies.includes(change.context.fullName);
+        }
+        return true;
+      });
+
+      const summary = this.generateVersionChangeSummary(filteredChanges);
+      
+      this.log.info(`📦 Detected ${filteredChanges.length} version changes in PR #${pullRequest.number}`);
+      
+      return {
+        hasVersionChanges: filteredChanges.length > 0,
+        versionChanges: filteredChanges,
+        summary,
+        files: pomXmlFiles
+      };
+
+    } catch (error) {
+      this.log.error(`Error detecting version changes: ${error.message}`);
+      return {
+        hasVersionChanges: false,
+        error: error.message,
+        versionChanges: [],
+        summary: 'Error analyzing version changes'
+      };
+    }
+  }
+
+  /**
+   * Analyze version changes in a specific pom.xml file
+   * @param {Object} file - File change information
+   * @returns {Array} - Array of detected version changes
+   */
+  async analyzeVersionChanges(file) {
+    const versionChanges = [];
+
+    try {
+      // Get the diff content
+      const diffContent = file.patch || '';
+      
+      if (!diffContent) {
+        this.log.warn(`No diff content available for file: ${file.filename}`);
+        return versionChanges;
+      }
+
+      // Parse the diff to extract version changes only
+      const diffLines = diffContent.split('\n');
+
+      for (let i = 0; i < diffLines.length; i++) {
+        const line = diffLines[i];
+        
+        // Look for version elements
+        if (line.includes('<version>') && line.includes('</version>')) {
+          const versionChange = this.versionParser.parseVersionChange(diffLines, i);
+          
+          if (versionChange && versionChange.oldVersion !== versionChange.newVersion) {
+            // Extract element context
+            const context = this.versionParser.extractElementContext(diffLines, i);
+            
+            // Create complete version change object
+            const completeChange = {
+              ...versionChange,
+              context,
+              file: file.filename,
+              status: file.status,
+              lineNumber: i + 1
+            };
+            
+            versionChanges.push(completeChange);
+          }
+        }
+      }
+
+      this.log.info(`Found ${versionChanges.length} version changes in ${file.filename}`);
+      
+      // Debug: Log what was detected
+      if (versionChanges.length > 0) {
+        versionChanges.forEach((change, index) => {
+          this.log.info(`  Change ${index + 1}: ${change.oldVersion} -> ${change.newVersion} (${change.significance})`);
+        });
+      }
+
+    } catch (error) {
+      this.log.error(`Error analyzing version changes in ${file.filename}: ${error.message}`);
+    }
+
+    return versionChanges;
+  }
+
+  /**
+   * Analyze changes in a specific pom.xml file (legacy method)
    * @param {Object} file - File change information
    * @param {Object} pullRequest - The pull request object
    * @returns {Array} - Array of detected changes
@@ -291,7 +433,45 @@ export class PomXmlChangeDetector {
   }
 
   /**
-   * Generate a summary of changes
+   * Generate a summary of version changes
+   * @param {Array} versionChanges - Array of version changes
+   * @returns {string} - Version change summary
+   */
+  generateVersionChangeSummary(versionChanges) {
+    if (versionChanges.length === 0) {
+      return 'No version changes detected';
+    }
+
+    // Group changes by significance
+    const bySignificance = versionChanges.reduce((acc, change) => {
+      const sig = change.significance;
+      if (!acc[sig]) acc[sig] = [];
+      acc[sig].push(change);
+      return acc;
+    }, {});
+
+    const parts = [];
+    
+    // Add significance breakdown
+    for (const [significance, changes] of Object.entries(bySignificance)) {
+      const elementTypes = changes.reduce((acc, change) => {
+        const type = change.context.elementType;
+        acc[type] = (acc[type] || 0) + 1;
+        return acc;
+      }, {});
+
+      const elementParts = Object.entries(elementTypes).map(([type, count]) => 
+        `${count} ${type}${count > 1 ? 's' : ''}`
+      );
+
+      parts.push(`${changes.length} ${significance} change${changes.length > 1 ? 's' : ''} (${elementParts.join(', ')})`);
+    }
+
+    return parts.join(' | ');
+  }
+
+  /**
+   * Generate a summary of changes (legacy method)
    * @param {Array} changes - Array of changes
    * @returns {string} - Change summary
    */
